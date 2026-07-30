@@ -13,7 +13,7 @@ import { UserProfileModal } from './components/UserProfileModal';
 import { OtpLoginModal } from './components/OtpLoginModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { AudioAndBotExplainerModal } from './components/AudioAndBotExplainerModal';
-import { Play, Zap } from 'lucide-react';
+import { Play, Zap, ArrowLeft, X, Home } from 'lucide-react';
 
 import { Pregunta, IntentoExamen, UserProfile } from './types';
 import {
@@ -186,6 +186,33 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6 pb-24 md:pb-6">
+        {/* BARRA SUPERIOR UNIVERSAL DE REGRESO RÁPIDO PARA MÓVIL Y PC */}
+        {activeTab !== 'landing' && activeTab !== 'dashboard' && (
+          <div className="sticky top-16 z-30 bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border border-slate-200 dark:border-slate-700/80 rounded-2xl py-3 px-4 mb-5 shadow-lg flex items-center justify-between gap-3 transition-all">
+            <button
+              type="button"
+              onClick={() => setActiveTab('dashboard')}
+              className="flex items-center gap-2 text-xs sm:text-sm font-display font-bold text-slate-900 dark:text-white hover:text-amber-600 dark:hover:text-amber-400 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/40 px-3.5 py-2 rounded-xl transition-all shadow-sm active-scale"
+            >
+              <ArrowLeft className="w-4 h-4 text-amber-500 shrink-0" />
+              <span>← Volver a Mi Portal Principal</span>
+            </button>
+            <div className="flex items-center gap-2">
+              <span className="hidden sm:inline text-xs text-slate-500 dark:text-slate-400 font-mono">
+                Sección: <strong className="text-slate-900 dark:text-white uppercase">{activeTab}</strong>
+              </span>
+              <button
+                type="button"
+                onClick={() => setActiveTab('dashboard')}
+                className="flex items-center gap-1.5 text-xs font-mono font-bold text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 bg-slate-100 dark:bg-slate-900 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 transition-all active-scale"
+              >
+                <X className="w-4 h-4 text-red-500" />
+                <span>Salir</span>
+              </button>
+            </div>
+          </div>
+        )}
+
         {activeTab === 'landing' && (
           <LandingPage
             onStartSimulacro={(modo) => {

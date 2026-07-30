@@ -232,11 +232,12 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
       <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-3 sm:p-4 text-slate-900 dark:text-slate-100 font-mono text-xs flex flex-wrap items-center justify-between gap-2 shadow-md">
         <div className="flex items-center gap-3">
           <button
+            type="button"
             onClick={onCancelExamen}
-            className="hover:text-slate-900 dark:hover:text-white flex items-center gap-1.5 bg-slate-100 dark:bg-slate-900 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 transition-all active-scale font-bold"
+            className="hover:text-red-600 dark:hover:text-red-400 flex items-center gap-1.5 bg-amber-500/10 dark:bg-slate-900 px-3.5 py-2 rounded-xl border border-amber-500/40 dark:border-slate-700 transition-all active-scale font-bold text-slate-900 dark:text-white shadow-sm"
           >
-            <ArrowLeft className="w-4 h-4 text-amber-500" />
-            <span>Salir</span>
+            <ArrowLeft className="w-4 h-4 text-amber-500 shrink-0" />
+            <span>← Volver al Portal</span>
           </button>
           <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-900 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 font-bold">
             <Shield className="w-3.5 h-3.5 text-amber-500" />

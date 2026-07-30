@@ -51,6 +51,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
   const [filtroGrupo, setFiltroGrupo] = useState<'TODOS' | GrupoMateria>('TODOS');
   const [busquedaNorma, setBusquedaNorma] = useState('');
   const [numPreguntasRapido, setNumPreguntasRapido] = useState<number>(20);
+  const [subTab, setSubTab] = useState<'simulacros' | 'normas' | 'estadisticas'>('simulacros');
 
   const materiasFiltradas = dominioMaterias.filter((m) => {
     const matchGrupo = filtroGrupo === 'TODOS' || m.grupo === filtroGrupo;
@@ -59,7 +60,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
   });
 
   return (
-    <div className="space-y-8 pb-16">
+    <div className="space-y-6 pb-16">
       {/* 1. Hero Banner Institucional */}
       <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 border border-amber-500/40 rounded-3xl p-6 md:p-8 text-white shadow-xl relative overflow-hidden glow-gold">
         <div className="absolute -right-12 -bottom-12 opacity-10 pointer-events-none">
@@ -99,6 +100,50 @@ export const Dashboard: React.FC<DashboardProps> = ({
         </div>
       </div>
 
+      {/* NAVEGADOR ORDENADO DE 3 PESTAÑAS (CERO SATURACIÓN EN MÓVIL Y PC) */}
+      <div className="flex flex-wrap items-center gap-2 bg-white dark:bg-slate-800 p-2 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-md">
+        <button
+          type="button"
+          onClick={() => setSubTab('simulacros')}
+          className={`flex-1 min-w-[130px] flex items-center justify-center gap-2 py-3 px-3 rounded-xl font-display font-bold text-xs sm:text-sm transition-all active-scale ${
+            subTab === 'simulacros'
+              ? 'bg-amber-500 text-slate-950 shadow-md font-extrabold'
+              : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/60'
+          }`}
+        >
+          <Target className="w-4 h-4 shrink-0" />
+          <span>1. Iniciar Simulacro</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setSubTab('normas')}
+          className={`flex-1 min-w-[130px] flex items-center justify-center gap-2 py-3 px-3 rounded-xl font-display font-bold text-xs sm:text-sm transition-all active-scale ${
+            subTab === 'normas'
+              ? 'bg-amber-500 text-slate-950 shadow-md font-extrabold'
+              : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/60'
+          }`}
+        >
+          <BookOpen className="w-4 h-4 shrink-0" />
+          <span>2. Las 22 Normas PNP</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setSubTab('estadisticas')}
+          className={`flex-1 min-w-[130px] flex items-center justify-center gap-2 py-3 px-3 rounded-xl font-display font-bold text-xs sm:text-sm transition-all active-scale ${
+            subTab === 'estadisticas'
+              ? 'bg-amber-500 text-slate-950 shadow-md font-extrabold'
+              : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/60'
+          }`}
+        >
+          <BarChart3 className="w-4 h-4 shrink-0" />
+          <span>3. Mis Estadísticas</span>
+        </button>
+      </div>
+
+      {subTab === 'simulacros' && (
+      <div className="space-y-6">
       {/* 2. BARRA DE ORIENTACIÓN: CÓMO COMENZAR (PASO A PASO) */}
       <div className="bg-amber-500/10 dark:bg-amber-500/5 border-2 border-amber-500/30 rounded-3xl p-5 sm:p-6 shadow-md">
         <div className="flex items-center gap-2 mb-3">
@@ -373,7 +418,11 @@ export const Dashboard: React.FC<DashboardProps> = ({
           </button>
         </div>
       )}
+      </div>
+      )}
 
+      {subTab === 'estadisticas' && (
+      <div className="space-y-6">
       {/* 5. SECCIÓN #2: TUS ESTADÍSTICAS DEL POSTULANTE */}
       <div className="space-y-4 pt-4 border-t border-slate-200 dark:border-slate-800">
         <div className="flex items-center justify-between">
@@ -511,7 +560,11 @@ export const Dashboard: React.FC<DashboardProps> = ({
           </div>
         </div>
       </div>
+      </div>
+      )}
 
+      {subTab === 'normas' && (
+      <div className="space-y-6">
       {/* 6. SECCIÓN #3: DOMINIO POR NORMA OFICIAL (22 NORMAS) */}
       <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-3xl p-6 text-slate-900 dark:text-slate-100 shadow-xl space-y-4 pt-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-700/80 pb-4">
@@ -639,7 +692,11 @@ export const Dashboard: React.FC<DashboardProps> = ({
           )}
         </div>
       </div>
+      </div>
+      )}
 
+      {subTab === 'estadisticas' && (
+      <div className="space-y-6">
       {/* 7. Historial de Intentos Recientes */}
       {historialIntentos.length > 0 && (
         <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-3xl p-6 text-slate-900 dark:text-slate-100 shadow-xl space-y-4">
@@ -682,6 +739,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
             })}
           </div>
         </div>
+      )}
+      </div>
       )}
     </div>
   );
