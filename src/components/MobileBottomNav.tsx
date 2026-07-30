@@ -44,7 +44,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
   return (
     <nav
       aria-label="Navegación móvil nativa"
-      className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-slate-900/95 dark:bg-slate-950/95 backdrop-blur-lg border-t border-slate-800 px-2 py-1.5 shadow-2xl transition-all"
+      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 dark:bg-slate-950/95 backdrop-blur-lg border-t border-slate-800 px-2 pt-2 pb-3 shadow-2xl transition-all"
     >
       <div className="flex items-center justify-around max-w-md mx-auto">
         {navItems.map((item) => {
@@ -53,8 +53,9 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
           return (
             <button
               key={item.id}
+              type="button"
               onClick={() => handleNavClick(item)}
-              className={`flex flex-col items-center justify-center min-w-[60px] min-h-[46px] px-2 py-1 rounded-2xl transition-all active-scale ${
+              className={`flex flex-col items-center justify-center min-w-[62px] min-h-[50px] px-2 py-1 rounded-2xl transition-all active-scale cursor-pointer ${
                 isActive
                   ? 'text-amber-400 font-bold scale-105'
                   : 'text-slate-400 hover:text-slate-200'

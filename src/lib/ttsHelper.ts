@@ -7,31 +7,68 @@ export function speakText(text: string, onEnd?: () => void, onError?: () => void
     return () => {};
   }
 
-  // Cancel any ongoing speech
-  window.speechSynthesis.cancel();
+  const synth = window.speechSynthesis;
 
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'es-PE'; // Spanish (Peru) or generic Spanish 'es-ES' / 'es-MX'
-  utterance.rate = 1.0;
-  utterance.pitch = 1.0;
-
-  // Try to find a Spanish voice
-  const voices = window.speechSynthesis.getVoices();
-  const esVoice = voices.find(
-    (v) => v.lang.includes('es-PE') || v.lang.includes('es-MX') || v.lang.includes('es-ES') || v.lang.startsWith('es')
-  );
-  if (esVoice) {
-    utterance.voice = esVoice;
+  // Cancel any ongoing speech safely without breaking new speech on iOS/Android
+  if (synth.speaking || synth.pending) {
+    synth.cancel();
   }
 
-  if (onEnd) utterance.onend = onEnd;
-  if (onError) utterance.onerror = onError;
+  let isCancelled = false;
 
-  window.speechSynthesis.speak(utterance);
+  // Small delay so mobile Safari / Chrome Android doesn't immediately abort the speech
+  const timeoutId = setTimeout(() => {
+    if (isCancelled) return;
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'es-ES'; // Universal Spanish fallback across iOS and Android
+    utterance.rate = 0.95;
+    utterance.pitch = 1.0;
+
+    const assignVoice = () => {
+      const voices = synth.getVoices();
+      if (!voices || voices.length === 0) return;
+      const esVoice =
+        voices.find((v) => v.lang.includes('es-PE')) ||
+        voices.find((v) => v.lang.includes('es-MX')) ||
+        voices.find((v) => v.lang.includes('es-ES')) ||
+        voices.find((v) => v.lang.toLowerCase().startsWith('es'));
+      if (esVoice) {
+        utterance.voice = esVoice;
+      }
+    };
+
+    assignVoice();
+
+    // If voices weren't ready on mobile, assign when loaded
+    if (synth.onvoiceschanged !== undefined) {
+      synth.onvoiceschanged = assignVoice;
+    }
+
+    utterance.onend = () => {
+      if (!isCancelled) onEnd?.();
+    };
+
+    utterance.onerror = (err) => {
+      console.warn('Speech synthesis error:', err);
+      if (!isCancelled) onError?.();
+    };
+
+    try {
+      synth.speak(utterance);
+    } catch (e) {
+      console.error('TTS error:', e);
+      if (!isCancelled) onError?.();
+    }
+  }, 100);
 
   // Return cancel function
   return () => {
-    window.speechSynthesis.cancel();
+    isCancelled = true;
+    clearTimeout(timeoutId);
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
   };
 }
 
@@ -44,3 +81,4 @@ export function stopSpeech(): void {
 export function isSpeechSupported(): boolean {
   return typeof window !== 'undefined' && 'speechSynthesis' in window;
 }
+

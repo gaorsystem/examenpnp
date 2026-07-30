@@ -158,7 +158,14 @@ export const Header: React.FC<HeaderProps> = ({
               return (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
+                  type="button"
+                  onClick={() => {
+                    if (!isLoggedIn) {
+                      onOpenOtpModal();
+                    } else {
+                      setActiveTab(tab.id);
+                    }
+                  }}
                   className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-mono font-medium transition-all whitespace-nowrap active-scale ${
                     isActive
                       ? 'bg-amber-500 text-slate-950 font-bold shadow-md'

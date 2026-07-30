@@ -35,7 +35,9 @@ import {
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('landing');
   const [userProfile, setUserProfile] = useState<UserProfile>(() => getProfile());
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
+    return localStorage.getItem('pnp_user_authenticated') === 'true';
+  });
   const [showProfileModal, setShowProfileModal] = useState<boolean>(false);
   const [showOtpModal, setShowOtpModal] = useState<boolean>(false);
   const [showExplainerModal, setShowExplainerModal] = useState<boolean>(false);
@@ -70,12 +72,14 @@ export default function App() {
     };
     setUserProfile(updatedProfile);
     saveProfile(updatedProfile);
+    localStorage.setItem('pnp_user_authenticated', 'true');
     setIsLoggedIn(true);
     setShowOtpModal(false);
     setActiveTab('dashboard');
   };
 
   const handleLogout = () => {
+    localStorage.removeItem('pnp_user_authenticated');
     setIsLoggedIn(false);
     setActiveTab('landing');
   };

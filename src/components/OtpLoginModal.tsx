@@ -82,53 +82,19 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
 
             <div className="space-y-3">
               <div>
-                <label className="block text-xs font-mono font-bold text-slate-700 dark:text-slate-300 mb-1">
+                <label htmlFor="telefono-input" className="block text-xs font-mono font-bold text-slate-700 dark:text-slate-300 mb-1">
                   Número de Celular / WhatsApp
                 </label>
                 <div className="relative">
                   <Phone className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                   <input
+                    id="telefono-input"
                     type="tel"
                     required
                     value={telefono}
                     onChange={(e) => setTelefono(e.target.value)}
                     placeholder="Ej. 987654321"
-                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-10 pr-4 py-2.5 text-sm font-mono focus:outline-none focus:border-amber-500 text-slate-900 dark:text-white"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-mono font-bold text-slate-700 dark:text-slate-300 mb-1">
-                    Grado Policial
-                  </label>
-                  <select
-                    value={grado}
-                    onChange={(e) => setGrado(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs font-mono focus:outline-none focus:border-amber-500 text-slate-900 dark:text-white"
-                  >
-                    <option value="S3 PNP">S3 PNP</option>
-                    <option value="S2 PNP">S2 PNP</option>
-                    <option value="S1 PNP">S1 PNP</option>
-                    <option value="ST3 PNP">ST3 PNP</option>
-                    <option value="ST2 PNP">ST2 PNP</option>
-                    <option value="ST1 PNP">ST1 PNP</option>
-                    <option value="SB PNP">SB PNP</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-mono font-bold text-slate-700 dark:text-slate-300 mb-1">
-                    Nombre o Seudónimo
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={nombre}
-                    onChange={(e) => setNombre(e.target.value)}
-                    placeholder="Ej. Juan Pérez"
-                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-amber-500 text-slate-900 dark:text-white"
+                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-10 pr-4 py-3 text-base font-mono focus:outline-none focus:border-amber-500 text-slate-900 dark:text-white"
                   />
                 </div>
               </div>
@@ -142,9 +108,9 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
 
             <button
               type="submit"
-              className="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-display font-black py-3 rounded-2xl text-sm shadow-lg transition-all flex items-center justify-center gap-2 active-scale"
+              className="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-display font-black py-3.5 rounded-2xl text-sm shadow-lg transition-all flex items-center justify-center gap-2 active-scale"
             >
-              <span>ENVIAR CÓDIGO OTP</span>
+              <span>ENVIAR CÓDIGO DE ACCESO</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </form>
@@ -162,26 +128,31 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
               <p className="text-slate-600 dark:text-slate-300">
                 Se envió el código de verificación al número <strong>{telefono}</strong>.
               </p>
-              <div className="bg-white dark:bg-slate-950 border border-emerald-500/40 p-2.5 rounded-xl font-mono text-center">
+              <div className="bg-white dark:bg-slate-950 border border-emerald-500/40 p-2.5 rounded-xl font-mono text-center relative">
                 <p className="text-[10px] text-slate-400 uppercase tracking-widest">
                   Código de Pruebas OTP:
                 </p>
                 <p className="text-xl font-bold text-emerald-600 dark:text-emerald-400 tracking-widest my-0.5">
                   {generatedOtp}
                 </p>
-                <p className="text-[10px] text-slate-400">
-                  (O puedes ingresar <strong>123456</strong>)
-                </p>
+                <button
+                  type="button"
+                  onClick={() => setInputOtp(generatedOtp)}
+                  className="mt-1 text-[11px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 px-3 py-1 rounded-lg font-bold hover:bg-emerald-500/30 transition-colors"
+                >
+                  Pegar código aquí
+                </button>
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-mono font-bold text-slate-700 dark:text-slate-300 mb-1">
+              <label htmlFor="otp-input" className="block text-xs font-mono font-bold text-slate-700 dark:text-slate-300 mb-1">
                 Ingresa el Código OTP (6 dígitos)
               </label>
               <div className="relative">
                 <KeyRound className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
+                  id="otp-input"
                   type="text"
                   maxLength={6}
                   required
