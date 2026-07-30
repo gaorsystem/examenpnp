@@ -17,18 +17,18 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
   // Mobile tabs structure for native app experience
   const publicNavItems = [
     { id: 'landing', label: 'Inicio', icon: Home },
-    { id: 'dashboard', label: 'Portal PNP', icon: BarChart3, requiresAuth: true },
+    { id: 'dashboard', label: 'Mi Portal', icon: BarChart3, requiresAuth: true },
     { id: 'simulacro', label: 'Simulacro', icon: Clock, requiresAuth: true },
-    { id: 'banco', label: 'Balotario', icon: Search, requiresAuth: true },
-    { id: 'whatsapp', label: 'Bot WhatsApp', icon: MessageSquare, requiresAuth: true },
+    { id: 'banco', label: '1,500 Preg.', icon: Search, requiresAuth: true },
+    { id: 'whatsapp', label: 'Audio / Bot', icon: MessageSquare, requiresAuth: true },
   ];
 
   const privateNavItems = [
-    { id: 'dashboard', label: 'Portal', icon: BarChart3 },
-    { id: 'crear-simulacro', label: 'Armar', icon: SlidersHorizontal },
-    { id: 'simulacro', label: 'Rendir', icon: Clock },
-    { id: 'normas', label: 'Materias', icon: Shield },
+    { id: 'dashboard', label: 'Mi Portal', icon: BarChart3 },
+    { id: 'simulacro', label: 'Simulacro', icon: Clock },
+    { id: 'crear-simulacro', label: 'Personalizar', icon: SlidersHorizontal },
     { id: 'banco', label: 'Balotario', icon: Search },
+    { id: 'whatsapp', label: 'Audio / Bot', icon: MessageSquare },
   ];
 
   const navItems = isLoggedIn && activeTab !== 'landing' ? privateNavItems : publicNavItems;
