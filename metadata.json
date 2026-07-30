@@ -1,6 +1,6 @@
 {
   "name": "Simulador de Ascenso PNP 2026",
-  "description": "Simulador interactivo para el Proceso de Ascenso PNP 2026 con 1,500 preguntas oficiales, audio-lectura, repetición espaciada y bot de WhatsApp.",
+  "description": "Simulacro PNP para el Concurso de Ascenso de Suboficiales - Promoción 2027, con portada informativa, portal del postulante, generador de simulacros personalizados, balotario oficial de 1,500 preguntas y bot interactivo por WhatsApp.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

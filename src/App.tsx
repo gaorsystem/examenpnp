@@ -44,6 +44,7 @@ export default function App() {
   });
 
   React.useEffect(() => {
+    document.title = 'Simulacro PNP | Concurso de Ascenso Promoción 2027';
     const root = document.documentElement;
     if (theme === 'dark') {
       root.classList.add('dark');
