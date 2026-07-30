@@ -11,6 +11,8 @@ import { ExamResultsScreen } from './components/ExamResultsScreen';
 import { CustomExamBuilder } from './components/CustomExamBuilder';
 import { UserProfileModal } from './components/UserProfileModal';
 import { OtpLoginModal } from './components/OtpLoginModal';
+import { MobileBottomNav } from './components/MobileBottomNav';
+import { AudioAndBotExplainerModal } from './components/AudioAndBotExplainerModal';
 import { Play, Zap } from 'lucide-react';
 
 import { Pregunta, IntentoExamen, UserProfile } from './types';
@@ -36,6 +38,7 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
   const [showProfileModal, setShowProfileModal] = useState<boolean>(false);
   const [showOtpModal, setShowOtpModal] = useState<boolean>(false);
+  const [showExplainerModal, setShowExplainerModal] = useState<boolean>(false);
 
   // Theme State ('light' | 'dark')
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -178,7 +181,7 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6 pb-24 md:pb-6">
         {activeTab === 'landing' && (
           <LandingPage
             onStartSimulacro={(modo) => {
@@ -195,6 +198,7 @@ export default function App() {
                 setActiveTab(tab);
               }
             }}
+            onOpenExplainer={() => setShowExplainerModal(true)}
           />
         )}
 
@@ -207,6 +211,7 @@ export default function App() {
             historialIntentos={historialIntentos}
             onStartExamen={handleStartExamen}
             onNavigateTab={setActiveTab}
+            onOpenExplainer={() => setShowExplainerModal(true)}
           />
         )}
 
@@ -314,6 +319,22 @@ export default function App() {
           onLoginSuccess={handleLoginSuccess}
         />
       )}
+
+      {/* Interactive Guide Modal for Audio-Lectura & WhatsApp Bot */}
+      {showExplainerModal && (
+        <AudioAndBotExplainerModal
+          onClose={() => setShowExplainerModal(false)}
+          onOpenWhatsAppSimulator={() => setActiveTab('whatsapp')}
+        />
+      )}
+
+      {/* Native Mobile Bottom Navigation Bar (Hidden on Desktop) */}
+      <MobileBottomNav
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        isLoggedIn={isLoggedIn}
+        onOpenOtpModal={() => setShowOtpModal(true)}
+      />
     </div>
   );
 }

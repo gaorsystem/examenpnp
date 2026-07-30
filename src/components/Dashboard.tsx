@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Clock, BookOpen, Search, Trophy, AlertTriangle, ArrowRight, Play, CheckCircle2, RotateCcw, Filter, HelpCircle, SlidersHorizontal } from 'lucide-react';
+import { Shield, Clock, BookOpen, Search, Trophy, AlertTriangle, ArrowRight, Play, CheckCircle2, RotateCcw, Filter, HelpCircle, SlidersHorizontal, Volume2, MessageSquare } from 'lucide-react';
 import { UserProfile, IntentoExamen, DominioMateria, GrupoMateria } from '../types';
 
 interface DashboardProps {
@@ -17,6 +17,7 @@ interface DashboardProps {
   historialIntentos: IntentoExamen[];
   onStartExamen: (modo: 'simulacro' | 'repaso' | 'norma' | 'expres' | 'whatsapp', numPreguntas?: number, normaNombre?: string) => void;
   onNavigateTab: (tab: string) => void;
+  onOpenExplainer?: () => void;
 }
 
 export const Dashboard: React.FC<DashboardProps> = ({
@@ -27,6 +28,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
   historialIntentos,
   onStartExamen,
   onNavigateTab,
+  onOpenExplainer,
 }) => {
   const [filtroGrupo, setFiltroGrupo] = useState<'TODOS' | GrupoMateria>('TODOS');
   const [busquedaNorma, setBusquedaNorma] = useState('');
@@ -197,6 +199,39 @@ export const Dashboard: React.FC<DashboardProps> = ({
           </button>
         </div>
       </div>
+
+      {/* INTERACTIVE AUDIO & WHATSAPP BOT EXPLAINER BANNER FOR PORTAL */}
+      {onOpenExplainer && (
+        <div
+          onClick={onOpenExplainer}
+          className="bg-gradient-to-r from-amber-500/15 via-amber-500/10 to-slate-900/10 dark:to-slate-900/80 border-2 border-amber-500/50 hover:border-amber-400 rounded-3xl p-5 sm:p-6 cursor-pointer transition-all active-scale shadow-lg group flex flex-col sm:flex-row items-center justify-between gap-4"
+        >
+          <div className="flex items-center gap-4 text-center sm:text-left">
+            <div className="w-14 h-14 rounded-2xl bg-amber-500 text-slate-950 flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform">
+              <Volume2 className="w-7 h-7" />
+            </div>
+            <div>
+              <span className="bg-amber-500 text-slate-950 font-mono text-[10px] font-extrabold px-2.5 py-0.5 rounded uppercase tracking-wider">
+                TECNOLOGÍA EN TU PREPARACIÓN PNP
+              </span>
+              <h3 className="font-display font-extrabold text-lg sm:text-xl text-slate-900 dark:text-white mt-1 group-hover:text-amber-400 transition-colors">
+                ¿Cómo funciona la Audio-Lectura en Voz Alta y el Bot de WhatsApp?
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-sans mt-0.5">
+                Haz clic aquí para probar el sintetizador neuronal de voz y los comandos para tu teléfono.
+              </p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            className="w-full sm:w-auto bg-amber-500 group-hover:bg-amber-400 text-slate-950 font-mono font-bold text-xs px-6 py-3.5 rounded-2xl shadow transition-all shrink-0 flex items-center justify-center gap-2"
+          >
+            <span>PROBAR EN VIVO</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+      )}
 
       {/* Mode Selectors */}
       <div className="space-y-3">
