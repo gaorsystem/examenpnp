@@ -14,7 +14,7 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
   onLoginSuccess,
 }) => {
   const [step, setStep] = useState<'PHONE' | 'OTP'>('PHONE');
-  const [telefono, setTelefono] = useState(userProfile.telefonoWhatsapp || '');
+  const [telefono, setTelefono] = useState('');
   const [grado, setGrado] = useState(userProfile.grado || 'S3 PNP');
   const [nombre, setNombre] = useState(userProfile.nombre || 'Efectivo Policial');
   const [generatedOtp, setGeneratedOtp] = useState<string>('');
@@ -23,8 +23,8 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
 
   const handleSendOtp = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!telefono || telefono.trim().length < 9) {
-      setErrorMsg('Ingresa un número de celular de 9 dígitos válido.');
+    if (!telefono || telefono.trim().length !== 9) {
+      setErrorMsg('Ingresa un número de celular de exactamente 9 dígitos.');
       return;
     }
 
@@ -91,8 +91,12 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
                     id="telefono-input"
                     type="tel"
                     required
+                    maxLength={9}
                     value={telefono}
-                    onChange={(e) => setTelefono(e.target.value)}
+                    onChange={(e) => {
+                      const val = e.target.value.replace(/\D/g, '');
+                      if (val.length <= 9) setTelefono(val);
+                    }}
                     placeholder="Ej. 987654321"
                     className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-10 pr-4 py-3 text-base font-mono focus:outline-none focus:border-amber-500 text-slate-900 dark:text-white"
                   />
