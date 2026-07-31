@@ -309,13 +309,16 @@ export default function App() {
         )}
       </main>
 
-      {/* Footer */}
-      <footer className="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 py-6 text-center text-xs font-mono text-slate-500 dark:text-slate-400 space-y-1.5 mt-auto">
+      {/* Footer - Simplified for mobile */}
+      <footer className="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 py-6 px-4 text-center text-[10px] sm:text-xs font-mono text-slate-500 dark:text-slate-400 space-y-1 mt-auto">
         <p className="font-semibold text-slate-700 dark:text-slate-300">
-          Simulador de Ascenso PNP 2026 — Basado en RD N° 006857-2026-DIRREHUM-PNP/JE
+          Simulador PNP 2026
         </p>
-        <p className="text-[11px]">
-          Promoción 2027 · Suboficiales de Armas y Servicios · 1,500 Preguntas Oficiales
+        <p className="hidden sm:block">
+          RD N° 006857-2026-DIRREHUM-PNP/JE · Promoción 2027
+        </p>
+        <p>
+          1,500 Preguntas Oficiales · PNP Ascenso
         </p>
       </footer>
 
