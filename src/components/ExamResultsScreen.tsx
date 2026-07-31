@@ -120,10 +120,10 @@ export const ExamResultsScreen: React.FC<ExamResultsScreenProps> = ({
 
           <button
             onClick={onBackToDashboard}
-            className="bg-amber-500 hover:bg-amber-400 text-slate-950 px-4 py-2.5 rounded-xl font-mono text-xs font-bold flex items-center gap-2 shadow-sm transition-all active-scale"
+            className="bg-slate-900 hover:bg-slate-800 text-white dark:bg-slate-700 dark:hover:bg-slate-600 px-6 py-2.5 rounded-xl font-display font-black text-xs flex items-center gap-2 shadow-lg shadow-slate-500/20 transition-all active-scale border-2 border-slate-700 dark:border-slate-500"
           >
             <ArrowLeft className="w-4 h-4" />
-            Ir al Inicio
+            VOLVER AL PORTAL
           </button>
 
           <button
