@@ -8,6 +8,7 @@ interface UserProfileModalProps {
   onClose: () => void;
   onProfileUpdated: (updated: UserProfile) => void;
   onOpenTab?: (tab: string) => void;
+  onLogout?: () => void;
 }
 
 export const UserProfileModal: React.FC<UserProfileModalProps> = ({
@@ -15,6 +16,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
   onClose,
   onProfileUpdated,
   onOpenTab,
+  onLogout,
 }) => {
   const [nombre, setNombre] = useState(userProfile.nombre);
   const [grado, setGrado] = useState(userProfile.grado);
@@ -226,12 +228,26 @@ create table perfiles (
                 />
               </div>
 
-              <div className="pt-2 flex items-center justify-between">
+              <div className="pt-2 flex items-center justify-between gap-4">
+                {onLogout && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onLogout();
+                      onClose();
+                    }}
+                    className="bg-red-500/10 hover:bg-red-500/20 text-red-600 border border-red-500/30 px-4 py-2.5 rounded-xl font-mono text-xs font-bold transition-all active-scale"
+                  >
+                    Cerrar Sesión
+                  </button>
+                )}
+                
                 {savedSuccess && (
                   <span className="text-emerald-600 dark:text-emerald-400 font-mono text-xs flex items-center gap-1">
-                    <CheckCircle2 className="w-4 h-4" /> ¡Guardado correctamente!
+                    <CheckCircle2 className="w-4 h-4" /> ¡Guardado!
                   </span>
                 )}
+                
                 <button
                   type="submit"
                   className="ml-auto bg-amber-500 hover:bg-amber-400 text-slate-950 font-mono font-bold px-6 py-2.5 rounded-xl shadow-sm transition-all active-scale"

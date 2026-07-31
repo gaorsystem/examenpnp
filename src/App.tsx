@@ -342,6 +342,7 @@ export default function App() {
           onClose={() => setShowProfileModal(false)}
           onProfileUpdated={(updated) => setUserProfile(updated)}
           onOpenTab={(tab) => setActiveTab(tab)}
+          onLogout={handleLogout}
         />
       )}
 

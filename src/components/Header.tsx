@@ -55,23 +55,28 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center gap-2">
           {isLoggedIn ? (
             <div className="flex items-center gap-2">
-              <span className="hidden sm:inline bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2 py-0.5 rounded font-mono text-[10px]">
-                {userProfile.grado} {userProfile.nombre}
-              </span>
+              <button 
+                onClick={onOpenProfile}
+                className="hidden sm:flex items-center gap-1.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 px-2 py-1 rounded transition-all font-mono text-[10px]"
+              >
+                <User className="w-3 h-3" />
+                <span className="font-bold">{userProfile.grado} {userProfile.nombre}</span>
+              </button>
               <button
                 onClick={onLogout}
-                className="text-slate-400 hover:text-red-400 transition-colors p-1"
-                title="Salir"
+                className="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 px-3 py-1.5 rounded-lg transition-all active-scale flex items-center gap-1.5 font-mono text-[10px] font-bold"
+                title="Cerrar Sesión"
               >
                 <LogOut className="w-3.5 h-3.5" />
+                <span>SALIR</span>
               </button>
             </div>
           ) : (
             <button
               onClick={onOpenOtpModal}
-              className="text-amber-400 font-mono font-bold text-[10px] sm:text-xs flex items-center gap-1 hover:text-amber-300 transition-colors"
+              className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-mono font-black text-[11px] px-4 py-2 rounded-lg flex items-center gap-1.5 shadow-md transition-all active-scale"
             >
-              <LogIn className="w-3 h-3" />
+              <LogIn className="w-3.5 h-3.5" />
               <span>INGRESAR</span>
             </button>
           )}
