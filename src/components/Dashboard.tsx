@@ -201,652 +201,426 @@ export const Dashboard: React.FC<DashboardProps> = ({
         </div>
       </div>
 
-      {/* NAVEGADOR ORDENADO DE 3 PESTAÑAS (CERO SATURACIÓN EN MÓVIL Y PC) */}
-      <div className="flex flex-wrap items-center gap-2 bg-white dark:bg-slate-800 p-2 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-md">
-        <button
-          type="button"
-          onClick={() => setSubTab('simulacros')}
-          className={`flex-1 min-w-[130px] flex items-center justify-center gap-2 py-3.5 px-3 rounded-xl font-display font-bold text-xs sm:text-sm transition-all active-scale ${
-            subTab === 'simulacros'
-              ? 'bg-amber-500 text-slate-950 shadow-md font-extrabold'
-              : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/60'
-          }`}
-        >
-          <Target className="w-4 h-4 shrink-0" />
-          <span>1. Iniciar Simulacro</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setSubTab('normas')}
-          className={`flex-1 min-w-[130px] flex items-center justify-center gap-2 py-3.5 px-3 rounded-xl font-display font-bold text-xs sm:text-sm transition-all active-scale ${
-            subTab === 'normas'
-              ? 'bg-amber-500 text-slate-950 shadow-md font-extrabold'
-              : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/60'
-          }`}
-        >
-          <BookOpen className="w-4 h-4 shrink-0" />
-          <span>2. Las 22 Normas PNP</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setSubTab('estadisticas')}
-          className={`flex-1 min-w-[130px] flex items-center justify-center gap-2 py-3.5 px-3 rounded-xl font-display font-bold text-xs sm:text-sm transition-all active-scale ${
-            subTab === 'estadisticas'
-              ? 'bg-amber-500 text-slate-950 shadow-md font-extrabold'
-              : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/60'
-          }`}
-        >
-          <BarChart3 className="w-4 h-4 shrink-0" />
-          <span>3. Mis Estadísticas</span>
-        </button>
-      </div>
-
-      {subTab === 'simulacros' && (
-      <div className="space-y-6">
-      {/* 2. BARRA DE ORIENTACIÓN: CÓMO COMENZAR (PASO A PASO) */}
-      <div className="bg-amber-500/10 dark:bg-amber-500/5 border-2 border-amber-500/30 rounded-3xl p-5 sm:p-6 shadow-md">
-        <div className="flex items-center gap-2 mb-3">
-          <Sparkles className="w-5 h-5 text-amber-600 dark:text-amber-400" />
-          <h2 className="font-display font-black text-sm sm:text-base text-slate-900 dark:text-white uppercase tracking-wide">
-            ¿CÓMO EMPEZAR TU PREPARACIÓN HOY? (GUÍA DE 3 PASOS)
-          </h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm font-sans">
-          <div className="bg-white dark:bg-slate-800/90 border border-amber-500/20 rounded-2xl p-4 space-y-1">
-            <div className="flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-amber-500 text-slate-950 font-mono font-black text-xs flex items-center justify-center shrink-0">1</span>
-              <strong className="text-slate-900 dark:text-white font-display text-sm">Elige tu Modo de Examen</strong>
-            </div>
-            <p className="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">
-              En la sección de abajo, escoge entre <strong>Simulacro Oficial (100 preg.)</strong>, <strong>Examen Rápido</strong> o <strong>Simulacro Personalizado</strong>.
-            </p>
-          </div>
-          <div className="bg-white dark:bg-slate-800/90 border border-amber-500/20 rounded-2xl p-4 space-y-1">
-            <div className="flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-amber-500 text-slate-950 font-mono font-black text-xs flex items-center justify-center shrink-0">2</span>
-              <strong className="text-slate-900 dark:text-white font-display text-sm">Escucha las Preguntas en Voz Alta</strong>
-            </div>
-            <p className="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">
-              Durante cualquier examen, puedes pulsar <strong>"Audio-Lectura"</strong> para escuchar la pregunta y sus alternativas en tu celular o PC.
-            </p>
-          </div>
-          <div className="bg-white dark:bg-slate-800/90 border border-amber-500/20 rounded-2xl p-4 space-y-1">
-            <div className="flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-amber-500 text-slate-950 font-mono font-black text-xs flex items-center justify-center shrink-0">3</span>
-              <strong className="text-slate-900 dark:text-white font-display text-sm">Repasa lo que Fallaste</strong>
-            </div>
-            <p className="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">
-              El algoritmo guarda tus errores automáticamente. Vuelve aquí para rendir un <strong>Repaso Adaptativo</strong> solo de tus preguntas pendientes.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* 3. SECCIÓN PRINCIPAL: SELECCIÓN TÁCTIL DE SIMULACROS (OPTIMIZADO MÓVIL) */}
-      <div className="space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 dark:border-slate-700/80 pb-3">
-          <div>
-            <span className="font-mono text-xs text-amber-600 dark:text-amber-400 uppercase tracking-widest font-extrabold">
-              PASO 1: SELECCIONA TU EVALUACIÓN
-            </span>
-            <h2 className="font-display text-xl sm:text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2 mt-0.5">
-              <Target className="w-6 h-6 text-amber-500" />
-              ¿Qué tipo de simulacro deseas rendir?
-            </h2>
-          </div>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
-            Toca cualquier modalidad para iniciar al instante en tu celular o PC.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-          {/* OPCIÓN 1: SIMULACRO OFICIAL PNP 100 PREGUNTAS */}
-          <div className="bg-gradient-to-br from-amber-500/15 via-amber-500/5 to-white dark:to-slate-800 border-2 border-amber-500 rounded-3xl p-5 hover:border-amber-400 transition-all shadow-lg flex flex-col justify-between group relative overflow-hidden">
-            <div className="absolute top-0 right-0 bg-amber-500 text-slate-950 font-mono text-[9px] font-black px-3 py-1 rounded-bl-xl uppercase tracking-wider">
-              MÁS RECOMENDADO
-            </div>
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-10 h-10 rounded-2xl bg-amber-500 text-slate-950 flex items-center justify-center shrink-0 font-bold shadow">
-                  <Shield className="w-5 h-5" />
-                </div>
-                <div>
-                  <span className="font-mono text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase block">
-                    FORMATO OFICIAL
-                  </span>
-                  <h3 className="font-display font-black text-lg text-slate-900 dark:text-white leading-tight">
-                    Simulacro Oficial PNP
-                  </h3>
-                </div>
-              </div>
-
-              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-sans mb-4">
-                Examen de <strong>100 preguntas</strong> (50 Comunes y 50 Especialidad) idéntico al día de la evaluación de ascenso. Con cronómetro de 120 minutos.
-              </p>
-
-              <div className="bg-slate-100 dark:bg-slate-900/80 rounded-xl p-2.5 text-xs font-mono text-slate-700 dark:text-slate-300 space-y-1 mb-4">
-                <div className="flex justify-between">
-                  <span>Preguntas:</span>
-                  <strong className="text-amber-600 dark:text-amber-400">100 reales</strong>
-                </div>
-                <div className="flex justify-between">
-                  <span>Duración:</span>
-                  <strong>120 minutos</strong>
-                </div>
-              </div>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => onStartExamen('simulacro', 100)}
-              className="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-display font-black py-3.5 rounded-2xl text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-lg active-scale"
-            >
-              <Play className="w-4 h-4 fill-current" />
-              <span>INICIAR SIMULACRO (100)</span>
-            </button>
-          </div>
-
-          {/* OPCIÓN 2: EXAMEN RÁPIDO O EXPRÉS (CON SELECTOR TÁCTIL MÓVIL) */}
-          <div className="bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-3xl p-5 hover:border-amber-500 transition-all shadow-md flex flex-col justify-between group">
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 flex items-center justify-center shrink-0">
-                  <Zap className="w-5 h-5" />
-                </div>
-                <div>
-                  <span className="font-mono text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase block">
-                    PRÁCTICA DIARIA
-                  </span>
-                  <h3 className="font-display font-black text-lg text-slate-900 dark:text-white leading-tight">
-                    Examen Rápido
-                  </h3>
-                </div>
-              </div>
-
-              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-sans mb-3">
-                Ideal para practicar desde el móvil en cualquier momento libre. Elige con un toque la cantidad:
-              </p>
-
-              {/* 3 BOTONES TÁCTILES PARA SELECCIONAR CANTIDAD EN MÓVIL SIN DESPLEGABLE */}
-              <div className="grid grid-cols-3 gap-1.5 mb-4">
-                {[10, 20, 50].map((cant) => (
-                  <button
-                    key={cant}
-                    type="button"
-                    onClick={() => setNumPreguntasRapido(cant)}
-                    className={`py-2 px-1 rounded-xl text-xs font-mono font-bold transition-all border ${
-                      numPreguntasRapido === cant
-                        ? 'bg-amber-500 text-slate-950 border-amber-500 shadow-sm font-extrabold'
-                        : 'bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-amber-500/50'
-                    }`}
-                  >
-                    {cant} preg.
-                  </button>
-                ))}
-              </div>
-
-              <div className="bg-slate-50 dark:bg-slate-900/80 rounded-xl p-2.5 text-xs font-mono text-slate-700 dark:text-slate-300 flex justify-between items-center mb-4">
-                <span>Tiempo est.:</span>
-                <strong className="text-amber-600 dark:text-amber-400">{numPreguntasRapido} minutos</strong>
-              </div>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => onStartExamen('simulacro', numPreguntasRapido)}
-              className="w-full bg-slate-900 hover:bg-slate-800 dark:bg-slate-700 dark:hover:bg-slate-600 text-white font-display font-bold py-3.5 rounded-2xl text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow active-scale"
-            >
-              <Play className="w-4 h-4 fill-current text-amber-400" />
-              <span>INICIAR EXAMEN ({numPreguntasRapido})</span>
-            </button>
-          </div>
-
-          {/* OPCIÓN 3: CREAR EXAMEN PERSONALIZADO */}
-          <div className="bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-3xl p-5 hover:border-amber-500 transition-all shadow-md flex flex-col justify-between group">
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-10 h-10 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/30 flex items-center justify-center shrink-0">
-                  <SlidersHorizontal className="w-5 h-5" />
-                </div>
-                <div>
-                  <span className="font-mono text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase block">
-                    A TU MEDIDA
-                  </span>
-                  <h3 className="font-display font-black text-lg text-slate-900 dark:text-white leading-tight">
-                    Personalizado por Temas
-                  </h3>
-                </div>
-              </div>
-
-              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-sans mb-4">
-                ¿Quieres estudiar únicamente Derecho Constitucional, Ley PNP o Derechos Humanos? Elige las normas exactas y la duración.
-              </p>
-
-              <div className="bg-slate-50 dark:bg-slate-900/80 rounded-xl p-2.5 text-xs font-mono text-slate-700 dark:text-slate-300 space-y-1 mb-4">
-                <div className="flex justify-between">
-                  <span>Temas:</span>
-                  <strong className="text-blue-600 dark:text-blue-400">1 a 22 normas</strong>
-                </div>
-                <div className="flex justify-between">
-                  <span>Modo:</span>
-                  <strong>Estudio o examen</strong>
-                </div>
-              </div>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => onNavigateTab('crear-simulacro')}
-              className="w-full bg-blue-600 hover:bg-blue-500 text-white font-display font-bold py-3.5 rounded-2xl text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow active-scale"
-            >
-              <SlidersHorizontal className="w-4 h-4" />
-              <span>CREAR PERSONALIZADO</span>
-            </button>
-          </div>
-
-          {/* OPCIÓN 4: REPASO ADAPTATIVO SRS */}
-          <div className="bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-3xl p-5 hover:border-emerald-500 transition-all shadow-md flex flex-col justify-between group">
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-10 h-10 rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 flex items-center justify-center shrink-0">
-                  <RotateCcw className="w-5 h-5" />
-                </div>
-                <div>
-                  <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase block">
-                    ALGORITMO SRS
-                  </span>
-                  <h3 className="font-display font-black text-lg text-slate-900 dark:text-white leading-tight">
-                    Repaso de Falladas
-                  </h3>
-                </div>
-              </div>
-
-              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-sans mb-4">
-                Practica únicamente las preguntas en las que cometiste errores o tuviste dudas. El algoritmo prioriza reforzar tus puntos débiles.
-              </p>
-
-              <div className="bg-slate-50 dark:bg-slate-900/80 rounded-xl p-2.5 text-xs font-mono text-slate-700 dark:text-slate-300 space-y-1 mb-4">
-                <div className="flex justify-between items-center">
-                  <span>Pendientes hoy:</span>
-                  <strong className="text-emerald-600 dark:text-emerald-400 text-base">{pendientesSRSCount}</strong>
-                </div>
-                <div className="flex justify-between text-[11px] text-slate-500">
-                  <span>Método:</span>
-                  <span>Repetición Espaciada</span>
-                </div>
-              </div>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => onStartExamen('repaso')}
-              className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-display font-bold py-3.5 rounded-2xl text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow active-scale"
-            >
-              <RotateCcw className="w-4 h-4" />
-              <span>REPASAR FALLADAS ({pendientesSRSCount})</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* 4. BANNER INFORMATIVO: ASISTENTE WHATSAPP & AUDIO EN VOZ ALTA */}
-      {onOpenExplainer && (
-        <div
-          onClick={onOpenExplainer}
-          className="bg-gradient-to-r from-amber-500/15 via-amber-500/10 to-slate-900/10 dark:to-slate-900/80 border-2 border-amber-500/50 hover:border-amber-400 rounded-3xl p-5 sm:p-6 cursor-pointer transition-all active-scale shadow-lg group flex flex-col sm:flex-row items-center justify-between gap-4"
-        >
-          <div className="flex items-center gap-4 text-center sm:text-left">
-            <div className="w-14 h-14 rounded-2xl bg-amber-500 text-slate-950 flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform">
-              <Volume2 className="w-7 h-7" />
-            </div>
-            <div>
-              <span className="bg-amber-500 text-slate-950 font-mono text-[10px] font-extrabold px-2.5 py-0.5 rounded uppercase tracking-wider">
-                TECNOLOGÍA EN TU PREPARACIÓN PNP
-              </span>
-              <h3 className="font-display font-extrabold text-lg sm:text-xl text-slate-900 dark:text-white mt-1 group-hover:text-amber-400 transition-colors">
-                ¿Cómo funciona la Audio-Lectura en Voz Alta y el Bot de WhatsApp?
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-sans mt-0.5">
-                Haz clic aquí para probar el sintetizador neuronal de voz y los comandos para tu teléfono móvil.
-              </p>
-            </div>
-          </div>
-
+      {/* 2. CENTRO DE ENTRENAMIENTO PROFESIONAL (ORDEN LÓGICO) */}
+      <div className="flex flex-col gap-6">
+        
+        {/* NAVEGACIÓN DE MÓDULOS - DISEÑO PROFESIONAL */}
+        <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-900 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-x-auto scrollbar-none sticky top-[72px] z-30 shadow-sm">
           <button
             type="button"
-            className="w-full sm:w-auto bg-amber-500 group-hover:bg-amber-400 text-slate-950 font-mono font-bold text-xs px-6 py-3.5 rounded-2xl shadow transition-all shrink-0 flex items-center justify-center gap-2"
+            onClick={() => setSubTab('simulacros')}
+            className={`flex-1 min-w-[120px] flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-display text-xs sm:text-sm transition-all active-scale ${
+              subTab === 'simulacros'
+                ? 'bg-white dark:bg-slate-800 text-amber-600 dark:text-amber-400 shadow-sm border border-slate-200 dark:border-slate-700 font-black'
+                : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 font-bold'
+            }`}
           >
-            <span>PROBAR EN VIVO</span>
-            <ArrowRight className="w-4 h-4" />
+            <Zap className="w-4 h-4" />
+            <span>Simulacros</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setSubTab('normas')}
+            className={`flex-1 min-w-[120px] flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-display text-xs sm:text-sm transition-all active-scale ${
+              subTab === 'normas'
+                ? 'bg-white dark:bg-slate-800 text-amber-600 dark:text-amber-400 shadow-sm border border-slate-200 dark:border-slate-700 font-black'
+                : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 font-bold'
+            }`}
+          >
+            <BookOpen className="w-4 h-4" />
+            <span>Normas PNP</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setSubTab('estadisticas')}
+            className={`flex-1 min-w-[120px] flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-display text-xs sm:text-sm transition-all active-scale ${
+              subTab === 'estadisticas'
+                ? 'bg-white dark:bg-slate-800 text-amber-600 dark:text-amber-400 shadow-sm border border-slate-200 dark:border-slate-700 font-black'
+                : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 font-bold'
+            }`}
+          >
+            <BarChart3 className="w-4 h-4" />
+            <span>Resultados</span>
           </button>
         </div>
-      )}
-      </div>
-      )}
 
-      {subTab === 'estadisticas' && (
-      <div className="space-y-6">
-      {/* 5. SECCIÓN #2: TUS ESTADÍSTICAS DEL POSTULANTE */}
-      <div className="space-y-4 pt-4 border-t border-slate-200 dark:border-slate-800">
-        <div className="flex items-center justify-between">
-          <div>
-            <span className="font-mono text-xs text-slate-500 dark:text-slate-400 uppercase tracking-widest font-extrabold">
-              PASO 2: SEGUIMIENTO DE TU RENDIMIENTO
-            </span>
-            <h2 className="font-display text-xl sm:text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2 mt-0.5">
-              <BarChart3 className="w-6 h-6 text-amber-500" />
-              Tus Estadísticas y Perfil de Ascenso
-            </h2>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* Global Readiness Score */}
-          <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-3xl p-5 text-slate-900 dark:text-slate-100 shadow-md flex flex-col justify-between">
-            <div className="flex justify-between items-start">
-              <div>
-                <span className="text-xs font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider font-bold">
-                  Preparación Global
-                </span>
-                <h3 className="font-display text-lg font-bold text-slate-900 dark:text-white mt-0.5">
-                  {indicadorGlobal.nivelLegible}
-                </h3>
-              </div>
-              <div className="w-10 h-10 rounded-2xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-500">
-                <Trophy className="w-5 h-5" />
-              </div>
-            </div>
-
-            <div className="my-4">
-              <div className="flex justify-between items-baseline mb-1 font-mono">
-                <span className="text-3xl font-extrabold text-amber-600 dark:text-amber-400">
-                  {indicadorGlobal.porcentajeGlobal}%
-                </span>
-                <span className="text-xs text-slate-500 dark:text-slate-400">
-                  {indicadorGlobal.totalCorrectas} / {indicadorGlobal.totalRespondidas} preg.
-                </span>
-              </div>
-              <div className="w-full bg-slate-200 dark:bg-slate-900 h-2.5 rounded-full overflow-hidden border border-slate-300 dark:border-slate-700">
-                <div
-                  className="bg-gradient-to-r from-amber-500 to-amber-600 h-full transition-all duration-500 rounded-full"
-                  style={{ width: `${Math.min(100, indicadorGlobal.porcentajeGlobal)}%` }}
-                ></div>
-              </div>
-            </div>
-
-            <p className="text-xs text-slate-600 dark:text-slate-300 font-sans leading-snug">
-              {indicadorGlobal.evaluacionTexto}
-            </p>
-          </div>
-
-          {/* SRS Pending Reviews */}
-          <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-3xl p-5 text-slate-900 dark:text-slate-100 shadow-md flex flex-col justify-between">
-            <div className="flex justify-between items-start">
-              <div>
-                <span className="text-xs font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider font-bold">
-                  Estado del Repaso SRS
-                </span>
-                <h3 className="font-display text-lg font-bold text-slate-900 dark:text-white mt-0.5">
-                  Preguntas a Reforzar
-                </h3>
-              </div>
-              <div className="w-10 h-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/40 flex items-center justify-center text-emerald-500">
-                <RotateCcw className="w-5 h-5" />
-              </div>
-            </div>
-
-            <div className="my-4">
-              <div className="flex items-baseline gap-2 font-mono">
-                <span className="text-3xl font-extrabold text-amber-600 dark:text-amber-400">
-                  {pendientesSRSCount}
-                </span>
-                <span className="text-xs text-slate-500 dark:text-slate-400">
-                  preguntas en tu lista hoy
-                </span>
-              </div>
-              <p className="text-xs text-slate-600 dark:text-slate-300 mt-2 font-sans">
-                El algoritmo guarda tus errores automáticamente para repasar justo a tiempo.
-              </p>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => onStartExamen('repaso')}
-              className="w-full bg-slate-900 dark:bg-slate-900 hover:bg-slate-800 text-white dark:hover:bg-slate-700 border border-slate-700 py-2.5 rounded-xl text-xs font-mono font-bold flex items-center justify-center gap-2 transition-all active-scale"
-            >
-              <RotateCcw className="w-3.5 h-3.5 text-amber-400" />
-              Iniciar Repaso SRS
-            </button>
-          </div>
-
-          {/* User Rank Card & Streak */}
-          <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-3xl p-5 text-slate-900 dark:text-slate-100 shadow-md flex flex-col justify-between">
-            <div className="flex justify-between items-start">
-              <div>
-                <span className="text-xs font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider font-bold">
-                  Datos de Postulación
-                </span>
-                <h3 className="font-display text-lg font-bold text-amber-600 dark:text-amber-400 mt-0.5">
-                  {userProfile.grado} {userProfile.nombre}
-                </h3>
-              </div>
-              <div className="bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30 text-xs px-2.5 py-1 rounded-full font-mono font-bold">
-                CIP: {userProfile.cip}
-              </div>
-            </div>
-
-            <div className="my-4 space-y-2 font-mono text-xs">
-              <div className="flex justify-between py-1 border-b border-slate-200 dark:border-slate-700/80">
-                <span className="text-slate-500 dark:text-slate-400">Racha de Aprobados:</span>
-                <span className="text-amber-600 dark:text-amber-400 font-bold">{indicadorGlobal.rachaActual} simulacros</span>
-              </div>
-              <div className="flex justify-between py-1 border-b border-slate-200 dark:border-slate-700/80">
-                <span className="text-slate-500 dark:text-slate-400">Meta Diaria:</span>
-                <span className="text-slate-900 dark:text-white font-bold">{userProfile.metaPreguntasDiarias} preguntas</span>
-              </div>
-              <div className="flex justify-between py-1">
-                <span className="text-slate-500 dark:text-slate-400">Plan Actual:</span>
-                <span className="uppercase text-emerald-700 dark:text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/30">
-                  {userProfile.plan} (Acceso Total)
-                </span>
-              </div>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => onNavigateTab('banco')}
-              className="w-full bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 py-2.5 rounded-xl text-xs font-mono font-bold flex items-center justify-center gap-2 transition-all active-scale"
-            >
-              <Search className="w-3.5 h-3.5 text-amber-500" />
-              Explorar Banco Total (1,500)
-            </button>
-          </div>
-        </div>
-      </div>
-      </div>
-      )}
-
-      {subTab === 'normas' && (
-      <div className="space-y-6">
-      {/* 6. SECCIÓN #3: DOMINIO POR NORMA OFICIAL (22 NORMAS) */}
-      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-3xl p-6 text-slate-900 dark:text-slate-100 shadow-xl space-y-4 pt-6">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-700/80 pb-4">
-          <div>
-            <span className="font-mono text-xs text-amber-600 dark:text-amber-400 uppercase tracking-widest font-extrabold">
-              PASO 3: PRÁCTICA ESPECÍFICA POR NORMA
-            </span>
-            <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 mt-0.5">
-              <BookOpen className="w-5 h-5 text-amber-500" />
-              Banco Oficial por Materia y Norma (22 Fuentes PNP)
-            </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              Haz clic en <strong>"Practicar"</strong> al costado de cualquier norma para evaluar únicamente preguntas de esa ley o reglamento.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2">
-            {/* Filter Group */}
-            <div className="flex items-center bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-1 text-xs font-mono">
-              <button
-                type="button"
-                onClick={() => setFiltroGrupo('TODOS')}
-                className={`px-3 py-1 rounded-lg transition-all ${
-                  filtroGrupo === 'TODOS' ? 'bg-amber-500 text-slate-950 font-bold' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                }`}
-              >
-                Todos (22)
-              </button>
-              <button
-                type="button"
-                onClick={() => setFiltroGrupo('COMUNES')}
-                className={`px-3 py-1 rounded-lg transition-all ${
-                  filtroGrupo === 'COMUNES' ? 'bg-amber-500 text-slate-950 font-bold' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                }`}
-              >
-                Comunes
-              </button>
-              <button
-                type="button"
-                onClick={() => setFiltroGrupo('ESPECIALIDAD')}
-                className={`px-3 py-1 rounded-lg transition-all ${
-                  filtroGrupo === 'ESPECIALIDAD' ? 'bg-amber-500 text-slate-950 font-bold' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                }`}
-              >
-                Especialidad
-              </button>
-            </div>
-
-            {/* Search Input */}
-            <div className="relative">
-              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-              <input
-                type="text"
-                value={busquedaNorma}
-                onChange={(e) => setBusquedaNorma(e.target.value)}
-                placeholder="Filtrar norma..."
-                className="bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white rounded-xl pl-8 pr-3 py-2 focus:outline-none focus:border-amber-500 font-sans w-40"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Materias Rows */}
-        <div className="divide-y divide-slate-100 dark:divide-slate-700/60 max-h-[500px] overflow-y-auto pr-1 scrollbar-thin">
-          {materiasFiltradas.length === 0 ? (
-            <div className="text-center py-8 text-xs text-slate-500 dark:text-slate-400">
-              No se encontraron materias que coincidan con la búsqueda.
-            </div>
-          ) : (
-            materiasFiltradas.map((m, idx) => (
-              <div
-                key={idx}
-                className="py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-slate-50 dark:hover:bg-slate-700/40 px-2.5 rounded-2xl transition-all group"
-              >
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span
-                      className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-md uppercase ${
-                        m.grupo === 'COMUNES'
-                          ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30'
-                          : 'bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30'
-                      }`}
-                    >
-                      {m.grupo}
-                    </span>
-                    <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">
-                      {m.totalBanco} preguntas en banco
-                    </span>
-                  </div>
-                  <h4 className="font-display text-sm font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors leading-snug">
-                    {m.norma}
-                  </h4>
+        {subTab === 'simulacros' && (
+          <div className="space-y-8 animate-fadeIn">
+            
+            {/* PRIORIDAD 1: REPASO ADAPTATIVO (SRS) - SIEMPRE ARRIBA SI HAY PENDIENTES */}
+            <div className={`rounded-3xl p-5 border-2 transition-all flex flex-col sm:flex-row items-center justify-between gap-4 ${
+              pendientesSRSCount > 0 
+                ? 'bg-emerald-500/10 border-emerald-500/30' 
+                : 'bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800'
+            }`}>
+              <div className="flex items-center gap-4 text-center sm:text-left">
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-lg ${
+                  pendientesSRSCount > 0 ? 'bg-emerald-500 text-white shadow-emerald-500/20' : 'bg-slate-200 dark:bg-slate-800 text-slate-400'
+                }`}>
+                  <RotateCcw className="w-6 h-6" />
                 </div>
-
-                {/* Progress Bar & Buttons */}
-                <div className="flex items-center gap-4 shrink-0 justify-between sm:justify-end">
-                  <div className="w-36">
-                    <div className="flex justify-between items-center text-xs font-mono mb-1">
-                      <span className="text-slate-500 dark:text-slate-400">{m.aciertos}/{m.totalRespondidas}</span>
-                      <span className={`font-bold ${m.porcentaje >= 70 ? 'text-emerald-600 dark:text-emerald-400' : m.porcentaje >= 50 ? 'text-amber-600 dark:text-amber-400' : 'text-red-600 dark:text-red-400'}`}>
-                        {m.porcentaje}%
-                      </span>
-                    </div>
-                    <div className="w-full bg-slate-200 dark:bg-slate-900 h-2 rounded-full overflow-hidden border border-slate-300 dark:border-slate-700">
-                      <div
-                        className={`h-full transition-all duration-300 rounded-full ${
-                          m.porcentaje >= 70 ? 'bg-emerald-500' : m.porcentaje >= 50 ? 'bg-amber-500' : 'bg-red-500'
-                        }`}
-                        style={{ width: `${Math.min(100, m.porcentaje)}%` }}
-                      ></div>
-                    </div>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => onStartExamen('norma', 15, m.norma)}
-                    className="bg-slate-100 hover:bg-amber-500 hover:text-slate-950 dark:bg-slate-900 dark:hover:bg-amber-500 dark:hover:text-slate-950 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 px-3.5 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all flex items-center gap-1 shrink-0 active-scale"
-                  >
-                    <span>Practicar</span>
-                    <ArrowRight className="w-3 h-3" />
-                  </button>
+                <div>
+                  <h3 className="font-display font-black text-slate-900 dark:text-white leading-none">
+                    {pendientesSRSCount > 0 ? 'Repaso de Fallos Pendiente' : 'Repaso al Día'}
+                  </h3>
+                  <p className="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 mt-1.5">
+                    {pendientesSRSCount > 0 
+                      ? `Tienes ${pendientesSRSCount} preguntas por reforzar según tu historial de errores.` 
+                      : '¡Excelente! No tienes preguntas marcadas para repaso hoy.'}
+                  </p>
                 </div>
               </div>
-            ))
-          )}
-        </div>
-      </div>
-      </div>
-      )}
+              <button
+                onClick={() => onStartExamen('repaso')}
+                disabled={pendientesSRSCount === 0}
+                className={`w-full sm:w-auto font-display font-black py-3.5 px-8 rounded-2xl transition-all flex items-center justify-center gap-2 ${
+                  pendientesSRSCount > 0 
+                    ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg active-scale' 
+                    : 'bg-slate-200 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
+                }`}
+              >
+                <span>REFORZAR FALLAS</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
 
-      {subTab === 'estadisticas' && (
-      <div className="space-y-6">
-      {/* 7. Historial de Intentos Recientes */}
-      {historialIntentos.length > 0 && (
-        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-3xl p-6 text-slate-900 dark:text-slate-100 shadow-xl space-y-4">
-          <h3 className="font-display text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700/80 pb-2 flex items-center gap-2">
-            <Clock className="w-5 h-5 text-amber-500" />
-            Historial de Simulacros Rendidos
-          </h3>
-
-          <div className="divide-y divide-slate-100 dark:divide-slate-700/60">
-            {historialIntentos.slice(0, 5).map((intento) => {
-              const pct = Math.round((intento.aciertos / intento.totalPreguntas) * 100);
-              const aprobado = pct >= 65;
-              const mins = Math.floor(intento.duracionSeg / 60);
-              const secs = intento.duracionSeg % 60;
-
-              return (
-                <div key={intento.id} className="py-3 flex items-center justify-between gap-4 text-xs font-mono">
-                  <div className="space-y-1">
+            {/* PRIORIDAD 2: SIMULACRO OFICIAL (EL GRAN RETO) */}
+            <section className="space-y-4">
+              <div className="flex items-center justify-between gap-4">
+                <h2 className="font-display font-black text-xl text-slate-900 dark:text-white uppercase tracking-tight flex items-center gap-2">
+                  <Shield className="w-5 h-5 text-amber-500" />
+                  Simulacro General 2026
+                </h2>
+                <div className="hidden sm:flex items-center gap-2 text-[10px] font-mono text-slate-400">
+                  <Clock className="w-3.5 h-3.5" />
+                  <span>120 MINUTOS</span>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                <div className="lg:col-span-2 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border border-slate-700 rounded-3xl p-6 sm:p-8 text-white relative overflow-hidden group shadow-xl">
+                  <div className="relative z-10 space-y-5">
                     <div className="flex items-center gap-2">
-                      <span className={`px-2.5 py-0.5 rounded-md font-bold uppercase ${aprobado ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30' : 'bg-red-500/10 text-red-700 dark:text-red-300 border border-red-500/30'}`}>
-                        {aprobado ? 'APROBADO' : 'REQUIERE REPASO'}
-                      </span>
-                      <span className="text-slate-500 dark:text-slate-400 uppercase">
-                        Modo: {intento.modo} {intento.normaFiltro ? `(${intento.normaFiltro})` : ''}
-                      </span>
+                      <span className="bg-amber-500 text-slate-950 text-[10px] font-mono font-black px-2.5 py-1 rounded-md shadow-sm">MODALIDAD OFICIAL PNP</span>
                     </div>
-                    <p className="text-slate-500 dark:text-slate-400 text-[11px]">
-                      Fecha: {new Date(intento.fecha).toLocaleString('es-PE')} · Tiempo: {mins}m {secs}s
+                    <div className="space-y-2">
+                      <h3 className="text-2xl sm:text-3xl font-display font-black leading-tight">Examen Completo de Ascenso</h3>
+                      <p className="text-sm text-slate-300 font-sans max-w-lg leading-relaxed">
+                        Ensayo de 100 preguntas reales seleccionadas aleatoriamente del banco oficial 2026. Incluye cronómetro y audio-lectura.
+                      </p>
+                    </div>
+                    <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
+                      <button
+                        onClick={() => onStartExamen('simulacro', 100)}
+                        className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-950 font-display font-black py-4 px-10 rounded-2xl transition-all shadow-2xl active-scale flex items-center justify-center gap-3"
+                      >
+                        <Play className="w-6 h-6 fill-current" />
+                        <span>EMPEZAR EXAMEN REAL</span>
+                      </button>
+                    </div>
+                  </div>
+                  <Shield className="absolute -right-16 -bottom-16 w-64 h-64 text-white/5 pointer-events-none group-hover:scale-110 transition-transform duration-700" />
+                </div>
+
+                <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 flex flex-col shadow-md">
+                  <div className="space-y-2">
+                    <h4 className="font-display font-bold text-lg text-slate-900 dark:text-white">Práctica Táctica</h4>
+                    <p className="text-xs text-slate-500 leading-relaxed font-sans">
+                      Entrena con sesiones más cortas para reforzar agilidad mental en momentos libres.
                     </p>
                   </div>
-
-                  <div className="text-right">
-                    <span className="text-lg font-bold text-amber-600 dark:text-amber-400 block">
-                      {intento.aciertos} / {intento.totalPreguntas}
-                    </span>
-                    <span className="text-xs text-slate-500 dark:text-slate-400">{pct}% de acierto</span>
+                  <div className="space-y-4 pt-6 mt-auto">
+                    <div className="grid grid-cols-3 gap-2">
+                      {[10, 20, 50].map((num) => (
+                        <button
+                          key={num}
+                          onClick={() => setNumPreguntasRapido(num)}
+                          className={`py-2.5 rounded-xl text-xs font-mono font-black border transition-all ${
+                            numPreguntasRapido === num
+                              ? 'bg-amber-500 border-amber-500 text-slate-950 shadow-sm'
+                              : 'bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-500 hover:border-amber-500/50'
+                          }`}
+                        >
+                          {num} PREG.
+                        </button>
+                      ))}
+                    </div>
+                    <button
+                      onClick={() => onStartExamen('simulacro', numPreguntasRapido)}
+                      className="w-full bg-slate-900 dark:bg-slate-700 hover:bg-slate-800 text-white font-display font-bold py-4 rounded-2xl text-xs transition-all flex items-center justify-center gap-2 active-scale"
+                    >
+                      <Zap className="w-4 h-4 text-amber-400" />
+                      <span>INICIAR SESIÓN ({numPreguntasRapido})</span>
+                    </button>
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            </section>
+
+            {/* PRIORIDAD 3: ENTRENAMIENTO ESPECÍFICO (OTROS MÉTODOS) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <button 
+                onClick={() => setSubTab('normas')}
+                className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl p-5 hover:border-amber-500 transition-all flex items-center gap-5 group shadow-sm text-left"
+              >
+                <div className="w-14 h-14 rounded-2xl bg-blue-500/10 text-blue-500 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                  <BookOpen className="w-7 h-7" />
+                </div>
+                <div>
+                  <h4 className="font-display font-black text-slate-900 dark:text-white uppercase tracking-tight text-sm">Biblioteca por Norma</h4>
+                  <p className="text-[11px] text-slate-500 font-sans mt-1">Practica una de las 22 leyes específicas PNP.</p>
+                </div>
+              </button>
+              
+              <button 
+                onClick={() => onNavigateTab('crear-simulacro')}
+                className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl p-5 hover:border-amber-500 transition-all flex items-center gap-5 group shadow-sm text-left"
+              >
+                <div className="w-14 h-14 rounded-2xl bg-slate-100 dark:bg-slate-900 text-slate-500 dark:text-slate-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                  <SlidersHorizontal className="w-7 h-7" />
+                </div>
+                <div>
+                  <h4 className="font-display font-black text-slate-900 dark:text-white uppercase tracking-tight text-sm">Filtro Personalizado</h4>
+                  <p className="text-[11px] text-slate-500 font-sans mt-1">Elige temas específicos y crea tu propio examen.</p>
+                </div>
+              </button>
+            </div>
+
+            {/* BARRA DE ASISTENTE (INFO EXTRA) */}
+            {onOpenExplainer && (
+              <button
+                onClick={onOpenExplainer}
+                className="w-full bg-amber-500/5 border-2 border-dashed border-amber-500/20 rounded-3xl p-6 hover:bg-amber-500/10 transition-all flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left group"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center shrink-0 group-hover:rotate-12 transition-transform">
+                    <HelpCircle className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h5 className="font-display font-bold text-slate-900 dark:text-white">¿Cómo funciona el Audio y WhatsApp?</h5>
+                    <p className="text-[11px] text-slate-500 font-sans">Aprende a usar el dictado por voz y los simulacros por WhatsApp.</p>
+                  </div>
+                </div>
+                <span className="text-xs font-mono font-bold text-amber-600 underline underline-offset-4">Ver Tutorial</span>
+              </button>
+            )}
           </div>
-        </div>
-      )}
+        )}
+
+        {subTab === 'normas' && (
+          <div className="animate-fadeIn space-y-6">
+            <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-3xl p-6 text-slate-900 dark:text-slate-100 shadow-xl space-y-6">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-700/80 pb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-2xl bg-amber-500 text-slate-950 flex items-center justify-center shrink-0 shadow-lg">
+                    <BookOpen className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h2 className="font-display font-black text-xl uppercase tracking-tight">Biblioteca de Normas 2026</h2>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Entrenamiento específico por materia legal.</p>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2">
+                  <div className="relative w-full sm:w-64">
+                    <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                    <input
+                      type="text"
+                      value={busquedaNorma}
+                      onChange={(e) => setBusquedaNorma(e.target.value)}
+                      placeholder="Buscar norma..."
+                      className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white rounded-xl pl-9 pr-3 py-2.5 focus:outline-none focus:border-amber-500 font-sans"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Materias Rows */}
+              <div className="divide-y divide-slate-100 dark:divide-slate-700/60 max-h-[500px] overflow-y-auto pr-1 scrollbar-thin">
+                {materiasFiltradas.length === 0 ? (
+                  <div className="text-center py-8 text-xs text-slate-500 dark:text-slate-400">
+                    No se encontraron materias que coincidan con la búsqueda.
+                  </div>
+                ) : (
+                  materiasFiltradas.map((m, idx) => (
+                    <div
+                      key={idx}
+                      className="py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-slate-50 dark:hover:bg-slate-700/40 px-2.5 rounded-2xl transition-all group"
+                    >
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span
+                            className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-md uppercase ${
+                              m.grupo === 'COMUNES'
+                                ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30'
+                                : 'bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30'
+                            }`}
+                          >
+                            {m.grupo}
+                          </span>
+                          <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">
+                            {m.totalBanco} preguntas en banco
+                          </span>
+                        </div>
+                        <h4 className="font-display text-sm font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors leading-snug">
+                          {m.norma}
+                        </h4>
+                      </div>
+
+                      <div className="flex items-center gap-4 shrink-0 justify-between sm:justify-end">
+                        <div className="w-36">
+                          <div className="flex justify-between items-center text-xs font-mono mb-1">
+                            <span className="text-slate-500 dark:text-slate-400">{m.aciertos}/{m.totalRespondidas}</span>
+                            <span className={`font-bold ${m.porcentaje >= 70 ? 'text-emerald-600 dark:text-emerald-400' : m.porcentaje >= 50 ? 'text-amber-600 dark:text-amber-400' : 'text-red-600 dark:text-red-400'}`}>
+                              {m.porcentaje}%
+                            </span>
+                          </div>
+                          <div className="w-full bg-slate-200 dark:bg-slate-900 h-2 rounded-full overflow-hidden border border-slate-300 dark:border-slate-700">
+                            <div
+                              className={`h-full transition-all duration-300 rounded-full ${
+                                m.porcentaje >= 70 ? 'bg-emerald-500' : m.porcentaje >= 50 ? 'bg-amber-500' : 'bg-red-500'
+                              }`}
+                              style={{ width: `${Math.min(100, m.porcentaje)}%` }}
+                            ></div>
+                          </div>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => onStartExamen('norma', 15, m.norma)}
+                          className="bg-slate-100 hover:bg-amber-500 hover:text-slate-950 dark:bg-slate-900 dark:hover:bg-amber-500 dark:hover:text-slate-950 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 px-3.5 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all flex items-center gap-1 shrink-0 active-scale"
+                        >
+                          <span>Practicar</span>
+                          <ArrowRight className="w-3 h-3" />
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {subTab === 'estadisticas' && (
+          <div className="animate-fadeIn space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 text-slate-900 dark:text-slate-100 shadow-md flex flex-col justify-between">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <span className="text-xs font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider font-bold">Nivel de Dominio</span>
+                    <h3 className="font-display text-lg font-bold text-slate-900 dark:text-white mt-1">{indicadorGlobal.nivelLegible}</h3>
+                  </div>
+                  <div className="w-10 h-10 rounded-2xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-500">
+                    <Trophy className="w-5 h-5" />
+                  </div>
+                </div>
+                <div className="my-5">
+                  <div className="flex justify-between items-baseline mb-2 font-mono">
+                    <span className="text-3xl font-black text-amber-600 dark:text-amber-400">{indicadorGlobal.porcentajeGlobal}%</span>
+                    <span className="text-xs text-slate-500">{indicadorGlobal.totalCorrectas} / {indicadorGlobal.totalRespondidas}</span>
+                  </div>
+                  <div className="w-full bg-slate-100 dark:bg-slate-900 h-2.5 rounded-full overflow-hidden">
+                    <div
+                      className="bg-amber-500 h-full transition-all duration-500"
+                      style={{ width: `${Math.min(100, indicadorGlobal.porcentajeGlobal)}%` }}
+                    ></div>
+                  </div>
+                </div>
+                <p className="text-[11px] text-slate-500 leading-snug">{indicadorGlobal.evaluacionTexto}</p>
+              </div>
+
+              <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 text-slate-900 dark:text-slate-100 shadow-md flex flex-col justify-between">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <span className="text-xs font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider font-bold">Racha Actual</span>
+                    <h3 className="font-display text-lg font-bold text-slate-900 dark:text-white mt-1">Simulacros</h3>
+                  </div>
+                  <div className="w-10 h-10 rounded-2xl bg-orange-500/10 border border-orange-500/40 flex items-center justify-center text-orange-500">
+                    <Zap className="w-5 h-5 fill-current" />
+                  </div>
+                </div>
+                <div className="my-5">
+                  <div className="flex items-baseline gap-2 font-mono">
+                    <span className="text-3xl font-black text-orange-600 dark:text-orange-400">{indicadorGlobal.rachaActual}</span>
+                    <span className="text-xs text-slate-500 uppercase">Aprobados seguidos</span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setSubTab('simulacros')}
+                  className="w-full bg-slate-900 dark:bg-slate-700 text-white font-display font-bold py-2.5 rounded-xl text-xs transition-all active-scale"
+                >
+                  Continuar Racha
+                </button>
+              </div>
+
+              <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 text-slate-900 dark:text-slate-100 shadow-md flex flex-col justify-between">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <span className="text-xs font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider font-bold">Perfil CIP</span>
+                    <h3 className="font-display text-lg font-bold text-slate-900 dark:text-white mt-1">{userProfile.nombre}</h3>
+                  </div>
+                  <div className="bg-amber-500/10 text-amber-600 border border-amber-500/30 text-[10px] px-2 py-0.5 rounded font-mono font-black">CIP {userProfile.cip}</div>
+                </div>
+                <div className="mt-4 space-y-2 text-xs font-mono">
+                  <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-700">
+                    <span className="text-slate-500">Grado:</span>
+                    <span className="font-black">{userProfile.grado}</span>
+                  </div>
+                  <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-700">
+                    <span className="text-slate-500">Plan:</span>
+                    <span className="text-emerald-600 font-black">{userProfile.plan}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Historial de Intentos Recientes */}
+            {historialIntentos.length > 0 && (
+              <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-3xl p-6 text-slate-900 dark:text-slate-100 shadow-xl space-y-4">
+                <h3 className="font-display text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700/80 pb-3 flex items-center gap-2">
+                  <Clock className="w-5 h-5 text-amber-500" />
+                  Historial de Evaluaciones
+                </h3>
+
+                <div className="divide-y divide-slate-100 dark:divide-slate-700/60">
+                  {historialIntentos.slice(0, 10).map((intento) => {
+                    const pct = Math.round((intento.aciertos / intento.totalPreguntas) * 100);
+                    const aprobado = pct >= 65;
+                    const mins = Math.floor(intento.duracionSeg / 60);
+                    const secs = intento.duracionSeg % 60;
+
+                    return (
+                      <div key={intento.id} className="py-4 flex items-center justify-between gap-4 text-xs font-mono">
+                        <div className="space-y-1.5 flex-1 min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className={`px-2 py-0.5 rounded font-black text-[10px] uppercase ${aprobado ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'}`}>
+                              {aprobado ? 'APROBADO' : 'FALLIDO'}
+                            </span>
+                            <span className="text-slate-500 dark:text-slate-400 font-bold truncate">
+                              MODO: {intento.modo} {intento.normaFiltro ? `(${intento.normaFiltro})` : ''}
+                            </span>
+                          </div>
+                          <p className="text-slate-400 text-[10px]">
+                            {new Date(intento.fecha).toLocaleDateString('es-PE')} · Duración: {mins}m {secs}s
+                          </p>
+                        </div>
+
+                        <div className="text-right shrink-0">
+                          <span className={`text-base font-black block ${aprobado ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600'}`}>
+                            {intento.aciertos}/{intento.totalPreguntas}
+                          </span>
+                          <span className="text-[10px] text-slate-400 font-bold">{pct}% ACIERTO</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
-      )}
     </div>
   );
 };
