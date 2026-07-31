@@ -3,6 +3,7 @@ import {
   Shield,
   Clock,
   BookOpen,
+  LayoutGrid,
   Search,
   Trophy,
   AlertTriangle,
@@ -245,165 +246,143 @@ export const Dashboard: React.FC<DashboardProps> = ({
         </div>
 
         {subTab === 'simulacros' && (
-          <div className="space-y-8 animate-fadeIn">
-            
-            {/* PRIORIDAD 1: REPASO ADAPTATIVO (SRS) - SIEMPRE ARRIBA SI HAY PENDIENTES */}
-            <div className={`rounded-3xl p-5 border-2 transition-all flex flex-col sm:flex-row items-center justify-between gap-4 ${
-              pendientesSRSCount > 0 
-                ? 'bg-emerald-500/10 border-emerald-500/30' 
-                : 'bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800'
-            }`}>
-              <div className="flex items-center gap-4 text-center sm:text-left">
-                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-lg ${
-                  pendientesSRSCount > 0 ? 'bg-emerald-500 text-white shadow-emerald-500/20' : 'bg-slate-200 dark:bg-slate-800 text-slate-400'
-                }`}>
-                  <RotateCcw className="w-6 h-6" />
+          <div className="animate-fadeIn space-y-8">
+            {/* STAGE 1: OFFICIAL CHALLENGE */}
+            <div className="bg-slate-900 dark:bg-slate-950 rounded-3xl p-6 sm:p-8 text-white relative overflow-hidden border border-slate-800 shadow-2xl">
+              <div className="absolute top-0 right-0 p-4 opacity-10">
+                <Shield className="w-32 h-32" />
+              </div>
+              <div className="relative z-10 space-y-5">
+                <div className="flex items-center gap-2">
+                  <span className="bg-amber-500 text-slate-950 text-[10px] font-black px-2.5 py-1 rounded-md uppercase tracking-widest shadow-sm">MODALIDAD OFICIAL PNP</span>
+                  <span className="text-amber-500 font-mono text-[10px] font-bold uppercase tracking-[0.2em] hidden xs:inline">Simulacro Real</span>
                 </div>
-                <div>
-                  <h3 className="font-display font-black text-slate-900 dark:text-white leading-none">
-                    {pendientesSRSCount > 0 ? 'Repaso de Fallos Pendiente' : 'Repaso al Día'}
-                  </h3>
-                  <p className="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 mt-1.5">
-                    {pendientesSRSCount > 0 
-                      ? `Tienes ${pendientesSRSCount} preguntas por reforzar según tu historial de errores.` 
-                      : '¡Excelente! No tienes preguntas marcadas para repaso hoy.'}
+                <div className="space-y-2">
+                  <h2 className="font-display text-2xl sm:text-4xl font-black leading-tight tracking-tight">Examen General de Ascenso 2026</h2>
+                  <p className="text-slate-400 text-sm sm:text-base max-w-xl leading-relaxed">
+                    Evaluación integral de <span className="text-white font-bold underline underline-offset-4 decoration-amber-500">100 preguntas</span> seleccionadas aleatoriamente. El estándar oficial para medir tu nota de ascenso.
                   </p>
                 </div>
+                <div className="flex flex-wrap items-center gap-6 pt-2 border-t border-slate-800/50">
+                  <div className="flex items-center gap-2 text-xs font-mono font-bold">
+                    <Clock className="w-4 h-4 text-amber-500" />
+                    <span>120 MINUTOS</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs font-mono font-bold">
+                    <Zap className="w-4 h-4 text-amber-500" />
+                    <span>CALIFICACIÓN VIGESIMAL</span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => onStartExamen('simulacro', 100)}
+                  className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-950 font-display font-black px-10 py-4 rounded-2xl transition-all active-scale shadow-xl shadow-amber-500/20 flex items-center justify-center gap-3 text-sm sm:text-base"
+                >
+                  <Play className="w-5 h-5 fill-current" />
+                  <span>EMPEZAR SIMULACRO OFICIAL</span>
+                </button>
               </div>
-              <button
-                onClick={() => onStartExamen('repaso')}
-                disabled={pendientesSRSCount === 0}
-                className={`w-full sm:w-auto font-display font-black py-3.5 px-8 rounded-2xl transition-all flex items-center justify-center gap-2 ${
-                  pendientesSRSCount > 0 
-                    ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg active-scale' 
-                    : 'bg-slate-200 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
-                }`}
-              >
-                <span>REFORZAR FALLAS</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
             </div>
 
-            {/* PRIORIDAD 2: SIMULACRO OFICIAL (EL GRAN RETO) */}
-            <section className="space-y-4">
-              <div className="flex items-center justify-between gap-4">
-                <h2 className="font-display font-black text-xl text-slate-900 dark:text-white uppercase tracking-tight flex items-center gap-2">
-                  <Shield className="w-5 h-5 text-amber-500" />
-                  Simulacro General 2026
-                </h2>
-                <div className="hidden sm:flex items-center gap-2 text-[10px] font-mono text-slate-400">
-                  <Clock className="w-3.5 h-3.5" />
-                  <span>120 MINUTOS</span>
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-                <div className="lg:col-span-2 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border border-slate-700 rounded-3xl p-6 sm:p-8 text-white relative overflow-hidden group shadow-xl">
-                  <div className="relative z-10 space-y-5">
-                    <div className="flex items-center gap-2">
-                      <span className="bg-amber-500 text-slate-950 text-[10px] font-mono font-black px-2.5 py-1 rounded-md shadow-sm">MODALIDAD OFICIAL PNP</span>
-                    </div>
-                    <div className="space-y-2">
-                      <h3 className="text-2xl sm:text-3xl font-display font-black leading-tight">Examen Completo de Ascenso</h3>
-                      <p className="text-sm text-slate-300 font-sans max-w-lg leading-relaxed">
-                        Ensayo de 100 preguntas reales seleccionadas aleatoriamente del banco oficial 2026. Incluye cronómetro y audio-lectura.
-                      </p>
-                    </div>
-                    <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
-                      <button
-                        onClick={() => onStartExamen('simulacro', 100)}
-                        className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-950 font-display font-black py-4 px-10 rounded-2xl transition-all shadow-2xl active-scale flex items-center justify-center gap-3"
-                      >
-                        <Play className="w-6 h-6 fill-current" />
-                        <span>EMPEZAR EXAMEN REAL</span>
-                      </button>
-                    </div>
+            {/* STAGE 2: TARGETED PRACTICE & REVIEW */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Review Section */}
+              <div className={`rounded-3xl p-6 border-2 transition-all flex flex-col justify-between gap-6 ${
+                pendientesSRSCount > 0 
+                  ? 'bg-emerald-500/5 border-emerald-500/20 shadow-lg shadow-emerald-500/5' 
+                  : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700'
+              }`}>
+                <div className="flex items-start gap-4">
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 shadow-xl ${
+                    pendientesSRSCount > 0 ? 'bg-emerald-500 text-white shadow-emerald-500/30' : 'bg-slate-100 dark:bg-slate-900 text-slate-400'
+                  }`}>
+                    <RotateCcw className="w-7 h-7" />
                   </div>
-                  <Shield className="absolute -right-16 -bottom-16 w-64 h-64 text-white/5 pointer-events-none group-hover:scale-110 transition-transform duration-700" />
-                </div>
-
-                <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 flex flex-col shadow-md">
-                  <div className="space-y-2">
-                    <h4 className="font-display font-bold text-lg text-slate-900 dark:text-white">Práctica Táctica</h4>
-                    <p className="text-xs text-slate-500 leading-relaxed font-sans">
-                      Entrena con sesiones más cortas para reforzar agilidad mental en momentos libres.
+                  <div>
+                    <h3 className="font-display font-black text-xl text-slate-900 dark:text-white leading-tight">
+                      Repaso de Fallos (SRS)
+                    </h3>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
+                      {pendientesSRSCount > 0 
+                        ? `Tienes ${pendientesSRSCount} preguntas críticas para repasar antes de tu examen real.` 
+                        : '¡Excelente! No tienes fallos pendientes para repasar hoy.'}
                     </p>
                   </div>
-                  <div className="space-y-4 pt-6 mt-auto">
-                    <div className="grid grid-cols-3 gap-2">
-                      {[10, 20, 50].map((num) => (
-                        <button
-                          key={num}
-                          onClick={() => setNumPreguntasRapido(num)}
-                          className={`py-2.5 rounded-xl text-xs font-mono font-black border transition-all ${
-                            numPreguntasRapido === num
-                              ? 'bg-amber-500 border-amber-500 text-slate-950 shadow-sm'
-                              : 'bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-500 hover:border-amber-500/50'
-                          }`}
-                        >
-                          {num} PREG.
-                        </button>
-                      ))}
-                    </div>
-                    <button
-                      onClick={() => onStartExamen('simulacro', numPreguntasRapido)}
-                      className="w-full bg-slate-900 dark:bg-slate-700 hover:bg-slate-800 text-white font-display font-bold py-4 rounded-2xl text-xs transition-all flex items-center justify-center gap-2 active-scale"
-                    >
-                      <Zap className="w-4 h-4 text-amber-400" />
-                      <span>INICIAR SESIÓN ({numPreguntasRapido})</span>
-                    </button>
+                </div>
+                <button
+                  onClick={() => onStartExamen('repaso')}
+                  disabled={pendientesSRSCount === 0}
+                  className={`w-full font-display font-black py-4 rounded-2xl transition-all flex items-center justify-center gap-2 text-sm ${
+                    pendientesSRSCount > 0 
+                      ? 'bg-slate-900 dark:bg-emerald-600 hover:bg-slate-800 dark:hover:bg-emerald-500 text-white shadow-md active-scale' 
+                      : 'bg-slate-100 dark:bg-slate-900 text-slate-400 cursor-not-allowed'
+                  }`}
+                >
+                  <span>REFORZAR CONOCIMIENTOS</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Sections Section */}
+              <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 flex flex-col justify-between gap-6 shadow-sm">
+                <div className="flex items-start gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center shrink-0 shadow-inner">
+                    <LayoutGrid className="w-7 h-7" />
+                  </div>
+                  <div>
+                    <h3 className="font-display font-black text-xl text-slate-900 dark:text-white leading-tight">
+                      Entrenamiento por Temas
+                    </h3>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
+                      Selecciona una sección específica para dominar materias comunes o reglamentos especiales.
+                    </p>
                   </div>
                 </div>
+                
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    onClick={() => onStartExamen('expres', 20)}
+                    className="bg-slate-50 dark:bg-slate-900 hover:bg-amber-500/5 border border-slate-200 dark:border-slate-700 p-4 rounded-2xl text-left group transition-all"
+                  >
+                    <span className="text-[10px] font-mono font-bold text-emerald-600 uppercase">Comunes</span>
+                    <h4 className="font-display font-bold text-xs mt-1 text-slate-900 dark:text-white">General</h4>
+                  </button>
+                  <button
+                    onClick={() => onStartExamen('expres', 20)}
+                    className="bg-slate-50 dark:bg-slate-900 hover:bg-amber-500/5 border border-slate-200 dark:border-slate-700 p-4 rounded-2xl text-left group transition-all"
+                  >
+                    <span className="text-[10px] font-mono font-bold text-amber-600 uppercase">Especialidad</span>
+                    <h4 className="font-display font-bold text-xs mt-1 text-slate-900 dark:text-white">Leyes PNP</h4>
+                  </button>
+                </div>
               </div>
-            </section>
+            </div>
 
-            {/* PRIORIDAD 3: ENTRENAMIENTO ESPECÍFICO (OTROS MÉTODOS) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* OTHER METHODS (SMALL CARDS) */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <button 
                 onClick={() => setSubTab('normas')}
-                className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl p-5 hover:border-amber-500 transition-all flex items-center gap-5 group shadow-sm text-left"
+                className="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 flex items-center gap-4 hover:border-amber-500/50 transition-all text-left"
               >
-                <div className="w-14 h-14 rounded-2xl bg-blue-500/10 text-blue-500 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                  <BookOpen className="w-7 h-7" />
-                </div>
-                <div>
-                  <h4 className="font-display font-black text-slate-900 dark:text-white uppercase tracking-tight text-sm">Biblioteca por Norma</h4>
-                  <p className="text-[11px] text-slate-500 font-sans mt-1">Practica una de las 22 leyes específicas PNP.</p>
-                </div>
+                <BookOpen className="w-5 h-5 text-blue-500" />
+                <span className="font-display font-bold text-xs uppercase tracking-tight text-slate-700 dark:text-slate-300">Todas las Normas</span>
               </button>
               
               <button 
                 onClick={() => onNavigateTab('crear-simulacro')}
-                className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl p-5 hover:border-amber-500 transition-all flex items-center gap-5 group shadow-sm text-left"
+                className="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 flex items-center gap-4 hover:border-amber-500/50 transition-all text-left"
               >
-                <div className="w-14 h-14 rounded-2xl bg-slate-100 dark:bg-slate-900 text-slate-500 dark:text-slate-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                  <SlidersHorizontal className="w-7 h-7" />
-                </div>
-                <div>
-                  <h4 className="font-display font-black text-slate-900 dark:text-white uppercase tracking-tight text-sm">Filtro Personalizado</h4>
-                  <p className="text-[11px] text-slate-500 font-sans mt-1">Elige temas específicos y crea tu propio examen.</p>
-                </div>
+                <SlidersHorizontal className="w-5 h-5 text-slate-500" />
+                <span className="font-display font-bold text-xs uppercase tracking-tight text-slate-700 dark:text-slate-300">Configurar Filtros</span>
+              </button>
+
+              <button 
+                onClick={onOpenExplainer}
+                className="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 flex items-center gap-4 hover:border-amber-500/50 transition-all text-left"
+              >
+                <HelpCircle className="w-5 h-5 text-amber-500" />
+                <span className="font-display font-bold text-xs uppercase tracking-tight text-slate-700 dark:text-slate-300">¿Cómo usar la App?</span>
               </button>
             </div>
-
-            {/* BARRA DE ASISTENTE (INFO EXTRA) */}
-            {onOpenExplainer && (
-              <button
-                onClick={onOpenExplainer}
-                className="w-full bg-amber-500/5 border-2 border-dashed border-amber-500/20 rounded-3xl p-6 hover:bg-amber-500/10 transition-all flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left group"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center shrink-0 group-hover:rotate-12 transition-transform">
-                    <HelpCircle className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h5 className="font-display font-bold text-slate-900 dark:text-white">¿Cómo funciona el Audio y WhatsApp?</h5>
-                    <p className="text-[11px] text-slate-500 font-sans">Aprende a usar el dictado por voz y los simulacros por WhatsApp.</p>
-                  </div>
-                </div>
-                <span className="text-xs font-mono font-bold text-amber-600 underline underline-offset-4">Ver Tutorial</span>
-              </button>
-            )}
           </div>
         )}
 
