@@ -68,19 +68,19 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             Balotario oficial de <strong className="text-white">1,500 preguntas</strong> para el concurso de ascenso. Practica en tu móvil con audio y simulacros reales.
           </p>
 
-          {/* 3 puntos resumidos - Hidden on mobile for cleaner view */}
-          <div className="hidden sm:flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-slate-300 pt-1">
-            <span className="flex items-center gap-1.5 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+          {/* 3 puntos resumidos - Optimized for both Mobile and PC */}
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-[10px] sm:text-xs font-mono text-slate-300 pt-1">
+            <span className="flex items-center gap-1.5 bg-slate-800/80 px-2.5 py-1.5 rounded-xl border border-slate-700">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
               <span>1,500 Preguntas</span>
             </span>
-            <span className="flex items-center gap-1.5 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700">
-              <Volume2 className="w-4 h-4 text-amber-400" />
-              <span>Audio en Voz Alta</span>
+            <span className="flex items-center gap-1.5 bg-slate-800/80 px-2.5 py-1.5 rounded-xl border border-slate-700">
+              <Volume2 className="w-3.5 h-3.5 text-amber-400" />
+              <span>Audio Voz</span>
             </span>
-            <span className="flex items-center gap-1.5 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700">
-              <Smartphone className="w-4 h-4 text-sky-400" />
-              <span>100% Móvil</span>
+            <span className="flex items-center gap-1.5 bg-slate-800/80 px-2.5 py-1.5 rounded-xl border border-slate-700">
+              <RotateCcw className="w-3.5 h-3.5 text-sky-400" />
+              <span>Repaso SRS</span>
             </span>
           </div>
 
@@ -106,6 +106,22 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <Shield className="w-5 h-5 fill-current" />
               <span>INGRESAR AL PORTAL</span>
             </button>
+          </div>
+
+          {/* INFO BÁSICA ADICIONAL PARA MÓVIL (LIMPIA) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 text-left border-t border-slate-800/60 mt-4 px-2">
+            <div className="space-y-1">
+              <h4 className="text-amber-400 font-display font-bold text-xs uppercase tracking-wider">¿De qué trata?</h4>
+              <p className="text-[11px] text-slate-400 leading-snug">
+                Simulador basado en el banco oficial de <strong className="text-slate-200">1,500 preguntas</strong> para el ascenso de Suboficiales PNP.
+              </p>
+            </div>
+            <div className="space-y-1">
+              <h4 className="text-amber-400 font-display font-bold text-xs uppercase tracking-wider">Contenido</h4>
+              <p className="text-[11px] text-slate-400 leading-snug">
+                Incluye las <strong className="text-slate-200">22 Normas Oficiales</strong> (Materias Comunes y Especialidad) actualizadas al 2026.
+              </p>
+            </div>
           </div>
 
           {/* Botón secundario - Mas pequeño y discreto */}
