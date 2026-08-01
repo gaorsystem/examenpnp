@@ -14,11 +14,22 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
   onClose,
   onLoginSuccess,
 }) => {
-  const [step, setStep] = useState<'PHONE' | 'OTP'>('PHONE');
+  const [step, setStep] = useState<'PHONE' | 'OTP' | 'ADMIN'>('PHONE');
   const [telefono, setTelefono] = useState('');
   const [loading, setLoading] = useState(false);
   const [inputOtp, setInputOtp] = useState<string>('');
+  const [adminPassword, setAdminPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState<string>('');
+
+  const handleAdminLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (adminPassword === 'moncheri1982') {
+      onLoginSuccess('ADMIN_BYPASS', 'ADMIN', 'Administrador');
+      onClose();
+    } else {
+      setErrorMsg('Contraseña de administrador incorrecta.');
+    }
+  };
 
   const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -169,8 +180,18 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
               {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <span>ENVIAR CÓDIGO</span>}
               {!loading && <ArrowRight className="w-4 h-4" />}
             </button>
+
+            <div className="pt-2 text-center">
+              <button
+                type="button"
+                onClick={() => setStep('ADMIN')}
+                className="text-[10px] font-mono font-bold text-slate-400 hover:text-amber-500 transition-colors uppercase tracking-wider"
+              >
+                Acceso Administrador (Solo Clave)
+              </button>
+            </div>
           </form>
-        ) : (
+        ) : step === 'OTP' ? (
           <form onSubmit={handleVerifyOtp} className="space-y-4">
             <div className="bg-emerald-500/10 border border-emerald-500/30 p-3.5 rounded-2xl text-xs space-y-2">
               <div className="flex items-center justify-between">
@@ -228,6 +249,58 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
               >
                 {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle2 className="w-4 h-4" />}
                 <span>{loading ? 'VERIFICANDO...' : 'INGRESAR'}</span>
+              </button>
+            </div>
+          </form>
+        ) : (
+          <form onSubmit={handleAdminLogin} className="space-y-4">
+            <div className="bg-blue-500/10 border border-blue-500/30 p-3.5 rounded-2xl text-xs space-y-2">
+              <span className="font-mono font-bold text-blue-600 dark:text-blue-400 flex items-center gap-1.5">
+                <Shield className="w-4 h-4" /> Panel Administrativo
+              </span>
+              <p className="text-slate-600 dark:text-slate-300">
+                Ingresa la clave maestra del sistema para gestionar usuarios y simulacros.
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-xs font-mono font-bold text-slate-700 dark:text-slate-300 mb-1">
+                Clave de Acceso
+              </label>
+              <div className="relative">
+                <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <input
+                  type="password"
+                  required
+                  autoFocus
+                  value={adminPassword}
+                  onChange={(e) => setAdminPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-10 pr-4 py-3 text-base font-mono focus:outline-none focus:border-blue-500 text-slate-900 dark:text-white"
+                />
+              </div>
+            </div>
+
+            {errorMsg && (
+              <p className="text-xs text-red-500 font-mono bg-red-500/10 p-2 rounded-lg">
+                {errorMsg}
+              </p>
+            )}
+
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => setStep('PHONE')}
+                className="w-1/3 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono text-xs font-bold py-3 rounded-2xl transition-colors"
+              >
+                Volver
+              </button>
+              <button
+                type="submit"
+                className="w-2/3 bg-slate-900 text-white font-display font-black py-3 rounded-2xl text-sm shadow-lg transition-all flex items-center justify-center gap-2 active-scale"
+              >
+                <CheckCircle2 className="w-4 h-4" />
+                <span>ACCEDER</span>
               </button>
             </div>
           </form>

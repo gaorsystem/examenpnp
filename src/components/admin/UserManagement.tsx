@@ -18,7 +18,11 @@ import { motion, AnimatePresence } from 'motion/react';
 
 import { TechnicalGuide } from './TechnicalGuide';
 
-export const UserManagement: React.FC = () => {
+interface UserManagementProps {
+  userProfile?: UserProfile;
+}
+
+export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) => {
   const [users, setUsers] = useState<UserProfile[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -34,12 +38,12 @@ export const UserManagement: React.FC = () => {
   const [saving, setSaving] = useState(false);
 
   const [adminPass, setAdminPass] = useState('');
-  const [isAdminAuth, setIsAdminAuth] = useState(false);
+  const [isAdminAuth, setIsAdminAuth] = useState(userProfile?.role === 'admin');
   const [authError, setAuthError] = useState(false);
 
   const handleAdminLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (adminPass === 'sistema26') {
+    if (adminPass === 'moncheri1982') {
       setIsAdminAuth(true);
       setAuthError(false);
     } else {

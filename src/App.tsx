@@ -224,9 +224,20 @@ export default function App() {
   };
 
   const handleLoginSuccess = (phone: string, grado?: string, nombre?: string) => {
-    // This is now handled by supabase.auth.onAuthStateChange
     setShowOtpModal(false);
-    setActiveTab('dashboard');
+    if (phone === 'ADMIN_BYPASS') {
+      setIsLoggedIn(true);
+      setUserProfile(prev => ({
+        ...prev,
+        nombre: nombre || 'Administrador',
+        grado: grado || 'Admin',
+        role: 'admin',
+        plan: 'premium'
+      }));
+      setActiveTab('admin');
+    } else {
+      setActiveTab('dashboard');
+    }
   };
 
   const handleLogout = async () => {
@@ -439,7 +450,7 @@ export default function App() {
 
         {activeTab === 'admin' && (
           <div className="max-w-7xl mx-auto px-4">
-            <UserManagement />
+            <UserManagement userProfile={userProfile} />
           </div>
         )}
 
