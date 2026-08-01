@@ -28,9 +28,24 @@ export const UserManagement: React.FC = () => {
   const [newUserName, setNewUserName] = useState('');
   const [newUserPhone, setNewUserPhone] = useState('');
   const [newUserGrado, setNewUserGrado] = useState('');
+  const [newUserDni, setNewUserDni] = useState('');
   const [newUserPlan, setNewUserPlan] = useState<'free' | 'premium'>('free');
   const [newUserRole, setNewUserRole] = useState<'student' | 'admin'>('student');
   const [saving, setSaving] = useState(false);
+
+  const [adminPass, setAdminPass] = useState('');
+  const [isAdminAuth, setIsAdminAuth] = useState(false);
+  const [authError, setAuthError] = useState(false);
+
+  const handleAdminLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (adminPass === 'sistema26') {
+      setIsAdminAuth(true);
+      setAuthError(false);
+    } else {
+      setAuthError(true);
+    }
+  };
 
   useEffect(() => {
     fetchUsers();
@@ -52,6 +67,7 @@ export const UserManagement: React.FC = () => {
         nombre: u.nombre,
         grado: u.grado || '',
         cip: u.cip || '',
+        dni: u.dni || '',
         telefonoWhatsapp: u.telefono_whatsapp,
         plan: u.plan || 'free',
         role: u.role || 'student',
@@ -84,6 +100,7 @@ export const UserManagement: React.FC = () => {
         nombre: newUserName,
         telefono_whatsapp: formattedPhone,
         grado: newUserGrado,
+        dni: newUserDni,
         plan: newUserPlan,
         role: newUserRole,
         user_id: null // Explicitly null until they login
@@ -94,6 +111,7 @@ export const UserManagement: React.FC = () => {
       setShowAddModal(false);
       setNewUserName('');
       setNewUserPhone('');
+      setNewUserDni('');
       fetchUsers();
     } catch (err: any) {
       alert('Error al agregar usuario: ' + err.message);
@@ -106,6 +124,44 @@ export const UserManagement: React.FC = () => {
     u.nombre.toLowerCase().includes(search.toLowerCase()) || 
     u.telefonoWhatsapp.includes(search)
   );
+
+  if (!isAdminAuth) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh]">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 max-w-md w-full"
+        >
+          <div className="bg-blue-100 w-16 h-16 rounded-2xl flex items-center justify-center text-blue-600 mb-6 mx-auto">
+            <Shield size={32} />
+          </div>
+          <h2 className="text-2xl font-bold text-center text-gray-900 mb-2">Panel Administrativo</h2>
+          <p className="text-gray-500 text-center mb-8">Ingresa la clave maestra para continuar.</p>
+          
+          <form onSubmit={handleAdminLogin} className="space-y-4">
+            <div>
+              <input
+                type="password"
+                placeholder="Clave de acceso"
+                className={`w-full px-4 py-3 border ${authError ? 'border-red-500 bg-red-50' : 'border-gray-200'} rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                value={adminPass}
+                onChange={(e) => setAdminPass(e.target.value)}
+                autoFocus
+              />
+              {authError && <p className="text-red-500 text-xs mt-2 font-medium">Clave incorrecta. Inténtalo de nuevo.</p>}
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-slate-800 transition-all active:scale-95"
+            >
+              Acceder al Sistema
+            </button>
+          </form>
+        </motion.div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -172,6 +228,7 @@ export const UserManagement: React.FC = () => {
               <thead className="bg-gray-50">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Documento</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contacto</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plan</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rol</th>
@@ -192,6 +249,9 @@ export const UserManagement: React.FC = () => {
                             <div className="text-xs text-gray-500">{user.grado || 'Sin grado'}</div>
                           </div>
                         </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium text-gray-900">{user.dni || '---'}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center text-sm text-gray-600">
@@ -288,6 +348,18 @@ export const UserManagement: React.FC = () => {
                           onChange={(e) => setNewUserName(e.target.value)}
                         />
                       </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">DNI / Documento</label>
+                      <input
+                        type="text"
+                        required
+                        className="block w-full px-3 py-2 border border-gray-300 rounded-xl focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        placeholder="77665544"
+                        value={newUserDni}
+                        onChange={(e) => setNewUserDni(e.target.value)}
+                      />
                     </div>
 
                     <div>

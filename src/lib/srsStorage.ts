@@ -37,6 +37,7 @@ export const DEFAULT_PROFILE: UserProfile = {
   nombre: 'Oficial PNP',
   grado: 'S1 PNP',
   cip: '31428590',
+  dni: '77665544',
   telefonoWhatsapp: '+51 987 654 321',
   plan: 'free',
   role: 'student',

@@ -34,6 +34,17 @@ export const AuthFlow: React.FC<AuthFlowProps> = ({ onAuthenticated }) => {
     const formattedPhone = '+' + cleanPhone;
 
     try {
+      // 1. Verificar si el usuario está registrado por el administrador
+      const { data: profile, error: profileError } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('telefono_whatsapp', formattedPhone)
+        .single();
+
+      if (profileError || !profile) {
+        throw new Error('Número de celular no registrado. Por favor, contacta con el administrador del sistema.');
+      }
+
       console.log('Solicitando OTP para:', formattedPhone);
       const { error } = await supabase.auth.signInWithOtp({
         phone: formattedPhone,

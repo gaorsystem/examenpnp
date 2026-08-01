@@ -54,6 +54,7 @@ export interface UserProfile {
   nombre: string;
   grado: string;
   cip: string;
+  dni: string;
   telefonoWhatsapp: string;
   plan: 'free' | 'premium';
   role: 'admin' | 'student';

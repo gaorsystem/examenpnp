@@ -59,6 +59,19 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center gap-2">
           {isLoggedIn ? (
             <div className="flex items-center gap-2">
+              {userProfile.role === 'admin' && (
+                <button
+                  onClick={() => setActiveTab('admin')}
+                  className={`flex items-center gap-1.5 border px-2 py-1 rounded transition-all font-mono text-[10px] font-bold ${
+                    activeTab === 'admin'
+                      ? 'bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-500/20'
+                      : 'bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 border-blue-500/30'
+                  }`}
+                >
+                  <Shield className="w-3 h-3" />
+                  <span>ADMIN</span>
+                </button>
+              )}
               <button 
                 onClick={onOpenProfile}
                 className="hidden sm:flex items-center gap-1.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 px-2 py-1 rounded transition-all font-mono text-[10px]"
@@ -76,13 +89,26 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
             </div>
           ) : (
-            <button
-              onClick={onOpenOtpModal}
-              className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-mono font-black text-[11px] px-4 py-2 rounded-lg flex items-center gap-1.5 shadow-md transition-all active-scale"
-            >
-              <LogIn className="w-3.5 h-3.5" />
-              <span>INGRESAR</span>
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setActiveTab('admin')}
+                className={`flex items-center gap-1.5 border px-2 py-1 rounded transition-all font-mono text-[10px] font-bold ${
+                  activeTab === 'admin'
+                    ? 'bg-blue-600 border-blue-500 text-white'
+                    : 'text-slate-500 hover:text-blue-400 border-slate-800'
+                }`}
+              >
+                <Shield className="w-3 h-3" />
+                <span>ADMIN</span>
+              </button>
+              <button
+                onClick={onOpenOtpModal}
+                className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-mono font-black text-[11px] px-4 py-2 rounded-lg flex items-center gap-1.5 shadow-md transition-all active-scale"
+              >
+                <LogIn className="w-3.5 h-3.5" />
+                <span>INGRESAR</span>
+              </button>
+            </div>
           )}
           <div className="h-3 w-[1px] bg-slate-800 mx-1"></div>
           <button
