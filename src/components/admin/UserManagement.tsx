@@ -334,98 +334,100 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              className="relative bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-2xl w-full max-w-xl overflow-hidden border border-slate-200 dark:border-slate-800"
+              className="relative bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl w-full max-w-xl overflow-hidden border border-slate-200 dark:border-slate-800"
             >
-              <form onSubmit={handleAddUser} className="p-8">
-                <div className="flex items-center justify-between mb-8">
-                  <div>
-                    <h3 className="text-2xl font-display font-black text-slate-900 dark:text-white flex items-center gap-3">
-                      <div className="p-2 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded-xl">
-                        <UserPlus size={24} />
-                      </div>
-                      Nuevo Cliente
-                    </h3>
-                    <p className="text-slate-500 text-sm mt-1">Registra un nuevo participante en el sistema.</p>
+              <form onSubmit={handleAddUser} className="flex flex-col max-h-[90vh]">
+                <div className="p-8 pb-4 border-b border-slate-100 dark:border-slate-800">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-2xl font-display font-black text-slate-900 dark:text-white flex items-center gap-3">
+                        <div className="p-2 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded-xl">
+                          <UserPlus size={24} />
+                        </div>
+                        Nuevo Cliente
+                      </h3>
+                      <p className="text-slate-500 text-sm mt-1 font-medium">Registra un nuevo participante en el sistema.</p>
+                    </div>
+                    <button 
+                      type="button" 
+                      onClick={() => setShowAddModal(false)} 
+                      className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
+                    >
+                      <XCircle size={24} />
+                    </button>
                   </div>
-                  <button 
-                    type="button" 
-                    onClick={() => setShowAddModal(false)} 
-                    className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
-                  >
-                    <XCircle size={24} />
-                  </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
-                  <div className="md:col-span-2">
-                    <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">Nombre Completo</label>
-                    <div className="relative">
-                      <UserIcon size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                <div className="p-8 pt-6 overflow-y-auto custom-scrollbar space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="md:col-span-2">
+                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">Nombre Completo</label>
+                      <div className="relative">
+                        <UserIcon size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                        <input
+                          type="text"
+                          required
+                          className="block w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
+                          placeholder="Ej. Juan Pérez García"
+                          value={newUserName}
+                          onChange={(e) => setNewUserName(e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">WhatsApp</label>
+                      <div className="relative">
+                        <Smartphone size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                        <input
+                          type="tel"
+                          required
+                          className="block w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
+                          placeholder="999 888 777"
+                          value={newUserPhone}
+                          onChange={(e) => setNewUserPhone(e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">DNI (Documento)</label>
                       <input
                         type="text"
                         required
-                        className="block w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
-                        placeholder="Ej. Juan Pérez García"
-                        value={newUserName}
-                        onChange={(e) => setNewUserName(e.target.value)}
+                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
+                        placeholder="77665544"
+                        value={newUserDni}
+                        onChange={(e) => setNewUserDni(e.target.value)}
                       />
                     </div>
-                  </div>
 
-                  <div>
-                    <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">WhatsApp</label>
-                    <div className="relative">
-                      <Smartphone size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
-                      <input
-                        type="tel"
-                        required
-                        className="block w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
-                        placeholder="999 888 777"
-                        value={newUserPhone}
-                        onChange={(e) => setNewUserPhone(e.target.value)}
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">DNI (Documento)</label>
-                    <input
-                      type="text"
-                      required
-                      className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
-                      placeholder="77665544"
-                      value={newUserDni}
-                      onChange={(e) => setNewUserDni(e.target.value)}
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">CIP (Opcional)</label>
-                    <input
-                      type="text"
-                      className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
-                      placeholder="123456"
-                      value={newUserCip}
-                      onChange={(e) => setNewUserCip(e.target.value)}
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">Grado</label>
-                    <input
-                      type="text"
-                      className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
-                      placeholder="Ej. SO3 / Alférez"
-                      value={newUserGrado}
-                      onChange={(e) => setNewUserGrado(e.target.value)}
-                    />
-                  </div>
-
-                  <div className="md:col-span-2 grid grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">Método de Pago</label>
+                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">CIP (Opcional)</label>
+                      <input
+                        type="text"
+                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
+                        placeholder="123456"
+                        value={newUserCip}
+                        onChange={(e) => setNewUserCip(e.target.value)}
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">Grado</label>
+                      <input
+                        type="text"
+                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
+                        placeholder="Ej. SO3 / Alférez"
+                        value={newUserGrado}
+                        onChange={(e) => setNewUserGrado(e.target.value)}
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">Método de Pago</label>
                       <select
-                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
+                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white cursor-pointer"
                         value={newUserMetodoPago}
                         onChange={(e) => setNewUserMetodoPago(e.target.value)}
                       >
@@ -437,7 +439,7 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">Plan</label>
+                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">Plan Acceso</label>
                       <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl h-[54px]">
                         <button
                           type="button"
@@ -463,50 +465,50 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
                         </button>
                       </div>
                     </div>
-                  </div>
 
-                  <div className="md:col-span-2 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
-                    <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-3 ml-1">Rol en el Sistema</label>
-                    <div className="flex items-center gap-6">
-                      <label className="flex items-center gap-2 cursor-pointer group">
-                        <input
-                          type="radio"
-                          name="role"
-                          checked={newUserRole === 'student'}
-                          onChange={() => setNewUserRole('student')}
-                          className="w-4 h-4 text-blue-600 border-slate-300 focus:ring-blue-500"
-                        />
-                        <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-blue-600 transition-colors">Estudiante</span>
-                      </label>
-                      <label className="flex items-center gap-2 cursor-pointer group">
-                        <input
-                          type="radio"
-                          name="role"
-                          checked={newUserRole === 'admin'}
-                          onChange={() => setNewUserRole('admin')}
-                          className="w-4 h-4 text-blue-600 border-slate-300 focus:ring-blue-500"
-                        />
-                        <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-blue-600 transition-colors">Administrador</span>
-                      </label>
+                    <div className="md:col-span-2 bg-slate-50 dark:bg-slate-800/50 p-5 rounded-2xl border border-slate-100 dark:border-slate-800">
+                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-4 ml-1">Permisos de Acceso</label>
+                      <div className="flex items-center gap-8">
+                        <label className="flex items-center gap-3 cursor-pointer group">
+                          <input
+                            type="radio"
+                            name="role"
+                            checked={newUserRole === 'student'}
+                            onChange={() => setNewUserRole('student')}
+                            className="w-5 h-5 text-blue-600 border-slate-300 dark:border-slate-700 focus:ring-blue-500 bg-white dark:bg-slate-900"
+                          />
+                          <span className="text-sm font-bold text-slate-700 dark:text-slate-300 group-hover:text-blue-600 transition-colors">Estudiante</span>
+                        </label>
+                        <label className="flex items-center gap-3 cursor-pointer group">
+                          <input
+                            type="radio"
+                            name="role"
+                            checked={newUserRole === 'admin'}
+                            onChange={() => setNewUserRole('admin')}
+                            className="w-5 h-5 text-blue-600 border-slate-300 dark:border-slate-700 focus:ring-blue-500 bg-white dark:bg-slate-900"
+                          />
+                          <span className="text-sm font-bold text-slate-700 dark:text-slate-300 group-hover:text-blue-600 transition-colors">Administrador</span>
+                        </label>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-10 flex gap-4">
+                <div className="p-8 border-t border-slate-100 dark:border-slate-800 flex gap-4">
                   <button
                     type="button"
                     onClick={() => setShowAddModal(false)}
-                    className="flex-1 px-6 py-4 border border-slate-200 dark:border-slate-800 text-sm font-bold rounded-2xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                    className="flex-1 px-6 py-4 border border-slate-200 dark:border-slate-800 text-sm font-bold rounded-2xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors uppercase tracking-widest"
                   >
                     Cancelar
                   </button>
                   <button
                     type="submit"
                     disabled={saving}
-                    className="flex-[2] flex justify-center items-center px-6 py-4 bg-blue-600 hover:bg-blue-500 text-white text-sm font-black rounded-2xl shadow-xl shadow-blue-600/20 transition-all active:scale-[0.98] disabled:opacity-70"
+                    className="flex-[2] flex justify-center items-center px-6 py-4 bg-blue-600 hover:bg-blue-500 text-white text-sm font-black rounded-2xl shadow-xl shadow-blue-600/20 transition-all active:scale-[0.98] disabled:opacity-70 uppercase tracking-widest"
                   >
                     {saving ? <Loader2 className="animate-spin h-5 w-5 mr-2" /> : <CheckCircle size={18} className="mr-2" />}
-                    {saving ? 'REGISTRANDO...' : 'CONFIRMAR REGISTRO'}
+                    {saving ? 'PROCESANDO...' : 'CONFIRMAR REGISTRO'}
                   </button>
                 </div>
               </form>
