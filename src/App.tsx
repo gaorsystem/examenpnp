@@ -73,7 +73,7 @@ export default function App() {
       setIsLoggedIn(!!session);
       if (session?.user) {
         // Load profile from DB if it exists
-        loadProfileFromSupabase(session.user.id);
+        loadProfileFromSupabase(session.user.id, session.user.phone);
       }
     });
 
@@ -124,24 +124,32 @@ export default function App() {
     }
 
     // 3. Si sigue sin existir, crear un perfil básico nuevo
-    if (!profileData && !profileError) {
-       const { data: created } = await supabase
+    if (!profileData) {
+       const { data: created, error: createError } = await supabase
         .from('profiles')
         .insert({
           user_id: userId,
           telefono_whatsapp: phone || '',
           nombre: 'Estudiante Nuevo',
+          plan: 'free',
+          role: 'student',
+          meta_preguntas_diarias: 50
         })
         .select()
         .single();
       
-      profileData = created;
+      if (createError) {
+        console.error('Error creating new profile:', createError);
+      } else {
+        profileData = created;
+      }
     }
 
     if (profileData) {
       setUserProfile((prev) => ({
         ...prev,
         id: profileData.id,
+        userId: profileData.user_id,
         nombre: profileData.nombre || prev.nombre,
         grado: profileData.grado || prev.grado,
         cip: profileData.cip || prev.cip,

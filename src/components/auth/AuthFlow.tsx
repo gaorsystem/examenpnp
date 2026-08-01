@@ -23,19 +23,29 @@ export const AuthFlow: React.FC<AuthFlowProps> = ({ onAuthenticated }) => {
     setError(null);
     setMessage(null);
 
-    // Formatear teléfono si no tiene +
-    let formattedPhone = phone.trim();
-    if (!formattedPhone.startsWith('+')) {
-      // Asumimos Perú (+51) si no tiene prefijo, puedes ajustarlo
-      formattedPhone = '+51' + formattedPhone;
+    // Limpiar el teléfono: solo números
+    let cleanPhone = phone.replace(/\D/g, '');
+    
+    // Si no empieza con 51 (Perú) y tiene 9 dígitos, asumimos Perú
+    if (cleanPhone.length === 9 && !cleanPhone.startsWith('51')) {
+      cleanPhone = '51' + cleanPhone;
     }
+    
+    const formattedPhone = '+' + cleanPhone;
 
     try {
+      console.log('Solicitando OTP para:', formattedPhone);
       const { error } = await supabase.auth.signInWithOtp({
         phone: formattedPhone,
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error de Supabase Auth:', error);
+        if (error.message.includes('Unsupported phone provider')) {
+          throw new Error('Configuración pendiente: Activa "Phone" en Supabase (Auth > Providers) y asegúrate que el SMS Hook esté guardado.');
+        }
+        throw error;
+      }
 
       setStep('otp');
       setMessage('Código enviado por WhatsApp');
@@ -54,16 +64,18 @@ export const AuthFlow: React.FC<AuthFlowProps> = ({ onAuthenticated }) => {
     setLoading(true);
     setError(null);
 
-    let formattedPhone = phone.trim();
-    if (!formattedPhone.startsWith('+')) {
-      formattedPhone = '+51' + formattedPhone;
+    let cleanPhone = phone.replace(/\D/g, '');
+    if (cleanPhone.length === 9 && !cleanPhone.startsWith('51')) {
+      cleanPhone = '51' + cleanPhone;
     }
+    const formattedPhone = '+' + cleanPhone;
 
     try {
+      console.log('Verificando OTP para:', formattedPhone, 'Código:', otp);
       const { data, error } = await supabase.auth.verifyOtp({
         phone: formattedPhone,
         token: otp,
-        type: 'sms', // Supabase usa 'sms' para hooks de SMS/WhatsApp
+        type: 'sms', 
       });
 
       if (error) throw error;

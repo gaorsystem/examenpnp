@@ -11,15 +11,19 @@ import {
   Loader2, 
   Smartphone,
   User as UserIcon,
-  Shield
+  Shield,
+  Settings
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+
+import { TechnicalGuide } from './TechnicalGuide';
 
 export const UserManagement: React.FC = () => {
   const [users, setUsers] = useState<UserProfile[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showGuide, setShowGuide] = useState(false);
   
   const [newUserName, setNewUserName] = useState('');
   const [newUserPhone, setNewUserPhone] = useState('');
@@ -69,21 +73,20 @@ export const UserManagement: React.FC = () => {
     setSaving(true);
 
     try {
-      // Nota: En Supabase Auth, no podemos crear usuarios "fantasma" fácilmente sin su ID.
-      // Pero podemos guardar la intención en la tabla 'profiles' con un placeholder 
-      // o simplemente dejar que ellos se registren y luego el admin les cambie el plan.
-      // Para este flujo específico de "pre-registro", usaremos una tabla de 'invitaciones' 
-      // o simplemente actualizaremos el perfil cuando el usuario se loguee por primera vez.
-      
-      // Implementación sugerida: Crear el perfil con una ID temporal o manejarlo como "habilitación".
-      // Por ahora, crearemos una entrada en profiles si tenemos la ID o usaremos un campo de búsqueda.
-      
+      // Formatear teléfono para que coincida con el flujo de OTP
+      let cleanPhone = newUserPhone.replace(/\D/g, '');
+      if (cleanPhone.length === 9 && !cleanPhone.startsWith('51')) {
+        cleanPhone = '51' + cleanPhone;
+      }
+      const formattedPhone = '+' + cleanPhone;
+
       const { data, error } = await supabase.from('profiles').insert({
         nombre: newUserName,
-        telefono_whatsapp: newUserPhone.startsWith('+') ? newUserPhone : '+51' + newUserPhone,
+        telefono_whatsapp: formattedPhone,
         grado: newUserGrado,
         plan: newUserPlan,
         role: newUserRole,
+        user_id: null // Explicitly null until they login
       });
 
       if (error) throw error;
@@ -111,14 +114,38 @@ export const UserManagement: React.FC = () => {
           <h2 className="text-2xl font-bold text-gray-900">Gestión de Clientes</h2>
           <p className="text-gray-500">Administra el acceso de tus alumnos y postulantes.</p>
         </div>
-        <button
-          onClick={() => setShowAddModal(true)}
-          className="flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl font-semibold transition-all active:scale-95"
-        >
-          <UserPlus size={20} />
-          <span>Nuevo Cliente</span>
-        </button>
+        <div className="flex flex-wrap gap-2">
+          <button
+            onClick={() => setShowGuide(!showGuide)}
+            className={`flex items-center justify-center space-x-2 px-4 py-2 rounded-xl font-semibold transition-all active:scale-95 ${
+              showGuide ? 'bg-gray-200 text-gray-700' : 'bg-slate-800 text-white hover:bg-slate-900'
+            }`}
+          >
+            <Settings size={20} />
+            <span>{showGuide ? 'Ocultar Guía' : 'Guía de Conexión VPS'}</span>
+          </button>
+          <button
+            onClick={() => setShowAddModal(true)}
+            className="flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl font-semibold transition-all active:scale-95"
+          >
+            <UserPlus size={20} />
+            <span>Nuevo Cliente</span>
+          </button>
+        </div>
       </div>
+
+      <AnimatePresence>
+        {showGuide && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden"
+          >
+            <TechnicalGuide />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <div className="relative">
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">

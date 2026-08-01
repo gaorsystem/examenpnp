@@ -50,6 +50,7 @@ export interface ProgresoSRS {
 
 export interface UserProfile {
   id: string;
+  userId?: string; // Link to auth.users.id
   nombre: string;
   grado: string;
   cip: string;
