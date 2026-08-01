@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Phone, KeyRound, CheckCircle2, ArrowRight, Lock, Sparkles, X, Smartphone, Loader2 } from 'lucide-react';
+import { Shield, Phone, KeyRound, CheckCircle2, ArrowRight, Lock, Sparkles, X, Smartphone, Loader2, MessageSquare } from 'lucide-react';
 import { UserProfile } from '../types';
 import { supabase } from '../lib/supabase';
 
@@ -106,68 +106,92 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl relative space-y-5 animate-in fade-in zoom-in duration-200 text-slate-900 dark:text-slate-100">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl relative animate-in fade-in zoom-in duration-200 text-slate-900 dark:text-slate-100">
         <button
           onClick={onClose}
           disabled={loading}
-          className="absolute top-4 right-4 p-2 rounded-full text-slate-400 hover:text-slate-600 dark:hover:text-white bg-slate-100 dark:bg-slate-800 transition-colors disabled:opacity-50"
+          className="absolute top-4 right-4 p-2 rounded-full text-slate-400 hover:text-slate-600 dark:hover:text-white bg-slate-100 dark:bg-slate-800 transition-colors disabled:opacity-50 z-10"
         >
           <X className="w-5 h-5" />
         </button>
 
-        {/* Header Icon */}
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-700 p-0.5 border border-amber-400 flex items-center justify-center shrink-0 shadow-lg">
-            <Shield className="w-7 h-7 text-slate-950" />
+        {/* Tabs - Only show if not in OTP verification */}
+        {step !== 'OTP' && (
+          <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl mb-6 mt-2">
+            <button
+              onClick={() => { setStep('PHONE'); setErrorMsg(''); }}
+              className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-xs font-bold transition-all ${
+                step === 'PHONE' 
+                  ? 'bg-white dark:bg-slate-700 text-blue-600 shadow-sm' 
+                  : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
+              }`}
+            >
+              <Smartphone size={14} />
+              ESTUDIANTE
+            </button>
+            <button
+              onClick={() => { setStep('ADMIN'); setErrorMsg(''); }}
+              className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-xs font-bold transition-all ${
+                step === 'ADMIN' 
+                  ? 'bg-white dark:bg-slate-700 text-blue-600 shadow-sm' 
+                  : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
+              }`}
+            >
+              <Shield size={14} />
+              ADMIN
+            </button>
           </div>
-          <div>
-            <h3 className="font-serif font-extrabold text-xl text-slate-900 dark:text-white">
-              Portal del Postulante PNP
-            </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              Ingreso Seguro con Verificación OTP SMS/WhatsApp
-            </p>
+        )}
+
+        {/* Header Icon & Title */}
+        <div className="text-center mb-6">
+          <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-4 mx-auto shadow-lg transition-colors ${
+            step === 'ADMIN' ? 'bg-blue-600/10 text-blue-600 shadow-blue-500/10' : 'bg-amber-500/10 text-amber-600 shadow-amber-500/10'
+          }`}>
+            {step === 'ADMIN' ? <Shield size={32} /> : <Smartphone size={32} />}
           </div>
+          <h2 className="text-2xl font-display font-black text-slate-900 dark:text-white leading-tight">
+            {step === 'ADMIN' ? 'Panel de Control' : step === 'OTP' ? 'Verificar Acceso' : 'Simulacro PNP'}
+          </h2>
+          <p className="text-slate-500 dark:text-slate-400 text-sm mt-1 font-medium">
+            {step === 'ADMIN' 
+              ? 'Acceso maestro para gestión' 
+              : step === 'OTP' 
+                ? `Ingresa el código enviado al ${telefono}` 
+                : 'Ingresa tu WhatsApp para comenzar'}
+          </p>
         </div>
 
         {step === 'PHONE' ? (
-          <form onSubmit={handleSendOtp} className="space-y-4">
-            <div className="bg-amber-500/10 border border-amber-500/30 p-3.5 rounded-2xl text-xs space-y-1">
-              <span className="font-mono font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1.5">
-                <Lock className="w-3.5 h-3.5" /> Acceso Exclusivo Personal PNP
-              </span>
-              <p className="text-slate-600 dark:text-slate-300">
-                Ingresa tu número celular registrado para recibir tu código único de acceso al portal y banco de preguntas.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <div>
-                <label htmlFor="telefono-input" className="block text-xs font-mono font-bold text-slate-700 dark:text-slate-300 mb-1">
-                  Número de Celular (+51)
-                </label>
-                <div className="relative">
-                  <Phone className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                  <input
-                    id="telefono-input"
-                    type="tel"
-                    required
-                    disabled={loading}
-                    maxLength={9}
-                    value={telefono}
-                    onChange={(e) => {
-                      const val = e.target.value.replace(/\D/g, '');
-                      if (val.length <= 9) setTelefono(val);
-                    }}
-                    placeholder="Ej. 987654321"
-                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-10 pr-4 py-3 text-base font-mono focus:outline-none focus:border-amber-500 text-slate-900 dark:text-white disabled:opacity-50"
-                  />
+          <form onSubmit={handleSendOtp} className="space-y-5">
+            <div className="space-y-1.5">
+              <label htmlFor="telefono-input" className="block text-[10px] font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest ml-1">
+                Número de Celular
+              </label>
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <span className="text-slate-400 font-mono font-bold border-r border-slate-200 dark:border-slate-700 pr-3 mr-1">+51</span>
                 </div>
+                <input
+                  id="telefono-input"
+                  type="tel"
+                  required
+                  disabled={loading}
+                  autoFocus
+                  placeholder="999 999 999"
+                  className="block w-full pl-20 pr-4 py-4 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-2xl text-lg font-mono tracking-widest focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all placeholder:text-slate-300 dark:text-white"
+                  value={telefono}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/\D/g, '');
+                    if (val.length <= 9) setTelefono(val);
+                  }}
+                />
               </div>
             </div>
 
             {errorMsg && (
-              <p className="text-xs text-red-500 font-mono bg-red-500/10 p-2 rounded-lg">
+              <p className="text-xs text-red-500 font-mono font-bold bg-red-50 dark:bg-red-900/20 p-3 rounded-xl border border-red-100 dark:border-red-900/30 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" />
                 {errorMsg}
               </p>
             )}
@@ -175,60 +199,41 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-display font-black py-3.5 rounded-2xl text-sm shadow-lg transition-all flex items-center justify-center gap-2 active-scale disabled:opacity-50"
+              className="w-full bg-blue-600 hover:bg-blue-500 disabled:bg-slate-400 text-white font-display font-black py-4 rounded-2xl text-sm shadow-xl shadow-blue-600/20 transition-all flex items-center justify-center gap-2 active-scale"
             >
               {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <span>ENVIAR CÓDIGO</span>}
               {!loading && <ArrowRight className="w-4 h-4" />}
             </button>
 
-            <div className="pt-2 text-center">
-              <button
-                type="button"
-                onClick={() => setStep('ADMIN')}
-                className="text-[10px] font-mono font-bold text-slate-400 hover:text-amber-500 transition-colors uppercase tracking-wider"
-              >
-                Acceso Administrador (Solo Clave)
-              </button>
+            <div className="flex items-center justify-center gap-2 text-[10px] text-slate-400 font-mono uppercase tracking-widest">
+              <MessageSquare className="w-3 h-3" />
+              <span>El código llegará vía WhatsApp</span>
             </div>
           </form>
         ) : step === 'OTP' ? (
-          <form onSubmit={handleVerifyOtp} className="space-y-4">
-            <div className="bg-emerald-500/10 border border-emerald-500/30 p-3.5 rounded-2xl text-xs space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
-                  <Smartphone className="w-4 h-4" /> SMS Enviado
-                </span>
-              </div>
-              <p className="text-slate-600 dark:text-slate-300">
-                Ingresa el código enviado al número <strong>{telefono}</strong>.
-              </p>
-              <p className="text-[10px] text-slate-400 italic">
-                * Si es un entorno de prueba y no recibes el SMS, intenta con 123456.
-              </p>
-            </div>
-
-            <div>
-              <label htmlFor="otp-input" className="block text-xs font-mono font-bold text-slate-700 dark:text-slate-300 mb-1">
-                Código de Verificación
+          <form onSubmit={handleVerifyOtp} className="space-y-5">
+            <div className="space-y-1.5 text-center">
+              <label htmlFor="otp-input" className="block text-[10px] font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">
+                Código de 6 dígitos
               </label>
               <div className="relative">
-                <KeyRound className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   id="otp-input"
                   type="text"
                   maxLength={6}
                   required
+                  autoFocus
                   disabled={loading}
                   value={inputOtp}
-                  onChange={(e) => setInputOtp(e.target.value)}
+                  onChange={(e) => setInputOtp(e.target.value.replace(/\D/g, ''))}
                   placeholder="000000"
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-10 pr-4 py-3 text-center text-lg font-mono font-bold tracking-widest focus:outline-none focus:border-amber-500 text-slate-900 dark:text-white disabled:opacity-50"
+                  className="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-2xl py-4 text-center text-3xl font-mono font-bold tracking-[0.5em] focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all placeholder:text-slate-200 dark:text-white"
                 />
               </div>
             </div>
 
             {errorMsg && (
-              <p className="text-xs text-red-500 font-mono bg-red-500/10 p-2 rounded-lg">
+              <p className="text-xs text-red-500 font-mono font-bold bg-red-50 dark:bg-red-900/20 p-3 rounded-xl border border-red-100 dark:border-red-900/30">
                 {errorMsg}
               </p>
             )}
@@ -238,71 +243,54 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
                 type="button"
                 onClick={() => setStep('PHONE')}
                 disabled={loading}
-                className="w-1/3 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono text-xs font-bold py-3 rounded-2xl transition-colors disabled:opacity-50"
+                className="flex-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono text-xs font-bold py-4 rounded-2xl transition-colors hover:bg-slate-200"
               >
-                Volver
+                VOLVER
               </button>
               <button
                 type="submit"
                 disabled={loading}
-                className="w-2/3 bg-emerald-600 hover:bg-emerald-500 text-white font-display font-black py-3 rounded-2xl text-sm shadow-lg transition-all flex items-center justify-center gap-2 active-scale disabled:opacity-50"
+                className="flex-[2] bg-emerald-600 hover:bg-emerald-500 text-white font-display font-black py-4 rounded-2xl text-sm shadow-xl shadow-emerald-600/20 transition-all flex items-center justify-center gap-2 active-scale"
               >
                 {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle2 className="w-4 h-4" />}
-                <span>{loading ? 'VERIFICANDO...' : 'INGRESAR'}</span>
+                <span>VERIFICAR</span>
               </button>
             </div>
           </form>
         ) : (
-          <form onSubmit={handleAdminLogin} className="space-y-4">
-            <div className="bg-blue-500/10 border border-blue-500/30 p-3.5 rounded-2xl text-xs space-y-2">
-              <span className="font-mono font-bold text-blue-600 dark:text-blue-400 flex items-center gap-1.5">
-                <Shield className="w-4 h-4" /> Panel Administrativo
-              </span>
-              <p className="text-slate-600 dark:text-slate-300">
-                Ingresa la clave maestra del sistema para gestionar usuarios y simulacros.
-              </p>
-            </div>
-
-            <div>
-              <label className="block text-xs font-mono font-bold text-slate-700 dark:text-slate-300 mb-1">
-                Clave de Acceso
+          <form onSubmit={handleAdminLogin} className="space-y-5">
+            <div className="space-y-1.5">
+              <label htmlFor="admin-pass" className="block text-[10px] font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest ml-1">
+                Clave Maestra
               </label>
               <div className="relative">
-                <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Lock className="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
                 <input
+                  id="admin-pass"
                   type="password"
                   required
                   autoFocus
                   value={adminPassword}
                   onChange={(e) => setAdminPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-10 pr-4 py-3 text-base font-mono focus:outline-none focus:border-blue-500 text-slate-900 dark:text-white"
+                  className="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-2xl pl-12 pr-4 py-4 text-lg font-mono focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all placeholder:text-slate-300 dark:text-white"
                 />
               </div>
             </div>
 
             {errorMsg && (
-              <p className="text-xs text-red-500 font-mono bg-red-500/10 p-2 rounded-lg">
+              <p className="text-xs text-red-500 font-mono font-bold bg-red-50 dark:bg-red-900/20 p-3 rounded-xl border border-red-100 dark:border-red-900/30">
                 {errorMsg}
               </p>
             )}
 
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={() => setStep('PHONE')}
-                className="w-1/3 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono text-xs font-bold py-3 rounded-2xl transition-colors"
-              >
-                Volver
-              </button>
-              <button
-                type="submit"
-                className="w-2/3 bg-slate-900 text-white font-display font-black py-3 rounded-2xl text-sm shadow-lg transition-all flex items-center justify-center gap-2 active-scale"
-              >
-                <CheckCircle2 className="w-4 h-4" />
-                <span>ACCEDER</span>
-              </button>
-            </div>
+            <button
+              type="submit"
+              className="w-full bg-slate-900 dark:bg-white dark:text-slate-900 text-white font-display font-black py-4 rounded-2xl text-sm shadow-xl transition-all flex items-center justify-center gap-2 active-scale"
+            >
+              <Shield className="w-4 h-4" />
+              <span>ACCEDER AL SISTEMA</span>
+            </button>
           </form>
         )}
       </div>
