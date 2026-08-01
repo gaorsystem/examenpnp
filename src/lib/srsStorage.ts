@@ -1,5 +1,6 @@
 import { IntentoExamen, ProgresoSRS, UserProfile, DominioMateria, Pregunta } from '../types';
 import { BANCO_PREGUNTAS, getNormasInfo } from '../data/questionsData';
+import { supabase } from './supabase';
 
 const STORAGE_KEYS = {
   INTENTOS: 'simulador_pnp_intentos',
@@ -55,10 +56,36 @@ export function getHistorialIntentos(): IntentoExamen[] {
   return getItem<IntentoExamen[]>(STORAGE_KEYS.INTENTOS, []);
 }
 
-export function guardarIntento(intento: IntentoExamen): void {
+export function setHistorialIntentos(intentos: IntentoExamen[]): void {
+  setItem(STORAGE_KEYS.INTENTOS, intentos);
+}
+
+export async function guardarIntento(intento: IntentoExamen): Promise<void> {
   const historial = getHistorialIntentos();
   historial.unshift(intento);
   setItem(STORAGE_KEYS.INTENTOS, historial);
+
+  // Sync with Supabase
+  if (supabase) {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        await supabase.from('exam_attempts').insert({
+          id: intento.id,
+          user_id: user.id,
+          tipo: intento.modo.toUpperCase(),
+          materia: intento.normaFiltro || 'GENERAL',
+          aciertos: intento.aciertos,
+          total_preguntas: intento.totalPreguntas,
+          tiempo_empleado_seg: intento.duracionSeg,
+          respuestas: intento.respuestas,
+          fecha: intento.fecha
+        });
+      }
+    } catch (e) {
+      console.error('Error syncing attempt to Supabase:', e);
+    }
+  }
 
   // Actualizar SRS de cada pregunta del intento
   intento.respuestas.forEach((resp) => {
@@ -71,7 +98,11 @@ export function getProgresoSRSMap(): Record<string, ProgresoSRS> {
   return getItem<Record<string, ProgresoSRS>>(STORAGE_KEYS.SRS, {});
 }
 
-export function actualizarProgresoSRS(preguntaId: string, esCorrecta: boolean, calidadSubjetiva?: number): ProgresoSRS {
+export function setProgresoSRSMap(srsMap: Record<string, ProgresoSRS>): void {
+  setItem(STORAGE_KEYS.SRS, srsMap);
+}
+
+export async function actualizarProgresoSRS(preguntaId: string, esCorrecta: boolean, calidadSubjetiva?: number): Promise<ProgresoSRS> {
   const srsMap = getProgresoSRSMap();
   const hoyStr = new Date().toISOString().split('T')[0];
 
@@ -88,10 +119,9 @@ export function actualizarProgresoSRS(preguntaId: string, esCorrecta: boolean, c
   actual.revisionesTotales += 1;
   actual.ultimaRevision = hoyStr;
 
-  // Determinar calidad SM-2 (0 a 5)
   let q = calidadSubjetiva;
   if (q === undefined) {
-    q = esCorrecta ? 4 : 1; // 4: fácil/correcto, 1: fallo
+    q = esCorrecta ? 4 : 1; 
   }
 
   if (esCorrecta) {
@@ -103,22 +133,42 @@ export function actualizarProgresoSRS(preguntaId: string, esCorrecta: boolean, c
     } else {
       actual.intervaloDias = Math.round(actual.intervaloDias * actual.facilidad);
     }
-    // Modificar ease factor
     actual.facilidad = Math.max(1.3, actual.facilidad + (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02)));
   } else {
     actual.fallosTotales += 1;
     actual.rachaCorrectas = 0;
-    actual.intervaloDias = 1; // repetir mañana
+    actual.intervaloDias = 1; 
     actual.facilidad = Math.max(1.3, actual.facilidad - 0.2);
   }
 
-  // Calcular próxima fecha de revisión
   const proxima = new Date();
   proxima.setDate(proxima.getDate() + actual.intervaloDias);
   actual.proximaRevision = proxima.toISOString().split('T')[0];
 
   srsMap[preguntaId] = actual;
   setItem(STORAGE_KEYS.SRS, srsMap);
+
+  // Sync with Supabase
+  if (supabase) {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        await supabase.from('srs_progress').upsert({
+          user_id: user.id,
+          pregunta_id: actual.preguntaId,
+          facilidad: actual.facilidad,
+          intervalo_dias: actual.intervaloDias,
+          proxima_revision: actual.proximaRevision,
+          racha_correctas: actual.rachaCorrectas,
+          fallos_totales: actual.fallosTotales,
+          revisiones_totales: actual.revisionesTotales,
+          ultima_revision: actual.ultimaRevision
+        });
+      }
+    } catch (e) {
+      console.error('Error syncing SRS to Supabase:', e);
+    }
+  }
 
   return actual;
 }
@@ -150,7 +200,11 @@ export function getFavoritos(): string[] {
   return getItem<string[]>(STORAGE_KEYS.FAVORITOS, []);
 }
 
-export function toggleFavorito(preguntaId: string): boolean {
+export function setFavoritos(favs: string[]): void {
+  setItem(STORAGE_KEYS.FAVORITOS, favs);
+}
+
+export async function toggleFavorito(preguntaId: string): Promise<boolean> {
   const favs = getFavoritos();
   const index = favs.indexOf(preguntaId);
   let isFav = false;
@@ -161,6 +215,29 @@ export function toggleFavorito(preguntaId: string): boolean {
     isFav = true;
   }
   setItem(STORAGE_KEYS.FAVORITOS, favs);
+
+  // Sync with Supabase
+  if (supabase) {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        if (isFav) {
+          await supabase.from('favorites').insert({
+            user_id: user.id,
+            pregunta_id: preguntaId
+          });
+        } else {
+          await supabase.from('favorites').delete().match({
+            user_id: user.id,
+            pregunta_id: preguntaId
+          });
+        }
+      }
+    } catch (e) {
+      console.error('Error syncing favorite to Supabase:', e);
+    }
+  }
+
   return isFav;
 }
 

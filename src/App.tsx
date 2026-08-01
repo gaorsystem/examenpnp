@@ -15,6 +15,7 @@ import { MobileBottomNav } from './components/MobileBottomNav';
 import { AudioAndBotExplainerModal } from './components/AudioAndBotExplainerModal';
 import { Play, Zap, ArrowLeft, X, Home } from 'lucide-react';
 
+import { supabase } from './lib/supabase';
 import { Pregunta, IntentoExamen, UserProfile } from './types';
 import {
   generarExamenSimulacro,
@@ -35,9 +36,8 @@ import {
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('landing');
   const [userProfile, setUserProfile] = useState<UserProfile>(() => getProfile());
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
-    return localStorage.getItem('pnp_user_authenticated') === 'true';
-  });
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [session, setSession] = useState<any>(null);
   const [showProfileModal, setShowProfileModal] = useState<boolean>(false);
   const [showOtpModal, setShowOtpModal] = useState<boolean>(false);
   const [showExplainerModal, setShowExplainerModal] = useState<boolean>(false);
@@ -59,27 +59,128 @@ export default function App() {
     localStorage.setItem('pnp_theme', theme);
   }, [theme]);
 
+  React.useEffect(() => {
+    if (!supabase) return;
+
+    // Initial session check
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setIsLoggedIn(!!session);
+      if (session?.user) {
+        // Load profile from DB if it exists
+        loadProfileFromSupabase(session.user.id);
+      }
+    });
+
+    // Listen for changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+      setIsLoggedIn(!!session);
+      if (session?.user) {
+        loadProfileFromSupabase(session.user.id);
+      } else {
+        setActiveTab('landing');
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const loadProfileFromSupabase = async (userId: string) => {
+    if (!supabase) return;
+
+    // Load Profile
+    const { data: profileData, error: profileError } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', userId)
+      .single();
+
+    if (profileData) {
+      setUserProfile((prev) => ({
+        ...prev,
+        id: profileData.id,
+        nombre: profileData.nombre || prev.nombre,
+        grado: profileData.grado || prev.grado,
+        cip: profileData.cip || prev.cip,
+        telefonoWhatsapp: profileData.telefono_whatsapp || prev.telefonoWhatsapp,
+        metaPreguntasDiarias: profileData.meta_preguntas_diarias || prev.metaPreguntasDiarias,
+        plan: profileData.plan || prev.plan,
+      }));
+    } else if (profileError && profileError.code !== 'PGRST116') {
+      console.error('Error loading profile:', profileError);
+    }
+
+    // Load Exam Attempts
+    const { data: attemptsData } = await supabase
+      .from('exam_attempts')
+      .select('*')
+      .eq('user_id', userId)
+      .order('fecha', { ascending: false });
+
+    if (attemptsData) {
+      const formatted = attemptsData.map(a => ({
+        id: a.id,
+        modo: a.tipo.toLowerCase(),
+        normaFiltro: a.materia === 'GENERAL' ? undefined : a.materia,
+        totalPreguntas: a.total_preguntas,
+        aciertos: a.aciertos,
+        duracionSeg: a.tiempo_empleado_seg,
+        fecha: a.fecha,
+        respuestas: a.respuestas
+      }));
+      import('./lib/srsStorage').then(m => m.setHistorialIntentos(formatted));
+    }
+
+    // Load SRS Progress
+    const { data: srsData } = await supabase
+      .from('srs_progress')
+      .select('*')
+      .eq('user_id', userId);
+
+    if (srsData) {
+      const srsMap: any = {};
+      srsData.forEach(s => {
+        srsMap[s.pregunta_id] = {
+          preguntaId: s.pregunta_id,
+          facilidad: s.facilidad,
+          intervaloDias: s.intervalo_dias,
+          proximaRevision: s.proxima_revision,
+          rachaCorrectas: s.racha_correctas,
+          fallosTotales: s.fallos_totales,
+          revisionesTotales: s.revisiones_totales,
+          ultimaRevision: s.ultima_revision
+        };
+      });
+      import('./lib/srsStorage').then(m => m.setProgresoSRSMap(srsMap));
+    }
+
+    // Load Favorites
+    const { data: favsData } = await supabase
+      .from('favorites')
+      .select('pregunta_id')
+      .eq('user_id', userId);
+
+    if (favsData) {
+      const favs = favsData.map(f => f.pregunta_id);
+      import('./lib/srsStorage').then(m => m.setFavoritos(favs));
+    }
+  };
+
   const toggleTheme = () => {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   };
 
   const handleLoginSuccess = (phone: string, grado?: string, nombre?: string) => {
-    const updatedProfile: UserProfile = {
-      ...userProfile,
-      telefonoWhatsapp: phone,
-      grado: grado || userProfile.grado,
-      nombre: nombre || userProfile.nombre,
-    };
-    setUserProfile(updatedProfile);
-    saveProfile(updatedProfile);
-    localStorage.setItem('pnp_user_authenticated', 'true');
-    setIsLoggedIn(true);
+    // This is now handled by supabase.auth.onAuthStateChange
     setShowOtpModal(false);
     setActiveTab('dashboard');
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('pnp_user_authenticated');
+  const handleLogout = async () => {
+    if (supabase) {
+      await supabase.auth.signOut();
+    }
     setIsLoggedIn(false);
     setActiveTab('landing');
   };

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { X, Shield, User, Check, CreditCard, Database, FileCode, CheckCircle2 } from 'lucide-react';
+import { X, Shield, User, Check, CreditCard, Database, FileCode, CheckCircle2, Loader2 } from 'lucide-react';
 import { UserProfile } from '../types';
 import { saveProfile } from '../lib/srsStorage';
+import { supabase } from '../lib/supabase';
 
 interface UserProfileModalProps {
   userProfile: UserProfile;
@@ -25,9 +26,11 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
   const [metaPreguntasDiarias, setMetaPreguntasDiarias] = useState(userProfile.metaPreguntasDiarias);
   const [activeTab, setActiveTab] = useState<'perfil' | 'whatsapp' | 'convocatoria' | 'plan' | 'supabase'>('perfil');
   const [savedSuccess, setSavedSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     const updated: UserProfile = {
       ...userProfile,
       nombre,
@@ -37,8 +40,37 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
       metaPreguntasDiarias,
     };
 
+    // Actualizamos storage local
     saveProfile(updated);
+
+    // Sincronizamos con Supabase
+    if (supabase) {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { error } = await supabase
+            .from('profiles')
+            .upsert({
+              id: user.id,
+              nombre,
+              grado,
+              cip,
+              telefono_whatsapp: telefonoWhatsapp,
+              meta_preguntas_diarias: metaPreguntasDiarias,
+              updated_at: new Date().toISOString(),
+            });
+
+          if (error) {
+            console.error('Error al sincronizar con Supabase:', error);
+          }
+        }
+      } catch (err) {
+        console.error('Error en handleSave:', err);
+      }
+    }
+
     onProfileUpdated(updated);
+    setLoading(false);
     setSavedSuccess(true);
     setTimeout(() => setSavedSuccess(false), 2000);
   };
@@ -250,9 +282,11 @@ create table perfiles (
                 
                 <button
                   type="submit"
-                  className="ml-auto bg-amber-500 hover:bg-amber-400 text-slate-950 font-mono font-bold px-6 py-2.5 rounded-xl shadow-sm transition-all active-scale"
+                  disabled={loading}
+                  className="ml-auto bg-amber-500 hover:bg-amber-400 text-slate-950 font-mono font-bold px-6 py-2.5 rounded-xl shadow-sm transition-all active-scale flex items-center gap-2 disabled:opacity-50"
                 >
-                  Guardar Cambios
+                  {loading && <Loader2 className="w-4 h-4 animate-spin" />}
+                  {loading ? 'Guardando...' : 'Guardar Cambios'}
                 </button>
               </div>
             </form>

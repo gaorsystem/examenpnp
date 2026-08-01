@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Shield, Phone, KeyRound, CheckCircle2, ArrowRight, Lock, Sparkles, X, Smartphone } from 'lucide-react';
+import { Shield, Phone, KeyRound, CheckCircle2, ArrowRight, Lock, Sparkles, X, Smartphone, Loader2 } from 'lucide-react';
 import { UserProfile } from '../types';
+import { supabase } from '../lib/supabase';
 
 interface OtpLoginModalProps {
   userProfile: UserProfile;
@@ -15,32 +16,80 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
 }) => {
   const [step, setStep] = useState<'PHONE' | 'OTP'>('PHONE');
   const [telefono, setTelefono] = useState('');
-  const [grado, setGrado] = useState(userProfile.grado || 'S3 PNP');
-  const [nombre, setNombre] = useState(userProfile.nombre || 'Efectivo Policial');
-  const [generatedOtp, setGeneratedOtp] = useState<string>('');
+  const [loading, setLoading] = useState(false);
   const [inputOtp, setInputOtp] = useState<string>('');
   const [errorMsg, setErrorMsg] = useState<string>('');
 
-  const handleSendOtp = (e: React.FormEvent) => {
+  const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!telefono || telefono.trim().length !== 9) {
       setErrorMsg('Ingresa un número de celular de exactamente 9 dígitos.');
       return;
     }
 
-    // Generate random 6 digit OTP
-    const code = Math.floor(100000 + Math.random() * 900000).toString();
-    setGeneratedOtp(code);
     setErrorMsg('');
-    setStep('OTP');
+    setLoading(true);
+
+    if (!supabase) {
+      // Si no hay supabase, permitimos pasar al paso de OTP para pruebas (usando 123456)
+      setStep('OTP');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const { error } = await supabase.auth.signInWithOtp({
+        phone: `+51${telefono}`,
+      });
+
+      if (error) {
+        if (error.message.includes('not enabled') || error.message.includes('not found')) {
+          setStep('OTP');
+        } else {
+          setErrorMsg(error.message);
+        }
+      } else {
+        setStep('OTP');
+      }
+    } catch (err: any) {
+      setErrorMsg(err.message || 'Error al enviar código.');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleVerifyOtp = (e: React.FormEvent) => {
+  const handleVerifyOtp = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (inputOtp.trim() === generatedOtp || inputOtp.trim() === '123456') {
-      onLoginSuccess(telefono, grado, nombre);
-    } else {
-      setErrorMsg('Código OTP incorrecto. Prueba usando el código generado arriba o 123456.');
+    setErrorMsg('');
+    setLoading(true);
+
+    try {
+      if (inputOtp === '123456') {
+        onLoginSuccess(telefono);
+        return;
+      }
+
+      if (!supabase) {
+        setErrorMsg('Supabase no está configurado. Por favor, contacta al administrador o usa el código de prueba 123456.');
+        setLoading(false);
+        return;
+      }
+
+      const { data, error } = await supabase.auth.verifyOtp({
+        phone: `+51${telefono}`,
+        token: inputOtp,
+        type: 'sms',
+      });
+
+      if (error) {
+        setErrorMsg(error.message);
+      } else if (data.session) {
+        onLoginSuccess(telefono);
+      }
+    } catch (err: any) {
+      setErrorMsg(err.message || 'Error al verificar código.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -49,7 +98,8 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl relative space-y-5 animate-in fade-in zoom-in duration-200 text-slate-900 dark:text-slate-100">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full text-slate-400 hover:text-slate-600 dark:hover:text-white bg-slate-100 dark:bg-slate-800 transition-colors"
+          disabled={loading}
+          className="absolute top-4 right-4 p-2 rounded-full text-slate-400 hover:text-slate-600 dark:hover:text-white bg-slate-100 dark:bg-slate-800 transition-colors disabled:opacity-50"
         >
           <X className="w-5 h-5" />
         </button>
@@ -83,7 +133,7 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
             <div className="space-y-3">
               <div>
                 <label htmlFor="telefono-input" className="block text-xs font-mono font-bold text-slate-700 dark:text-slate-300 mb-1">
-                  Número de Celular / WhatsApp
+                  Número de Celular (+51)
                 </label>
                 <div className="relative">
                   <Phone className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -91,6 +141,7 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
                     id="telefono-input"
                     type="tel"
                     required
+                    disabled={loading}
                     maxLength={9}
                     value={telefono}
                     onChange={(e) => {
@@ -98,7 +149,7 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
                       if (val.length <= 9) setTelefono(val);
                     }}
                     placeholder="Ej. 987654321"
-                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-10 pr-4 py-3 text-base font-mono focus:outline-none focus:border-amber-500 text-slate-900 dark:text-white"
+                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-10 pr-4 py-3 text-base font-mono focus:outline-none focus:border-amber-500 text-slate-900 dark:text-white disabled:opacity-50"
                   />
                 </div>
               </div>
@@ -112,10 +163,11 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
 
             <button
               type="submit"
-              className="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-display font-black py-3.5 rounded-2xl text-sm shadow-lg transition-all flex items-center justify-center gap-2 active-scale"
+              disabled={loading}
+              className="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-display font-black py-3.5 rounded-2xl text-sm shadow-lg transition-all flex items-center justify-center gap-2 active-scale disabled:opacity-50"
             >
-              <span>ENVIAR CÓDIGO DE ACCESO</span>
-              <ArrowRight className="w-4 h-4" />
+              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <span>ENVIAR CÓDIGO</span>}
+              {!loading && <ArrowRight className="w-4 h-4" />}
             </button>
           </form>
         ) : (
@@ -123,35 +175,20 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
             <div className="bg-emerald-500/10 border border-emerald-500/30 p-3.5 rounded-2xl text-xs space-y-2">
               <div className="flex items-center justify-between">
                 <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
-                  <Smartphone className="w-4 h-4" /> SMS / WhatsApp Enviado
-                </span>
-                <span className="bg-emerald-600 text-white font-mono text-[10px] px-2 py-0.5 rounded font-bold">
-                  SIMULADO
+                  <Smartphone className="w-4 h-4" /> SMS Enviado
                 </span>
               </div>
               <p className="text-slate-600 dark:text-slate-300">
-                Se envió el código de verificación al número <strong>{telefono}</strong>.
+                Ingresa el código enviado al número <strong>{telefono}</strong>.
               </p>
-              <div className="bg-white dark:bg-slate-950 border border-emerald-500/40 p-2.5 rounded-xl font-mono text-center relative">
-                <p className="text-[10px] text-slate-400 uppercase tracking-widest">
-                  Código de Pruebas OTP:
-                </p>
-                <p className="text-xl font-bold text-emerald-600 dark:text-emerald-400 tracking-widest my-0.5">
-                  {generatedOtp}
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setInputOtp(generatedOtp)}
-                  className="mt-1 text-[11px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 px-3 py-1 rounded-lg font-bold hover:bg-emerald-500/30 transition-colors"
-                >
-                  Pegar código aquí
-                </button>
-              </div>
+              <p className="text-[10px] text-slate-400 italic">
+                * Si es un entorno de prueba y no recibes el SMS, intenta con 123456.
+              </p>
             </div>
 
             <div>
               <label htmlFor="otp-input" className="block text-xs font-mono font-bold text-slate-700 dark:text-slate-300 mb-1">
-                Ingresa el Código OTP (6 dígitos)
+                Código de Verificación
               </label>
               <div className="relative">
                 <KeyRound className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -160,10 +197,11 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
                   type="text"
                   maxLength={6}
                   required
+                  disabled={loading}
                   value={inputOtp}
                   onChange={(e) => setInputOtp(e.target.value)}
-                  placeholder="Ej. 852914"
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-10 pr-4 py-3 text-center text-lg font-mono font-bold tracking-widest focus:outline-none focus:border-amber-500 text-slate-900 dark:text-white"
+                  placeholder="000000"
+                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-10 pr-4 py-3 text-center text-lg font-mono font-bold tracking-widest focus:outline-none focus:border-amber-500 text-slate-900 dark:text-white disabled:opacity-50"
                 />
               </div>
             </div>
@@ -178,16 +216,18 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
               <button
                 type="button"
                 onClick={() => setStep('PHONE')}
-                className="w-1/3 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono text-xs font-bold py-3 rounded-2xl transition-colors"
+                disabled={loading}
+                className="w-1/3 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono text-xs font-bold py-3 rounded-2xl transition-colors disabled:opacity-50"
               >
-                Cambiar N°
+                Volver
               </button>
               <button
                 type="submit"
-                className="w-2/3 bg-emerald-600 hover:bg-emerald-500 text-white font-display font-black py-3 rounded-2xl text-sm shadow-lg transition-all flex items-center justify-center gap-2 active-scale"
+                disabled={loading}
+                className="w-2/3 bg-emerald-600 hover:bg-emerald-500 text-white font-display font-black py-3 rounded-2xl text-sm shadow-lg transition-all flex items-center justify-center gap-2 active-scale disabled:opacity-50"
               >
-                <CheckCircle2 className="w-4 h-4" />
-                <span>INGRESAR AL PORTAL</span>
+                {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle2 className="w-4 h-4" />}
+                <span>{loading ? 'VERIFICANDO...' : 'INGRESAR'}</span>
               </button>
             </div>
           </form>
