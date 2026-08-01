@@ -33,6 +33,8 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
   const [newUserPhone, setNewUserPhone] = useState('');
   const [newUserGrado, setNewUserGrado] = useState('');
   const [newUserDni, setNewUserDni] = useState('');
+  const [newUserCip, setNewUserCip] = useState('');
+  const [newUserMetodoPago, setNewUserMetodoPago] = useState('Yape / Plin');
   const [newUserPlan, setNewUserPlan] = useState<'free' | 'premium'>('free');
   const [newUserRole, setNewUserRole] = useState<'student' | 'admin'>('student');
   const [saving, setSaving] = useState(false);
@@ -76,6 +78,7 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
         plan: u.plan || 'free',
         role: u.role || 'student',
         metaPreguntasDiarias: u.meta_preguntas_diarias || 50,
+        metodoPago: u.metodo_pago || '',
         fechaRegistro: u.created_at
       }));
 
@@ -105,6 +108,8 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
         telefono_whatsapp: formattedPhone,
         grado: newUserGrado,
         dni: newUserDni,
+        cip: newUserCip,
+        metodo_pago: newUserMetodoPago,
         plan: newUserPlan,
         role: newUserRole,
         user_id: null // Explicitly null until they login
@@ -116,6 +121,8 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
       setNewUserName('');
       setNewUserPhone('');
       setNewUserDni('');
+      setNewUserCip('');
+      setNewUserMetodoPago('Yape / Plin');
       fetchUsers();
     } catch (err: any) {
       alert('Error al agregar usuario: ' + err.message);
@@ -234,6 +241,7 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Documento</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contacto</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pago</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plan</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rol</th>
                   <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
@@ -255,13 +263,17 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900">{user.dni || '---'}</div>
+                        <div className="text-sm font-medium text-gray-900">DNI: {user.dni || '---'}</div>
+                        {user.cip && <div className="text-xs text-gray-500">CIP: {user.cip}</div>}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center text-sm text-gray-600">
                           <Smartphone size={16} className="mr-2 text-gray-400" />
                           {user.telefonoWhatsapp}
                         </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-xs font-mono font-bold text-slate-500">{user.metodoPago || 'No reg.'}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
@@ -320,34 +332,41 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
               />
               <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
               <motion.div
-                initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                initial={{ scale: 0.95, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
-                exit={{ scale: 0.9, opacity: 0, y: 20 }}
-                className="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                className="inline-block align-bottom bg-white dark:bg-slate-900 rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full border border-slate-200 dark:border-slate-800"
               >
-                <form onSubmit={handleAddUser} className="p-6">
-                  <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-xl font-bold text-gray-900 flex items-center">
-                      <UserPlus className="mr-2 text-blue-600" />
-                      Registrar Nuevo Cliente
-                    </h3>
-                    <button type="button" onClick={() => setShowAddModal(false)} className="text-gray-400 hover:text-gray-600">
-                      <XCircle />
+                <form onSubmit={handleAddUser} className="p-8">
+                  <div className="flex items-center justify-between mb-8">
+                    <div>
+                      <h3 className="text-2xl font-display font-black text-slate-900 dark:text-white flex items-center gap-3">
+                        <div className="p-2 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded-xl">
+                          <UserPlus size={24} />
+                        </div>
+                        Nuevo Cliente
+                      </h3>
+                      <p className="text-slate-500 text-sm mt-1">Registra un nuevo participante en el sistema.</p>
+                    </div>
+                    <button 
+                      type="button" 
+                      onClick={() => setShowAddModal(false)} 
+                      className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
+                    >
+                      <XCircle size={24} />
                     </button>
                   </div>
 
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="md:col-span-2">
+                      <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">Nombre Completo</label>
                       <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <UserIcon size={18} className="text-gray-400" />
-                        </div>
+                        <UserIcon size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
                         <input
                           type="text"
                           required
-                          className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-xl focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                          placeholder="Juan Perez"
+                          className="block w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
+                          placeholder="Ej. Juan Pérez García"
                           value={newUserName}
                           onChange={(e) => setNewUserName(e.target.value)}
                         />
@@ -355,11 +374,26 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">DNI / Documento</label>
+                      <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">WhatsApp</label>
+                      <div className="relative">
+                        <Smartphone size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                        <input
+                          type="tel"
+                          required
+                          className="block w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
+                          placeholder="999 888 777"
+                          value={newUserPhone}
+                          onChange={(e) => setNewUserPhone(e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">DNI (Documento)</label>
                       <input
                         type="text"
                         required
-                        className="block w-full px-3 py-2 border border-gray-300 rounded-xl focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
                         placeholder="77665544"
                         value={newUserDni}
                         onChange={(e) => setNewUserDni(e.target.value)}
@@ -367,89 +401,115 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Número de WhatsApp</label>
-                      <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <Smartphone size={18} className="text-gray-400" />
-                        </div>
-                        <input
-                          type="tel"
-                          required
-                          className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-xl focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                          placeholder="999888777"
-                          value={newUserPhone}
-                          onChange={(e) => setNewUserPhone(e.target.value)}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Grado</label>
-                        <input
-                          type="text"
-                          className="block w-full px-3 py-2 border border-gray-300 rounded-xl focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                          placeholder="SO3 / Alferez"
-                          value={newUserGrado}
-                          onChange={(e) => setNewUserGrado(e.target.value)}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Plan</label>
-                        <select
-                          className="block w-full px-3 py-2 border border-gray-300 rounded-xl focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                          value={newUserPlan}
-                          onChange={(e) => setNewUserPlan(e.target.value as any)}
-                        >
-                          <option value="free">FREE</option>
-                          <option value="premium">PREMIUM</option>
-                        </select>
-                      </div>
+                      <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">CIP (Opcional)</label>
+                      <input
+                        type="text"
+                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
+                        placeholder="123456"
+                        value={newUserCip}
+                        onChange={(e) => setNewUserCip(e.target.value)}
+                      />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Rol</label>
-                      <div className="flex items-center space-x-4">
-                        <label className="flex items-center">
+                      <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">Grado</label>
+                      <input
+                        type="text"
+                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
+                        placeholder="Ej. SO3 / Alférez"
+                        value={newUserGrado}
+                        onChange={(e) => setNewUserGrado(e.target.value)}
+                      />
+                    </div>
+
+                    <div className="md:col-span-2 grid grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">Método de Pago</label>
+                        <select
+                          className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
+                          value={newUserMetodoPago}
+                          onChange={(e) => setNewUserMetodoPago(e.target.value)}
+                        >
+                          <option value="Yape / Plin">Yape / Plin</option>
+                          <option value="Transferencia">Transferencia</option>
+                          <option value="Efectivo">Efectivo</option>
+                          <option value="Otro">Otro</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">Plan</label>
+                        <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl h-[54px]">
+                          <button
+                            type="button"
+                            onClick={() => setNewUserPlan('free')}
+                            className={`flex-1 rounded-xl text-xs font-bold transition-all ${
+                              newUserPlan === 'free' 
+                                ? 'bg-white dark:bg-slate-700 text-blue-600 shadow-sm' 
+                                : 'text-slate-500'
+                            }`}
+                          >
+                            FREE
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setNewUserPlan('premium')}
+                            className={`flex-1 rounded-xl text-xs font-bold transition-all ${
+                              newUserPlan === 'premium' 
+                                ? 'bg-white dark:bg-slate-700 text-amber-600 shadow-sm' 
+                                : 'text-slate-500'
+                            }`}
+                          >
+                            PREMIUM
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="md:col-span-2 bg-slate-50 dark:bg-slate-900/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
+                      <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-3 ml-1">Rol en el Sistema</label>
+                      <div className="flex items-center gap-6">
+                        <label className="flex items-center gap-2 cursor-pointer group">
                           <input
                             type="radio"
                             name="role"
                             value="student"
                             checked={newUserRole === 'student'}
                             onChange={() => setNewUserRole('student')}
-                            className="mr-2"
+                            className="w-4 h-4 text-blue-600 border-slate-300 focus:ring-blue-500"
                           />
-                          <span className="text-sm text-gray-700">Estudiante</span>
+                          <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-blue-600 transition-colors">Estudiante</span>
                         </label>
-                        <label className="flex items-center">
+                        <label className="flex items-center gap-2 cursor-pointer group">
                           <input
                             type="radio"
                             name="role"
                             value="admin"
                             checked={newUserRole === 'admin'}
                             onChange={() => setNewUserRole('admin')}
-                            className="mr-2"
+                            className="w-4 h-4 text-blue-600 border-slate-300 focus:ring-blue-500"
                           />
-                          <span className="text-sm text-gray-700">Administrador</span>
+                          <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-blue-600 transition-colors">Administrador</span>
                         </label>
                       </div>
                     </div>
                   </div>
 
-                  <div className="mt-8 flex space-x-3">
+                  <div className="mt-10 flex gap-4">
                     <button
                       type="button"
                       onClick={() => setShowAddModal(false)}
-                      className="flex-1 px-4 py-2 border border-gray-300 text-sm font-medium rounded-xl text-gray-700 bg-white hover:bg-gray-50"
+                      className="flex-1 px-6 py-4 border border-slate-200 dark:border-slate-800 text-sm font-bold rounded-2xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
                     >
                       Cancelar
                     </button>
                     <button
                       type="submit"
                       disabled={saving}
-                      className="flex-1 flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-xl text-white bg-blue-600 hover:bg-blue-700 transition-all active:scale-95 disabled:opacity-70"
+                      className="flex-[2] flex justify-center items-center px-6 py-4 bg-blue-600 hover:bg-blue-500 text-white text-sm font-black rounded-2xl shadow-xl shadow-blue-600/20 transition-all active:scale-[0.98] disabled:opacity-70"
                     >
-                      {saving ? <Loader2 className="animate-spin h-5 w-5" /> : 'Registrar'}
+                      {saving ? <Loader2 className="animate-spin h-5 w-5 mr-2" /> : <CheckCircle size={18} className="mr-2" />}
+                      {saving ? 'REGISTRANDO...' : 'CONFIRMAR REGISTRO'}
                     </button>
                   </div>
                 </form>

@@ -60,6 +60,7 @@ export interface UserProfile {
   role: 'admin' | 'student';
   metaPreguntasDiarias: number;
   fechaRegistro: string;
+  metodoPago?: string;
 }
 
 export interface DominioMateria {
