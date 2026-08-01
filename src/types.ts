@@ -55,6 +55,7 @@ export interface UserProfile {
   cip: string;
   telefonoWhatsapp: string;
   plan: 'free' | 'premium';
+  role: 'admin' | 'student';
   metaPreguntasDiarias: number;
   fechaRegistro: string;
 }

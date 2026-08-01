@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, BookOpen, Clock, BarChart3, Search, MessageSquare, Award, User, Sun, Moon, SlidersHorizontal, Home, LogIn, LogOut } from 'lucide-react';
+import { Shield, BookOpen, Clock, BarChart3, Search, MessageSquare, Award, User, Sun, Moon, SlidersHorizontal, Home, LogIn, LogOut, Users } from 'lucide-react';
 import { UserProfile } from '../types';
 
 interface HeaderProps {
@@ -35,6 +35,10 @@ export const Header: React.FC<HeaderProps> = ({
     { id: 'banco', label: 'Banco (1,500)', icon: Search },
     { id: 'whatsapp', label: 'Bot WhatsApp', icon: MessageSquare },
   ];
+
+  if (isLoggedIn && userProfile.role === 'admin') {
+    portalTabs.push({ id: 'admin', label: 'Panel Admin', icon: Users });
+  }
 
   const isLandingView = activeTab === 'landing';
 

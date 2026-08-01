@@ -13,6 +13,8 @@ import { UserProfileModal } from './components/UserProfileModal';
 import { OtpLoginModal } from './components/OtpLoginModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { AudioAndBotExplainerModal } from './components/AudioAndBotExplainerModal';
+import { AuthFlow } from './components/auth/AuthFlow';
+import { UserManagement } from './components/admin/UserManagement';
 import { Play, Zap, ArrowLeft, X, Home } from 'lucide-react';
 
 import { supabase } from './lib/supabase';
@@ -35,7 +37,10 @@ import {
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('landing');
-  const [userProfile, setUserProfile] = useState<UserProfile>(() => getProfile());
+  const [userProfile, setUserProfile] = useState<UserProfile>(() => {
+    const base = getProfile();
+    return { ...base, role: 'student' }; // Default role
+  });
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [session, setSession] = useState<any>(null);
   const [showProfileModal, setShowProfileModal] = useState<boolean>(false);
@@ -77,7 +82,7 @@ export default function App() {
       setSession(session);
       setIsLoggedIn(!!session);
       if (session?.user) {
-        loadProfileFromSupabase(session.user.id);
+        loadProfileFromSupabase(session.user.id, session.user.phone);
       } else {
         setActiveTab('landing');
       }
@@ -86,15 +91,52 @@ export default function App() {
     return () => subscription.unsubscribe();
   }, []);
 
-  const loadProfileFromSupabase = async (userId: string) => {
+  const loadProfileFromSupabase = async (userId: string, phone?: string) => {
     if (!supabase) return;
 
-    // Load Profile
-    const { data: profileData, error: profileError } = await supabase
+    // 1. Intentar buscar por user_id (usuario ya vinculado)
+    let { data: profileData, error: profileError } = await supabase
       .from('profiles')
       .select('*')
-      .eq('id', userId)
+      .eq('user_id', userId)
       .single();
+
+    // 2. Si no existe, intentar buscar por teléfono (pre-registrado por admin)
+    if (!profileData && phone) {
+      const { data: phoneMatch } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('telefono_whatsapp', phone)
+        .is('user_id', null)
+        .single();
+
+      if (phoneMatch) {
+        // Vincular perfil pre-existente con la ID de autenticación actual
+        const { data: linked } = await supabase
+          .from('profiles')
+          .update({ user_id: userId })
+          .eq('id', phoneMatch.id)
+          .select()
+          .single();
+        
+        profileData = linked;
+      }
+    }
+
+    // 3. Si sigue sin existir, crear un perfil básico nuevo
+    if (!profileData && !profileError) {
+       const { data: created } = await supabase
+        .from('profiles')
+        .insert({
+          user_id: userId,
+          telefono_whatsapp: phone || '',
+          nombre: 'Estudiante Nuevo',
+        })
+        .select()
+        .single();
+      
+      profileData = created;
+    }
 
     if (profileData) {
       setUserProfile((prev) => ({
@@ -106,6 +148,7 @@ export default function App() {
         telefonoWhatsapp: profileData.telefono_whatsapp || prev.telefonoWhatsapp,
         metaPreguntasDiarias: profileData.meta_preguntas_diarias || prev.metaPreguntasDiarias,
         plan: profileData.plan || prev.plan,
+        role: profileData.role || 'student',
       }));
     } else if (profileError && profileError.code !== 'PGRST116') {
       console.error('Error loading profile:', profileError);
@@ -269,6 +312,13 @@ export default function App() {
     }
   };
 
+  if (!isLoggedIn && activeTab !== 'landing') {
+    return <AuthFlow onAuthenticated={() => {
+      setIsLoggedIn(true);
+      setActiveTab('dashboard');
+    }} />;
+  }
+
   return (
     <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200">
       {/* Header Bar */}
@@ -287,6 +337,9 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6 pb-24 md:pb-6">
+        {activeTab === 'admin' && userProfile.role === 'admin' && (
+          <UserManagement />
+        )}
         {/* BARRA SUPERIOR UNIVERSAL DE REGRESO RÁPIDO PARA MÓVIL Y PC */}
         {activeTab !== 'landing' && activeTab !== 'dashboard' && (
           <div className="sticky top-16 z-30 bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border border-slate-200 dark:border-slate-700/80 rounded-2xl py-3 px-4 mb-5 shadow-lg flex items-center justify-between gap-3 transition-all">

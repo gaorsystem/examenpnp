@@ -39,6 +39,7 @@ export const DEFAULT_PROFILE: UserProfile = {
   cip: '31428590',
   telefonoWhatsapp: '+51 987 654 321',
   plan: 'free',
+  role: 'student',
   metaPreguntasDiarias: 20,
   fechaRegistro: new Date().toISOString(),
 };
