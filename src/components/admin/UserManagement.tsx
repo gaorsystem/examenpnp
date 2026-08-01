@@ -321,200 +321,196 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
 
       <AnimatePresence>
         {showAddModal && (
-          <div className="fixed inset-0 z-50 overflow-y-auto">
-            <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={() => setShowAddModal(false)}
-                className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75"
-              />
-              <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-              <motion.div
-                initial={{ scale: 0.95, opacity: 0, y: 20 }}
-                animate={{ scale: 1, opacity: 1, y: 0 }}
-                exit={{ scale: 0.95, opacity: 0, y: 20 }}
-                className="inline-block align-bottom bg-white dark:bg-slate-900 rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full border border-slate-200 dark:border-slate-800"
-              >
-                <form onSubmit={handleAddUser} className="p-8">
-                  <div className="flex items-center justify-between mb-8">
-                    <div>
-                      <h3 className="text-2xl font-display font-black text-slate-900 dark:text-white flex items-center gap-3">
-                        <div className="p-2 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded-xl">
-                          <UserPlus size={24} />
-                        </div>
-                        Nuevo Cliente
-                      </h3>
-                      <p className="text-slate-500 text-sm mt-1">Registra un nuevo participante en el sistema.</p>
-                    </div>
-                    <button 
-                      type="button" 
-                      onClick={() => setShowAddModal(false)} 
-                      className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
-                    >
-                      <XCircle size={24} />
-                    </button>
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowAddModal(false)}
+              className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm"
+            />
+            
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              className="relative bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-2xl w-full max-w-xl overflow-hidden border border-slate-200 dark:border-slate-800"
+            >
+              <form onSubmit={handleAddUser} className="p-8">
+                <div className="flex items-center justify-between mb-8">
+                  <div>
+                    <h3 className="text-2xl font-display font-black text-slate-900 dark:text-white flex items-center gap-3">
+                      <div className="p-2 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded-xl">
+                        <UserPlus size={24} />
+                      </div>
+                      Nuevo Cliente
+                    </h3>
+                    <p className="text-slate-500 text-sm mt-1">Registra un nuevo participante en el sistema.</p>
                   </div>
+                  <button 
+                    type="button" 
+                    onClick={() => setShowAddModal(false)} 
+                    className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
+                  >
+                    <XCircle size={24} />
+                  </button>
+                </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="md:col-span-2">
-                      <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">Nombre Completo</label>
-                      <div className="relative">
-                        <UserIcon size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
-                        <input
-                          type="text"
-                          required
-                          className="block w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
-                          placeholder="Ej. Juan Pérez García"
-                          value={newUserName}
-                          onChange={(e) => setNewUserName(e.target.value)}
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">WhatsApp</label>
-                      <div className="relative">
-                        <Smartphone size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
-                        <input
-                          type="tel"
-                          required
-                          className="block w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
-                          placeholder="999 888 777"
-                          value={newUserPhone}
-                          onChange={(e) => setNewUserPhone(e.target.value)}
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">DNI (Documento)</label>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
+                  <div className="md:col-span-2">
+                    <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">Nombre Completo</label>
+                    <div className="relative">
+                      <UserIcon size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
                       <input
                         type="text"
                         required
-                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
-                        placeholder="77665544"
-                        value={newUserDni}
-                        onChange={(e) => setNewUserDni(e.target.value)}
+                        className="block w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
+                        placeholder="Ej. Juan Pérez García"
+                        value={newUserName}
+                        onChange={(e) => setNewUserName(e.target.value)}
                       />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">WhatsApp</label>
+                    <div className="relative">
+                      <Smartphone size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                      <input
+                        type="tel"
+                        required
+                        className="block w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
+                        placeholder="999 888 777"
+                        value={newUserPhone}
+                        onChange={(e) => setNewUserPhone(e.target.value)}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">DNI (Documento)</label>
+                    <input
+                      type="text"
+                      required
+                      className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
+                      placeholder="77665544"
+                      value={newUserDni}
+                      onChange={(e) => setNewUserDni(e.target.value)}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">CIP (Opcional)</label>
+                    <input
+                      type="text"
+                      className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
+                      placeholder="123456"
+                      value={newUserCip}
+                      onChange={(e) => setNewUserCip(e.target.value)}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">Grado</label>
+                    <input
+                      type="text"
+                      className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
+                      placeholder="Ej. SO3 / Alférez"
+                      value={newUserGrado}
+                      onChange={(e) => setNewUserGrado(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="md:col-span-2 grid grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">Método de Pago</label>
+                      <select
+                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
+                        value={newUserMetodoPago}
+                        onChange={(e) => setNewUserMetodoPago(e.target.value)}
+                      >
+                        <option value="Yape / Plin">Yape / Plin</option>
+                        <option value="Transferencia">Transferencia</option>
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Otro">Otro</option>
+                      </select>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">CIP (Opcional)</label>
-                      <input
-                        type="text"
-                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
-                        placeholder="123456"
-                        value={newUserCip}
-                        onChange={(e) => setNewUserCip(e.target.value)}
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">Grado</label>
-                      <input
-                        type="text"
-                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
-                        placeholder="Ej. SO3 / Alférez"
-                        value={newUserGrado}
-                        onChange={(e) => setNewUserGrado(e.target.value)}
-                      />
-                    </div>
-
-                    <div className="md:col-span-2 grid grid-cols-2 gap-6">
-                      <div>
-                        <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">Método de Pago</label>
-                        <select
-                          className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white"
-                          value={newUserMetodoPago}
-                          onChange={(e) => setNewUserMetodoPago(e.target.value)}
+                      <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">Plan</label>
+                      <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl h-[54px]">
+                        <button
+                          type="button"
+                          onClick={() => setNewUserPlan('free')}
+                          className={`flex-1 rounded-xl text-xs font-bold transition-all ${
+                            newUserPlan === 'free' 
+                              ? 'bg-white dark:bg-slate-700 text-blue-600 shadow-sm' 
+                              : 'text-slate-500'
+                          }`}
                         >
-                          <option value="Yape / Plin">Yape / Plin</option>
-                          <option value="Transferencia">Transferencia</option>
-                          <option value="Efectivo">Efectivo</option>
-                          <option value="Otro">Otro</option>
-                        </select>
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">Plan</label>
-                        <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl h-[54px]">
-                          <button
-                            type="button"
-                            onClick={() => setNewUserPlan('free')}
-                            className={`flex-1 rounded-xl text-xs font-bold transition-all ${
-                              newUserPlan === 'free' 
-                                ? 'bg-white dark:bg-slate-700 text-blue-600 shadow-sm' 
-                                : 'text-slate-500'
-                            }`}
-                          >
-                            FREE
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => setNewUserPlan('premium')}
-                            className={`flex-1 rounded-xl text-xs font-bold transition-all ${
-                              newUserPlan === 'premium' 
-                                ? 'bg-white dark:bg-slate-700 text-amber-600 shadow-sm' 
-                                : 'text-slate-500'
-                            }`}
-                          >
-                            PREMIUM
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="md:col-span-2 bg-slate-50 dark:bg-slate-900/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
-                      <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-3 ml-1">Rol en el Sistema</label>
-                      <div className="flex items-center gap-6">
-                        <label className="flex items-center gap-2 cursor-pointer group">
-                          <input
-                            type="radio"
-                            name="role"
-                            value="student"
-                            checked={newUserRole === 'student'}
-                            onChange={() => setNewUserRole('student')}
-                            className="w-4 h-4 text-blue-600 border-slate-300 focus:ring-blue-500"
-                          />
-                          <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-blue-600 transition-colors">Estudiante</span>
-                        </label>
-                        <label className="flex items-center gap-2 cursor-pointer group">
-                          <input
-                            type="radio"
-                            name="role"
-                            value="admin"
-                            checked={newUserRole === 'admin'}
-                            onChange={() => setNewUserRole('admin')}
-                            className="w-4 h-4 text-blue-600 border-slate-300 focus:ring-blue-500"
-                          />
-                          <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-blue-600 transition-colors">Administrador</span>
-                        </label>
+                          FREE
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setNewUserPlan('premium')}
+                          className={`flex-1 rounded-xl text-xs font-bold transition-all ${
+                            newUserPlan === 'premium' 
+                              ? 'bg-white dark:bg-slate-700 text-amber-600 shadow-sm' 
+                              : 'text-slate-500'
+                          }`}
+                        >
+                          PREMIUM
+                        </button>
                       </div>
                     </div>
                   </div>
 
-                  <div className="mt-10 flex gap-4">
-                    <button
-                      type="button"
-                      onClick={() => setShowAddModal(false)}
-                      className="flex-1 px-6 py-4 border border-slate-200 dark:border-slate-800 text-sm font-bold rounded-2xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
-                    >
-                      Cancelar
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={saving}
-                      className="flex-[2] flex justify-center items-center px-6 py-4 bg-blue-600 hover:bg-blue-500 text-white text-sm font-black rounded-2xl shadow-xl shadow-blue-600/20 transition-all active:scale-[0.98] disabled:opacity-70"
-                    >
-                      {saving ? <Loader2 className="animate-spin h-5 w-5 mr-2" /> : <CheckCircle size={18} className="mr-2" />}
-                      {saving ? 'REGISTRANDO...' : 'CONFIRMAR REGISTRO'}
-                    </button>
+                  <div className="md:col-span-2 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
+                    <label className="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-3 ml-1">Rol en el Sistema</label>
+                    <div className="flex items-center gap-6">
+                      <label className="flex items-center gap-2 cursor-pointer group">
+                        <input
+                          type="radio"
+                          name="role"
+                          checked={newUserRole === 'student'}
+                          onChange={() => setNewUserRole('student')}
+                          className="w-4 h-4 text-blue-600 border-slate-300 focus:ring-blue-500"
+                        />
+                        <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-blue-600 transition-colors">Estudiante</span>
+                      </label>
+                      <label className="flex items-center gap-2 cursor-pointer group">
+                        <input
+                          type="radio"
+                          name="role"
+                          checked={newUserRole === 'admin'}
+                          onChange={() => setNewUserRole('admin')}
+                          className="w-4 h-4 text-blue-600 border-slate-300 focus:ring-blue-500"
+                        />
+                        <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-blue-600 transition-colors">Administrador</span>
+                      </label>
+                    </div>
                   </div>
-                </form>
-              </motion.div>
-            </div>
+                </div>
+
+                <div className="mt-10 flex gap-4">
+                  <button
+                    type="button"
+                    onClick={() => setShowAddModal(false)}
+                    className="flex-1 px-6 py-4 border border-slate-200 dark:border-slate-800 text-sm font-bold rounded-2xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={saving}
+                    className="flex-[2] flex justify-center items-center px-6 py-4 bg-blue-600 hover:bg-blue-500 text-white text-sm font-black rounded-2xl shadow-xl shadow-blue-600/20 transition-all active:scale-[0.98] disabled:opacity-70"
+                  >
+                    {saving ? <Loader2 className="animate-spin h-5 w-5 mr-2" /> : <CheckCircle size={18} className="mr-2" />}
+                    {saving ? 'REGISTRANDO...' : 'CONFIRMAR REGISTRO'}
+                  </button>
+                </div>
+              </form>
+            </motion.div>
           </div>
         )}
       </AnimatePresence>
