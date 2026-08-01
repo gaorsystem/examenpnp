@@ -1,11 +1,13 @@
 import React from 'react';
-import { Home, BarChart3, SlidersHorizontal, Clock, Shield, Search, MessageSquare, LogIn } from 'lucide-react';
+import { Home, BarChart3, SlidersHorizontal, Clock, Shield, Search, MessageSquare, LogIn, Users } from 'lucide-react';
+import { UserProfile } from '../types';
 
 interface MobileBottomNavProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
   isLoggedIn: boolean;
   onOpenOtpModal: () => void;
+  userProfile: UserProfile;
 }
 
 export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
@@ -13,6 +15,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
   setActiveTab,
   isLoggedIn,
   onOpenOtpModal,
+  userProfile,
 }) => {
   // Mobile tabs structure for native app experience
   const publicNavItems = [
@@ -26,10 +29,13 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
   const privateNavItems = [
     { id: 'dashboard', label: 'Mi Portal', icon: BarChart3 },
     { id: 'simulacro', label: 'Simulacro', icon: Clock },
-    { id: 'crear-simulacro', label: 'Personalizar', icon: SlidersHorizontal },
     { id: 'banco', label: 'Balotario', icon: Search },
     { id: 'whatsapp', label: 'Audio / Bot', icon: MessageSquare },
   ];
+
+  if (isLoggedIn && userProfile.role === 'admin') {
+    privateNavItems.push({ id: 'admin', label: 'Admin', icon: Users });
+  }
 
   const navItems = isLoggedIn && activeTab !== 'landing' ? privateNavItems : publicNavItems;
 

@@ -73,7 +73,7 @@ export default function App() {
       setIsLoggedIn(!!session);
       if (session?.user) {
         // Load profile from DB if it exists
-        loadProfileFromSupabase(session.user.id, session.user.phone);
+        loadProfileFromSupabase(session.user.id, session.user.phone, session.user.email);
       }
     });
 
@@ -91,7 +91,7 @@ export default function App() {
     return () => subscription.unsubscribe();
   }, []);
 
-  const loadProfileFromSupabase = async (userId: string, phone?: string) => {
+  const loadProfileFromSupabase = async (userId: string, phone?: string, email?: string) => {
     if (!supabase) return;
 
     // 1. Intentar buscar por user_id (usuario ya vinculado)
@@ -132,7 +132,7 @@ export default function App() {
           telefono_whatsapp: phone || '',
           nombre: 'Estudiante Nuevo',
           plan: 'free',
-          role: 'student',
+          role: email === 'gaorsystem@gmail.com' ? 'admin' : 'student',
           meta_preguntas_diarias: 50
         })
         .select()
@@ -156,7 +156,7 @@ export default function App() {
         telefonoWhatsapp: profileData.telefono_whatsapp || prev.telefonoWhatsapp,
         metaPreguntasDiarias: profileData.meta_preguntas_diarias || prev.metaPreguntasDiarias,
         plan: profileData.plan || prev.plan,
-        role: profileData.role || 'student',
+        role: (email === 'gaorsystem@gmail.com' ? 'admin' : profileData.role) || 'student',
       }));
     } else if (profileError && profileError.code !== 'PGRST116') {
       console.error('Error loading profile:', profileError);
@@ -531,6 +531,7 @@ export default function App() {
         setActiveTab={setActiveTab}
         isLoggedIn={isLoggedIn}
         onOpenOtpModal={() => setShowOtpModal(true)}
+        userProfile={userProfile}
       />
     </div>
   );
