@@ -67,6 +67,21 @@ export const TechnicalGuide: React.FC = () => {
         "Body: Envía un JSON con 'number' (sacado del webhook) y 'text' (el mensaje)."
       ],
       validation: "El nodo HTTP Request debe devolver un código 200 o 201 y el mensaje debe llegar al teléfono.",
+    },
+    {
+      id: 4,
+      title: "Edge Function: admin-create-user",
+      description: "Crear usuarios de forma segura desde el panel de administración sin vulnerar RLS.",
+      instructions: [
+        "Despliega la Edge Function desde tu terminal usando Supabase CLI: 'supabase functions deploy admin-create-user'.",
+        "Asegúrate de configurar el secret SUPABASE_SERVICE_ROLE_KEY en Supabase Dashboard > Edge Functions > Secrets.",
+        "La función recibe el JWT en el header Authorization, verifica que el usuario es 'admin', usa service_role para crear en auth.users y en profiles.",
+        "Esto evita errores de RLS e 'infinite recursion' de forma 100% segura."
+      ],
+      validation: "Invoca la función desde la sección 'Agregar Usuario' en el panel de Administración.",
+      code: `// Código guardado en /supabase/functions/admin-create-user/index.ts
+// Despliegue con Supabase CLI:
+supabase functions deploy admin-create-user --no-verify-jwt`
     }
   ];
 

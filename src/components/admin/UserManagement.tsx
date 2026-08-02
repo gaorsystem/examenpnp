@@ -34,6 +34,8 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
   
   const [newUserName, setNewUserName] = useState('');
   const [newUserPhone, setNewUserPhone] = useState('');
+  const [newUserEmail, setNewUserEmail] = useState('');
+  const [newUserPassword, setNewUserPassword] = useState('');
   const [newUserGrado, setNewUserGrado] = useState('');
   const [newUserDni, setNewUserDni] = useState('');
   const [newUserCip, setNewUserCip] = useState('');
@@ -105,34 +107,53 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
       }
       const formattedPhone = '+' + cleanPhone;
 
-      const { data, error } = await supabase.from('profiles').insert({
-        nombre: newUserName,
-        telefono_whatsapp: formattedPhone,
-        grado: newUserGrado,
-        dni: newUserDni,
-        cip: newUserCip,
-        metodo_pago: newUserMetodoPago,
-        plan: 'premium',
-        role: newUserRole,
-        user_id: null // Explicitly null until they login
+      // Obtener JWT del Administrador si hay sesión iniciada
+      const { data: sessionData } = await supabase.auth.getSession();
+      const accessToken = sessionData.session?.access_token;
+
+      // Invocación segura de la Edge Function admin-create-user
+      const { data, error } = await supabase.functions.invoke('admin-create-user', {
+        body: {
+          email: newUserEmail.trim() || undefined,
+          password: newUserPassword.trim() || undefined,
+          nombre: newUserName,
+          telefono_whatsapp: formattedPhone,
+          dni: newUserDni,
+          grado: newUserGrado,
+          cip: newUserCip,
+          metodo_pago: newUserMetodoPago,
+          role: newUserRole,
+          plan: 'premium'
+        },
+        headers: accessToken ? {
+          Authorization: `Bearer ${accessToken}`
+        } : undefined
       });
 
       if (error) {
-        if (error.message.includes('infinite recursion')) {
-          throw new Error('Error de Seguridad en Supabase (RLS): Detectada recursión infinita en las políticas. Por favor, revisa la Guía Técnica o ejecuta el script de corrección en el SQL Editor de Supabase.');
-        }
-        throw error;
+        throw new Error(error.message || 'Error al invocar la Edge Function administrativa');
       }
+
+      if (data && !data.success && data.error) {
+        throw new Error(data.error);
+      }
+
+      const createdEmail = data?.user?.email || (newUserEmail.trim() || `estudiante_${cleanPhone}@simuladorpnp.app`);
+      const tempPass = data?.user?.tempPassword || 'Generada en servidor';
+
+      alert(`✅ Usuario y perfil registrados exitosamente a través de Supabase Edge Function.\n\nUsuario / Email: ${createdEmail}\nClave Temporal: ${tempPass}`);
 
       setShowAddModal(false);
       setNewUserName('');
       setNewUserPhone('');
+      setNewUserEmail('');
+      setNewUserPassword('');
       setNewUserDni('');
       setNewUserCip('');
       setNewUserMetodoPago('Yape / Plin');
       fetchUsers();
     } catch (err: any) {
-      alert('Error al agregar usuario: ' + err.message);
+      alert('Error al agregar usuario: ' + (err.message || 'Error desconocido'));
     } finally {
       setSaving(false);
     }
@@ -443,6 +464,28 @@ WITH CHECK (true);`}
                           onChange={(e) => setNewUserPhone(e.target.value)}
                         />
                       </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">Correo Electrónico (Opcional)</label>
+                      <input
+                        type="email"
+                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
+                        placeholder="ejemplo@correo.com (Auto si está vacío)"
+                        value={newUserEmail}
+                        onChange={(e) => setNewUserEmail(e.target.value)}
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">Contraseña Temporal (Opcional)</label>
+                      <input
+                        type="text"
+                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
+                        placeholder="Mínimo 6 caracteres (Auto si está vacío)"
+                        value={newUserPassword}
+                        onChange={(e) => setNewUserPassword(e.target.value)}
+                      />
                     </div>
 
                     <div>
