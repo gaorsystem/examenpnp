@@ -38,7 +38,6 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
   const [newUserDni, setNewUserDni] = useState('');
   const [newUserCip, setNewUserCip] = useState('');
   const [newUserMetodoPago, setNewUserMetodoPago] = useState('Yape / Plin');
-  const [newUserPlan, setNewUserPlan] = useState<'free' | 'premium'>('free');
   const [newUserRole, setNewUserRole] = useState<'student' | 'admin'>('student');
   const [saving, setSaving] = useState(false);
 
@@ -113,7 +112,7 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
         dni: newUserDni,
         cip: newUserCip,
         metodo_pago: newUserMetodoPago,
-        plan: newUserPlan,
+        plan: 'premium',
         role: newUserRole,
         user_id: null // Explicitly null until they login
       });
@@ -385,18 +384,25 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
                       Si recibes el error "infinite recursion detected", copia y ejecuta este comando en el <b>SQL Editor</b> de tu panel de Supabase para corregir los permisos:
                     </p>
                     <div className="relative group">
-                      <pre className="text-[9px] bg-slate-900 text-amber-200 p-3 rounded-lg overflow-x-auto font-mono max-h-32">
+                      <pre className="text-[9px] bg-slate-900 text-amber-200 p-3 rounded-lg overflow-x-auto font-mono max-h-36">
 {`ALTER TABLE profiles DISABLE ROW LEVEL SECURITY;
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 
 DROP POLICY IF EXISTS "Admins manage all" ON profiles;
-CREATE POLICY "Admins manage all" ON profiles 
-FOR ALL USING ( (SELECT role FROM profiles WHERE id = auth.uid()) = 'admin' );`}
+DROP POLICY IF EXISTS "Users can view own profile" ON profiles;
+DROP POLICY IF EXISTS "Enable insert for authenticated users only" ON profiles;
+DROP POLICY IF EXISTS "Allow all access" ON profiles;
+
+CREATE POLICY "Allow public access to profiles"
+ON public.profiles
+FOR ALL
+USING (true)
+WITH CHECK (true);`}
                       </pre>
                       <button 
                         type="button"
                         onClick={() => {
-                          navigator.clipboard.writeText(`ALTER TABLE profiles DISABLE ROW LEVEL SECURITY;\nALTER TABLE profiles ENABLE ROW LEVEL SECURITY;\n\nDROP POLICY IF EXISTS "Admins manage all" ON profiles;\nCREATE POLICY "Admins manage all" ON profiles \nFOR ALL USING ( (SELECT role FROM profiles WHERE id = auth.uid()) = 'admin' );`);
+                          navigator.clipboard.writeText(`ALTER TABLE profiles DISABLE ROW LEVEL SECURITY;\nALTER TABLE profiles ENABLE ROW LEVEL SECURITY;\n\nDROP POLICY IF EXISTS "Admins manage all" ON profiles;\nDROP POLICY IF EXISTS "Users can view own profile" ON profiles;\nDROP POLICY IF EXISTS "Enable insert for authenticated users only" ON profiles;\nDROP POLICY IF EXISTS "Allow all access" ON profiles;\n\nCREATE POLICY "Allow public access to profiles"\nON public.profiles\nFOR ALL\nUSING (true)\nWITH CHECK (true);`);
                           alert('¡Código SQL copiado!');
                         }}
                         className="absolute right-2 top-2 p-1.5 bg-white/10 hover:bg-white/20 rounded-md text-white opacity-0 group-hover:opacity-100 transition-opacity"
@@ -473,7 +479,7 @@ FOR ALL USING ( (SELECT role FROM profiles WHERE id = auth.uid()) = 'admin' );`}
                       />
                     </div>
 
-                    <div>
+                    <div className="md:col-span-2">
                       <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">Método de Pago</label>
                       <select
                         className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white cursor-pointer"
@@ -485,34 +491,6 @@ FOR ALL USING ( (SELECT role FROM profiles WHERE id = auth.uid()) = 'admin' );`}
                         <option value="Efectivo">Efectivo</option>
                         <option value="Otro">Otro</option>
                       </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">Plan Acceso</label>
-                      <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl h-[54px]">
-                        <button
-                          type="button"
-                          onClick={() => setNewUserPlan('free')}
-                          className={`flex-1 rounded-xl text-xs font-bold transition-all ${
-                            newUserPlan === 'free' 
-                              ? 'bg-white dark:bg-slate-700 text-blue-600 shadow-sm' 
-                              : 'text-slate-500'
-                          }`}
-                        >
-                          FREE
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setNewUserPlan('premium')}
-                          className={`flex-1 rounded-xl text-xs font-bold transition-all ${
-                            newUserPlan === 'premium' 
-                              ? 'bg-white dark:bg-slate-700 text-amber-600 shadow-sm' 
-                              : 'text-slate-500'
-                          }`}
-                        >
-                          PREMIUM
-                        </button>
-                      </div>
                     </div>
 
                     <div className="md:col-span-2 bg-slate-50 dark:bg-slate-800/50 p-5 rounded-2xl border border-slate-100 dark:border-slate-800">
