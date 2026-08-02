@@ -43,6 +43,18 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
   const [newUserRole, setNewUserRole] = useState<'student' | 'admin'>('student');
   const [saving, setSaving] = useState(false);
 
+  // Estados para Edición y Eliminación
+  const [editingUser, setEditingUser] = useState<UserProfile | null>(null);
+  const [editName, setEditName] = useState('');
+  const [editPhone, setEditPhone] = useState('');
+  const [editGrado, setEditGrado] = useState('');
+  const [editDni, setEditDni] = useState('');
+  const [editCip, setEditCip] = useState('');
+  const [editMetodoPago, setEditMetodoPago] = useState('Yape / Plin');
+  const [editRole, setEditRole] = useState<'student' | 'admin'>('student');
+  const [editPlan, setEditPlan] = useState<'free' | 'premium'>('premium');
+  const [savingEdit, setSavingEdit] = useState(false);
+
   const [adminPass, setAdminPass] = useState('');
   const [isAdminAuth, setIsAdminAuth] = useState(userProfile?.role === 'admin');
   const [authError, setAuthError] = useState(false);
@@ -186,6 +198,70 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
       alert('Error al agregar usuario: ' + (err.message || 'Error desconocido'));
     } finally {
       setSaving(false);
+    }
+  };
+
+  const openEditModal = (user: UserProfile) => {
+    setEditingUser(user);
+    setEditName(user.nombre || '');
+    setEditPhone(user.telefonoWhatsapp || '');
+    setEditGrado(user.grado || '');
+    setEditDni(user.dni || '');
+    setEditCip(user.cip || '');
+    setEditMetodoPago(user.metodoPago || 'Yape / Plin');
+    setEditRole(user.role || 'student');
+    setEditPlan(user.plan || 'premium');
+  };
+
+  const handleSaveEdit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!supabase || !editingUser) return;
+    setSavingEdit(true);
+
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .update({
+          nombre: editName,
+          telefono_whatsapp: editPhone,
+          grado: editGrado,
+          dni: editDni,
+          cip: editCip,
+          metodo_pago: editMetodoPago,
+          role: editRole,
+          plan: editPlan
+        })
+        .eq('id', editingUser.id);
+
+      if (error) throw error;
+
+      alert(`✅ Usuario "${editName}" actualizado correctamente.`);
+      setEditingUser(null);
+      fetchUsers();
+    } catch (err: any) {
+      alert('Error al actualizar usuario: ' + (err.message || 'Error desconocido'));
+    } finally {
+      setSavingEdit(false);
+    }
+  };
+
+  const handleDeleteUser = async (user: UserProfile) => {
+    if (!supabase) return;
+    const confirmDelete = window.confirm(`¿Estás seguro de eliminar permanentemente al usuario ${user.nombre}?`);
+    if (!confirmDelete) return;
+
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .delete()
+        .eq('id', user.id);
+
+      if (error) throw error;
+
+      alert(`✅ Usuario "${user.nombre}" eliminado correctamente.`);
+      fetchUsers();
+    } catch (err: any) {
+      alert('Error al eliminar usuario: ' + (err.message || 'Error desconocido'));
     }
   };
 
@@ -354,10 +430,18 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <div className="flex justify-end space-x-2">
-                          <button className="text-gray-400 hover:text-blue-600">
+                          <button 
+                            onClick={() => openEditModal(user)}
+                            title="Editar cliente"
+                            className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                          >
                             <Edit2 size={18} />
                           </button>
-                          <button className="text-gray-400 hover:text-red-600">
+                          <button 
+                            onClick={() => handleDeleteUser(user)}
+                            title="Eliminar cliente"
+                            className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                          >
                             <Trash2 size={18} />
                           </button>
                         </div>
@@ -609,6 +693,170 @@ WITH CHECK (true);`}
                   >
                     {saving ? <Loader2 className="animate-spin h-5 w-5 mr-2" /> : <CheckCircle size={18} className="mr-2" />}
                     {saving ? 'PROCESANDO...' : 'CONFIRMAR REGISTRO'}
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </div>
+        )}
+
+        {/* MODAL PARA EDITAR USUARIO */}
+        {editingUser && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setEditingUser(null)}
+              className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm"
+            />
+            
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              className="relative bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl w-full max-w-xl overflow-hidden border border-slate-200 dark:border-slate-800"
+            >
+              <form onSubmit={handleSaveEdit} className="flex flex-col max-h-[90vh]">
+                <div className="p-8 pb-4 border-b border-slate-100 dark:border-slate-800">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Editar Cliente</h3>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Modifica la información o permisos de este usuario.</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setEditingUser(null)}
+                      className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                    >
+                      <XCircle size={24} />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="p-8 space-y-6 overflow-y-auto">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="md:col-span-2">
+                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">Nombre Completo</label>
+                      <input
+                        type="text"
+                        required
+                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
+                        value={editName}
+                        onChange={(e) => setEditName(e.target.value)}
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">WhatsApp / Teléfono</label>
+                      <input
+                        type="text"
+                        required
+                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
+                        value={editPhone}
+                        onChange={(e) => setEditPhone(e.target.value)}
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">DNI (Documento)</label>
+                      <input
+                        type="text"
+                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
+                        value={editDni}
+                        onChange={(e) => setEditDni(e.target.value)}
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">CIP (Opcional)</label>
+                      <input
+                        type="text"
+                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
+                        value={editCip}
+                        onChange={(e) => setEditCip(e.target.value)}
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">Grado</label>
+                      <input
+                        type="text"
+                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
+                        value={editGrado}
+                        onChange={(e) => setEditGrado(e.target.value)}
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">Método de Pago</label>
+                      <select
+                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white cursor-pointer"
+                        value={editMetodoPago}
+                        onChange={(e) => setEditMetodoPago(e.target.value)}
+                      >
+                        <option value="Yape / Plin">Yape / Plin</option>
+                        <option value="Transferencia">Transferencia</option>
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Otro">Otro</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">Plan de Acceso</label>
+                      <select
+                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white cursor-pointer"
+                        value={editPlan}
+                        onChange={(e) => setEditPlan(e.target.value as 'free' | 'premium')}
+                      >
+                        <option value="premium">PREMIUM (Acceso completo)</option>
+                        <option value="free">FREE (Gratuito)</option>
+                      </select>
+                    </div>
+
+                    <div className="md:col-span-2 bg-slate-50 dark:bg-slate-800/50 p-5 rounded-2xl border border-slate-100 dark:border-slate-800">
+                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-4 ml-1">Permisos de Acceso</label>
+                      <div className="flex items-center gap-8">
+                        <label className="flex items-center gap-3 cursor-pointer group">
+                          <input
+                            type="radio"
+                            name="editRole"
+                            checked={editRole === 'student'}
+                            onChange={() => setEditRole('student')}
+                            className="w-5 h-5 text-blue-600 border-slate-300 dark:border-slate-700 focus:ring-blue-500 bg-white dark:bg-slate-900"
+                          />
+                          <span className="text-sm font-bold text-slate-700 dark:text-slate-300 group-hover:text-blue-600 transition-colors">Estudiante</span>
+                        </label>
+                        <label className="flex items-center gap-3 cursor-pointer group">
+                          <input
+                            type="radio"
+                            name="editRole"
+                            checked={editRole === 'admin'}
+                            onChange={() => setEditRole('admin')}
+                            className="w-5 h-5 text-blue-600 border-slate-300 dark:border-slate-700 focus:ring-blue-500 bg-white dark:bg-slate-900"
+                          />
+                          <span className="text-sm font-bold text-slate-700 dark:text-slate-300 group-hover:text-blue-600 transition-colors">Administrador</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-8 border-t border-slate-100 dark:border-slate-800 flex gap-4">
+                  <button
+                    type="button"
+                    onClick={() => setEditingUser(null)}
+                    className="flex-1 px-6 py-4 border border-slate-200 dark:border-slate-800 text-sm font-bold rounded-2xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors uppercase tracking-widest"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={savingEdit}
+                    className="flex-[2] flex justify-center items-center px-6 py-4 bg-blue-600 hover:bg-blue-500 text-white text-sm font-black rounded-2xl shadow-xl shadow-blue-600/20 transition-all active:scale-[0.98] disabled:opacity-70 uppercase tracking-widest"
+                  >
+                    {savingEdit ? <Loader2 className="animate-spin h-5 w-5 mr-2" /> : <CheckCircle size={18} className="mr-2" />}
+                    {savingEdit ? 'GUARDANDO...' : 'GUARDAR CAMBIOS'}
                   </button>
                 </div>
               </form>
