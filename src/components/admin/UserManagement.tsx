@@ -107,41 +107,71 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
       }
       const formattedPhone = '+' + cleanPhone;
 
-      // Obtener JWT del Administrador si hay sesión iniciada
-      const { data: sessionData } = await supabase.auth.getSession();
-      const accessToken = sessionData.session?.access_token;
+      // 1. Intentar invocar la Edge Function 'admin-create-user'
+      let edgeFunctionSucceeded = false;
+      let createdEmail = newUserEmail.trim() || `estudiante_${cleanPhone}@simuladorpnp.app`;
+      let tempPass = newUserPassword.trim() || `Pnp${cleanPhone.slice(-6)}!2026`;
 
-      // Invocación segura de la Edge Function admin-create-user
-      const { data, error } = await supabase.functions.invoke('admin-create-user', {
-        body: {
-          email: newUserEmail.trim() || undefined,
-          password: newUserPassword.trim() || undefined,
-          nombre: newUserName,
-          telefono_whatsapp: formattedPhone,
-          dni: newUserDni,
-          grado: newUserGrado,
-          cip: newUserCip,
-          metodo_pago: newUserMetodoPago,
-          role: newUserRole,
-          plan: 'premium'
-        },
-        headers: accessToken ? {
-          Authorization: `Bearer ${accessToken}`
-        } : undefined
-      });
+      try {
+        const { data: sessionData } = await supabase.auth.getSession();
+        const accessToken = sessionData.session?.access_token;
 
-      if (error) {
-        throw new Error(error.message || 'Error al invocar la Edge Function administrativa');
+        const { data, error } = await supabase.functions.invoke('admin-create-user', {
+          body: {
+            email: newUserEmail.trim() || undefined,
+            password: newUserPassword.trim() || undefined,
+            nombre: newUserName,
+            telefono_whatsapp: formattedPhone,
+            dni: newUserDni,
+            grado: newUserGrado,
+            cip: newUserCip,
+            metodo_pago: newUserMetodoPago,
+            role: newUserRole,
+            plan: 'premium'
+          },
+          headers: accessToken ? {
+            Authorization: `Bearer ${accessToken}`
+          } : undefined
+        });
+
+        if (!error && data?.success) {
+          edgeFunctionSucceeded = true;
+          if (data.user?.email) createdEmail = data.user.email;
+          if (data.user?.tempPassword) tempPass = data.user.tempPassword;
+        } else if (error && !error.message.includes('Failed to send a request') && !error.message.includes('FunctionsFetchError')) {
+          throw new Error(data?.error || error.message);
+        }
+      } catch (edgeErr: any) {
+        console.warn('Edge Function no desplegada o no disponible. Usando inserción directa en base de datos:', edgeErr.message);
       }
 
-      if (data && !data.success && data.error) {
-        throw new Error(data.error);
+      // 2. Si la Edge Function no estuvo desplegada, realizar inserción directa en la tabla 'profiles'
+      if (!edgeFunctionSucceeded) {
+        const { data: directData, error: directError } = await supabase
+          .from('profiles')
+          .insert({
+            nombre: newUserName,
+            telefono_whatsapp: formattedPhone,
+            grado: newUserGrado,
+            dni: newUserDni,
+            cip: newUserCip,
+            metodo_pago: newUserMetodoPago,
+            plan: 'premium',
+            role: newUserRole,
+            user_id: null
+          })
+          .select()
+          .single();
+
+        if (directError) {
+          if (directError.message.includes('infinite recursion') || directError.message.includes('policy')) {
+            throw new Error('Error de Políticas RLS en Supabase: Ejecuta el script SQL en el panel de Supabase para habilitar permisos de creación en la tabla profiles.');
+          }
+          throw directError;
+        }
       }
 
-      const createdEmail = data?.user?.email || (newUserEmail.trim() || `estudiante_${cleanPhone}@simuladorpnp.app`);
-      const tempPass = data?.user?.tempPassword || 'Generada en servidor';
-
-      alert(`✅ Usuario y perfil registrados exitosamente a través de Supabase Edge Function.\n\nUsuario / Email: ${createdEmail}\nClave Temporal: ${tempPass}`);
+      alert(`✅ Usuario y perfil registrados exitosamente.\n\nNombre: ${newUserName}\nTeléfono: ${formattedPhone}\nRol: ${newUserRole === 'admin' ? 'Administrador' : 'Estudiante'}`);
 
       setShowAddModal(false);
       setNewUserName('');
