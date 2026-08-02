@@ -12,7 +12,10 @@ import {
   Smartphone,
   User as UserIcon,
   Shield,
-  Settings
+  Settings,
+  HelpCircle,
+  AlertCircle,
+  ClipboardCheck
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -115,7 +118,12 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
         user_id: null // Explicitly null until they login
       });
 
-      if (error) throw error;
+      if (error) {
+        if (error.message.includes('infinite recursion')) {
+          throw new Error('Error de Seguridad en Supabase (RLS): Detectada recursión infinita en las políticas. Por favor, revisa la Guía Técnica o ejecuta el script de corrección en el SQL Editor de Supabase.');
+        }
+        throw error;
+      }
 
       setShowAddModal(false);
       setNewUserName('');
@@ -348,15 +356,56 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
                       </h3>
                       <p className="text-slate-500 text-sm mt-1 font-medium">Registra un nuevo participante en el sistema.</p>
                     </div>
-                    <button 
-                      type="button" 
-                      onClick={() => setShowAddModal(false)} 
-                      className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
-                    >
-                      <XCircle size={24} />
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button 
+                        type="button" 
+                        onClick={() => setShowGuide(!showGuide)} 
+                        className={`p-2 rounded-full transition-all ${showGuide ? 'bg-amber-100 text-amber-600' : 'text-slate-400 hover:text-blue-600 hover:bg-blue-50'}`}
+                        title="Ver Guía de Resolución de Errores"
+                      >
+                        <HelpCircle size={24} />
+                      </button>
+                      <button 
+                        type="button" 
+                        onClick={() => setShowAddModal(false)} 
+                        className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
+                      >
+                        <XCircle size={24} />
+                      </button>
+                    </div>
                   </div>
                 </div>
+
+                {showGuide && (
+                  <div className="mx-8 mt-4 p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl animate-in slide-in-from-top-2">
+                    <h4 className="text-amber-800 dark:text-amber-400 text-xs font-black uppercase tracking-widest mb-2 flex items-center gap-2">
+                      <AlertCircle size={14} /> Solución: Error de Recursión RLS
+                    </h4>
+                    <p className="text-amber-700 dark:text-amber-500 text-[10px] leading-relaxed mb-3">
+                      Si recibes el error "infinite recursion detected", copia y ejecuta este comando en el <b>SQL Editor</b> de tu panel de Supabase para corregir los permisos:
+                    </p>
+                    <div className="relative group">
+                      <pre className="text-[9px] bg-slate-900 text-amber-200 p-3 rounded-lg overflow-x-auto font-mono max-h-32">
+{`ALTER TABLE profiles DISABLE ROW LEVEL SECURITY;
+ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Admins manage all" ON profiles;
+CREATE POLICY "Admins manage all" ON profiles 
+FOR ALL USING ( (SELECT role FROM profiles WHERE id = auth.uid()) = 'admin' );`}
+                      </pre>
+                      <button 
+                        type="button"
+                        onClick={() => {
+                          navigator.clipboard.writeText(`ALTER TABLE profiles DISABLE ROW LEVEL SECURITY;\nALTER TABLE profiles ENABLE ROW LEVEL SECURITY;\n\nDROP POLICY IF EXISTS "Admins manage all" ON profiles;\nCREATE POLICY "Admins manage all" ON profiles \nFOR ALL USING ( (SELECT role FROM profiles WHERE id = auth.uid()) = 'admin' );`);
+                          alert('¡Código SQL copiado!');
+                        }}
+                        className="absolute right-2 top-2 p-1.5 bg-white/10 hover:bg-white/20 rounded-md text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                      >
+                        <ClipboardCheck size={14} />
+                      </button>
+                    </div>
+                  </div>
+                )}
 
                 <div className="p-8 pt-6 overflow-y-auto custom-scrollbar space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
