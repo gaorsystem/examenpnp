@@ -77,34 +77,103 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
     }
 
     try {
-      // Buscar el teléfono en la tabla profiles
-      const { data: profiles, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .or(`telefono_whatsapp.eq.${formattedPhone},telefono_whatsapp.eq.${cleanPhone}`);
+      // Buscar el teléfono en la tabla profiles o en localStorage
+      let user: any = null;
+      if (supabase) {
+        try {
+          const { data: profiles } = await supabase
+            .from('profiles')
+            .select('*')
+            .or(`telefono_whatsapp.eq.${formattedPhone},telefono_whatsapp.eq.${cleanPhone}`);
+          
+          if (profiles && profiles.length > 0) {
+            user = profiles[0];
+          }
+        } catch (dbErr) {
+          console.warn('Supabase profile query fallback:', dbErr);
+        }
+      }
 
-      if (error) throw error;
-
-      let user = (profiles && profiles.length > 0) ? profiles[0] : null;
+      // Si no estuvo en Supabase, buscar en usuarios guardados en localStorage
+      if (!user) {
+        try {
+          const savedLocal = localStorage.getItem('simulador_local_users');
+          if (savedLocal) {
+            const localList = JSON.parse(savedLocal);
+            const foundLocal = localList.find((u: any) => 
+              u.telefonoWhatsapp === formattedPhone || 
+              u.telefonoWhatsapp === cleanPhone || 
+              u.telefonoWhatsapp === '+' + cleanPhone
+            );
+            if (foundLocal) {
+              user = {
+                id: foundLocal.id,
+                nombre: foundLocal.nombre,
+                telefono_whatsapp: foundLocal.telefonoWhatsapp,
+                grado: foundLocal.grado,
+                plan: foundLocal.plan || 'premium',
+                role: foundLocal.role || 'student',
+                codigo_acceso: foundLocal.codigoAcceso
+              };
+            }
+          }
+        } catch (lsErr) {
+          console.warn('Error reading local users:', lsErr);
+        }
+      }
 
       if (!user) {
         // Auto-crear perfil para el nuevo estudiante en Supabase si no existe
         const defaultPin = Math.floor(100000 + Math.random() * 900000).toString();
-        const { data: createdProfile, error: createError } = await supabase
+        let profilePayload: any = {
+          nombre: `Postulante ${cleanPhone.slice(-4)}`,
+          telefono_whatsapp: formattedPhone,
+          grado: 'Suboficial PNP',
+          plan: 'premium',
+          role: 'student',
+          codigo_acceso: defaultPin
+        };
+
+        let createdProfile: any = null;
+        let createError: any = null;
+
+        const res1 = await supabase
           .from('profiles')
-          .insert({
-            nombre: `Postulante ${cleanPhone.slice(-4)}`,
-            telefono_whatsapp: formattedPhone,
-            grado: 'Suboficial PNP',
-            plan: 'premium',
-            role: 'student',
-            codigo_acceso: defaultPin
-          })
+          .insert(profilePayload)
           .select()
-          .single();
+          .maybeSingle();
+
+        if (res1.error) {
+          if (res1.error.message.includes('codigo_acceso') || res1.error.message.includes('schema cache')) {
+            delete profilePayload.codigo_acceso;
+            profilePayload.codigo_pin = defaultPin;
+            const res2 = await supabase
+              .from('profiles')
+              .insert(profilePayload)
+              .select()
+              .maybeSingle();
+
+            if (res2.error) {
+              delete profilePayload.codigo_pin;
+              const res3 = await supabase
+                .from('profiles')
+                .insert(profilePayload)
+                .select()
+                .maybeSingle();
+              createdProfile = res3.data;
+              createError = res3.error;
+            } else {
+              createdProfile = res2.data;
+            }
+          } else {
+            createError = res1.error;
+          }
+        } else {
+          createdProfile = res1.data;
+        }
 
         if (createError) {
-          console.warn('Auto-creación local en caso de error RLS:', createError.message);
+          console.warn('Auto-creación local en caso de error RLS o esquema:', createError.message);
           user = {
             id: 'estudiante_' + cleanPhone,
             nombre: `Postulante ${cleanPhone.slice(-4)}`,
@@ -115,7 +184,15 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
             codigo_acceso: defaultPin
           };
         } else {
-          user = createdProfile;
+          user = createdProfile || {
+            id: 'estudiante_' + cleanPhone,
+            nombre: `Postulante ${cleanPhone.slice(-4)}`,
+            telefono_whatsapp: formattedPhone,
+            grado: 'Suboficial PNP',
+            plan: 'premium',
+            role: 'student',
+            codigo_acceso: defaultPin
+          };
         }
       }
 

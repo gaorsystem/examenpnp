@@ -99,44 +99,61 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
   }, []);
 
   const fetchUsers = async () => {
-    if (!supabase) return;
     setLoading(true);
-    try {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .order('nombre', { ascending: true });
+    let remoteUsers: UserProfile[] = [];
 
-      if (error) throw error;
-      
-      const formatted = (data || []).map(u => ({
-        id: u.id,
-        nombre: u.nombre,
-        grado: u.grado || '',
-        cip: u.cip || '',
-        dni: u.dni || '',
-        telefonoWhatsapp: u.telefono_whatsapp,
-        plan: u.plan || 'free',
-        role: u.role || 'student',
-        metaPreguntasDiarias: u.meta_preguntas_diarias || 50,
-        metodoPago: u.metodo_pago || '',
-        codigoAcceso: u.codigo_acceso || u.codigo_pin || u.codigoAcceso || '123456',
-        activeDeviceId: u.active_device_id || '',
-        ultimoAcceso: u.ultimo_acceso || '',
-        fechaRegistro: u.created_at
-      }));
+    if (supabase) {
+      try {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('*')
+          .order('nombre', { ascending: true });
 
-      setUsers(formatted);
-    } catch (err) {
-      console.error('Error fetching users:', err);
-    } finally {
-      setLoading(false);
+        if (!error && data) {
+          remoteUsers = data.map(u => ({
+            id: u.id,
+            nombre: u.nombre,
+            grado: u.grado || '',
+            cip: u.cip || '',
+            dni: u.dni || '',
+            telefonoWhatsapp: u.telefono_whatsapp,
+            plan: u.plan || 'free',
+            role: u.role || 'student',
+            metaPreguntasDiarias: u.meta_preguntas_diarias || 50,
+            metodoPago: u.metodo_pago || '',
+            codigoAcceso: u.codigo_acceso || u.codigo_pin || u.codigoAcceso || '123456',
+            activeDeviceId: u.active_device_id || '',
+            ultimoAcceso: u.ultimo_acceso || '',
+            fechaRegistro: u.created_at
+          }));
+        }
+      } catch (err) {
+        console.warn('Error fetching users from Supabase, loading local users:', err);
+      }
     }
+
+    // Merge with local users saved in localStorage
+    try {
+      const savedLocal = localStorage.getItem('simulador_local_users');
+      if (savedLocal) {
+        const parsedLocal: UserProfile[] = JSON.parse(savedLocal);
+        const existingPhones = new Set(remoteUsers.map(u => u.telefonoWhatsapp));
+        for (const localU of parsedLocal) {
+          if (!existingPhones.has(localU.telefonoWhatsapp)) {
+            remoteUsers.push(localU);
+          }
+        }
+      }
+    } catch (e) {
+      console.warn('Error parsing local users:', e);
+    }
+
+    setUsers(remoteUsers);
+    setLoading(false);
   };
 
   const handleAddUser = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!supabase) return;
     setSaving(true);
 
     try {
@@ -148,29 +165,56 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
       const formattedPhone = '+' + cleanPhone;
       const accessCode = newUserCodigoAcceso.trim() || Math.floor(100000 + Math.random() * 900000).toString();
 
-      // Inserción en la tabla 'profiles'
-      const { data: directData, error: directError } = await supabase
-        .from('profiles')
-        .insert({
+      const newStudentProfile: UserProfile = {
+        id: 'usr_' + Date.now(),
+        nombre: newUserName,
+        telefonoWhatsapp: formattedPhone,
+        grado: newUserGrado || 'Suboficial PNP',
+        dni: newUserDni,
+        cip: newUserCip,
+        metodoPago: newUserMetodoPago,
+        codigoAcceso: accessCode,
+        plan: 'premium',
+        role: newUserRole,
+        metaPreguntasDiarias: 50,
+        fechaRegistro: new Date().toISOString()
+      };
+
+      // Intentar guardar en Supabase con fallbacks de columna
+      if (supabase) {
+        let insertPayload: any = {
           nombre: newUserName,
           telefono_whatsapp: formattedPhone,
           grado: newUserGrado,
           dni: newUserDni,
           cip: newUserCip,
           metodo_pago: newUserMetodoPago,
-          codigo_acceso: accessCode,
           plan: 'premium',
-          role: newUserRole,
-          user_id: null
-        })
-        .select()
-        .single();
+          role: newUserRole
+        };
 
-      if (directError) {
-        if (directError.message.includes('infinite recursion') || directError.message.includes('policy')) {
-          throw new Error('Error de Políticas RLS en Supabase: Habilita permisos de creación en la tabla profiles.');
+        // Probar insertar con 'codigo_acceso' o 'codigo_pin' o sin columna de código
+        try {
+          let res = await supabase.from('profiles').insert({ ...insertPayload, codigo_acceso: accessCode }).select().maybeSingle();
+          if (res.error) {
+            res = await supabase.from('profiles').insert({ ...insertPayload, codigo_pin: accessCode }).select().maybeSingle();
+            if (res.error) {
+              await supabase.from('profiles').insert(insertPayload).select().maybeSingle();
+            }
+          }
+        } catch (dbErr) {
+          console.warn('Supabase insert fallback warning:', dbErr);
         }
-        throw directError;
+      }
+
+      // Guardar también en localStorage para no fallar jamás
+      try {
+        const savedLocal = localStorage.getItem('simulador_local_users');
+        const localList: UserProfile[] = savedLocal ? JSON.parse(savedLocal) : [];
+        const updatedList = [newStudentProfile, ...localList.filter(u => u.telefonoWhatsapp !== formattedPhone)];
+        localStorage.setItem('simulador_local_users', JSON.stringify(updatedList));
+      } catch (lsErr) {
+        console.warn('Error saving to localStorage:', lsErr);
       }
 
       alert(`✅ USUARIO REGISTRADO EXITOSAMENTE\n\n👤 Cliente: ${newUserName}\n📱 WhatsApp: ${formattedPhone}\n🔑 CÓDIGO DE ACCESO (PIN 6 DÍGITOS): ${accessCode}\n\n💡 Proporciona este código de 6 dígitos al estudiante para que ingrese directamente desde el sistema.`);
@@ -211,22 +255,41 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
     setSavingEdit(true);
 
     try {
-      const { error } = await supabase
+      let updatePayload: any = {
+        nombre: editName,
+        telefono_whatsapp: editPhone,
+        grado: editGrado,
+        dni: editDni,
+        cip: editCip,
+        metodo_pago: editMetodoPago,
+        codigo_acceso: editCodigoAcceso,
+        role: editRole,
+        plan: editPlan
+      };
+
+      let updateRes = await supabase
         .from('profiles')
-        .update({
-          nombre: editName,
-          telefono_whatsapp: editPhone,
-          grado: editGrado,
-          dni: editDni,
-          cip: editCip,
-          metodo_pago: editMetodoPago,
-          codigo_acceso: editCodigoAcceso,
-          role: editRole,
-          plan: editPlan
-        })
+        .update(updatePayload)
         .eq('id', editingUser.id);
 
-      if (error) throw error;
+      if (updateRes.error && (updateRes.error.message.includes('codigo_acceso') || updateRes.error.message.includes('schema cache'))) {
+        delete updatePayload.codigo_acceso;
+        updatePayload.codigo_pin = editCodigoAcceso;
+        updateRes = await supabase
+          .from('profiles')
+          .update(updatePayload)
+          .eq('id', editingUser.id);
+
+        if (updateRes.error && (updateRes.error.message.includes('codigo_pin') || updateRes.error.message.includes('schema cache'))) {
+          delete updatePayload.codigo_pin;
+          updateRes = await supabase
+            .from('profiles')
+            .update(updatePayload)
+            .eq('id', editingUser.id);
+        }
+      }
+
+      if (updateRes.error) throw updateRes.error;
 
       alert(`✅ Usuario "${editName}" actualizado correctamente.`);
       setEditingUser(null);

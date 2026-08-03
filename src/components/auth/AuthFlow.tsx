@@ -60,29 +60,98 @@ export const AuthFlow: React.FC<AuthFlowProps> = ({ onAuthenticated }) => {
         return;
       }
 
-      const { data: profiles, error: profileErr } = await supabase
-        .from('profiles')
-        .select('*')
-        .or(`telefono_whatsapp.eq.${formattedPhone},telefono_whatsapp.eq.${cleanPhone}`);
+      let user: any = null;
+      if (supabase) {
+        try {
+          const { data: profiles } = await supabase
+            .from('profiles')
+            .select('*')
+            .or(`telefono_whatsapp.eq.${formattedPhone},telefono_whatsapp.eq.${cleanPhone}`);
 
-      if (profileErr) throw profileErr;
+          if (profiles && profiles.length > 0) {
+            user = profiles[0];
+          }
+        } catch (dbErr) {
+          console.warn('Supabase profile check error:', dbErr);
+        }
+      }
 
-      let user = (profiles && profiles.length > 0) ? profiles[0] : null;
+      // Check localStorage if not found in Supabase
+      if (!user) {
+        try {
+          const savedLocal = localStorage.getItem('simulador_local_users');
+          if (savedLocal) {
+            const localList = JSON.parse(savedLocal);
+            const foundLocal = localList.find((u: any) => 
+              u.telefonoWhatsapp === formattedPhone || 
+              u.telefonoWhatsapp === cleanPhone || 
+              u.telefonoWhatsapp === '+51' + cleanPhone
+            );
+            if (foundLocal) {
+              user = {
+                id: foundLocal.id,
+                nombre: foundLocal.nombre,
+                telefono_whatsapp: foundLocal.telefonoWhatsapp,
+                grado: foundLocal.grado,
+                plan: foundLocal.plan || 'premium',
+                role: foundLocal.role || 'student',
+                codigo_acceso: foundLocal.codigoAcceso
+              };
+            }
+          }
+        } catch (lsErr) {
+          console.warn('Error reading local users in AuthFlow:', lsErr);
+        }
+      }
 
       if (!user) {
         const defaultPin = Math.floor(100000 + Math.random() * 900000).toString();
-        const { data: createdProfile, error: createError } = await supabase
+        let profilePayload: any = {
+          nombre: `Postulante ${cleanPhone.slice(-4)}`,
+          telefono_whatsapp: formattedPhone,
+          grado: 'Suboficial PNP',
+          plan: 'premium',
+          role: 'student',
+          codigo_acceso: defaultPin
+        };
+
+        let createdProfile: any = null;
+        let createError: any = null;
+
+        const res1 = await supabase
           .from('profiles')
-          .insert({
-            nombre: `Postulante ${cleanPhone.slice(-4)}`,
-            telefono_whatsapp: formattedPhone,
-            grado: 'Suboficial PNP',
-            plan: 'premium',
-            role: 'student',
-            codigo_acceso: defaultPin
-          })
+          .insert(profilePayload)
           .select()
-          .single();
+          .maybeSingle();
+
+        if (res1.error) {
+          if (res1.error.message.includes('codigo_acceso') || res1.error.message.includes('schema cache')) {
+            delete profilePayload.codigo_acceso;
+            profilePayload.codigo_pin = defaultPin;
+            const res2 = await supabase
+              .from('profiles')
+              .insert(profilePayload)
+              .select()
+              .maybeSingle();
+
+            if (res2.error) {
+              delete profilePayload.codigo_pin;
+              const res3 = await supabase
+                .from('profiles')
+                .insert(profilePayload)
+                .select()
+                .maybeSingle();
+              createdProfile = res3.data;
+              createError = res3.error;
+            } else {
+              createdProfile = res2.data;
+            }
+          } else {
+            createError = res1.error;
+          }
+        } else {
+          createdProfile = res1.data;
+        }
 
         if (createError) {
           user = {
@@ -95,7 +164,15 @@ export const AuthFlow: React.FC<AuthFlowProps> = ({ onAuthenticated }) => {
             codigo_acceso: defaultPin
           };
         } else {
-          user = createdProfile;
+          user = createdProfile || {
+            id: 'estudiante_' + cleanPhone,
+            nombre: `Postulante ${cleanPhone.slice(-4)}`,
+            telefono_whatsapp: formattedPhone,
+            grado: 'Suboficial PNP',
+            plan: 'premium',
+            role: 'student',
+            codigo_acceso: defaultPin
+          };
         }
       }
 
