@@ -62,10 +62,9 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
   const [authError, setAuthError] = useState(false);
 
   const copyWhatsAppMessage = (user: UserProfile) => {
-    const code = user.codigoAcceso || '123456';
-    const text = `👮 *SIMULACRO PNP 2026 - ACCESO ACTIVADO*\n\nHola *${user.nombre}*, tu suscripción al Simulador de Examen de Ascenso ha sido activada correctamente.\n\n📱 *Tu Número:* ${user.telefonoWhatsapp}\n🔑 *Tu Código de Acceso (PIN):* ${code}\n\n🌐 *Ingresa aquí:* ${window.location.origin}\n\n⚠️ *Nota:* Tu código es de uso personal y solo permite 1 dispositivo activo a la vez. ¡Éxitos en tu preparación!`;
+    const text = `👮 *SIMULACRO PNP 2026 - ACCESO ACTIVADO*\n\nHola *${user.nombre}*, tu suscripción al Simulador de Examen de Ascenso ha sido activada correctamente.\n\n📱 *Tu WhatsApp Registrado:* ${user.telefonoWhatsapp}\n\n🌐 *Ingresa aquí:* ${window.location.origin}\n\n⚠️ *Nota:* Tu cuenta es de uso personal y permite 1 dispositivo activo a la vez. ¡Éxitos en tu preparación!`;
     navigator.clipboard.writeText(text);
-    alert(`📋 ¡Mensaje de WhatsApp copiado para ${user.nombre}!\n\n📱 Número: ${user.telefonoWhatsapp}\n🔑 Código: ${code}`);
+    alert(`📋 ¡Mensaje de WhatsApp copiado para ${user.nombre}!\n\n📱 Número: ${user.telefonoWhatsapp}`);
   };
 
   const handleUnlockDevice = async (user: UserProfile) => {
@@ -217,7 +216,7 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
         console.warn('Error saving to localStorage:', lsErr);
       }
 
-      alert(`✅ USUARIO REGISTRADO EXITOSAMENTE\n\n👤 Cliente: ${newUserName}\n📱 WhatsApp: ${formattedPhone}\n🔑 CÓDIGO DE ACCESO (PIN 6 DÍGITOS): ${accessCode}\n\n💡 Proporciona este código de 6 dígitos al estudiante para que ingrese directamente desde el sistema.`);
+      alert(`✅ USUARIO REGISTRADO EXITOSAMENTE\n\n👤 Cliente: ${newUserName}\n📱 WhatsApp: ${formattedPhone}`);
 
       setShowAddModal(false);
       setNewUserName('');
@@ -431,7 +430,7 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Documento</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contacto</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Código de Acceso</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado Acceso</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dispositivo</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plan / Rol</th>
                   <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
@@ -463,11 +462,9 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center gap-2">
-                          <span className="font-mono bg-amber-50 text-amber-700 border border-amber-200/80 font-black text-sm px-3 py-1 rounded-xl shadow-sm tracking-widest">
-                            🔑 {user.codigoAcceso || '123456'}
-                          </span>
-                        </div>
+                        <span className="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold text-xs px-2.5 py-1 rounded-lg">
+                          🟢 Habilitado
+                        </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {user.activeDeviceId ? (
@@ -697,28 +694,6 @@ WITH CHECK (true);`}
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono font-bold text-amber-700 dark:text-amber-400 uppercase tracking-widest mb-2 ml-1">🔑 Código de Acceso PIN (6 Dígitos)</label>
-                      <div className="relative flex gap-2">
-                        <input
-                          type="text"
-                          maxLength={6}
-                          className="block w-full px-4 py-3.5 bg-amber-50/60 dark:bg-amber-950/20 border border-amber-300 dark:border-amber-800 rounded-2xl focus:ring-2 focus:ring-amber-500 outline-none font-mono font-black text-amber-900 dark:text-amber-200 text-base tracking-widest placeholder:text-amber-400"
-                          placeholder="Auto-generado"
-                          value={newUserCodigoAcceso}
-                          onChange={(e) => setNewUserCodigoAcceso(e.target.value.replace(/\D/g, ''))}
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setNewUserCodigoAcceso(Math.floor(100000 + Math.random() * 900000).toString())}
-                          className="px-4 py-3 bg-amber-100 hover:bg-amber-200 text-amber-800 text-xs font-black rounded-2xl whitespace-nowrap transition-colors"
-                        >
-                          Generar PIN
-                        </button>
-                      </div>
-                      <p className="text-[10px] text-slate-500 mt-1 ml-1">Si lo dejas vacío, el sistema asignará uno aleatorio.</p>
-                    </div>
-
-                    <div>
                       <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">CIP (Opcional)</label>
                       <input
                         type="text"
@@ -918,43 +893,20 @@ WITH CHECK (true);`}
                       </select>
                     </div>
 
-                    <div className="md:col-span-2 bg-amber-50/60 dark:bg-amber-950/20 p-5 rounded-2xl border border-amber-200 dark:border-amber-800">
-                      <label className="block text-xs font-mono font-bold text-amber-800 dark:text-amber-400 uppercase tracking-widest mb-2">
-                        🔑 Código PIN de Acceso de 6 Dígitos
-                      </label>
-                      <div className="flex flex-col sm:flex-row gap-3">
-                        <input
-                          type="text"
-                          maxLength={6}
-                          required
-                          className="block w-full px-4 py-3.5 bg-white dark:bg-slate-950 border border-amber-300 dark:border-amber-800 rounded-2xl focus:ring-2 focus:ring-amber-500 font-mono font-black text-amber-900 dark:text-amber-200 text-lg tracking-widest"
-                          value={editCodigoAcceso}
-                          onChange={(e) => setEditCodigoAcceso(e.target.value.replace(/\D/g, ''))}
-                        />
+                    {editingUser?.activeDeviceId && (
+                      <div className="md:col-span-2 bg-amber-50/60 dark:bg-amber-950/20 p-5 rounded-2xl border border-amber-200 dark:border-amber-800 flex items-center justify-between">
+                        <span className="text-xs text-amber-900 dark:text-amber-300 font-medium">
+                          📱 <b>Dispositivo vinculado activo</b>
+                        </span>
                         <button
                           type="button"
-                          onClick={() => setEditCodigoAcceso(Math.floor(100000 + Math.random() * 900000).toString())}
-                          className="px-4 py-3 bg-amber-200/80 hover:bg-amber-300 text-amber-900 text-xs font-black rounded-2xl whitespace-nowrap transition-colors"
+                          onClick={() => handleUnlockDevice(editingUser)}
+                          className="px-3 py-1.5 bg-red-100 hover:bg-red-200 text-red-700 text-xs font-bold rounded-xl transition-colors flex items-center gap-1"
                         >
-                          Nuevo PIN ⚡
+                          🔓 Liberar Dispositivo
                         </button>
                       </div>
-                      
-                      {editingUser?.activeDeviceId && (
-                        <div className="mt-4 pt-3 border-t border-amber-200/60 dark:border-amber-800/40 flex items-center justify-between">
-                          <span className="text-xs text-amber-900 dark:text-amber-300 font-medium">
-                            📱 <b>Dispositivo vinculado activo</b>
-                          </span>
-                          <button
-                            type="button"
-                            onClick={() => handleUnlockDevice(editingUser)}
-                            className="px-3 py-1.5 bg-red-100 hover:bg-red-200 text-red-700 text-xs font-bold rounded-xl transition-colors flex items-center gap-1"
-                          >
-                            🔓 Liberar Dispositivo
-                          </button>
-                        </div>
-                      )}
-                    </div>
+                    )}
 
                     <div className="md:col-span-2 bg-slate-50 dark:bg-slate-800/50 p-5 rounded-2xl border border-slate-100 dark:border-slate-800">
                       <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-4 ml-1">Permisos de Acceso</label>
