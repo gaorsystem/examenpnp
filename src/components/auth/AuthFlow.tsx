@@ -51,25 +51,22 @@ export const AuthFlow: React.FC<AuthFlowProps> = ({ onAuthenticated }) => {
 
     let cleanPhone = phone.replace(/\D/g, '');
     let formattedPhone = '+51' + cleanPhone;
+    let targetDigits = cleanPhone.slice(-9);
 
     try {
-      if (!supabase) {
-        generateNewRandomPin();
-        setStep('pin');
-        setLoading(false);
-        return;
-      }
-
       let user: any = null;
+
       if (supabase) {
         try {
           const { data: profiles } = await supabase
             .from('profiles')
-            .select('*')
-            .or(`telefono_whatsapp.eq.${formattedPhone},telefono_whatsapp.eq.${cleanPhone}`);
+            .select('*');
 
           if (profiles && profiles.length > 0) {
-            user = profiles[0];
+            user = profiles.find((p: any) => {
+              const pDigits = (p.telefono_whatsapp || '').replace(/\D/g, '').slice(-9);
+              return pDigits === targetDigits && targetDigits.length === 9;
+            });
           }
         } catch (dbErr) {
           console.warn('Supabase profile check error:', dbErr);
@@ -82,17 +79,16 @@ export const AuthFlow: React.FC<AuthFlowProps> = ({ onAuthenticated }) => {
           const savedLocal = localStorage.getItem('simulador_local_users');
           if (savedLocal) {
             const localList = JSON.parse(savedLocal);
-            const foundLocal = localList.find((u: any) => 
-              u.telefonoWhatsapp === formattedPhone || 
-              u.telefonoWhatsapp === cleanPhone || 
-              u.telefonoWhatsapp === '+' + cleanPhone ||
-              u.telefonoWhatsapp === '+51' + cleanPhone
-            );
+            const foundLocal = localList.find((u: any) => {
+              const uDigits = (u.telefonoWhatsapp || u.telefono_whatsapp || '').replace(/\D/g, '').slice(-9);
+              return uDigits === targetDigits && targetDigits.length === 9;
+            });
+
             if (foundLocal) {
               user = {
                 id: foundLocal.id,
                 nombre: foundLocal.nombre,
-                telefono_whatsapp: foundLocal.telefonoWhatsapp,
+                telefono_whatsapp: foundLocal.telefonoWhatsapp || foundLocal.telefono_whatsapp,
                 grado: foundLocal.grado,
                 plan: foundLocal.plan || 'premium',
                 role: foundLocal.role || 'student',
@@ -105,9 +101,9 @@ export const AuthFlow: React.FC<AuthFlowProps> = ({ onAuthenticated }) => {
         }
       }
 
-      // Bloquear si el número no está registrado previamente
+      // Bloquear estrictamente si el número no está registrado previamente
       if (!user) {
-        setError('❌ Número de WhatsApp no registrado. Solo pueden ingresar los postulantes previamente habilitados por el Administrador.');
+        setError('❌ Número de WhatsApp no registrado. Solo pueden ingresar los postulantes registrados previamente por el Administrador.');
         setLoading(false);
         return;
       }
