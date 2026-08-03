@@ -223,10 +223,10 @@ export default function App() {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   };
 
-  const handleLoginSuccess = (phone: string, grado?: string, nombre?: string) => {
+  const handleLoginSuccess = (phone: string, grado?: string, nombre?: string, profileData?: any) => {
     setShowOtpModal(false);
+    setIsLoggedIn(true);
     if (phone === 'ADMIN_BYPASS') {
-      setIsLoggedIn(true);
       setUserProfile(prev => ({
         ...prev,
         nombre: nombre || 'Administrador',
@@ -236,6 +236,15 @@ export default function App() {
       }));
       setActiveTab('admin');
     } else {
+      setUserProfile(prev => ({
+        ...prev,
+        id: profileData?.id || prev.id,
+        nombre: profileData?.nombre || nombre || `Postulante (${phone.slice(-4)})`,
+        grado: profileData?.grado || grado || 'Suboficial PNP',
+        telefonoWhatsapp: phone,
+        plan: profileData?.plan || 'premium',
+        role: profileData?.role || 'student'
+      }));
       setActiveTab('dashboard');
     }
   };

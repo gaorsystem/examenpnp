@@ -61,6 +61,9 @@ export interface UserProfile {
   metaPreguntasDiarias: number;
   fechaRegistro: string;
   metodoPago?: string;
+  codigoAcceso?: string;
+  activeDeviceId?: string;
+  ultimoAcceso?: string;
 }
 
 export interface DominioMateria {

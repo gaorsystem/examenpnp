@@ -41,6 +41,7 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
   const [newUserCip, setNewUserCip] = useState('');
   const [newUserMetodoPago, setNewUserMetodoPago] = useState('Yape / Plin');
   const [newUserRole, setNewUserRole] = useState<'student' | 'admin'>('student');
+  const [newUserCodigoAcceso, setNewUserCodigoAcceso] = useState('');
   const [saving, setSaving] = useState(false);
 
   // Estados para Edición y Eliminación
@@ -53,11 +54,35 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
   const [editMetodoPago, setEditMetodoPago] = useState('Yape / Plin');
   const [editRole, setEditRole] = useState<'student' | 'admin'>('student');
   const [editPlan, setEditPlan] = useState<'free' | 'premium'>('premium');
+  const [editCodigoAcceso, setEditCodigoAcceso] = useState('');
   const [savingEdit, setSavingEdit] = useState(false);
 
   const [adminPass, setAdminPass] = useState('');
   const [isAdminAuth, setIsAdminAuth] = useState(userProfile?.role === 'admin');
   const [authError, setAuthError] = useState(false);
+
+  const copyWhatsAppMessage = (user: UserProfile) => {
+    const code = user.codigoAcceso || '123456';
+    const text = `👮 *SIMULACRO PNP 2026 - ACCESO ACTIVADO*\n\nHola *${user.nombre}*, tu suscripción al Simulador de Examen de Ascenso ha sido activada correctamente.\n\n📱 *Tu Número:* ${user.telefonoWhatsapp}\n🔑 *Tu Código de Acceso (PIN):* ${code}\n\n🌐 *Ingresa aquí:* ${window.location.origin}\n\n⚠️ *Nota:* Tu código es de uso personal y solo permite 1 dispositivo activo a la vez. ¡Éxitos en tu preparación!`;
+    navigator.clipboard.writeText(text);
+    alert(`📋 ¡Mensaje de WhatsApp copiado para ${user.nombre}!\n\n📱 Número: ${user.telefonoWhatsapp}\n🔑 Código: ${code}`);
+  };
+
+  const handleUnlockDevice = async (user: UserProfile) => {
+    if (!supabase) return;
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .update({ active_device_id: null })
+        .eq('id', user.id);
+
+      if (error) throw error;
+      alert(`✅ Dispositivo liberado para ${user.nombre}. El usuario ya podrá ingresar desde un nuevo teléfono o computadora.`);
+      fetchUsers();
+    } catch (err: any) {
+      alert('Error al liberar dispositivo: ' + err.message);
+    }
+  };
 
   const handleAdminLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -95,6 +120,9 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
         role: u.role || 'student',
         metaPreguntasDiarias: u.meta_preguntas_diarias || 50,
         metodoPago: u.metodo_pago || '',
+        codigoAcceso: u.codigo_acceso || u.codigo_pin || u.codigoAcceso || '123456',
+        activeDeviceId: u.active_device_id || '',
+        ultimoAcceso: u.ultimo_acceso || '',
         fechaRegistro: u.created_at
       }));
 
@@ -112,78 +140,40 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
     setSaving(true);
 
     try {
-      // Formatear teléfono para que coincida con el flujo de OTP
+      // Formatear teléfono
       let cleanPhone = newUserPhone.replace(/\D/g, '');
       if (cleanPhone.length === 9 && !cleanPhone.startsWith('51')) {
         cleanPhone = '51' + cleanPhone;
       }
       const formattedPhone = '+' + cleanPhone;
+      const accessCode = newUserCodigoAcceso.trim() || Math.floor(100000 + Math.random() * 900000).toString();
 
-      // 1. Intentar invocar la Edge Function 'admin-create-user'
-      let edgeFunctionSucceeded = false;
-      let createdEmail = newUserEmail.trim() || `estudiante_${cleanPhone}@simuladorpnp.app`;
-      let tempPass = newUserPassword.trim() || `Pnp${cleanPhone.slice(-6)}!2026`;
+      // Inserción en la tabla 'profiles'
+      const { data: directData, error: directError } = await supabase
+        .from('profiles')
+        .insert({
+          nombre: newUserName,
+          telefono_whatsapp: formattedPhone,
+          grado: newUserGrado,
+          dni: newUserDni,
+          cip: newUserCip,
+          metodo_pago: newUserMetodoPago,
+          codigo_acceso: accessCode,
+          plan: 'premium',
+          role: newUserRole,
+          user_id: null
+        })
+        .select()
+        .single();
 
-      try {
-        const { data: sessionData } = await supabase.auth.getSession();
-        const accessToken = sessionData.session?.access_token;
-
-        const { data, error } = await supabase.functions.invoke('admin-create-user', {
-          body: {
-            email: newUserEmail.trim() || undefined,
-            password: newUserPassword.trim() || undefined,
-            nombre: newUserName,
-            telefono_whatsapp: formattedPhone,
-            dni: newUserDni,
-            grado: newUserGrado,
-            cip: newUserCip,
-            metodo_pago: newUserMetodoPago,
-            role: newUserRole,
-            plan: 'premium'
-          },
-          headers: accessToken ? {
-            Authorization: `Bearer ${accessToken}`
-          } : undefined
-        });
-
-        if (!error && data?.success) {
-          edgeFunctionSucceeded = true;
-          if (data.user?.email) createdEmail = data.user.email;
-          if (data.user?.tempPassword) tempPass = data.user.tempPassword;
-        } else if (error && !error.message.includes('Failed to send a request') && !error.message.includes('FunctionsFetchError')) {
-          throw new Error(data?.error || error.message);
+      if (directError) {
+        if (directError.message.includes('infinite recursion') || directError.message.includes('policy')) {
+          throw new Error('Error de Políticas RLS en Supabase: Habilita permisos de creación en la tabla profiles.');
         }
-      } catch (edgeErr: any) {
-        console.warn('Edge Function no desplegada o no disponible. Usando inserción directa en base de datos:', edgeErr.message);
+        throw directError;
       }
 
-      // 2. Si la Edge Function no estuvo desplegada, realizar inserción directa en la tabla 'profiles'
-      if (!edgeFunctionSucceeded) {
-        const { data: directData, error: directError } = await supabase
-          .from('profiles')
-          .insert({
-            nombre: newUserName,
-            telefono_whatsapp: formattedPhone,
-            grado: newUserGrado,
-            dni: newUserDni,
-            cip: newUserCip,
-            metodo_pago: newUserMetodoPago,
-            plan: 'premium',
-            role: newUserRole,
-            user_id: null
-          })
-          .select()
-          .single();
-
-        if (directError) {
-          if (directError.message.includes('infinite recursion') || directError.message.includes('policy')) {
-            throw new Error('Error de Políticas RLS en Supabase: Ejecuta el script SQL en el panel de Supabase para habilitar permisos de creación en la tabla profiles.');
-          }
-          throw directError;
-        }
-      }
-
-      alert(`✅ Usuario y perfil registrados exitosamente.\n\nNombre: ${newUserName}\nTeléfono: ${formattedPhone}\nRol: ${newUserRole === 'admin' ? 'Administrador' : 'Estudiante'}`);
+      alert(`✅ USUARIO REGISTRADO EXITOSAMENTE\n\n👤 Cliente: ${newUserName}\n📱 WhatsApp: ${formattedPhone}\n🔑 CÓDIGO DE ACCESO (PIN 6 DÍGITOS): ${accessCode}\n\n💡 Proporciona este código de 6 dígitos al estudiante para que ingrese directamente desde el sistema.`);
 
       setShowAddModal(false);
       setNewUserName('');
@@ -192,6 +182,7 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
       setNewUserPassword('');
       setNewUserDni('');
       setNewUserCip('');
+      setNewUserCodigoAcceso('');
       setNewUserMetodoPago('Yape / Plin');
       fetchUsers();
     } catch (err: any) {
@@ -211,6 +202,7 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
     setEditMetodoPago(user.metodoPago || 'Yape / Plin');
     setEditRole(user.role || 'student');
     setEditPlan(user.plan || 'premium');
+    setEditCodigoAcceso(user.codigoAcceso || Math.floor(100000 + Math.random() * 900000).toString());
   };
 
   const handleSaveEdit = async (e: React.FormEvent) => {
@@ -228,6 +220,7 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
           dni: editDni,
           cip: editCip,
           metodo_pago: editMetodoPago,
+          codigo_acceso: editCodigoAcceso,
           role: editRole,
           plan: editPlan
         })
@@ -375,9 +368,9 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Documento</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contacto</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pago</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plan</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rol</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Código de Acceso</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dispositivo</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plan / Rol</th>
                   <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
                 </tr>
               </thead>
@@ -401,48 +394,74 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
                         {user.cip && <div className="text-xs text-gray-500">CIP: {user.cip}</div>}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center text-sm text-gray-600">
-                          <Smartphone size={16} className="mr-2 text-gray-400" />
+                        <div className="flex items-center text-sm text-gray-600 font-mono font-medium">
+                          <Smartphone size={16} className="mr-2 text-emerald-600" />
                           {user.telefonoWhatsapp}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-xs font-mono font-bold text-slate-500">{user.metodoPago || 'No reg.'}</div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono bg-amber-50 text-amber-700 border border-amber-200/80 font-black text-sm px-3 py-1 rounded-xl shadow-sm tracking-widest">
+                            🔑 {user.codigoAcceso || '123456'}
+                          </span>
+                        </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                          user.plan === 'premium' ? 'bg-amber-100 text-amber-800' : 'bg-gray-100 text-gray-800'
-                        }`}>
-                          {user.plan.toUpperCase()}
-                        </span>
+                        {user.activeDeviceId ? (
+                          <div className="flex items-center gap-1.5">
+                            <span className="px-2.5 py-1 text-[10px] font-mono font-bold bg-emerald-100 text-emerald-800 rounded-full flex items-center gap-1">
+                              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
+                              📱 1 Dispositivo
+                            </span>
+                            <button
+                              onClick={() => handleUnlockDevice(user)}
+                              title="Liberar dispositivo para permitir nuevo ingreso"
+                              className="p-1 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors text-xs font-bold"
+                            >
+                              🔓 Liberar
+                            </button>
+                          </div>
+                        ) : (
+                          <span className="px-2.5 py-1 text-[10px] font-mono text-slate-400 bg-slate-100 rounded-full">
+                            ⚪ Sin sesión activa
+                          </span>
+                        )}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <div className="flex items-center">
-                          {user.role === 'admin' ? (
-                            <>
-                              <Shield size={14} className="mr-1 text-blue-600" />
-                              <span className="text-blue-600 font-medium">Admin</span>
-                            </>
-                          ) : (
-                            <span>Estudiante</span>
-                          )}
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex flex-col gap-1">
+                          <span className={`px-2 py-0.5 w-max inline-flex text-[10px] font-black rounded-full uppercase tracking-wider ${
+                            user.plan === 'premium' ? 'bg-amber-100 text-amber-800' : 'bg-gray-100 text-gray-800'
+                          }`}>
+                            {user.plan}
+                          </span>
+                          <span className="text-xs text-slate-500 font-medium">
+                            {user.role === 'admin' ? '🛡️ Admin' : '👤 Estudiante'}
+                          </span>
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <div className="flex justify-end space-x-2">
                           <button 
+                            onClick={() => copyWhatsAppMessage(user)}
+                            title="Copiar mensaje de bienvenida para WhatsApp con teléfono y código"
+                            className="p-2 text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors flex items-center gap-1 text-xs font-bold"
+                          >
+                            <ClipboardCheck size={16} />
+                            <span className="hidden sm:inline">WhatsApp</span>
+                          </button>
+                          <button 
                             onClick={() => openEditModal(user)}
                             title="Editar cliente"
-                            className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                            className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-colors"
                           >
-                            <Edit2 size={18} />
+                            <Edit2 size={16} />
                           </button>
                           <button 
                             onClick={() => handleDeleteUser(user)}
                             title="Eliminar cliente"
-                            className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                            className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors"
                           >
-                            <Trash2 size={18} />
+                            <Trash2 size={16} />
                           </button>
                         </div>
                       </td>
@@ -450,7 +469,7 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={5} className="px-6 py-12 text-center text-gray-500 italic">
+                    <td colSpan={7} className="px-6 py-12 text-center text-gray-500 italic">
                       No se encontraron usuarios.
                     </td>
                   </tr>
@@ -612,6 +631,28 @@ WITH CHECK (true);`}
                         value={newUserDni}
                         onChange={(e) => setNewUserDni(e.target.value)}
                       />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-mono font-bold text-amber-700 dark:text-amber-400 uppercase tracking-widest mb-2 ml-1">🔑 Código de Acceso PIN (6 Dígitos)</label>
+                      <div className="relative flex gap-2">
+                        <input
+                          type="text"
+                          maxLength={6}
+                          className="block w-full px-4 py-3.5 bg-amber-50/60 dark:bg-amber-950/20 border border-amber-300 dark:border-amber-800 rounded-2xl focus:ring-2 focus:ring-amber-500 outline-none font-mono font-black text-amber-900 dark:text-amber-200 text-base tracking-widest placeholder:text-amber-400"
+                          placeholder="Auto-generado"
+                          value={newUserCodigoAcceso}
+                          onChange={(e) => setNewUserCodigoAcceso(e.target.value.replace(/\D/g, ''))}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setNewUserCodigoAcceso(Math.floor(100000 + Math.random() * 900000).toString())}
+                          className="px-4 py-3 bg-amber-100 hover:bg-amber-200 text-amber-800 text-xs font-black rounded-2xl whitespace-nowrap transition-colors"
+                        >
+                          Generar PIN
+                        </button>
+                      </div>
+                      <p className="text-[10px] text-slate-500 mt-1 ml-1">Si lo dejas vacío, el sistema asignará uno aleatorio.</p>
                     </div>
 
                     <div>
@@ -812,6 +853,44 @@ WITH CHECK (true);`}
                         <option value="premium">PREMIUM (Acceso completo)</option>
                         <option value="free">FREE (Gratuito)</option>
                       </select>
+                    </div>
+
+                    <div className="md:col-span-2 bg-amber-50/60 dark:bg-amber-950/20 p-5 rounded-2xl border border-amber-200 dark:border-amber-800">
+                      <label className="block text-xs font-mono font-bold text-amber-800 dark:text-amber-400 uppercase tracking-widest mb-2">
+                        🔑 Código PIN de Acceso de 6 Dígitos
+                      </label>
+                      <div className="flex flex-col sm:flex-row gap-3">
+                        <input
+                          type="text"
+                          maxLength={6}
+                          required
+                          className="block w-full px-4 py-3.5 bg-white dark:bg-slate-950 border border-amber-300 dark:border-amber-800 rounded-2xl focus:ring-2 focus:ring-amber-500 font-mono font-black text-amber-900 dark:text-amber-200 text-lg tracking-widest"
+                          value={editCodigoAcceso}
+                          onChange={(e) => setEditCodigoAcceso(e.target.value.replace(/\D/g, ''))}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setEditCodigoAcceso(Math.floor(100000 + Math.random() * 900000).toString())}
+                          className="px-4 py-3 bg-amber-200/80 hover:bg-amber-300 text-amber-900 text-xs font-black rounded-2xl whitespace-nowrap transition-colors"
+                        >
+                          Nuevo PIN ⚡
+                        </button>
+                      </div>
+                      
+                      {editingUser?.activeDeviceId && (
+                        <div className="mt-4 pt-3 border-t border-amber-200/60 dark:border-amber-800/40 flex items-center justify-between">
+                          <span className="text-xs text-amber-900 dark:text-amber-300 font-medium">
+                            📱 <b>Dispositivo vinculado activo</b>
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => handleUnlockDevice(editingUser)}
+                            className="px-3 py-1.5 bg-red-100 hover:bg-red-200 text-red-700 text-xs font-bold rounded-xl transition-colors flex items-center gap-1"
+                          >
+                            🔓 Liberar Dispositivo
+                          </button>
+                        </div>
+                      )}
                     </div>
 
                     <div className="md:col-span-2 bg-slate-50 dark:bg-slate-800/50 p-5 rounded-2xl border border-slate-100 dark:border-slate-800">
