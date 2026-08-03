@@ -69,13 +69,6 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
     let cleanPhone = telefono.replace(/\D/g, '');
     let formattedPhone = '+51' + cleanPhone;
 
-    if (!supabase) {
-      // Si no hay Supabase, permitir continuar con código por defecto 123456
-      setStep('PIN');
-      setLoading(false);
-      return;
-    }
-
     try {
       // Buscar el teléfono en la tabla profiles o en localStorage
       let user: any = null;
@@ -103,7 +96,8 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
             const foundLocal = localList.find((u: any) => 
               u.telefonoWhatsapp === formattedPhone || 
               u.telefonoWhatsapp === cleanPhone || 
-              u.telefonoWhatsapp === '+' + cleanPhone
+              u.telefonoWhatsapp === '+' + cleanPhone ||
+              u.telefonoWhatsapp === '+51' + cleanPhone
             );
             if (foundLocal) {
               user = {
@@ -122,78 +116,11 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
         }
       }
 
+      // Bloquear acceso si el número no está registrado previamente por el admin
       if (!user) {
-        // Auto-crear perfil para el nuevo estudiante en Supabase si no existe
-        const defaultPin = Math.floor(100000 + Math.random() * 900000).toString();
-        let profilePayload: any = {
-          nombre: `Postulante ${cleanPhone.slice(-4)}`,
-          telefono_whatsapp: formattedPhone,
-          grado: 'Suboficial PNP',
-          plan: 'premium',
-          role: 'student',
-          codigo_acceso: defaultPin
-        };
-
-        let createdProfile: any = null;
-        let createError: any = null;
-
-        const res1 = await supabase
-          .from('profiles')
-          .insert(profilePayload)
-          .select()
-          .maybeSingle();
-
-        if (res1.error) {
-          if (res1.error.message.includes('codigo_acceso') || res1.error.message.includes('schema cache')) {
-            delete profilePayload.codigo_acceso;
-            profilePayload.codigo_pin = defaultPin;
-            const res2 = await supabase
-              .from('profiles')
-              .insert(profilePayload)
-              .select()
-              .maybeSingle();
-
-            if (res2.error) {
-              delete profilePayload.codigo_pin;
-              const res3 = await supabase
-                .from('profiles')
-                .insert(profilePayload)
-                .select()
-                .maybeSingle();
-              createdProfile = res3.data;
-              createError = res3.error;
-            } else {
-              createdProfile = res2.data;
-            }
-          } else {
-            createError = res1.error;
-          }
-        } else {
-          createdProfile = res1.data;
-        }
-
-        if (createError) {
-          console.warn('Auto-creación local en caso de error RLS o esquema:', createError.message);
-          user = {
-            id: 'estudiante_' + cleanPhone,
-            nombre: `Postulante ${cleanPhone.slice(-4)}`,
-            telefono_whatsapp: formattedPhone,
-            grado: 'Suboficial PNP',
-            plan: 'premium',
-            role: 'student',
-            codigo_acceso: defaultPin
-          };
-        } else {
-          user = createdProfile || {
-            id: 'estudiante_' + cleanPhone,
-            nombre: `Postulante ${cleanPhone.slice(-4)}`,
-            telefono_whatsapp: formattedPhone,
-            grado: 'Suboficial PNP',
-            plan: 'premium',
-            role: 'student',
-            codigo_acceso: defaultPin
-          };
-        }
+        setErrorMsg('❌ Número de WhatsApp no registrado. Solo pueden ingresar los postulantes registrados por el Administrador.');
+        setLoading(false);
+        return;
       }
 
       setFoundProfile(user);
