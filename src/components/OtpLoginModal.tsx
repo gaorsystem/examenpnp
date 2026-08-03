@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, Smartphone, ArrowRight, CheckCircle2, Lock, X, Loader2, KeyRound, AlertTriangle, MonitorSmartphone, RefreshCw } from 'lucide-react';
+import { Shield, Smartphone, ArrowRight, CheckCircle2, Lock, X, Loader2, KeyRound, AlertTriangle, MonitorSmartphone, RefreshCw, MessageCircle } from 'lucide-react';
 import { UserProfile } from '../types';
 import { supabase } from '../lib/supabase';
 import { getDeviceId } from '../lib/deviceHelper';
@@ -314,10 +314,23 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
             </div>
 
             {errorMsg && (
-              <p className="text-xs text-red-500 font-mono font-bold bg-red-50 dark:bg-red-900/20 p-3.5 rounded-2xl border border-red-200 dark:border-red-900/30 flex items-start gap-2 leading-relaxed">
-                <AlertTriangle className="w-5 h-5 flex-shrink-0 text-red-500 mt-0.5" />
-                <span>{errorMsg}</span>
-              </p>
+              <div className="space-y-3">
+                <p className="text-xs text-red-500 font-mono font-bold bg-red-50 dark:bg-red-900/20 p-3.5 rounded-2xl border border-red-200 dark:border-red-900/30 flex items-start gap-2 leading-relaxed">
+                  <AlertTriangle className="w-5 h-5 flex-shrink-0 text-red-500 mt-0.5" />
+                  <span>{errorMsg}</span>
+                </p>
+                {errorMsg.includes('no registrado') && (
+                  <a
+                    href={`https://wa.me/51987654321?text=${encodeURIComponent(`Hola, deseo contratar el Servicio del Simulador PNP 2026 para mi número +51 ${telefono}`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 w-full py-3.5 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-display font-black text-xs rounded-2xl shadow-xl shadow-emerald-600/20 transition-all hover:scale-[1.01] active:scale-95 uppercase tracking-wider"
+                  >
+                    <MessageCircle className="w-5 h-5" />
+                    <span>Contratar Servicio por WhatsApp</span>
+                  </a>
+                )}
+              </div>
             )}
 
             <button

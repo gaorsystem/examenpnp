@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
 import { motion, AnimatePresence } from 'motion/react';
-import { Smartphone, Lock, ArrowRight, CheckCircle2, Loader2, KeyRound, AlertTriangle, MonitorSmartphone, RefreshCw } from 'lucide-react';
+import { Smartphone, Lock, ArrowRight, CheckCircle2, Loader2, KeyRound, AlertTriangle, MonitorSmartphone, RefreshCw, MessageCircle } from 'lucide-react';
 import { getDeviceId } from '../../lib/deviceHelper';
 
 interface AuthFlowProps {
@@ -241,9 +241,22 @@ export const AuthFlow: React.FC<AuthFlowProps> = ({ onAuthenticated }) => {
               </div>
 
               {error && (
-                <div className="text-red-600 text-xs text-left bg-red-50 p-3.5 rounded-xl border border-red-200 flex items-start gap-2 leading-relaxed font-bold">
-                  <AlertTriangle size={18} className="flex-shrink-0 mt-0.5 text-red-500" />
-                  <span>{error}</span>
+                <div className="space-y-3">
+                  <div className="text-red-600 text-xs text-left bg-red-50 p-3.5 rounded-xl border border-red-200 flex items-start gap-2 leading-relaxed font-bold">
+                    <AlertTriangle size={18} className="flex-shrink-0 mt-0.5 text-red-500" />
+                    <span>{error}</span>
+                  </div>
+                  {error.includes('no registrado') && (
+                    <a
+                      href={`https://wa.me/51987654321?text=${encodeURIComponent(`Hola, deseo contratar el Servicio del Simulador PNP 2026 para mi número +51 ${phone}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 w-full py-3.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition-all hover:scale-[1.01] active:scale-95 uppercase tracking-wider"
+                    >
+                      <MessageCircle size={18} />
+                      <span>Contratar Servicio por WhatsApp</span>
+                    </a>
+                  )}
                 </div>
               )}
 
