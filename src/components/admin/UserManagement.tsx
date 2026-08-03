@@ -67,19 +67,35 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
     alert(`📋 ¡Mensaje de WhatsApp copiado para ${user.nombre}!\n\n📱 Número: ${user.telefonoWhatsapp}`);
   };
 
-  const handleUnlockDevice = async (user: UserProfile) => {
-    if (!supabase) return;
-    try {
-      const { error } = await supabase
-        .from('profiles')
-        .update({ active_device_id: null })
-        .eq('id', user.id);
+  const isUUID = (str: string) => /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str || '');
 
-      if (error) throw error;
+  const handleUnlockDevice = async (user: UserProfile) => {
+    try {
+      if (supabase) {
+        if (isUUID(user.id)) {
+          await supabase.from('profiles').update({ active_device_id: null }).eq('id', user.id);
+        } else if (user.telefonoWhatsapp) {
+          await supabase.from('profiles').update({ active_device_id: null }).eq('telefono_whatsapp', user.telefonoWhatsapp);
+        }
+      }
+
+      try {
+        const savedLocal = localStorage.getItem('simulador_local_users');
+        if (savedLocal) {
+          const localList: UserProfile[] = JSON.parse(savedLocal);
+          const updated = localList.map(u => 
+            (u.id === user.id || u.telefonoWhatsapp === user.telefonoWhatsapp) 
+              ? { ...u, activeDeviceId: '' } 
+              : u
+          );
+          localStorage.setItem('simulador_local_users', JSON.stringify(updated));
+        }
+      } catch (e) {}
+
       alert(`✅ Dispositivo liberado para ${user.nombre}. El usuario ya podrá ingresar desde un nuevo teléfono o computadora.`);
       fetchUsers();
     } catch (err: any) {
-      alert('Error al liberar dispositivo: ' + err.message);
+      alert('Error al liberar dispositivo: ' + (err.message || 'Error desconocido'));
     }
   };
 
@@ -250,7 +266,7 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
 
   const handleSaveEdit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!supabase || !editingUser) return;
+    if (!editingUser) return;
     setSavingEdit(true);
 
     try {
@@ -261,34 +277,41 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
         dni: editDni,
         cip: editCip,
         metodo_pago: editMetodoPago,
-        codigo_acceso: editCodigoAcceso,
         role: editRole,
         plan: editPlan
       };
 
-      let updateRes = await supabase
-        .from('profiles')
-        .update(updatePayload)
-        .eq('id', editingUser.id);
-
-      if (updateRes.error && (updateRes.error.message.includes('codigo_acceso') || updateRes.error.message.includes('schema cache'))) {
-        delete updatePayload.codigo_acceso;
-        updatePayload.codigo_pin = editCodigoAcceso;
-        updateRes = await supabase
-          .from('profiles')
-          .update(updatePayload)
-          .eq('id', editingUser.id);
-
-        if (updateRes.error && (updateRes.error.message.includes('codigo_pin') || updateRes.error.message.includes('schema cache'))) {
-          delete updatePayload.codigo_pin;
-          updateRes = await supabase
-            .from('profiles')
-            .update(updatePayload)
-            .eq('id', editingUser.id);
+      if (supabase) {
+        if (isUUID(editingUser.id)) {
+          await supabase.from('profiles').update(updatePayload).eq('id', editingUser.id);
+        } else if (editingUser.telefonoWhatsapp) {
+          await supabase.from('profiles').update(updatePayload).eq('telefono_whatsapp', editingUser.telefonoWhatsapp);
         }
       }
 
-      if (updateRes.error) throw updateRes.error;
+      try {
+        const savedLocal = localStorage.getItem('simulador_local_users');
+        if (savedLocal) {
+          const localList: UserProfile[] = JSON.parse(savedLocal);
+          const updated = localList.map(u => {
+            if (u.id === editingUser.id || u.telefonoWhatsapp === editingUser.telefonoWhatsapp) {
+              return {
+                ...u,
+                nombre: editName,
+                telefonoWhatsapp: editPhone,
+                grado: editGrado,
+                dni: editDni,
+                cip: editCip,
+                metodoPago: editMetodoPago,
+                role: editRole,
+                plan: editPlan
+              };
+            }
+            return u;
+          });
+          localStorage.setItem('simulador_local_users', JSON.stringify(updated));
+        }
+      } catch (lsErr) {}
 
       alert(`✅ Usuario "${editName}" actualizado correctamente.`);
       setEditingUser(null);
@@ -301,17 +324,30 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
   };
 
   const handleDeleteUser = async (user: UserProfile) => {
-    if (!supabase) return;
     const confirmDelete = window.confirm(`¿Estás seguro de eliminar permanentemente al usuario ${user.nombre}?`);
     if (!confirmDelete) return;
 
     try {
-      const { error } = await supabase
-        .from('profiles')
-        .delete()
-        .eq('id', user.id);
+      if (supabase) {
+        if (isUUID(user.id)) {
+          const { error } = await supabase.from('profiles').delete().eq('id', user.id);
+          if (error) console.warn('Supabase delete by id warning:', error.message);
+        } else if (user.telefonoWhatsapp) {
+          const { error } = await supabase.from('profiles').delete().eq('telefono_whatsapp', user.telefonoWhatsapp);
+          if (error) console.warn('Supabase delete by phone warning:', error.message);
+        }
+      }
 
-      if (error) throw error;
+      try {
+        const savedLocal = localStorage.getItem('simulador_local_users');
+        if (savedLocal) {
+          const localList: UserProfile[] = JSON.parse(savedLocal);
+          const filtered = localList.filter(u => u.id !== user.id && u.telefonoWhatsapp !== user.telefonoWhatsapp);
+          localStorage.setItem('simulador_local_users', JSON.stringify(filtered));
+        }
+      } catch (lsErr) {
+        console.warn('Error deleting from localStorage:', lsErr);
+      }
 
       alert(`✅ Usuario "${user.nombre}" eliminado correctamente.`);
       fetchUsers();
