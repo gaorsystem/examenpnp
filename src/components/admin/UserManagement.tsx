@@ -117,6 +117,15 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
     setLoading(true);
     let remoteUsers: UserProfile[] = [];
 
+    // Cargar lista de teléfonos eliminados localmente
+    let deletedSet = new Set<string>();
+    try {
+      const savedDeleted = localStorage.getItem('simulador_deleted_phones');
+      if (savedDeleted) {
+        deletedSet = new Set(JSON.parse(savedDeleted));
+      }
+    } catch (e) {}
+
     if (supabase) {
       try {
         const { data, error } = await supabase
@@ -147,14 +156,21 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
       }
     }
 
-    // Merge with local users saved in localStorage
+    // Filtrar teléfonos eliminados
+    remoteUsers = remoteUsers.filter(u => {
+      const digits = (u.telefonoWhatsapp || '').replace(/\D/g, '').slice(-9);
+      return digits && !deletedSet.has(digits);
+    });
+
+    // Merge con usuarios locales guardados en localStorage
     try {
       const savedLocal = localStorage.getItem('simulador_local_users');
       if (savedLocal) {
         const parsedLocal: UserProfile[] = JSON.parse(savedLocal);
-        const existingPhones = new Set(remoteUsers.map(u => u.telefonoWhatsapp));
+        const existingPhones = new Set(remoteUsers.map(u => (u.telefonoWhatsapp || '').replace(/\D/g, '').slice(-9)));
         for (const localU of parsedLocal) {
-          if (!existingPhones.has(localU.telefonoWhatsapp)) {
+          const digits = (localU.telefonoWhatsapp || '').replace(/\D/g, '').slice(-9);
+          if (digits && !existingPhones.has(digits) && !deletedSet.has(digits)) {
             remoteUsers.push(localU);
           }
         }
@@ -270,9 +286,12 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
     setSavingEdit(true);
 
     try {
+      const cleanDigits = editPhone.replace(/\D/g, '').slice(-9);
+      const formattedPhone = cleanDigits ? '+51' + cleanDigits : editPhone;
+
       let updatePayload: any = {
         nombre: editName,
-        telefono_whatsapp: editPhone,
+        telefono_whatsapp: formattedPhone,
         grado: editGrado,
         dni: editDni,
         cip: editCip,
@@ -284,8 +303,9 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
       if (supabase) {
         if (isUUID(editingUser.id)) {
           await supabase.from('profiles').update(updatePayload).eq('id', editingUser.id);
-        } else if (editingUser.telefonoWhatsapp) {
-          await supabase.from('profiles').update(updatePayload).eq('telefono_whatsapp', editingUser.telefonoWhatsapp);
+        }
+        if (cleanDigits) {
+          await supabase.from('profiles').update(updatePayload).or(`telefono_whatsapp.eq.+51${cleanDigits},telefono_whatsapp.eq.51${cleanDigits},telefono_whatsapp.eq.${cleanDigits}`);
         }
       }
 
@@ -294,11 +314,12 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
         if (savedLocal) {
           const localList: UserProfile[] = JSON.parse(savedLocal);
           const updated = localList.map(u => {
-            if (u.id === editingUser.id || u.telefonoWhatsapp === editingUser.telefonoWhatsapp) {
+            const uDigits = (u.telefonoWhatsapp || '').replace(/\D/g, '').slice(-9);
+            if (u.id === editingUser.id || uDigits === cleanDigits) {
               return {
                 ...u,
                 nombre: editName,
-                telefonoWhatsapp: editPhone,
+                telefonoWhatsapp: formattedPhone,
                 grado: editGrado,
                 dni: editDni,
                 cip: editCip,
@@ -327,13 +348,31 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
     const confirmDelete = window.confirm(`¿Estás seguro de eliminar permanentemente al usuario ${user.nombre}?`);
     if (!confirmDelete) return;
 
+    const cleanDigits = (user.telefonoWhatsapp || '').replace(/\D/g, '').slice(-9);
+
     try {
+      // Registrar en lista local de eliminados
+      if (cleanDigits) {
+        try {
+          const savedDeleted = localStorage.getItem('simulador_deleted_phones');
+          const list: string[] = savedDeleted ? JSON.parse(savedDeleted) : [];
+          if (!list.includes(cleanDigits)) {
+            list.push(cleanDigits);
+          }
+          localStorage.setItem('simulador_deleted_phones', JSON.stringify(list));
+        } catch (e) {}
+      }
+
       if (supabase) {
         if (isUUID(user.id)) {
           const { error } = await supabase.from('profiles').delete().eq('id', user.id);
           if (error) console.warn('Supabase delete by id warning:', error.message);
-        } else if (user.telefonoWhatsapp) {
-          const { error } = await supabase.from('profiles').delete().eq('telefono_whatsapp', user.telefonoWhatsapp);
+        }
+        if (cleanDigits) {
+          const { error } = await supabase
+            .from('profiles')
+            .delete()
+            .or(`telefono_whatsapp.eq.+51${cleanDigits},telefono_whatsapp.eq.51${cleanDigits},telefono_whatsapp.eq.${cleanDigits}`);
           if (error) console.warn('Supabase delete by phone warning:', error.message);
         }
       }
@@ -342,7 +381,10 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
         const savedLocal = localStorage.getItem('simulador_local_users');
         if (savedLocal) {
           const localList: UserProfile[] = JSON.parse(savedLocal);
-          const filtered = localList.filter(u => u.id !== user.id && u.telefonoWhatsapp !== user.telefonoWhatsapp);
+          const filtered = localList.filter(u => {
+            const uDigits = (u.telefonoWhatsapp || '').replace(/\D/g, '').slice(-9);
+            return u.id !== user.id && uDigits !== cleanDigits;
+          });
           localStorage.setItem('simulador_local_users', JSON.stringify(filtered));
         }
       } catch (lsErr) {
