@@ -3,200 +3,399 @@ import {
   Shield,
   Play,
   MessageSquare,
-  CheckCircle2,
-  Volume2,
   Smartphone,
   ArrowRight,
-  HelpCircle,
-  CheckCircle,
-  XCircle,
   RotateCcw,
   Zap,
+  BookOpen,
+  BrainCircuit,
+  Search,
+  Sliders,
+  ChevronDown,
+  ChevronUp,
+  Sparkles,
+  CheckCircle,
+  XCircle,
+  Award,
+  Target,
+  Check,
+  Star,
+  Users,
 } from 'lucide-react';
 import { BANCO_PREGUNTAS } from '../data/questionsData';
-import { AudioButton } from './AudioButton';
 
 interface LandingPageProps {
   onStartSimulacro: (modo: 'simulacro' | 'expres' | 'repaso' | 'norma') => void;
   onNavigateTab: (tab: string) => void;
-  onOpenExplainer?: () => void;
 }
 
 export const LandingPage: React.FC<LandingPageProps> = ({
   onStartSimulacro,
   onNavigateTab,
-  onOpenExplainer,
 }) => {
-  // Estado para una muestra rápida y limpia de 1 pregunta (sin saturar)
-  const [sampleQuestionIndex, setSampleQuestionIndex] = useState<number>(0);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [expandedCard, setExpandedCard] = useState<string | null>(null);
+  const [sampleIndex, setSampleIndex] = useState<number>(0);
+  const [selectedOpt, setSelectedOpt] = useState<string | null>(null);
 
-  const sampleQuestion = BANCO_PREGUNTAS[sampleQuestionIndex % BANCO_PREGUNTAS.length];
-
-  const handleNextSample = () => {
-    setSelectedOption(null);
-    setSampleQuestionIndex((prev) => (prev + 1) % BANCO_PREGUNTAS.length);
+  const toggleDetail = (id: string) => {
+    setExpandedCard(prev => (prev === id ? null : id));
   };
 
-  const isCorrect = selectedOption?.trim() === sampleQuestion.respuesta.trim();
+  const sampleQuestion = BANCO_PREGUNTAS[sampleIndex % BANCO_PREGUNTAS.length];
 
-  // Enlace directo para contratar por WhatsApp
   const wspLink =
     'https://wa.me/51987654321?text=Hola,%20deseo%20contratar%20el%20Servicio%20del%20Simulador%20de%20Ascenso%20PNP%202026%20(Balotario%201,500%20preguntas)%20y%20activar%20mi%20acceso.';
 
-  return (
-    <div className="max-w-4xl mx-auto space-y-6 pb-12">
-      {/* 1. SECCIÓN PRINCIPAL LIMPIA Y DIRECCIONAL (CERO SATURACIÓN) */}
-      <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 border-2 border-amber-500/50 rounded-3xl p-6 sm:p-10 text-white shadow-2xl relative overflow-hidden text-center">
-        <div className="absolute -right-12 -bottom-12 opacity-10 pointer-events-none hidden sm:block">
-          <Shield className="w-80 h-80 text-amber-400" />
-        </div>
+  // Módulos concisos, ultra-visuales con íconos e indicadores de impacto
+  const visualModules = [
+    {
+      id: 'simulacro_100',
+      title: 'Simulacro Real 100 Preg.',
+      tag: '100 PREG · 180 MIN',
+      tagColor: 'bg-amber-500/20 text-amber-400 border-amber-500/40',
+      icon: Shield,
+      iconColor: 'bg-amber-500 text-slate-950',
+      benefit: 'Mide tu puntaje exacto de 0 a 100 con la misma distribución y tiempo del examen oficial.',
+      actionText: 'Iniciar Simulacro Oficial',
+      btnStyle: 'bg-amber-500 hover:bg-amber-400 text-slate-950 font-black',
+      onAction: () => onStartSimulacro('simulacro'),
+      bullets: [
+        '100 preguntas de las 22 normas legales del temario.',
+        'Cronómetro de 180 minutos con hoja de respuestas al instante.',
+        'Sustento jurídico artículo por artículo.'
+      ]
+    },
+    {
+      id: 'bot_wsp',
+      title: 'Bot WhatsApp 24/7',
+      tag: 'SIN INSTALAR APPS',
+      tagColor: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40',
+      icon: Smartphone,
+      iconColor: 'bg-emerald-500 text-slate-950',
+      benefit: 'Practica en tu celular respondiendo mensajes en tus tiempos libres o de servicio.',
+      actionText: 'Probar Bot WhatsApp',
+      btnStyle: 'bg-emerald-600 hover:bg-emerald-500 text-white font-black',
+      onAction: () => onNavigateTab('whatsapp'),
+      bullets: [
+        'Responde A, B, C o D en el chat.',
+        'Recibe la confirmación y el artículo de ley al instante.',
+        'Guarda tu avance y racha diaria.'
+      ]
+    },
+    {
+      id: 'tutor_ia',
+      title: 'Profesor Legal IA',
+      tag: 'BASE LEGAL INTERACTIVA',
+      tagColor: 'bg-sky-500/20 text-sky-400 border-sky-500/40',
+      icon: BrainCircuit,
+      iconColor: 'bg-sky-500 text-slate-950',
+      benefit: 'Resuelve tus dudas en preguntas dudosas con la explicación del artículo legal en vivo.',
+      actionText: 'Ver Profesor IA',
+      btnStyle: 'bg-sky-600 hover:bg-sky-500 text-white font-black',
+      onAction: () => onStartSimulacro('expres'),
+      bullets: [
+        'Explicación en lenguaje sencillo de artículos complejos.',
+        'Analiza casuísticas del Código Penal y Ley PNP.',
+        'Despeja alternativas parecidas al instante.'
+      ]
+    },
+    {
+      id: 'repaso_srs',
+      title: 'Repaso de Errores',
+      tag: 'ALGORITMO MEMORIA',
+      tagColor: 'bg-purple-500/20 text-purple-400 border-purple-500/40',
+      icon: RotateCcw,
+      iconColor: 'bg-purple-500 text-slate-950',
+      benefit: 'Elimina tus fallos volviendo a practicar únicamente las preguntas en las que te equivocaste.',
+      actionText: 'Repasar Mis Errores',
+      btnStyle: 'bg-purple-600 hover:bg-purple-500 text-white font-black',
+      onAction: () => onStartSimulacro('repaso'),
+      bullets: [
+        'Guarda automáticamente cada pregunta fallada.',
+        'Repetición espaciada hasta lograr 100% de acierto.',
+        'Asegura la retención de plazos y números de ley.'
+      ]
+    },
+    {
+      id: 'test_expres',
+      title: 'Test Exprés (10-20 Preg.)',
+      tag: '10 MINUTOS',
+      tagColor: 'bg-amber-500/20 text-amber-400 border-amber-500/40',
+      icon: Zap,
+      iconColor: 'bg-amber-400 text-slate-950',
+      benefit: 'Entrenamientos ultrarrápidos con comodín 50/50 y solución inmediata tras cada clic.',
+      actionText: 'Test Exprés Inmediato',
+      btnStyle: 'bg-slate-900 hover:bg-slate-800 text-white dark:bg-slate-700 font-black',
+      onAction: () => onStartSimulacro('expres'),
+      bullets: [
+        'Ideal para sesiones breves de 10 minutos.',
+        'Incluye comodín 50/50 para eliminar 2 falsas.',
+        'Gana velocidad de lectura y descarte.'
+      ]
+    },
+    {
+      id: 'normas',
+      title: 'Estudio por Norma Legal',
+      tag: '22 LEYES OFICIALES',
+      tagColor: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40',
+      icon: BookOpen,
+      iconColor: 'bg-emerald-400 text-slate-950',
+      benefit: 'Refuerza individualmente la ley en la que sientas mayor duda (Ley PNP, Disciplina, etc.).',
+      actionText: 'Ver las 22 Normas',
+      btnStyle: 'bg-emerald-700 hover:bg-emerald-600 text-white font-black',
+      onAction: () => onNavigateTab('normas'),
+      bullets: [
+        'Practica ley por ley de forma enfocada.',
+        'Mide tu % de acierto por cada cuerpo normativo.',
+        'Consolida los temas de mayor peso en el examen.'
+      ]
+    },
+    {
+      id: 'banco',
+      title: 'Buscador del Banco',
+      tag: '1,500 REACTIVOS',
+      tagColor: 'bg-slate-500/20 text-slate-300 border-slate-500/40',
+      icon: Search,
+      iconColor: 'bg-slate-300 text-slate-950',
+      benefit: 'Encuentra cualquier término o código de pregunta para verificar la clave oficial.',
+      actionText: 'Buscar en el Banco',
+      btnStyle: 'bg-slate-800 hover:bg-slate-700 text-white font-black',
+      onAction: () => onNavigateTab('banco'),
+      bullets: [
+        'Búsqueda por palabras clave como "flagrancia" o "delito".',
+        'Guarda preguntas difíciles en Favoritos.',
+        'Verifica fundamentación legal oficial.'
+      ]
+    },
+    {
+      id: 'custom_sim',
+      title: 'Examen Personalizado',
+      tag: 'A TU MEDIDA',
+      tagColor: 'bg-purple-500/20 text-purple-400 border-purple-500/40',
+      icon: Sliders,
+      iconColor: 'bg-purple-400 text-slate-950',
+      benefit: 'Arma tus propios examentes combinando únicamente las materias que deseas estudiar.',
+      actionText: 'Diseñar Examen',
+      btnStyle: 'bg-purple-700 hover:bg-purple-600 text-white font-black',
+      onAction: () => onNavigateTab('custom'),
+      bullets: [
+        'Selecciona varias normas en un solo examen.',
+        'Ajusta la cantidad de preguntas y tiempo libre.',
+        'Ideal para repasos personalizados de fin de semana.'
+      ]
+    }
+  ];
 
-        <div className="relative z-10 max-w-2xl mx-auto space-y-5">
-          {/* Badge Oficial - Hidden on mobile to save space */}
-          <div className="hidden sm:inline-flex items-center gap-2 bg-amber-500/15 border border-amber-500/50 text-amber-400 px-4 py-1.5 rounded-full text-xs font-mono font-extrabold tracking-wide">
-            <Shield className="w-4 h-4 shrink-0 text-amber-400" />
-            <span>RD N° 006857-2026-DIRREHUM-PNP/JE · BALOTARIO 2026</span>
+  return (
+    <div className="max-w-5xl mx-auto space-y-8 pb-16">
+      
+      {/* 1. BANNER HERO - ALTO IMPACTO VISUAL Y CONVERSIÓN */}
+      <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 border-2 border-amber-500/60 rounded-3xl p-6 sm:p-8 text-white shadow-2xl relative overflow-hidden text-center">
+        {/* Adorno brillante */}
+        <div className="absolute top-0 right-0 -mt-12 -mr-12 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div className="relative z-10 max-w-2xl mx-auto space-y-4">
+          
+          {/* BADGE OFICIAL */}
+          <div className="inline-flex items-center gap-1.5 bg-amber-500/20 border border-amber-500/50 text-amber-400 px-3.5 py-1 rounded-full text-xs font-mono font-bold">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>BALOTARIO OFICIAL REVISADO 2026 · RD N° 006857-2026</span>
           </div>
 
-          {/* Título simple y contundente */}
-          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black leading-tight text-white tracking-tight">
-            Simulador Ascenso <span className="text-amber-400">PNP 2026</span>
+          {/* TITULO HERO */}
+          <h1 className="font-display text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
+            Asegura tu <span className="text-amber-400 underline decoration-amber-500/60 decoration-wavy">Ascenso PNP 2026</span>
           </h1>
 
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans px-2">
-            Balotario oficial de <strong className="text-white">1,500 preguntas</strong> para el concurso de ascenso. Practica en tu móvil con audio y simulacros reales.
+          <p className="text-xs sm:text-base text-slate-300 font-sans max-w-lg mx-auto">
+            El sistema inteligente con <strong className="text-white">1,500 preguntas oficiales</strong>, <strong className="text-emerald-400">Bot de WhatsApp 24/7</strong> y <strong className="text-sky-300">Profesor IA Legal</strong>.
           </p>
 
-          {/* 3 puntos resumidos - Optimized for both Mobile and PC */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-[10px] sm:text-xs font-mono text-slate-300 pt-1">
-            <span className="flex items-center gap-1.5 bg-slate-800/80 px-2.5 py-1.5 rounded-xl border border-slate-700">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-              <span>1,500 Preguntas</span>
-            </span>
-            <span className="flex items-center gap-1.5 bg-slate-800/80 px-2.5 py-1.5 rounded-xl border border-slate-700">
-              <Volume2 className="w-3.5 h-3.5 text-amber-400" />
-              <span>Audio Voz</span>
-            </span>
-            <span className="flex items-center gap-1.5 bg-slate-800/80 px-2.5 py-1.5 rounded-xl border border-slate-700">
-              <RotateCcw className="w-3.5 h-3.5 text-sky-400" />
-              <span>Repaso SRS</span>
-            </span>
+          {/* TARJETAS DE MÉTRICAS VISUALES */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center max-w-xl mx-auto pt-2 font-mono">
+            <div className="bg-slate-900/90 border border-slate-800 p-2.5 rounded-2xl">
+              <span className="text-xl sm:text-2xl font-black text-amber-400 block">1,500</span>
+              <span className="text-[10px] text-slate-400">Preguntas</span>
+            </div>
+            <div className="bg-slate-900/90 border border-slate-800 p-2.5 rounded-2xl">
+              <span className="text-xl sm:text-2xl font-black text-emerald-400 block">22</span>
+              <span className="text-[10px] text-slate-400">Normas</span>
+            </div>
+            <div className="bg-slate-900/90 border border-slate-800 p-2.5 rounded-2xl">
+              <span className="text-xl sm:text-2xl font-black text-sky-400 block">24/7</span>
+              <span className="text-[10px] text-slate-400">Bot Wsp</span>
+            </div>
+            <div className="bg-slate-900/90 border border-slate-800 p-2.5 rounded-2xl">
+              <span className="text-xl sm:text-2xl font-black text-purple-400 block">IA</span>
+              <span className="text-[10px] text-slate-400">Sustento</span>
+            </div>
           </div>
 
-          {/* 2 BOTONES PRINCIPALES - Focus central en móvil */}
-          <div className="pt-2 sm:pt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mx-auto px-2">
-            {/* BOTÓN 1: CONTRATAR SERVICIO POR WHATSAPP */}
+          {/* BOTONES PRINCIPALES CTA */}
+          <div className="pt-3 flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
             <a
               href={wspLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-emerald-600 hover:bg-emerald-500 text-white font-display font-black text-sm sm:text-base py-4 px-5 rounded-2xl shadow-xl transition-all active-scale flex items-center justify-center gap-3 border-2 border-emerald-400/60 group"
+              className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-display font-black text-sm py-3.5 px-5 rounded-2xl shadow-xl transition-all active-scale flex items-center justify-center gap-2 border border-emerald-400/80"
             >
-              <MessageSquare className="w-5 h-5 fill-current" />
-              <span>CONTRATAR POR WSP</span>
+              <MessageSquare className="w-5 h-5 fill-current shrink-0" />
+              <span>CONTRATAR POR WHATSAPP</span>
+              <ArrowRight className="w-4 h-4" />
             </a>
 
-            {/* BOTÓN 2: YA ESTOY REGISTRADO / INGRESAR AL PORTAL */}
             <button
               type="button"
               onClick={() => onNavigateTab('dashboard')}
-              className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-display font-black text-sm sm:text-base py-4 px-5 rounded-2xl shadow-xl transition-all active-scale flex items-center justify-center gap-3 border-2 border-amber-300 group"
+              className="flex-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-display font-black text-sm py-3.5 px-5 rounded-2xl shadow-xl transition-all active-scale flex items-center justify-center gap-2 border border-amber-300"
             >
-              <Shield className="w-5 h-5 fill-current" />
-              <span>INGRESAR AL PORTAL</span>
+              <Shield className="w-5 h-5 fill-current shrink-0" />
+              <span>PROBAR SIMULADOR</span>
             </button>
           </div>
 
-          {/* INFO BÁSICA ADICIONAL PARA MÓVIL (LIMPIA) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 text-left border-t border-slate-800/60 mt-4 px-2">
-            <div className="space-y-1">
-              <h4 className="text-amber-400 font-display font-bold text-xs uppercase tracking-wider">¿De qué trata?</h4>
-              <p className="text-[11px] text-slate-400 leading-snug">
-                Simulador basado en el banco oficial de <strong className="text-slate-200">1,500 preguntas</strong> para el ascenso de Suboficiales PNP.
-              </p>
-            </div>
-            <div className="space-y-1">
-              <h4 className="text-amber-400 font-display font-bold text-xs uppercase tracking-wider">Contenido</h4>
-              <p className="text-[11px] text-slate-400 leading-snug">
-                Incluye las <strong className="text-slate-200">22 Normas Oficiales</strong> (Materias Comunes y Especialidad) actualizadas al 2026.
-              </p>
-            </div>
-          </div>
+          <p className="text-[11px] text-slate-400 font-mono">
+            ✓ Acceso instantáneo en Android, iPhone y Laptop.
+          </p>
 
-          {/* Botón secundario - Mas pequeño y discreto */}
-          {onOpenExplainer && (
-            <div className="pt-1">
-              <button
-                type="button"
-                onClick={onOpenExplainer}
-                className="text-[10px] sm:text-xs font-mono text-slate-400 hover:text-amber-400 transition-colors inline-flex items-center gap-1"
-              >
-                <span>¿Cómo funciona el Audio y WhatsApp?</span>
-                <HelpCircle className="w-3 h-3" />
-              </button>
-            </div>
-          )}
         </div>
       </div>
 
-      {/* 2. DEMOSTRACIÓN DE PREGUNTA - Hidden on mobile to avoid confusion/clutter */}
-      <div className="hidden sm:block bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-3xl p-6 text-slate-900 dark:text-slate-100 shadow-lg space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-700/80 pb-3">
-          <div>
-            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/30 inline-block mb-1">
-              MUESTRA DEL BALOTARIO OFICIAL
+      {/* 2. SECCIÓN VISUAL DE MÓDULOS DE ACCIÓN */}
+      <div className="space-y-4">
+        <div className="text-center space-y-1">
+          <span className="text-[11px] font-mono font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30 inline-flex items-center gap-1.5">
+            <Target className="w-3.5 h-3.5 text-amber-500" />
+            <span>¿QUÉ PUEDES HACER EN ESTE SIMULADOR?</span>
+          </span>
+          <h2 className="font-display text-xl sm:text-3xl font-black text-slate-900 dark:text-white">
+            Selecciona la acción de tu preferencia
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-lg mx-auto font-sans">
+            Presiona el botón de cada tarjeta para empezar a practicar o toca <strong className="text-slate-900 dark:text-white">"[+] Ver detalles"</strong> para desplegar más información.
+          </p>
+        </div>
+
+        {/* GRILLA ULTRA VISUAL DE ACCIONES */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {visualModules.map(mod => {
+            const Icon = mod.icon;
+            const isExpanded = expandedCard === mod.id;
+
+            return (
+              <div
+                key={mod.id}
+                className="bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-4 text-slate-900 dark:text-slate-100 shadow-sm hover:border-amber-500/70 transition-all flex flex-col justify-between gap-3 group"
+              >
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded border ${mod.tagColor}`}>
+                      {mod.tag}
+                    </span>
+                    <div className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold ${mod.iconColor}`}>
+                      <Icon className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  <h3 className="font-display font-extrabold text-base text-slate-900 dark:text-white leading-snug">
+                    {mod.title}
+                  </h3>
+
+                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-snug font-sans">
+                    {mod.benefit}
+                  </p>
+                </div>
+
+                {/* BOTÓN Y DESPLEGABLE COMPACTO */}
+                <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-700/60">
+                  <button
+                    type="button"
+                    onClick={mod.onAction}
+                    className={`w-full py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow transition-all active-scale ${mod.btnStyle}`}
+                  >
+                    <Play className="w-3.5 h-3.5 fill-current shrink-0" />
+                    <span>{mod.actionText}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => toggleDetail(mod.id)}
+                    className="w-full text-[10px] font-mono font-bold text-slate-500 hover:text-amber-500 dark:text-slate-400 dark:hover:text-amber-400 flex items-center justify-center gap-1 py-0.5"
+                  >
+                    <span>{isExpanded ? 'Ocultar detalles' : '[+] Ver detalles'}</span>
+                    {isExpanded ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                  </button>
+
+                  {/* DESPLEGABLE EN LÍNEA */}
+                  {isExpanded && (
+                    <div className="bg-slate-50 dark:bg-slate-900 border border-amber-500/30 rounded-xl p-2.5 text-[11px] space-y-1.5 animate-fadeIn">
+                      {mod.bullets.map((b, idx) => (
+                        <div key={idx} className="flex items-start gap-1.5 text-slate-700 dark:text-slate-300 leading-tight">
+                          <CheckCircle className="w-3 h-3 text-emerald-500 shrink-0 mt-0.5" />
+                          <span>{b}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* 3. MUESTRA REAL INTERACTIVA CORTA */}
+      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-5 text-slate-900 dark:text-slate-100 shadow-md space-y-3">
+        <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-700 pb-2">
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] font-mono font-bold text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded border border-amber-500/30">
+              MUESTRA EN VIVO
             </span>
-            <h2 className="font-display text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">
-              Prueba una pregunta real del examen
-            </h2>
+            <span className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400">
+              BALOTARIO PNP 2026
+            </span>
           </div>
 
-          <div className="flex items-center gap-2">
-            <AudioButton
-              textToRead={`Pregunta de muestra. Norma: ${sampleQuestion.norma}. ${sampleQuestion.enunciado}. Alternativas: ${sampleQuestion.opciones.map((op, i) => `Opción ${String.fromCharCode(65 + i)}: ${op}`).join('. ')}`}
-              label="Escuchar audio"
-              size="sm"
-            />
-            <button
-              onClick={handleNextSample}
-              className="bg-slate-100 dark:bg-slate-900 hover:bg-amber-500 hover:text-slate-950 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 px-3 py-1.5 rounded-full text-xs font-mono font-bold transition-all flex items-center gap-1 active-scale"
-            >
-              <RotateCcw className="w-3.5 h-3.5 text-amber-500" />
-              <span>Otra pregunta</span>
-            </button>
-          </div>
+          <button
+            onClick={() => {
+              setSelectedOpt(null);
+              setSampleIndex(prev => prev + 1);
+            }}
+            className="text-xs font-mono font-bold text-slate-600 hover:text-amber-500 dark:text-slate-300 flex items-center gap-1 active-scale"
+          >
+            <RotateCcw className="w-3.5 h-3.5 text-amber-500" />
+            <span>Otra pregunta</span>
+          </button>
         </div>
 
         {/* CÓDIGO Y NORMA */}
-        <div className="flex items-center gap-2 font-mono text-xs">
+        <div className="flex items-center gap-2 font-mono text-[11px]">
           <span className="bg-slate-100 dark:bg-slate-900 text-amber-600 dark:text-amber-400 border border-amber-500/30 px-2 py-0.5 rounded font-bold">
             CÓDIGO: {sampleQuestion.id}
           </span>
-          <span className="bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-500/40 px-2 py-0.5 rounded font-bold uppercase">
+          <span className="bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-500/40 px-2 py-0.5 rounded font-bold uppercase truncate max-w-[200px]">
             {sampleQuestion.norma}
           </span>
         </div>
 
         {/* ENUNCIADO */}
-        <p className="font-display font-semibold text-sm sm:text-base text-slate-900 dark:text-white leading-relaxed">
+        <p className="font-display font-semibold text-xs sm:text-sm text-slate-900 dark:text-white leading-snug">
           {sampleQuestion.enunciado}
         </p>
 
         {/* OPCIONES */}
-        <div className="space-y-2 pt-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
           {sampleQuestion.opciones.map((op, opIdx) => {
             const letra = String.fromCharCode(65 + opIdx);
-            const isSelected = selectedOption === op;
+            const isSelected = selectedOpt === op;
             const isRight = op.trim() === sampleQuestion.respuesta.trim();
 
             let optionStyle =
-              'bg-slate-50 dark:bg-slate-900 hover:bg-amber-50 dark:hover:bg-slate-700/80 text-slate-800 dark:text-slate-200 border-slate-200 dark:border-slate-700';
+              'bg-slate-50 dark:bg-slate-900 hover:bg-amber-50 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border-slate-200 dark:border-slate-700';
 
-            if (selectedOption !== null) {
+            if (selectedOpt !== null) {
               if (isRight) {
-                optionStyle =
-                  'bg-emerald-100 dark:bg-emerald-950 text-emerald-900 dark:text-emerald-200 border-emerald-500 font-bold ring-1 ring-emerald-500/50';
+                optionStyle = 'bg-emerald-100 dark:bg-emerald-950 text-emerald-900 dark:text-emerald-200 border-emerald-500 font-bold';
               } else if (isSelected) {
                 optionStyle = 'bg-red-100 dark:bg-red-950 text-red-900 dark:text-red-200 border-red-500 font-bold';
               }
@@ -205,60 +404,70 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             return (
               <button
                 key={opIdx}
-                onClick={() => setSelectedOption(op)}
-                className={`w-full text-left p-3 rounded-xl border text-xs sm:text-sm font-sans transition-all flex items-start gap-3 active-scale ${optionStyle}`}
+                onClick={() => setSelectedOpt(op)}
+                className={`p-2.5 rounded-xl border text-xs font-sans transition-all text-left flex items-start gap-2 active-scale ${optionStyle}`}
               >
-                <span className="font-mono text-amber-600 dark:text-amber-400 font-bold text-xs bg-amber-500/10 w-6 h-6 rounded flex items-center justify-center shrink-0 border border-amber-500/30">
+                <span className="font-mono text-amber-600 dark:text-amber-400 font-bold text-xs bg-amber-500/10 w-5 h-5 rounded flex items-center justify-center shrink-0 border border-amber-500/30">
                   {letra}
                 </span>
-                <span className="flex-1 leading-snug pt-0.5">{op}</span>
-                {selectedOption !== null && isRight && (
-                  <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0" />
-                )}
-                {selectedOption !== null && isSelected && !isRight && (
-                  <XCircle className="w-4 h-4 text-red-500 shrink-0" />
-                )}
+                <span className="flex-1 leading-tight pt-0.5 text-[11px]">{op}</span>
               </button>
             );
           })}
         </div>
 
-        {/* FEEDBACK CORTO SI YA RESPONDIÓ */}
-        {selectedOption !== null && (
-          <div className="p-3.5 rounded-xl border bg-slate-50 dark:bg-slate-900 border-amber-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono">
-            <div className="flex items-center gap-2">
-              {isCorrect ? (
-                <>
-                  <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0" />
-                  <span className="text-emerald-700 dark:text-emerald-300 font-bold">
-                    ¡CORRECTO! Base legal verificada.
-                  </span>
-                </>
-              ) : (
-                <>
-                  <XCircle className="w-4 h-4 text-red-500 shrink-0" />
-                  <span className="text-red-700 dark:text-red-300 font-bold">
-                    Respuesta oficial: {sampleQuestion.respuesta}
-                  </span>
-                </>
-              )}
-            </div>
-
+        {/* FEEDBACK */}
+        {selectedOpt !== null && (
+          <div className="p-2.5 rounded-xl border bg-slate-50 dark:bg-slate-900 border-amber-500/40 flex items-center justify-between gap-2 text-xs font-mono">
+            <span className="text-emerald-600 dark:text-emerald-400 font-bold">
+              Clave oficial: {sampleQuestion.respuesta}
+            </span>
             <button
               onClick={() => onNavigateTab('dashboard')}
-              className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-mono font-bold px-3 py-1.5 rounded-lg text-xs shadow flex items-center gap-1 self-end sm:self-auto active-scale"
+              className="bg-amber-500 text-slate-950 font-bold px-3 py-1 rounded text-[11px] active-scale"
             >
-              <span>Entrar al Portal a practicar</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              Ir al Portal
             </button>
           </div>
         )}
       </div>
 
-      {/* PIE DE ACCESO RÁPIDO DISCRETO */}
-      <div className="text-center text-xs text-slate-500 dark:text-slate-400 font-mono">
-        <span>RD N° 006857-2026-DIRREHUM-PNP/JE — Centro de Evaluación de Ascenso PNP 2026</span>
+      {/* 4. BANNER FINAL CTA DE CONVERSIÓN */}
+      <div className="bg-gradient-to-r from-emerald-950 via-slate-900 to-amber-950 border-2 border-emerald-500/80 rounded-3xl p-6 text-white shadow-xl text-center space-y-4">
+        <Award className="w-10 h-10 text-amber-400 mx-auto" />
+        <h2 className="font-display text-2xl sm:text-3xl font-black">
+          ¡Asegura tu Vacante de Ascenso PNP 2026!
+        </h2>
+        <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto">
+          Prueba las herramientas gratis o contáctanos por WhatsApp para activar tu acceso al Balotario Oficial de 1,500 preguntas.
+        </p>
+
+        <div className="flex flex-col sm:flex-row justify-center gap-3 pt-1">
+          <a
+            href={wspLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-mono font-black text-xs py-3 px-6 rounded-xl flex items-center justify-center gap-2 border border-emerald-300"
+          >
+            <MessageSquare className="w-4 h-4 fill-current" />
+            <span>CONTRATAR POR WHATSAPP</span>
+          </a>
+
+          <button
+            onClick={() => onNavigateTab('dashboard')}
+            className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-mono font-black text-xs py-3 px-6 rounded-xl flex items-center justify-center gap-2 border border-amber-300"
+          >
+            <Play className="w-4 h-4 fill-current" />
+            <span>INGRESAR AL SIMULADOR</span>
+          </button>
+        </div>
       </div>
+
+      {/* PIE REGULATORIO */}
+      <div className="text-center text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+        <span>RD N° 006857-2026-DIRREHUM-PNP/JE — Centro de Evaluación PNP 2026</span>
+      </div>
+
     </div>
   );
 };

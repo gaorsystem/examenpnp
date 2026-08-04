@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Shield, BookOpen, Search, ArrowRight, CheckCircle2, Play } from 'lucide-react';
 import { NormaInfo, GrupoMateria } from '../types';
 import { getNormasInfo } from '../data/questionsData';
+import { SimulacroInfoModal, ExamModalDetails } from './SimulacroInfoModal';
 
 interface NormPracticeScreenProps {
   onStartExamenNorma: (normaNombre: string, cantidad: number) => void;
@@ -13,12 +14,34 @@ export const NormPracticeScreen: React.FC<NormPracticeScreenProps> = ({ onStartE
   const [search, setSearch] = useState('');
   const [selectedNorma, setSelectedNorma] = useState<NormaInfo | null>(normas[0] || null);
   const [cantidad, setCantidad] = useState<number>(15);
+  const [selectedExamDetails, setSelectedExamDetails] = useState<ExamModalDetails | null>(null);
 
   const filteredNormas = normas.filter((n) => {
     const matchGrupo = grupoFiltro === 'TODOS' || n.grupo === grupoFiltro;
     const matchSearch = n.nombre.toLowerCase().includes(search.toLowerCase());
     return matchGrupo && matchSearch;
   });
+
+  const handleConfirmStartNorma = () => {
+    if (!selectedNorma) return;
+    setSelectedExamDetails({
+      mode: 'norma',
+      title: `Estudio Focalizado: ${selectedNorma.nombre}`,
+      badge: `📖 ${cantidad} Preguntas por Norma`,
+      badgeColor: 'bg-amber-600 text-white font-black',
+      finalidad: `Evaluar y consolidar tu nivel de acierto en los artículos y disposiciones de la norma legal "${selectedNorma.nombre}".`,
+      comoFunciona: [
+        `Resolverás ${cantidad} preguntas de opción múltiple pertenecientes a esta ley.`,
+        'Al marcar cada respuesta verás el número de artículo legal que sustenta la solución.',
+        'Podrás apoyarte en el Profesor IA para despejar cualquier duda interpretativa.'
+      ],
+      preguntasCount: cantidad,
+      tiempoEstimado: 'Sin límite de tiempo',
+      permiteAyudas: true,
+      retroalimentacion: 'instantanea',
+      onConfirm: () => onStartExamenNorma(selectedNorma.nombre, cantidad)
+    });
+  };
 
   return (
     <div className="space-y-6 pb-12">
@@ -158,7 +181,7 @@ export const NormPracticeScreen: React.FC<NormPracticeScreenProps> = ({ onStartE
             </div>
 
             <button
-              onClick={() => onStartExamenNorma(selectedNorma.nombre, cantidad)}
+              onClick={handleConfirmStartNorma}
               className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-mono font-bold px-6 py-2.5 rounded-xl text-xs flex items-center gap-2 shadow-md transition-all active-scale"
             >
               <Play className="w-4 h-4 fill-current" />
@@ -167,6 +190,13 @@ export const NormPracticeScreen: React.FC<NormPracticeScreenProps> = ({ onStartE
           </div>
         </div>
       )}
+
+      {/* Modal Popup informativo */}
+      <SimulacroInfoModal
+        isOpen={selectedExamDetails !== null}
+        details={selectedExamDetails}
+        onClose={() => setSelectedExamDetails(null)}
+      />
     </div>
   );
 };

@@ -19,6 +19,7 @@ import { BANCO_PREGUNTAS } from '../data/questionsData';
 import { Pregunta, GrupoMateria } from '../types';
 import { barajar } from '../data/questionsData';
 import { getFavoritos } from '../lib/srsStorage';
+import { SimulacroInfoModal, ExamModalDetails } from './SimulacroInfoModal';
 
 interface CustomExamBuilderProps {
   onStartCustomExamen: (
@@ -44,6 +45,7 @@ export const CustomExamBuilder: React.FC<CustomExamBuilderProps> = ({
   const [manualSelection, setManualSelection] = useState<boolean>(false);
   const [selectedQuestionIds, setSelectedQuestionIds] = useState<string[]>([]);
   const [busquedaManual, setBusquedaManual] = useState<string>('');
+  const [selectedExamDetails, setSelectedExamDetails] = useState<ExamModalDetails | null>(null);
 
   const favoritedIds = getFavoritos();
 
@@ -114,7 +116,24 @@ export const CustomExamBuilder: React.FC<CustomExamBuilderProps> = ({
     }
 
     const titulo = `Simulacro Personalizado (${finalQuestions.length} preg.)`;
-    onStartCustomExamen(finalQuestions, tiempoMinutos, titulo);
+
+    setSelectedExamDetails({
+      mode: 'custom',
+      title: titulo,
+      badge: '⚙️ Simulacro Personalizado',
+      badgeColor: 'bg-purple-600 text-white font-black',
+      finalidad: `Realizar un entrenamiento especializado de ${finalQuestions.length} preguntas focalizadas en las normas legales elegidas por ti.`,
+      comoFunciona: [
+        `Se preparó un banco de ${finalQuestions.length} preguntas filtradas.`,
+        `Tiempo límite configurado: ${tiempoMinutos === 0 ? 'Sin tiempo límite' : `${tiempoMinutos} minutos`}.`,
+        'Verás el sustento legal y profesor IA al responder cada reactivo.'
+      ],
+      preguntasCount: finalQuestions.length,
+      tiempoEstimado: tiempoMinutos === 0 ? 'Sin límite de tiempo' : `${tiempoMinutos} minutos`,
+      permiteAyudas: true,
+      retroalimentacion: 'instantanea',
+      onConfirm: () => onStartCustomExamen(finalQuestions, tiempoMinutos, titulo)
+    });
   };
 
   return (
@@ -394,6 +413,13 @@ export const CustomExamBuilder: React.FC<CustomExamBuilderProps> = ({
           <span>GENERAR E INICIAR MI SIMULACRO PERSONALIZADO</span>
         </button>
       </div>
+
+      {/* Modal Popup al Iniciar Simulacro Personalizado */}
+      <SimulacroInfoModal
+        isOpen={selectedExamDetails !== null}
+        details={selectedExamDetails}
+        onClose={() => setSelectedExamDetails(null)}
+      />
     </div>
   );
 };

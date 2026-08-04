@@ -13,6 +13,7 @@ import { UserProfileModal } from './components/UserProfileModal';
 import { OtpLoginModal } from './components/OtpLoginModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { AudioAndBotExplainerModal } from './components/AudioAndBotExplainerModal';
+import { GuideHelpModal } from './components/GuideHelpModal';
 import { AuthFlow } from './components/auth/AuthFlow';
 import { UserManagement } from './components/admin/UserManagement';
 import { Play, Zap, ArrowLeft, X, Home } from 'lucide-react';
@@ -46,6 +47,7 @@ export default function App() {
   const [showProfileModal, setShowProfileModal] = useState<boolean>(false);
   const [showOtpModal, setShowOtpModal] = useState<boolean>(false);
   const [showExplainerModal, setShowExplainerModal] = useState<boolean>(false);
+  const [showGuideModal, setShowGuideModal] = useState<boolean>(false);
 
   // Theme State ('light' | 'dark')
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -360,6 +362,7 @@ export default function App() {
         onOpenOtpModal={() => setShowOtpModal(true)}
         onLogout={handleLogout}
         onQuickSimulacro={() => handleStartExamen('simulacro', 20)}
+        onOpenGuideModal={() => setShowGuideModal(true)}
         theme={theme}
         onToggleTheme={toggleTheme}
       />
@@ -530,13 +533,11 @@ export default function App() {
         />
       )}
 
-      {/* Interactive Guide Modal for Audio-Lectura & WhatsApp Bot */}
-      {showExplainerModal && (
-        <AudioAndBotExplainerModal
-          onClose={() => setShowExplainerModal(false)}
-          onOpenWhatsAppSimulator={() => setActiveTab('whatsapp')}
-        />
-      )}
+      {/* General Visual Guide Help Modal */}
+      <GuideHelpModal
+        isOpen={showGuideModal}
+        onClose={() => setShowGuideModal(false)}
+      />
 
       {/* Native Mobile Bottom Navigation Bar (Hidden on Desktop) */}
       <MobileBottomNav

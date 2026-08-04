@@ -16,10 +16,11 @@ import {
   Lightbulb,
   Grid,
   Zap,
+  Eye,
 } from 'lucide-react';
 import { Pregunta, RespuestaUsuario, IntentoExamen } from '../types';
 import { getFavoritos, toggleFavorito } from '../lib/srsStorage';
-import { AudioButton } from './AudioButton';
+import { esRespuestaCorrecta } from '../data/questionsData';
 
 interface ExamScreenProps {
   modo: 'simulacro' | 'repaso' | 'norma' | 'expres' | 'whatsapp';
@@ -48,7 +49,7 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
   );
   const [showConfirmFinish, setShowConfirmFinish] = useState<boolean>(false);
   const [modoInstantaneo, setModoInstantaneo] = useState<boolean>(
-    modo === 'repaso' || modo === 'norma'
+    modo !== 'simulacro'
   );
 
   // Lifelines & Interactive tools
@@ -126,7 +127,11 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
     if (!currentPregunta) return;
 
     const elapsedSeg = Math.max(1, Math.round((Date.now() - questionStartTimeRef.current) / 1000));
-    const esCorrecta = opcionElegida.trim() === currentPregunta.respuesta.trim();
+    const esCorrecta = esRespuestaCorrecta(
+      opcionElegida,
+      currentPregunta.respuesta,
+      currentPregunta.opciones
+    );
 
     setRespuestasMap((prev) => ({
       ...prev,
@@ -147,8 +152,8 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
   const handleUse5050 = () => {
     if (!currentPregunta || eliminatedMap[currentPregunta.id]) return;
 
-    const correctIndex = currentPregunta.opciones.findIndex(
-      (op) => op.trim() === currentPregunta.respuesta.trim()
+    const correctIndex = currentPregunta.opciones.findIndex((op) =>
+      esRespuestaCorrecta(op, currentPregunta.respuesta, currentPregunta.opciones)
     );
 
     const wrongIndices = currentPregunta.opciones
@@ -175,7 +180,9 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
     preguntas.forEach((q) => {
       const resp = respuestasMap[q.id];
       const opcionElegida = resp ? resp.opcion : '';
-      const esCorrecta = resp ? opcionElegida.trim() === q.respuesta.trim() : false;
+      const esCorrecta = resp
+        ? esRespuestaCorrecta(opcionElegida, q.respuesta, q.opciones)
+        : false;
       if (esCorrecta) aciertos += 1;
 
       respuestasList.push({
@@ -229,17 +236,19 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
   return (
     <div className="max-w-4xl mx-auto space-y-4 pb-16">
       {/* Top Control Header */}
-      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-2 sm:p-3 text-slate-900 dark:text-slate-100 font-mono text-[10px] sm:text-xs flex items-center justify-between gap-2 shadow-md sticky top-0 z-30">
-        <div className="flex items-center gap-1.5">
+      <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-2.5 sm:p-3 text-slate-900 dark:text-slate-100 font-mono text-[10px] sm:text-xs flex items-center justify-between gap-2 shadow-md sticky top-0 z-30">
+        <div className="flex items-center gap-2">
+          {/* BOTÓN VISIBLE Y DESTACADO: VOLVER AL PORTAL */}
           <button
             type="button"
             onClick={onCancelExamen}
-            className="px-3 py-2 rounded-xl bg-red-500/10 hover:bg-red-500 hover:text-white border border-red-500/30 text-red-600 transition-all active-scale flex items-center gap-1.5 font-black uppercase tracking-tighter"
-            title="Regresar al Portal"
+            className="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-white text-white dark:text-slate-950 font-display font-extrabold text-xs flex items-center gap-2 border border-slate-700 dark:border-slate-200 shadow-md transition-all active-scale shrink-0"
+            title="Volver al Portal de preparación"
           >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span className="text-[9px] sm:text-[10px]">SALIR</span>
+            <ArrowLeft className="w-4 h-4 text-amber-400 dark:text-amber-600 shrink-0 stroke-[2.5]" />
+            <span className="font-sans">Volver al Portal</span>
           </button>
+
           <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-900 px-2.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 font-bold">
             <span className="text-amber-600">{currentIndex + 1}</span>
             <span className="opacity-40">/</span>
@@ -254,7 +263,7 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
               <span>{timeFormatted}</span>
             </div>
           ) : (
-            <span className="hidden xs:inline bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30 px-2 py-2 rounded-xl font-bold uppercase text-[9px]">
+            <span className="hidden xs:inline bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30 px-2.5 py-2 rounded-xl font-bold uppercase text-[10px]">
               {modo.toUpperCase()}
             </span>
           )}
@@ -262,13 +271,14 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
           <button
             onClick={() => setShowJumpDrawer(!showJumpDrawer)}
             className="bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-amber-400 border border-slate-200 dark:border-slate-700 p-2 rounded-xl active-scale"
+            title="Ver mapa de preguntas"
           >
             <Grid className="w-4 h-4" />
           </button>
 
           <button
             onClick={() => setShowConfirmFinish(true)}
-            className="bg-red-600 text-white px-3 py-2 rounded-xl font-black shadow-sm active-scale text-[10px]"
+            className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-xl font-black shadow-sm active-scale text-[10px]"
           >
             FIN
           </button>
@@ -284,156 +294,147 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
       </div>
 
       {/* EXPEDIENTE POLICIAL QUESTION CARD */}
-      <div className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-3xl shadow-xl p-6 sm:p-8 relative border border-slate-200 dark:border-slate-700/80 overflow-hidden space-y-6">
+      <div className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-6 relative border border-slate-200 dark:border-slate-700/80 overflow-hidden space-y-4">
         {/* Top Accent Strip */}
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600"></div>
 
         {/* Official PNP Stamp Badge */}
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 dark:border-slate-700/80 pb-4">
-          <div className="space-y-1">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 dark:border-slate-700/80 pb-3">
+          <div className="space-y-0.5">
             <div className="flex items-center gap-2">
               <span
-                className={`font-mono text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase tracking-wider ${
+                className={`font-mono text-[9px] sm:text-[10px] font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider ${
                   currentPregunta.grupo === 'COMUNES'
                     ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30'
                     : 'bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30'
                 }`}
               >
-                Materias {currentPregunta.grupo.toLowerCase()}
+                {currentPregunta.grupo.toLowerCase()}
               </span>
-              <span className="font-mono text-xs text-amber-600 dark:text-amber-400 font-bold">
-                CÓDIGO PNP: {currentPregunta.id}
+              <span className="font-mono text-[11px] text-amber-600 dark:text-amber-400 font-bold">
+                CÓDIGO: {currentPregunta.id}
               </span>
             </div>
 
-            <h2 className="font-display font-bold text-xs sm:text-sm text-slate-700 dark:text-slate-300 uppercase tracking-wide">
+            <h2 className="font-display font-bold text-xs text-slate-700 dark:text-slate-300 uppercase tracking-wide">
               {currentPregunta.norma}
             </h2>
-          </div>
-
-          {/* Interactive Audio Player Button */}
-          <div className="shrink-0">
-            <AudioButton
-              textToRead={`Pregunta número ${currentIndex + 1}. Norma: ${currentPregunta.norma}. ${currentPregunta.enunciado}. Alternativas: ${currentPregunta.opciones.map((op, i) => `Opción ${String.fromCharCode(65 + i)}: ${op}`).join('. ')}`}
-              label="Escuchar Pregunta"
-              size="md"
-            />
           </div>
         </div>
 
         {/* INTERACTIVE LIFELINES & STUDY TOOLS BAR (COMODINES) */}
-        <div className="flex flex-wrap items-center justify-between gap-2 bg-slate-100 dark:bg-slate-900 p-2.5 rounded-2xl border border-slate-200 dark:border-slate-700">
-          <span className="text-[11px] font-mono font-bold text-amber-600 dark:text-amber-400 px-2 flex items-center gap-1">
-            <Zap className="w-3.5 h-3.5" />
-            Herramientas Interactivas:
+        <div className="flex flex-wrap items-center justify-between gap-1.5 bg-slate-100 dark:bg-slate-900 p-2 rounded-xl border border-slate-200 dark:border-slate-700">
+          <span className="text-[10px] font-mono font-bold text-amber-600 dark:text-amber-400 px-1 flex items-center gap-1">
+            <Zap className="w-3 h-3" />
+            Herramientas:
           </span>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             {/* 50:50 Lifeline Button */}
             <button
               onClick={handleUse5050}
               disabled={currentEliminated.length > 0 || isRespondida}
-              className={`px-3 py-1.5 rounded-xl font-mono text-xs font-bold transition-all flex items-center gap-1.5 border active-scale ${
+              className={`px-2.5 py-1 rounded-lg font-mono text-[11px] font-bold transition-all flex items-center gap-1 border active-scale ${
                 currentEliminated.length > 0
                   ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/30 opacity-80'
                   : 'bg-white dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-amber-400 border-slate-300 dark:border-slate-700 shadow-sm'
               }`}
               title="Descartar 2 alternativas incorrectas"
             >
-              <Scissors className="w-3.5 h-3.5 text-amber-500" />
-              <span>{currentEliminated.length > 0 ? 'Descarte 50:50 Usado' : '50:50 Descarte'}</span>
+              <Scissors className="w-3 h-3 text-amber-500" />
+              <span>{currentEliminated.length > 0 ? '50:50 Usado' : '50:50'}</span>
             </button>
 
             {/* Hint Toggle Button */}
             <button
               onClick={() => setShowHint(!showHint)}
-              className={`px-3 py-1.5 rounded-xl font-mono text-xs font-bold transition-all flex items-center gap-1.5 border active-scale ${
+              className={`px-2.5 py-1 rounded-lg font-mono text-[11px] font-bold transition-all flex items-center gap-1 border active-scale ${
                 showHint
                   ? 'bg-amber-500 text-slate-950 border-amber-400 shadow-sm'
                   : 'bg-white dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700'
               }`}
               title="Ver pista o referencia de ley"
             >
-              <Lightbulb className="w-3.5 h-3.5" />
-              <span>{showHint ? 'Ocultar Pista' : 'Ver Pista Legal'}</span>
+              <Lightbulb className="w-3 h-3" />
+              <span>{showHint ? 'Ocultar Pista' : 'Pista'}</span>
             </button>
 
             {/* Bookmark Question Button */}
             <button
               onClick={handleToggleFavorito}
-              className={`px-3 py-1.5 rounded-xl font-mono text-xs font-bold transition-all flex items-center gap-1.5 border active-scale ${
+              className={`px-2.5 py-1 rounded-lg font-mono text-[11px] font-bold transition-all flex items-center gap-1 border active-scale ${
                 isFav
                   ? 'bg-red-600 text-white border-red-500 shadow-sm'
                   : 'bg-white dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700'
               }`}
               title="Guardar en lista de repaso prioritario SRS"
             >
-              <Bookmark className={`w-3.5 h-3.5 ${isFav ? 'fill-current' : ''}`} />
-              <span>{isFav ? 'Marcada' : 'Marcar'}</span>
+              <Bookmark className={`w-3 h-3 ${isFav ? 'fill-current' : ''}`} />
+              <span>{isFav ? 'Guardada' : 'Marcar'}</span>
             </button>
           </div>
         </div>
 
         {/* HINT FLOATING DRAWER */}
         {showHint && (
-          <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-slate-800 dark:text-slate-200 space-y-2 text-xs font-mono animate-fadeIn">
-            <div className="flex items-center gap-2 text-amber-700 dark:text-amber-400 font-bold text-sm">
-              <Lightbulb className="w-4 h-4 fill-current" />
-              <span>Referencia del Balotario Oficial:</span>
+          <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-slate-800 dark:text-slate-200 space-y-1 text-xs font-mono animate-fadeIn">
+            <div className="flex items-center gap-1.5 text-amber-700 dark:text-amber-400 font-bold">
+              <Lightbulb className="w-3.5 h-3.5 fill-current" />
+              <span>Referencia Legal:</span>
             </div>
             <p className="leading-relaxed">
               {currentPregunta.ubicacion
-                ? `Esta pregunta corresponde a: ${currentPregunta.ubicacion}. Analiza con detenimiento la redacción técnica del texto legal.`
-                : 'Esta pregunta proviene de las materias fundamentales del temario oficial PNP 2026. Recuerda distinguir los plazos y causales taxativas.'}
+                ? `Esta pregunta corresponde a: ${currentPregunta.ubicacion}. Analiza la redacción del texto legal.`
+                : 'Pregunta del temario oficial PNP 2026. Distingue los plazos y causales taxativas.'}
             </p>
           </div>
         )}
 
         {/* ENUNCIADO DE LA PREGUNTA */}
-        <div className="space-y-4">
-          <p className="font-display font-black text-xl sm:text-2xl md:text-3xl text-slate-900 dark:text-white leading-[1.1] tracking-tight">
+        <div className="space-y-2">
+          <p className="font-display font-black text-base sm:text-xl md:text-2xl text-slate-900 dark:text-white leading-snug tracking-tight">
             {currentPregunta.enunciado}
           </p>
-          <div className="flex flex-wrap items-center gap-3">
-            <button
-              onClick={() => setModoInstantaneo(!modoInstantaneo)}
-              className={`text-[10px] font-mono font-bold px-2.5 py-1 rounded-lg border transition-all ${
-                modoInstantaneo 
-                  ? 'bg-amber-500 text-slate-950 border-amber-400' 
-                  : 'bg-slate-100 dark:bg-slate-900 text-slate-500 border-slate-200 dark:border-slate-700'
-              }`}
-            >
-              FEEDBACK: {modoInstantaneo ? 'ON' : 'OFF'}
-            </button>
-            <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest font-bold">
-              Toca la respuesta correcta:
+          <div className="flex items-center justify-between gap-2">
+            <span className="text-xs font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider font-extrabold">
+              Selecciona una alternativa:
             </span>
+            {modo !== 'simulacro' && (
+              <span className="text-[10px] font-mono font-black px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
+                <CheckCircle className="w-3 h-3 text-emerald-500" />
+                RESPUESTA AL INSTANTE ACTIVADA
+              </span>
+            )}
           </div>
         </div>
 
         {/* ALTERNATIVAS INTERACTIVAS (OPTION CARDS) */}
-        <div className="grid grid-cols-1 gap-3 pt-2">
+        <div className="grid grid-cols-1 gap-2 pt-1">
           {currentPregunta.opciones.map((opcionText, opIdx) => {
             const letra = String.fromCharCode(65 + opIdx); // A, B, C, D, E
             const isSelected = currentRespuesta?.opcion === opcionText;
-            const esCorrecta = opcionText.trim() === currentPregunta.respuesta.trim();
+            const esCorrecta = esRespuestaCorrecta(
+              opcionText,
+              currentPregunta.respuesta,
+              currentPregunta.opciones
+            );
             const isEliminated = currentEliminated.includes(opcionText);
 
             let optionStyle =
-              'bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100';
+              'bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 hover:border-amber-400';
 
             if (isSelected) {
               optionStyle =
-                'bg-amber-500/10 dark:bg-amber-500/20 border-amber-500 text-slate-900 dark:text-white font-bold ring-1 ring-amber-500';
+                'bg-amber-500/20 dark:bg-amber-500/30 border-2 border-amber-500 text-slate-900 dark:text-white font-extrabold ring-2 ring-amber-500/40 shadow-sm';
             }
 
             if (modoInstantaneo && isRespondida) {
               if (esCorrecta) {
                 optionStyle =
-                  'bg-emerald-500/10 dark:bg-emerald-500/20 border-emerald-500 text-emerald-900 dark:text-emerald-100 font-bold ring-1 ring-emerald-500';
+                  'bg-emerald-500/20 dark:bg-emerald-500/30 border-2 border-emerald-500 text-emerald-950 dark:text-emerald-100 font-extrabold ring-2 ring-emerald-500/40 shadow-sm';
               } else if (isSelected) {
                 optionStyle =
-                  'bg-red-500/10 dark:bg-red-500/20 border-red-500 text-red-900 dark:text-red-100 font-bold ring-1 ring-red-500';
+                  'bg-red-500/20 dark:bg-red-500/30 border-2 border-red-500 text-red-950 dark:text-red-100 font-extrabold ring-2 ring-red-500/40 shadow-sm';
               }
             }
 
@@ -447,17 +448,17 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
                 key={opIdx}
                 disabled={isEliminated}
                 onClick={() => handleSelectOpcion(opcionText)}
-                className={`w-full text-left p-4 sm:p-5 rounded-2xl border-2 transition-all flex items-start gap-4 text-sm sm:text-lg font-sans active-scale ${optionStyle}`}
+                className={`w-full text-left p-3.5 sm:p-4 rounded-xl border transition-all flex items-start gap-3 text-xs sm:text-sm font-sans active-scale ${optionStyle}`}
               >
                 {/* Letter Pill */}
                 <span
-                  className={`w-9 h-9 rounded-xl flex items-center justify-center font-mono font-black text-base shrink-0 mt-0.5 border shadow-sm transition-all ${
+                  className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center font-mono font-black text-xs sm:text-sm shrink-0 mt-0.5 border shadow-sm transition-all ${
                     modoInstantaneo && isRespondida && esCorrecta
-                      ? 'bg-emerald-500 text-white border-emerald-400'
+                      ? 'bg-emerald-500 text-white border-emerald-400 shadow-md scale-105'
                       : modoInstantaneo && isRespondida && isSelected && !esCorrecta
-                      ? 'bg-red-500 text-white border-red-400'
+                      ? 'bg-red-500 text-white border-red-400 shadow-md scale-105'
                       : isSelected
-                      ? 'bg-amber-500 text-slate-950 border-amber-400'
+                      ? 'bg-amber-500 text-slate-950 border-amber-400 font-black shadow-md scale-105'
                       : 'bg-white dark:bg-slate-800 text-amber-600 dark:text-amber-400 border-slate-300 dark:border-slate-700'
                   }`}
                 >
@@ -465,7 +466,7 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
                 </span>
 
                 {/* Text Content */}
-                <span className="flex-1 leading-[1.3] pt-1">{opcionText}</span>
+                <span className="flex-1 leading-snug pt-0.5">{opcionText}</span>
 
                 {/* Instant Feedback Symbols */}
                 {modoInstantaneo && isRespondida && esCorrecta && (
@@ -479,35 +480,91 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
           })}
         </div>
 
-        {/* FEEDBACK & RATIONALE FOOTER PANEL */}
-        {modoInstantaneo && isRespondida && (
-          <div className="mt-6 p-5 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700/80 space-y-3 font-mono text-xs animate-fadeIn shadow-md">
-            <div className="flex items-center gap-2 text-sm font-bold">
-              {currentRespuesta.esCorrecta ? (
-                <span className="text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
-                  <CheckCircle className="w-5 h-5 text-emerald-500" />
-                  ¡Excelente Oficial! Respuesta Correcta Confirmada
-                </span>
-              ) : (
-                <span className="text-red-600 dark:text-red-400 flex items-center gap-1.5">
-                  <XCircle className="w-5 h-5 text-red-500" />
-                  Respuesta Incorrecta — Revisa la Base Legal Oficial
-                </span>
-              )}
+        {/* PIE DE PÁGINA DE LA PREGUNTA: AVANCE, BARRA DE PROGRESO Y NAVEGACIÓN */}
+        <div className="border-t border-slate-200 dark:border-slate-700/80 pt-3.5 mt-4 space-y-3">
+          {/* BARRA DE AVANCE INTEGRADA EN EL PIE DE PÁGINA */}
+          <div className="space-y-1.5 w-full">
+            <div className="flex items-center justify-between text-xs font-mono font-bold">
+              <span className="text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                <span className="text-amber-600 dark:text-amber-400 font-extrabold">
+                  Pregunta {currentIndex + 1}
+                </span>{' '}
+                <span className="text-slate-400 font-normal">de {totalPreguntas}</span>
+              </span>
+              <span className="text-[11px] bg-amber-500/15 text-amber-700 dark:text-amber-400 px-2.5 py-0.5 rounded-lg font-extrabold border border-amber-500/30">
+                {Math.round(((currentIndex + 1) / totalPreguntas) * 100)}% Avance
+              </span>
             </div>
 
-            <p className="text-slate-800 dark:text-slate-200 leading-relaxed pt-1 border-t border-slate-200 dark:border-slate-700/80">
-              <strong className="text-slate-900 dark:text-white font-bold">Alternativa Oficial:</strong>{' '}
-              <span className="text-amber-600 dark:text-amber-400 font-bold">{currentPregunta.respuesta}</span>
-            </p>
+            {/* BARRA DE PROGRESO VISIBLE */}
+            <div className="w-full bg-slate-100 dark:bg-slate-900 h-2.5 rounded-full overflow-hidden border border-slate-200 dark:border-slate-700 shadow-inner">
+              <div
+                className="bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 h-full transition-all duration-300 rounded-full"
+                style={{ width: `${((currentIndex + 1) / totalPreguntas) * 100}%` }}
+              ></div>
+            </div>
+          </div>
 
-            {currentPregunta.ubicacion && (
-              <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                <strong className="text-slate-800 dark:text-slate-200">Sustento en Reglamento:</strong> {currentPregunta.ubicacion}
-              </p>
+          <div className="w-full">
+            {isRespondida ? (
+              <div className={`p-3 sm:p-4 rounded-xl border flex flex-col gap-2 animate-fadeIn transition-all ${
+                currentRespuesta.esCorrecta
+                  ? 'bg-emerald-500/10 dark:bg-emerald-950/40 border-emerald-500/40 text-emerald-950 dark:text-emerald-100'
+                  : 'bg-red-500/10 dark:bg-red-950/40 border-red-500/40 text-red-950 dark:text-red-100'
+              }`}>
+                {modoInstantaneo ? (
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between gap-2 border-b border-emerald-500/20 pb-1.5">
+                      <div className="flex items-center gap-1.5 font-black text-xs sm:text-sm">
+                        {currentRespuesta.esCorrecta ? (
+                          <span className="text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5">
+                            <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0" />
+                            ¡RESPUESTA CORRECTA!
+                          </span>
+                        ) : (
+                          <span className="text-red-700 dark:text-red-400 flex items-center gap-1.5">
+                            <XCircle className="w-4 h-4 text-red-500 shrink-0" />
+                            RESPUESTA INCORRECTA
+                          </span>
+                        )}
+                      </div>
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-white/50 dark:bg-slate-900/50">
+                        {currentRespuesta.esCorrecta ? 'ACIERTO' : 'FALLO'}
+                      </span>
+                    </div>
+
+                    <div className="font-mono text-xs space-y-1">
+                      <div className="flex items-start gap-1.5">
+                        <span className="font-black text-amber-600 dark:text-amber-400 shrink-0">
+                          Respuesta Oficial:
+                        </span>
+                        <span className="font-extrabold text-slate-900 dark:text-white">
+                          {currentPregunta.respuesta}
+                        </span>
+                      </div>
+
+                      {currentPregunta.ubicacion && (
+                        <div className="text-[11px] text-slate-700 dark:text-slate-300 flex items-start gap-1">
+                          <span className="font-bold shrink-0 text-slate-500 dark:text-slate-400">Base Legal:</span>
+                          <span className="font-semibold">{currentPregunta.ubicacion}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-1.5 font-bold text-xs text-amber-600 dark:text-amber-400">
+                    <CheckCircle className="w-4 h-4 shrink-0" />
+                    <span>Respuesta seleccionada y registrada para calificación final.</span>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400 italic block text-center py-1">
+                Toca una alternativa para responder y ver la solución al instante
+              </span>
             )}
           </div>
-        )}
+        </div>
       </div>
 
       {/* JUMP DRAWER POPUP */}
@@ -580,36 +637,36 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
         </div>
       )}
 
-      {/* BOTTOM NAVIGATION ACTION BAR */}
-      <div className="flex items-center justify-between gap-3 pt-2">
+      {/* BOTTOM NAVIGATION ACTION BAR (DESTACADO ATRÁS / ADELANTE) */}
+      <div className="flex items-center justify-between gap-3 pt-3">
         <button
           onClick={() => setCurrentIndex((prev) => Math.max(0, prev - 1))}
           disabled={currentIndex === 0}
-          className="bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 disabled:opacity-40 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700 px-5 py-3 rounded-2xl font-display text-xs sm:text-sm font-bold flex items-center gap-2 transition-all shadow-sm active-scale"
+          className="bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 disabled:opacity-40 text-slate-900 dark:text-slate-100 border-2 border-slate-300 dark:border-slate-700 px-6 py-3.5 rounded-2xl font-display text-xs sm:text-sm font-extrabold flex items-center gap-2.5 transition-all shadow-md active-scale"
         >
-          <ArrowLeft className="w-4 h-4 text-amber-500" />
-          <span>Anterior</span>
+          <ArrowLeft className="w-5 h-5 text-amber-500 stroke-[2.5]" />
+          <span>◄ Pregunta Anterior</span>
         </button>
 
-        <span className="font-mono text-xs text-slate-500 dark:text-slate-400 hidden sm:inline">
-          Usa teclas de dirección ← → para navegar
+        <span className="font-mono text-xs text-slate-500 dark:text-slate-400 hidden md:inline">
+          Teclas de dirección ← → para navegar
         </span>
 
         {currentIndex < totalPreguntas - 1 ? (
           <button
             onClick={() => setCurrentIndex((prev) => Math.min(totalPreguntas - 1, prev + 1))}
-            className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-display text-xs sm:text-sm font-black px-7 py-3 rounded-2xl flex items-center gap-2 transition-all shadow-md active-scale border border-amber-400"
+            className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-display text-xs sm:text-sm font-black px-8 py-3.5 rounded-2xl flex items-center gap-2.5 transition-all shadow-lg shadow-amber-500/20 active-scale border-2 border-amber-400"
           >
-            <span>Siguiente</span>
-            <ArrowRight className="w-4 h-4" />
+            <span>Siguiente Pregunta ►</span>
+            <ArrowRight className="w-5 h-5 stroke-[2.5]" />
           </button>
         ) : (
           <button
             onClick={handleFinalizarExamen}
-            className="bg-red-600 hover:bg-red-700 text-white font-display text-xs sm:text-sm font-black px-7 py-3 rounded-2xl flex items-center gap-2 transition-all shadow-md active-scale border border-red-500 animate-pulse"
+            className="bg-red-600 hover:bg-red-700 text-white font-display text-xs sm:text-sm font-black px-8 py-3.5 rounded-2xl flex items-center gap-2.5 transition-all shadow-lg shadow-red-600/20 active-scale border-2 border-red-500 animate-pulse"
           >
             <span>Finalizar y Ver Nota</span>
-            <CheckCircle className="w-4 h-4" />
+            <CheckCircle className="w-5 h-5" />
           </button>
         )}
       </div>

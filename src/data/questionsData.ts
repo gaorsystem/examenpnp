@@ -96,3 +96,45 @@ export function buscarPreguntas(query: string, normaFiltro?: string, grupoFiltro
     );
   });
 }
+
+/**
+ * Compara de forma robusta si una opción elegida es la respuesta correcta oficial.
+ */
+export function esRespuestaCorrecta(
+  opcionElegida: string,
+  respuestaOficial: string,
+  opciones?: string[]
+): boolean {
+  if (!opcionElegida || !respuestaOficial) return false;
+
+  const choiceClean = opcionElegida.trim().toUpperCase();
+  const respClean = respuestaOficial.trim().toUpperCase();
+
+  // 1. Coincidencia exacta (sin importar mayúsculas/minúsculas)
+  if (choiceClean === respClean) return true;
+
+  // 2. Ignorar puntos finales y espacios de borde
+  const choiceNoDot = choiceClean.replace(/[\.\s]+$/, '');
+  const respNoDot = respClean.replace(/[\.\s]+$/, '');
+  if (choiceNoDot === respNoDot) return true;
+
+  // 3. Manejo de recortados o prefijos
+  if (
+    respNoDot.length > 8 &&
+    (choiceNoDot.startsWith(respNoDot) || respNoDot.startsWith(choiceNoDot))
+  ) {
+    return true;
+  }
+
+  // 4. Si la respuesta oficial es la letra de la alternativa (ej: "A", "B", "C", "D", "E" o "A.")
+  const letterMatch = respClean.match(/^([A-E])[\.\)\s]*$/);
+  if (letterMatch && opciones && opciones.length > 0) {
+    const letterIndex = letterMatch[1].charCodeAt(0) - 65;
+    if (letterIndex >= 0 && letterIndex < opciones.length) {
+      return choiceClean === opciones[letterIndex].trim().toUpperCase();
+    }
+  }
+
+  return false;
+}
+

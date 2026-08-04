@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, BookOpen, Clock, BarChart3, Search, MessageSquare, Award, User, Sun, Moon, SlidersHorizontal, Home, LogIn, LogOut, Users } from 'lucide-react';
+import { Shield, BookOpen, Clock, BarChart3, Search, MessageSquare, Award, User, Sun, Moon, SlidersHorizontal, Home, LogIn, LogOut, Users, HelpCircle } from 'lucide-react';
 import { UserProfile } from '../types';
 
 interface HeaderProps {
@@ -11,6 +11,7 @@ interface HeaderProps {
   onOpenOtpModal: () => void;
   onLogout: () => void;
   onQuickSimulacro: () => void;
+  onOpenGuideModal?: () => void;
   theme: 'light' | 'dark';
   onToggleTheme: () => void;
 }
@@ -24,6 +25,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenOtpModal,
   onLogout,
   onQuickSimulacro,
+  onOpenGuideModal,
   theme,
   onToggleTheme,
 }) => {
@@ -109,6 +111,16 @@ export const Header: React.FC<HeaderProps> = ({
                 <span>INGRESAR</span>
               </button>
             </div>
+          )}
+          {onOpenGuideModal && (
+            <button
+              onClick={onOpenGuideModal}
+              className="bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/40 px-2.5 py-1 rounded-lg transition-all active-scale flex items-center gap-1 font-mono text-[10px] font-extrabold"
+              title="Ver Guía de Uso del Sistema"
+            >
+              <HelpCircle className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+              <span>GUÍA</span>
+            </button>
           )}
           <div className="h-3 w-[1px] bg-slate-800 mx-1"></div>
           <button
