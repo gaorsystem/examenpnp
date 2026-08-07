@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, BarChart3, SlidersHorizontal, Clock, Shield, Search, MessageSquare, LogIn, Users } from 'lucide-react';
+import { Home, BarChart3, Clock, Shield, Search, Users } from 'lucide-react';
 import { UserProfile } from '../types';
 
 interface MobileBottomNavProps {
@@ -17,20 +17,19 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
   onOpenOtpModal,
   userProfile,
 }) => {
-  // Mobile tabs structure for native app experience
   const publicNavItems = [
     { id: 'landing', label: 'Inicio', icon: Home },
     { id: 'dashboard', label: 'Mi Portal', icon: BarChart3, requiresAuth: true },
     { id: 'simulacro', label: 'Simulacro', icon: Clock, requiresAuth: true },
     { id: 'banco', label: '1,500 Preg.', icon: Search, requiresAuth: true },
-    { id: 'whatsapp', label: 'Audio / Bot', icon: MessageSquare, requiresAuth: true },
+    { id: 'normas', label: 'Por Materia', icon: Shield, requiresAuth: true },
   ];
 
   const privateNavItems = [
     { id: 'dashboard', label: 'Mi Portal', icon: BarChart3 },
     { id: 'simulacro', label: 'Simulacro', icon: Clock },
+    { id: 'normas', label: 'Materia', icon: Shield },
     { id: 'banco', label: 'Balotario', icon: Search },
-    { id: 'whatsapp', label: 'Audio / Bot', icon: MessageSquare },
   ];
 
   if (isLoggedIn && userProfile.role === 'admin') {
@@ -50,7 +49,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
   return (
     <nav
       aria-label="Navegación móvil nativa"
-      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 dark:bg-slate-950/95 backdrop-blur-lg border-t border-slate-800 px-2 pt-2 pb-3 shadow-2xl transition-all"
+      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#011e17]/95 backdrop-blur-lg border-t border-[#053d2f] px-2 pt-2 pb-3 shadow-2xl transition-all"
     >
       <div className="flex items-center justify-around max-w-md mx-auto">
         {navItems.map((item) => {
@@ -63,13 +62,13 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
               onClick={() => handleNavClick(item)}
               className={`flex flex-col items-center justify-center min-w-[62px] min-h-[50px] px-2 py-1 rounded-2xl transition-all active-scale cursor-pointer ${
                 isActive
-                  ? 'text-amber-400 font-bold scale-105'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'text-white font-bold scale-105'
+                  : 'text-emerald-300/70 hover:text-white'
               }`}
             >
               <div
                 className={`p-1.5 rounded-xl transition-all ${
-                  isActive ? 'bg-amber-500/20 text-amber-400 shadow-sm' : ''
+                  isActive ? 'bg-emerald-500/30 text-white shadow-sm border border-emerald-400/40' : ''
                 }`}
               >
                 <Icon className="w-5 h-5" />

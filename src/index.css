@@ -3,24 +3,24 @@
 
 @layer base {
   :root {
-    --bg-primary: #F8FAFC;
-    --bg-card: #FFFFFF;
-    --border-color: #E2E8F0;
-    --text-primary: #0F172A;
-    --text-muted: #475569;
+    --bg-primary: #02281e;
+    --bg-card: #053d2f;
+    --border-color: #0d5240;
+    --text-primary: #F8FAFC;
+    --text-muted: #A7F3D0;
   }
 
   .dark {
-    --bg-primary: #0F172A;
-    --bg-card: #1E293B;
-    --border-color: #334155;
+    --bg-primary: #02281e;
+    --bg-card: #053d2f;
+    --border-color: #0d5240;
     --text-primary: #F8FAFC;
-    --text-muted: #94A3B8;
+    --text-muted: #A7F3D0;
   }
 
   body {
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
+    background-color: #02281e;
+    color: #F8FAFC;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     min-height: 100vh;
     -webkit-tap-highlight-color: transparent;

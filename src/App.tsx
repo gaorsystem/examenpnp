@@ -351,7 +351,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200">
+    <div className="min-h-screen bg-[#02281e] text-slate-100 flex flex-col font-sans transition-colors duration-200">
       {/* Header Bar */}
       <Header
         activeTab={activeTab}
@@ -401,6 +401,7 @@ export default function App() {
                 setActiveTab(tab);
               }
             }}
+            onOpenOtpModal={() => setShowOtpModal(true)}
             onOpenExplainer={() => setShowExplainerModal(true)}
           />
         )}
@@ -488,8 +489,8 @@ export default function App() {
       </main>
 
       {/* Footer - Simplified for mobile */}
-      <footer className="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 py-6 px-4 text-center text-[10px] sm:text-xs font-mono text-slate-500 dark:text-slate-400 space-y-1 mt-auto">
-        <p className="font-semibold text-slate-700 dark:text-slate-300">
+      <footer className="bg-[#011e17] border-t border-[#053d2f] py-6 px-4 text-center text-[10px] sm:text-xs font-mono text-emerald-300/80 space-y-1 mt-auto">
+        <p className="font-semibold text-emerald-200">
           Simulador PNP 2026
         </p>
         <p className="hidden sm:block">

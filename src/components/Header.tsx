@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, BookOpen, Clock, BarChart3, Search, MessageSquare, Award, User, Sun, Moon, SlidersHorizontal, Home, LogIn, LogOut, Users, HelpCircle } from 'lucide-react';
+import { Shield, BookOpen, Clock, BarChart3, Search, Award, User, Sun, Moon, SlidersHorizontal, Home, LogIn, LogOut, Users, HelpCircle } from 'lucide-react';
 import { UserProfile } from '../types';
 
 interface HeaderProps {
@@ -31,11 +31,10 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const portalTabs = [
     { id: 'dashboard', label: 'Panel Principal', icon: BarChart3 },
-    { id: 'crear-simulacro', label: 'Armar Simulacro', icon: SlidersHorizontal },
     { id: 'simulacro', label: 'Simulacro Real', icon: Clock },
+    { id: 'crear-simulacro', label: 'Armar Examen', icon: SlidersHorizontal },
     { id: 'normas', label: 'Por Materia', icon: Shield },
     { id: 'banco', label: 'Banco (1,500)', icon: Search },
-    { id: 'whatsapp', label: 'Bot WhatsApp', icon: MessageSquare },
   ];
 
   if (isLoggedIn && userProfile.role === 'admin') {
@@ -45,16 +44,16 @@ export const Header: React.FC<HeaderProps> = ({
   const isLandingView = activeTab === 'landing';
 
   return (
-    <header className="bg-slate-900 dark:bg-slate-950 text-white border-b border-slate-800 dark:border-slate-800/80 shadow-md sticky top-0 z-40">
-      {/* Top Banner Status Bar - Simplified for mobile */}
-      <div className="bg-slate-950 dark:bg-slate-900/90 px-4 py-1.5 border-b border-slate-800 flex justify-between items-center text-xs text-slate-300">
+    <header className="bg-[#011e17] text-white border-b border-[#053d2f] shadow-md sticky top-0 z-40">
+      {/* Top Banner Status Bar */}
+      <div className="bg-[#011611] px-4 py-1.5 border-b border-[#053d2f] flex justify-between items-center text-xs text-slate-300">
         <div className="flex items-center gap-2 overflow-hidden whitespace-nowrap">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></span>
-          <span className="font-mono tracking-tight font-semibold text-amber-400 truncate max-w-[120px] sm:max-w-none">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0"></span>
+          <span className="font-mono tracking-tight font-semibold text-emerald-300 truncate max-w-[120px] sm:max-w-none">
             OFICIAL 2026
           </span>
-          <span className="hidden sm:inline text-slate-600">|</span>
-          <span className="hidden sm:inline text-slate-400">
+          <span className="hidden sm:inline text-emerald-800">|</span>
+          <span className="hidden sm:inline text-emerald-200/80">
             Simulador de Ascenso PNP
           </span>
         </div>
@@ -66,8 +65,8 @@ export const Header: React.FC<HeaderProps> = ({
                   onClick={() => setActiveTab('admin')}
                   className={`flex items-center gap-1.5 border px-2 py-1 rounded transition-all font-mono text-[10px] font-bold ${
                     activeTab === 'admin'
-                      ? 'bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-500/20'
-                      : 'bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 border-blue-500/30'
+                      ? 'bg-emerald-600 border-emerald-500 text-white shadow-lg shadow-emerald-500/20'
+                      : 'bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
                   }`}
                 >
                   <Shield className="w-3 h-3" />
@@ -76,9 +75,9 @@ export const Header: React.FC<HeaderProps> = ({
               )}
               <button 
                 onClick={onOpenProfile}
-                className="hidden sm:flex items-center gap-1.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 px-2 py-1 rounded transition-all font-mono text-[10px]"
+                className="hidden sm:flex items-center gap-1.5 bg-emerald-900/40 hover:bg-emerald-800/60 text-emerald-200 border border-emerald-600/40 px-2 py-1 rounded transition-all font-mono text-[10px]"
               >
-                <User className="w-3 h-3" />
+                <User className="w-3 h-3 text-emerald-300" />
                 <span className="font-bold">{userProfile.grado} {userProfile.nombre}</span>
               </button>
               <button
@@ -92,20 +91,22 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           ) : (
             <div className="flex items-center gap-2">
-              <button
-                onClick={() => setActiveTab('admin')}
-                className={`flex items-center gap-1.5 border px-2 py-1 rounded transition-all font-mono text-[10px] font-bold ${
-                  activeTab === 'admin'
-                    ? 'bg-blue-600 border-blue-500 text-white'
-                    : 'text-slate-500 hover:text-blue-400 border-slate-800'
-                }`}
-              >
-                <Shield className="w-3 h-3" />
-                <span>ADMIN</span>
-              </button>
+              {userProfile.role === 'admin' && (
+                <button
+                  onClick={() => setActiveTab('admin')}
+                  className={`flex items-center gap-1.5 border px-2 py-1 rounded transition-all font-mono text-[10px] font-bold ${
+                    activeTab === 'admin'
+                      ? 'bg-emerald-600 border-emerald-500 text-white'
+                      : 'text-emerald-400 hover:text-emerald-200 border-emerald-800'
+                  }`}
+                >
+                  <Shield className="w-3 h-3" />
+                  <span>ADMIN</span>
+                </button>
+              )}
               <button
                 onClick={onOpenOtpModal}
-                className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-mono font-black text-[11px] px-4 py-2 rounded-lg flex items-center gap-1.5 shadow-md transition-all active-scale"
+                className="bg-white hover:bg-emerald-50 text-[#01241a] font-mono font-black text-[11px] px-4 py-2 rounded-lg flex items-center gap-1.5 shadow-md transition-all active-scale"
               >
                 <LogIn className="w-3.5 h-3.5" />
                 <span>INGRESAR</span>
@@ -115,17 +116,17 @@ export const Header: React.FC<HeaderProps> = ({
           {onOpenGuideModal && (
             <button
               onClick={onOpenGuideModal}
-              className="bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/40 px-2.5 py-1 rounded-lg transition-all active-scale flex items-center gap-1 font-mono text-[10px] font-extrabold"
+              className="bg-emerald-900/40 hover:bg-emerald-800/60 text-emerald-300 border border-emerald-600/40 px-2.5 py-1 rounded-lg transition-all active-scale flex items-center gap-1 font-mono text-[10px] font-extrabold"
               title="Ver Guía de Uso del Sistema"
             >
-              <HelpCircle className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+              <HelpCircle className="w-3.5 h-3.5 text-emerald-300 animate-pulse" />
               <span>GUÍA</span>
             </button>
           )}
-          <div className="h-3 w-[1px] bg-slate-800 mx-1"></div>
+          <div className="h-3 w-[1px] bg-emerald-800 mx-1"></div>
           <button
             onClick={onToggleTheme}
-            className="text-slate-400 hover:text-amber-400 transition-colors p-1"
+            className="text-emerald-300 hover:text-white transition-colors p-1"
           >
             {theme === 'light' ? <Moon className="w-3.5 h-3.5" /> : <Sun className="w-3.5 h-3.5" />}
           </button>
@@ -138,14 +139,14 @@ export const Header: React.FC<HeaderProps> = ({
           className="flex items-center gap-2.5 cursor-pointer shrink-0" 
           onClick={() => setActiveTab('landing')}
         >
-          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-amber-500 flex items-center justify-center shrink-0 shadow-lg">
-            <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-slate-950" />
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#059669] flex items-center justify-center shrink-0 shadow-lg border border-emerald-400/40">
+            <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
           </div>
           <div>
             <h1 className="font-display font-black text-lg sm:text-xl text-white tracking-tight leading-none">
-              PNP <span className="text-amber-400">2026</span>
+              PNP <span className="text-emerald-300">2026</span>
             </h1>
-            <p className="hidden sm:block text-[10px] text-slate-400 font-sans mt-0.5">
+            <p className="hidden sm:block text-[10px] text-emerald-200/80 font-sans mt-0.5">
               Simulador de Ascenso Oficial
             </p>
           </div>
@@ -156,7 +157,7 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={onOpenOtpModal}
-              className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-display font-black text-xs px-4 py-2 rounded-xl shadow-lg transition-all active-scale"
+              className="bg-white hover:bg-emerald-50 text-[#01241a] font-display font-black text-xs px-4 py-2 rounded-xl shadow-lg transition-all active-scale"
             >
               INGRESAR AL PORTAL
             </button>
@@ -166,10 +167,10 @@ export const Header: React.FC<HeaderProps> = ({
           <nav className="flex items-center gap-1 overflow-x-auto max-w-full pb-1 md:pb-0 scrollbar-none">
             <button
               onClick={() => setActiveTab('landing')}
-              className="flex items-center gap-1 px-2.5 py-2 rounded-xl text-xs font-mono text-slate-400 hover:text-white hover:bg-slate-800 transition-colors shrink-0"
+              className="flex items-center gap-1 px-2.5 py-2 rounded-xl text-xs font-mono text-emerald-200 hover:text-white hover:bg-[#004d38] transition-colors shrink-0"
               title="Volver a la portada informativa"
             >
-              <Home className="w-3.5 h-3.5 text-slate-400" />
+              <Home className="w-3.5 h-3.5 text-emerald-300" />
               Inicio
             </button>
 
@@ -189,11 +190,11 @@ export const Header: React.FC<HeaderProps> = ({
                   }}
                   className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-mono font-medium transition-all whitespace-nowrap active-scale ${
                     isActive
-                      ? 'bg-amber-500 text-slate-950 font-bold shadow-md'
-                      : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                      ? 'bg-white text-[#01241a] font-bold shadow-md'
+                      : 'text-emerald-200 hover:bg-[#004d38] hover:text-white'
                   }`}
                 >
-                  <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-slate-950' : 'text-amber-400'}`} />
+                  <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-[#01241a]' : 'text-emerald-300'}`} />
                   {tab.label}
                 </button>
               );
@@ -201,9 +202,9 @@ export const Header: React.FC<HeaderProps> = ({
 
             <button
               onClick={onQuickSimulacro}
-              className="ml-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white px-3.5 py-2 rounded-xl text-xs font-mono font-bold flex items-center gap-1.5 shadow-md border border-red-500/50 shrink-0 transition-transform active-scale"
+              className="ml-2 bg-[#059669] hover:bg-[#047857] text-white px-3.5 py-2 rounded-xl text-xs font-mono font-bold flex items-center gap-1.5 shadow-md border border-emerald-400/50 shrink-0 transition-transform active-scale"
             >
-              <Award className="w-3.5 h-3.5 text-amber-300" />
+              <Award className="w-3.5 h-3.5 text-emerald-200" />
               Examen Rápido
             </button>
           </nav>
@@ -212,5 +213,3 @@ export const Header: React.FC<HeaderProps> = ({
     </header>
   );
 };
-
-
