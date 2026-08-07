@@ -353,19 +353,21 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#02281e] text-slate-100 flex flex-col font-sans transition-colors duration-200">
       {/* Header Bar */}
-      <Header
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        userProfile={userProfile}
-        isLoggedIn={isLoggedIn}
-        onOpenProfile={() => setShowProfileModal(true)}
-        onOpenOtpModal={() => setShowOtpModal(true)}
-        onLogout={handleLogout}
-        onQuickSimulacro={() => handleStartExamen('simulacro', 20)}
-        onOpenGuideModal={() => setShowGuideModal(true)}
-        theme={theme}
-        onToggleTheme={toggleTheme}
-      />
+      {!['examen', 'simulacro', 'repaso'].includes(activeTab) && (
+        <Header
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          userProfile={userProfile}
+          isLoggedIn={isLoggedIn}
+          onOpenProfile={() => setShowProfileModal(true)}
+          onOpenOtpModal={() => setShowOtpModal(true)}
+          onLogout={handleLogout}
+          onQuickSimulacro={() => handleStartExamen('simulacro', 20)}
+          onOpenGuideModal={() => setShowGuideModal(true)}
+          theme={theme}
+          onToggleTheme={toggleTheme}
+        />
+      )}
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6 pb-24 md:pb-6">
@@ -501,18 +503,7 @@ export default function App() {
         </p>
       </footer>
 
-      {/* Mobile Floating Action CTA */}
-      {!['examen', 'simulacro', 'repaso'].includes(activeTab) && (
-        <div className="fixed bottom-20 right-4 z-40 md:hidden">
-          <button
-            onClick={() => handleStartExamen('simulacro', 20)}
-            className="bg-[#A6822E] hover:bg-[#C9A94A] text-[#182A20] font-mono font-extrabold text-xs px-4 py-3 rounded-full shadow-2xl border-2 border-[#C9A94A] flex items-center gap-2 animate-bounce"
-          >
-            <Play className="w-4 h-4 fill-current" />
-            <span>EXAMEN RÁPIDO</span>
-          </button>
-        </div>
-      )}
+      {/* Mobile Floating Action CTA - REMOVED */}
 
       {/* Profile & Settings Modal */}
       {showProfileModal && (
