@@ -308,7 +308,7 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
 
         {/* ENUNCIADO DE LA PREGUNTA */}
         <div className="space-y-2">
-          <p className="font-ubuntu font-bold text-base sm:text-xl md:text-2xl text-white leading-snug tracking-tight">
+          <p className="font-ubuntu font-bold text-lg sm:text-2xl md:text-3xl text-white leading-snug tracking-tight">
             {currentPregunta.enunciado}
           </p>
           <div className="flex items-center justify-between gap-2">
@@ -325,7 +325,7 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
         </div>
 
         {/* ALTERNATIVAS */}
-        <div className="grid grid-cols-1 gap-2 pt-1">
+        <div className="grid grid-cols-1 gap-1.5 pt-1">
           {currentPregunta.opciones.map((opcionText, opIdx) => {
             const letra = String.fromCharCode(65 + opIdx);
             const isSelected = currentRespuesta?.opcion === opcionText;
@@ -364,7 +364,7 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
                 key={opIdx}
                 disabled={isEliminated}
                 onClick={() => handleSelectOpcion(opcionText)}
-                className={`w-full text-left p-3.5 sm:p-4 rounded-xl border transition-all flex items-start gap-3 text-xs sm:text-sm font-ubuntu active-scale ${optionStyle}`}
+                className={`w-full text-left p-2.5 sm:p-3 rounded-xl border transition-all flex items-start gap-2.5 text-xs sm:text-sm font-ubuntu active-scale ${optionStyle}`}
               >
                 <span
                   className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center font-mono font-black text-xs sm:text-sm shrink-0 mt-0.5 border shadow-sm transition-all ${
