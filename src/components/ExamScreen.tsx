@@ -306,71 +306,9 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
           </div>
         </div>
 
-        {/* COMODINES */}
-        <div className="flex flex-wrap items-center justify-between gap-1.5 bg-[#003829] p-2 rounded-xl border border-emerald-700/60">
-          <span className="text-[10px] font-mono font-bold text-emerald-300 px-1 flex items-center gap-1">
-            <Zap className="w-3 h-3" />
-            Herramientas:
-          </span>
-
-          <div className="flex items-center gap-1.5">
-            <button
-              onClick={handleUse5050}
-              disabled={currentEliminated.length > 0 || isRespondida}
-              className={`px-2.5 py-1 rounded-lg font-mono text-[11px] font-bold transition-all flex items-center gap-1 border active-scale ${
-                currentEliminated.length > 0
-                  ? 'bg-emerald-950 text-emerald-400 border-emerald-700 opacity-80'
-                  : 'bg-[#004d38] hover:bg-emerald-900 text-emerald-200 border-emerald-600'
-              }`}
-            >
-              <Scissors className="w-3 h-3 text-emerald-300" />
-              <span>{currentEliminated.length > 0 ? '50:50 Usado' : '50:50'}</span>
-            </button>
-
-            <button
-              onClick={() => setShowHint(!showHint)}
-              className={`px-2.5 py-1 rounded-lg font-mono text-[11px] font-bold transition-all flex items-center gap-1 border active-scale ${
-                showHint
-                  ? 'bg-white text-[#01241a] border-white'
-                  : 'bg-[#004d38] hover:bg-emerald-900 text-emerald-200 border-emerald-600'
-              }`}
-            >
-              <Lightbulb className="w-3 h-3" />
-              <span>{showHint ? 'Ocultar Pista' : 'Pista'}</span>
-            </button>
-
-            <button
-              onClick={handleToggleFavorito}
-              className={`px-2.5 py-1 rounded-lg font-mono text-[11px] font-bold transition-all flex items-center gap-1 border active-scale ${
-                isFav
-                  ? 'bg-red-600 text-white border-red-500 shadow-sm'
-                  : 'bg-[#004d38] hover:bg-emerald-900 text-emerald-200 border-emerald-600'
-              }`}
-            >
-              <Bookmark className={`w-3 h-3 ${isFav ? 'fill-current' : ''}`} />
-              <span>{isFav ? 'Guardada' : 'Marcar'}</span>
-            </button>
-          </div>
-        </div>
-
-        {/* HINT DRAWER */}
-        {showHint && (
-          <div className="p-3 rounded-xl bg-[#003829] border border-emerald-600/60 text-emerald-200 space-y-1 text-xs font-mono animate-fadeIn">
-            <div className="flex items-center gap-1.5 text-emerald-300 font-bold">
-              <Lightbulb className="w-3.5 h-3.5 fill-current" />
-              <span>Referencia Legal:</span>
-            </div>
-            <p className="leading-relaxed">
-              {currentPregunta.ubicacion
-                ? `Esta pregunta corresponde a: ${currentPregunta.ubicacion}. Analiza la redacción del texto legal.`
-                : 'Pregunta del temario oficial PNP 2026. Distingue los plazos y causales taxativas.'}
-            </p>
-          </div>
-        )}
-
         {/* ENUNCIADO DE LA PREGUNTA */}
         <div className="space-y-2">
-          <p className="font-display font-black text-base sm:text-xl md:text-2xl text-white leading-snug tracking-tight">
+          <p className="font-ubuntu font-bold text-base sm:text-xl md:text-2xl text-white leading-snug tracking-tight">
             {currentPregunta.enunciado}
           </p>
           <div className="flex items-center justify-between gap-2">
@@ -426,7 +364,7 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
                 key={opIdx}
                 disabled={isEliminated}
                 onClick={() => handleSelectOpcion(opcionText)}
-                className={`w-full text-left p-3.5 sm:p-4 rounded-xl border transition-all flex items-start gap-3 text-xs sm:text-sm font-sans active-scale ${optionStyle}`}
+                className={`w-full text-left p-3.5 sm:p-4 rounded-xl border transition-all flex items-start gap-3 text-xs sm:text-sm font-ubuntu active-scale ${optionStyle}`}
               >
                 <span
                   className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center font-mono font-black text-xs sm:text-sm shrink-0 mt-0.5 border shadow-sm transition-all ${
@@ -533,6 +471,68 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
                 Toca una alternativa para responder y ver la solución al instante
               </span>
             )}
+          </div>
+        </div>
+
+        {/* HINT DRAWER */}
+        {showHint && (
+          <div className="p-3 rounded-xl bg-[#003829] border border-emerald-600/60 text-emerald-200 space-y-1 text-xs font-mono animate-fadeIn mt-4">
+            <div className="flex items-center gap-1.5 text-emerald-300 font-bold">
+              <Lightbulb className="w-3.5 h-3.5 fill-current" />
+              <span>Referencia Legal:</span>
+            </div>
+            <p className="leading-relaxed">
+              {currentPregunta.ubicacion
+                ? `Esta pregunta corresponde a: ${currentPregunta.ubicacion}. Analiza la redacción del texto legal.`
+                : 'Pregunta del temario oficial PNP 2026. Distingue los plazos y causales taxativas.'}
+            </p>
+          </div>
+        )}
+
+        {/* COMODINES (MOVING TO BOTTOM) */}
+        <div className="flex flex-wrap items-center justify-between gap-1.5 bg-[#003829] p-2 rounded-xl border border-emerald-700/60 mt-4">
+          <span className="text-[10px] font-mono font-bold text-emerald-300 px-1 flex items-center gap-1">
+            <Zap className="w-3 h-3" />
+            Herramientas:
+          </span>
+
+          <div className="flex items-center gap-1.5">
+            <button
+              onClick={handleUse5050}
+              disabled={currentEliminated.length > 0 || isRespondida}
+              className={`px-2.5 py-1 rounded-lg font-mono text-[11px] font-bold transition-all flex items-center gap-1 border active-scale ${
+                currentEliminated.length > 0
+                  ? 'bg-emerald-950 text-emerald-400 border-emerald-700 opacity-80'
+                  : 'bg-[#004d38] hover:bg-emerald-900 text-emerald-200 border-emerald-600'
+              }`}
+            >
+              <Scissors className="w-3 h-3 text-emerald-300" />
+              <span>{currentEliminated.length > 0 ? '50:50 Usado' : '50:50'}</span>
+            </button>
+
+            <button
+              onClick={() => setShowHint(!showHint)}
+              className={`px-2.5 py-1 rounded-lg font-mono text-[11px] font-bold transition-all flex items-center gap-1 border active-scale ${
+                showHint
+                  ? 'bg-white text-[#01241a] border-white'
+                  : 'bg-[#004d38] hover:bg-emerald-900 text-emerald-200 border-emerald-600'
+              }`}
+            >
+              <Lightbulb className="w-3 h-3" />
+              <span>{showHint ? 'Ocultar Pista' : 'Pista'}</span>
+            </button>
+
+            <button
+              onClick={handleToggleFavorito}
+              className={`px-2.5 py-1 rounded-lg font-mono text-[11px] font-bold transition-all flex items-center gap-1 border active-scale ${
+                isFav
+                  ? 'bg-red-600 text-white border-red-500 shadow-sm'
+                  : 'bg-[#004d38] hover:bg-emerald-900 text-emerald-200 border-emerald-600'
+              }`}
+            >
+              <Bookmark className={`w-3 h-3 ${isFav ? 'fill-current' : ''}`} />
+              <span>{isFav ? 'Guardada' : 'Marcar'}</span>
+            </button>
           </div>
         </div>
       </div>
