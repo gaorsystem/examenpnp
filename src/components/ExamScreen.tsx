@@ -325,7 +325,7 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
         </div>
 
         {/* ALTERNATIVAS */}
-        <div className="grid grid-cols-1 gap-1.5 pt-1">
+        <div className="grid grid-cols-1 gap-1 pt-1">
           {currentPregunta.opciones.map((opcionText, opIdx) => {
             const letra = String.fromCharCode(65 + opIdx);
             const isSelected = currentRespuesta?.opcion === opcionText;
@@ -364,10 +364,10 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
                 key={opIdx}
                 disabled={isEliminated}
                 onClick={() => handleSelectOpcion(opcionText)}
-                className={`w-full text-left p-2.5 sm:p-3 rounded-xl border transition-all flex items-start gap-2.5 text-xs sm:text-sm font-ubuntu active-scale ${optionStyle}`}
+                className={`w-full text-left p-2 sm:p-2.5 rounded-xl border transition-all flex items-start gap-2 text-sm sm:text-base font-ubuntu active-scale ${optionStyle}`}
               >
                 <span
-                  className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center font-mono font-black text-xs sm:text-sm shrink-0 mt-0.5 border shadow-sm transition-all ${
+                  className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center font-mono font-black text-sm shrink-0 mt-0.5 border shadow-sm transition-all ${
                     modoInstantaneo && isRespondida && esCorrecta
                       ? 'bg-emerald-500 text-white border-emerald-400'
                       : modoInstantaneo && isRespondida && isSelected && !esCorrecta

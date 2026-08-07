@@ -502,8 +502,8 @@ export default function App() {
       </footer>
 
       {/* Mobile Floating Action CTA */}
-      {activeTab !== 'examen' && (
-        <div className="fixed bottom-4 right-4 z-40 md:hidden">
+      {!['examen', 'simulacro', 'repaso'].includes(activeTab) && (
+        <div className="fixed bottom-20 right-4 z-40 md:hidden">
           <button
             onClick={() => handleStartExamen('simulacro', 20)}
             className="bg-[#A6822E] hover:bg-[#C9A94A] text-[#182A20] font-mono font-extrabold text-xs px-4 py-3 rounded-full shadow-2xl border-2 border-[#C9A94A] flex items-center gap-2 animate-bounce"
@@ -541,13 +541,15 @@ export default function App() {
       />
 
       {/* Native Mobile Bottom Navigation Bar (Hidden on Desktop) */}
-      <MobileBottomNav
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        isLoggedIn={isLoggedIn}
-        onOpenOtpModal={() => setShowOtpModal(true)}
-        userProfile={userProfile}
-      />
+      {!['examen', 'simulacro', 'repaso'].includes(activeTab) && (
+        <MobileBottomNav
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          isLoggedIn={isLoggedIn}
+          onOpenOtpModal={() => setShowOtpModal(true)}
+          userProfile={userProfile}
+        />
+      )}
     </div>
   );
 }
