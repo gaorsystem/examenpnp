@@ -321,13 +321,13 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
                 </p>
                 {errorMsg.includes('no registrado') && (
                   <a
-                    href={`https://wa.me/51987654321?text=${encodeURIComponent(`Hola, deseo contratar el Servicio del Simulador PNP 2026 para mi número +51 ${telefono}`)}`}
+                    href={`https://wa.me/51929172559?text=${encodeURIComponent(`Hola, deseo inscribirme en el Simulador PNP 2026 con mi celular +51 ${telefono}`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 w-full py-3.5 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-display font-black text-xs rounded-2xl shadow-xl shadow-emerald-600/20 transition-all hover:scale-[1.01] active:scale-95 uppercase tracking-wider"
                   >
                     <MessageCircle className="w-5 h-5" />
-                    <span>Contratar Servicio por WhatsApp</span>
+                    <span>Inscribirme por WhatsApp (929172559)</span>
                   </a>
                 )}
               </div>

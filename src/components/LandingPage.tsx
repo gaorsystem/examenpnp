@@ -8,6 +8,7 @@ import {
   Award,
   ChevronRight,
   Sparkles,
+  MessageCircle,
 } from 'lucide-react';
 
 interface LandingPageProps {
@@ -22,12 +23,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   onNavigateTab,
   onOpenOtpModal,
 }) => {
-  const handleRegisterOrLogin = () => {
-    if (onOpenOtpModal) {
-      onOpenOtpModal();
-    } else {
-      onNavigateTab('dashboard');
-    }
+  const handleRegisterWhatsApp = () => {
+    const message = encodeURIComponent('Hola, deseo inscribirme en el Simulador PNP 2026');
+    window.open(`https://wa.me/51929172559?text=${message}`, '_blank');
   };
 
   return (
@@ -83,24 +81,24 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           {/* OPCIÓN 2: REGISTRARSE SI ES NUEVO */}
           <button
             type="button"
-            onClick={handleRegisterOrLogin}
+            onClick={handleRegisterWhatsApp}
             className="w-full bg-white hover:bg-emerald-50 text-[#01241a] rounded-2xl p-5 sm:p-6 shadow-xl transition-all flex items-center gap-4 border-2 border-white active:scale-[0.99] text-left group"
           >
-            <div className="w-14 h-14 rounded-2xl bg-[#01241a] text-white flex items-center justify-center shrink-0 shadow-md">
-              <UserPlus className="w-7 h-7 text-emerald-300" />
+            <div className="w-14 h-14 rounded-2xl bg-[#059669] text-white flex items-center justify-center shrink-0 shadow-md">
+              <MessageCircle className="w-7 h-7 text-white" />
             </div>
             <div className="flex-1 min-w-0">
               <div className="font-extrabold text-base sm:text-lg text-[#01241a] flex items-center gap-2">
                 <span>Registrarse si eres Nuevo</span>
-                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-mono px-2.5 py-0.5 rounded-full font-bold">
-                  Acceso Rápido
+                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-mono px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1">
+                  WhatsApp
                 </span>
               </div>
               <p className="text-xs text-slate-600 truncate mt-1">
-                Crea tu cuenta con tu teléfono o DNI para activar tu pase
+                Solicita tu inscripción al WhatsApp 929172559
               </p>
             </div>
-            <LogIn className="w-6 h-6 text-[#01241a] group-hover:translate-x-1 shrink-0 transition-transform" />
+            <MessageCircle className="w-6 h-6 text-[#059669] group-hover:translate-x-1 shrink-0 transition-transform" />
           </button>
         </div>
 
