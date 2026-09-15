@@ -175,7 +175,7 @@ export const CustomExamBuilder: React.FC<CustomExamBuilderProps> = ({
             <button
               type="button"
               onClick={() => selectGroupNormas('COMUNES')}
-              className="bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 px-2.5 py-1 rounded-lg transition-colors"
+              className="bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 px-2.5 py-1 rounded-lg transition-colors"
             >
               Solo Comunes
             </button>

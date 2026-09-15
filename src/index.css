@@ -3,32 +3,44 @@
 
 @layer base {
   :root {
-    --bg-primary: #02281e;
-    --bg-card: #053d2f;
-    --border-color: #0d5240;
-    --text-primary: #F8FAFC;
-    --text-muted: #A7F3D0;
+    /* MODO CLARO - Limpio y Profesional */
+    --bg-primary: #FFFFFF;
+    --bg-card: #F8FAFC;
+    --border-color: #E2E8F0;
+    --text-primary: #0F172A;
+    --text-muted: #64748B;
+    --accent-primary: #059669;
   }
 
   .dark {
-    --bg-primary: #02281e;
-    --bg-card: #053d2f;
-    --border-color: #0d5240;
+    /* MODO OSCURO - Identidad PNP (Verde Profundo) */
+    --bg-primary: #011d17;
+    --bg-card: #01281e;
+    --border-color: #053d2f;
     --text-primary: #F8FAFC;
     --text-muted: #A7F3D0;
+    --accent-primary: #10b981;
   }
 
   body {
-    background-color: #02281e;
-    color: #F8FAFC;
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     min-height: 100vh;
     -webkit-tap-highlight-color: transparent;
-    transition: background-color 0.25s ease, color 0.25s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  button, a, .cursor-pointer {
+    user-select: none;
+    -webkit-user-select: none;
   }
 
   h1, h2, h3, h4, .font-serif, .font-display {
-    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Rajdhani', 'Inter', sans-serif;
   }
 
   code, pre, .font-mono {

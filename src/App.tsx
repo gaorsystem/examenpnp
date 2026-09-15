@@ -9,6 +9,7 @@ import { QuestionBankScreen } from './components/QuestionBankScreen';
 import { WhatsAppBotSimulator } from './components/WhatsAppBotSimulator';
 import { ExamResultsScreen } from './components/ExamResultsScreen';
 import { CustomExamBuilder } from './components/CustomExamBuilder';
+import { SimulacroHubScreen } from './components/SimulacroHubScreen';
 import { UserProfileModal } from './components/UserProfileModal';
 import { OtpLoginModal } from './components/OtpLoginModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
@@ -37,12 +38,12 @@ import {
 } from './lib/srsStorage';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<string>('landing');
+  const [activeTab, setActiveTab] = useState<string>('simulacro');
   const [userProfile, setUserProfile] = useState<UserProfile>(() => {
     const base = getProfile();
     return { ...base, role: 'student', dni: '' }; // Default role and empty dni
   });
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
   const [session, setSession] = useState<any>(null);
   const [showProfileModal, setShowProfileModal] = useState<boolean>(false);
   const [showOtpModal, setShowOtpModal] = useState<boolean>(false);
@@ -85,8 +86,6 @@ export default function App() {
       setIsLoggedIn(!!session);
       if (session?.user) {
         loadProfileFromSupabase(session.user.id, session.user.phone);
-      } else {
-        setActiveTab('landing');
       }
     });
 
@@ -330,12 +329,14 @@ export default function App() {
       .filter((r) => !r.esCorrecta)
       .map((r) => r.preguntaId);
 
-    const falladasPreguntas = BANCO_PREGUNTAS.filter((q) => falladasIds.includes(q.id));
+    const falladasPreguntas = BANCO_PREGUNTAS.filter(
+      (q) => falladasIds.includes(q.id) || falladasIds.includes(String(q.numero))
+    );
 
     if (falladasPreguntas.length > 0) {
       setActiveExamPreguntas(barajar(falladasPreguntas));
       setActiveExamModo('repaso');
-      setActiveExamNorma(undefined);
+      setActiveExamNorma('Repaso de Fallas');
       setActiveExamTiempoMin(Math.max(10, falladasPreguntas.length));
       setActiveTab('examen');
     } else {
@@ -343,15 +344,8 @@ export default function App() {
     }
   };
 
-  if (!isLoggedIn && activeTab !== 'landing') {
-    return <AuthFlow onAuthenticated={() => {
-      setIsLoggedIn(true);
-      setActiveTab('dashboard');
-    }} />;
-  }
-
   return (
-    <div className="min-h-screen bg-[#02281e] text-slate-100 flex flex-col font-sans transition-colors duration-200">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#02281e] text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200">
       {/* Header Bar */}
       {!['examen', 'simulacro', 'repaso'].includes(activeTab) && (
         <Header
@@ -370,9 +364,9 @@ export default function App() {
       )}
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6 pb-24 md:pb-6">
-        {/* Navigation Breadcrumb/Back button */}
-        {activeTab !== 'landing' && activeTab !== 'dashboard' && (
+      <main className={`flex-1 max-w-none w-full mx-auto px-2 sm:px-6 lg:px-10 ${['examen', 'simulacro', 'repaso'].includes(activeTab) ? 'py-2 pb-4' : 'py-6 pb-24 md:pb-6'}`}>
+        {/* Navigation Breadcrumb/Back button - hidden during active exams */}
+        {!['landing', 'dashboard', 'examen', 'repaso'].includes(activeTab) && (
           <div className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700/80 rounded-2xl p-2 mb-6 flex items-center justify-between">
             <button
               onClick={() => setActiveTab('dashboard')}
@@ -390,18 +384,10 @@ export default function App() {
         {activeTab === 'landing' && (
           <LandingPage
             onStartSimulacro={(modo) => {
-              if (!isLoggedIn) {
-                setShowOtpModal(true);
-              } else {
-                handleStartExamen(modo, modo === 'expres' ? 10 : 20);
-              }
+              setActiveTab('simulacro');
             }}
             onNavigateTab={(tab) => {
-              if (tab !== 'landing' && !isLoggedIn) {
-                setShowOtpModal(true);
-              } else {
-                setActiveTab(tab);
-              }
+              setActiveTab(tab);
             }}
             onOpenOtpModal={() => setShowOtpModal(true)}
             onOpenExplainer={() => setShowExplainerModal(true)}
@@ -421,41 +407,17 @@ export default function App() {
           />
         )}
 
-        {activeTab === 'crear-simulacro' && (
-          <CustomExamBuilder onStartCustomExamen={handleStartCustomExamen} />
-        )}
-
-        {activeTab === 'simulacro' && (
-          <div className="space-y-6">
-            <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-6 text-slate-800 dark:text-slate-100 shadow-md">
-              <h2 className="font-serif text-2xl font-extrabold mb-2 text-slate-900 dark:text-white">Simulacro Completo de Ascenso PNP 2026</h2>
-              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-sans">
-                Selecciona la modalidad de examen que deseas rendir. Se extraerán preguntas mezcladas del banco oficial de 1,500 preguntas (50% Materias Comunes, 50% Materias de Especialidad).
-              </p>
-            </div>
-
-            <ExamScreen
-              modo="simulacro"
-              preguntas={generarExamenSimulacro(20)}
-              tiempoLimiteMinutos={20}
-              onFinishExamen={handleFinishExamen}
-              onCancelExamen={() => setActiveTab('dashboard')}
-            />
-          </div>
+        {(activeTab === 'simulacro' || activeTab === 'crear-simulacro' || activeTab === 'normas') && (
+          <SimulacroHubScreen
+            onStartCustomExamen={handleStartCustomExamen}
+            onNavigateTab={setActiveTab}
+          />
         )}
 
         {activeTab === 'repaso' && (
           <SRSReviewScreen
             preguntas={pendientesSRS.length > 0 ? pendientesSRS : barajar(BANCO_PREGUNTAS).slice(0, 15)}
             onFinishReview={() => setActiveTab('dashboard')}
-          />
-        )}
-
-        {activeTab === 'normas' && (
-          <NormPracticeScreen
-            onStartExamenNorma={(normaNombre, cantidad) =>
-              handleStartExamen('norma', cantidad, normaNombre)
-            }
           />
         )}
 
@@ -490,18 +452,20 @@ export default function App() {
         )}
       </main>
 
-      {/* Footer - Simplified for mobile */}
-      <footer className="bg-[#011e17] border-t border-[#053d2f] py-6 px-4 text-center text-[10px] sm:text-xs font-mono text-emerald-300/80 space-y-1 mt-auto">
-        <p className="font-semibold text-emerald-200">
-          Simulador PNP 2026
-        </p>
-        <p className="hidden sm:block">
-          RD N° 006857-2026-DIRREHUM-PNP/JE · Promoción 2027
-        </p>
-        <p>
-          1,500 Preguntas Oficiales · PNP Ascenso
-        </p>
-      </footer>
+      {/* Footer - Simplified for mobile and hidden during exams */}
+      {!['examen', 'simulacro', 'repaso'].includes(activeTab) && (
+        <footer className="bg-slate-900 dark:bg-[#011e17] border-t border-slate-800 dark:border-[#053d2f] py-6 px-4 text-center text-[10px] sm:text-xs font-mono text-emerald-600 dark:text-emerald-300/80 space-y-1 mt-auto">
+          <p className="font-semibold text-emerald-600 dark:text-emerald-200">
+            Simulador PNP 2026
+          </p>
+          <p className="hidden sm:block">
+            RD N° 006857-2026-DIRREHUM-PNP/JE · Promoción 2027
+          </p>
+          <p>
+            1,500 Preguntas Oficiales · PNP Ascenso
+          </p>
+        </footer>
+      )}
 
       {/* Mobile Floating Action CTA - REMOVED */}
 

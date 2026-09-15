@@ -132,7 +132,7 @@ export const QuestionBankScreen: React.FC = () => {
                     <span
                       className={`font-mono text-[10px] font-bold px-2 py-0.5 rounded-md uppercase ${
                         q.grupo === 'COMUNES'
-                          ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30'
+                          ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-600 dark:text-emerald-300 border border-emerald-500/30'
                           : 'bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30'
                       }`}
                     >

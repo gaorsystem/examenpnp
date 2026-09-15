@@ -296,7 +296,7 @@ create table perfiles (
             <div className="space-y-4">
               <div className="bg-emerald-500/10 border border-emerald-500/30 p-4 rounded-xl space-y-3">
                 <div className="flex items-center justify-between">
-                  <h4 className="font-display font-bold text-base text-emerald-800 dark:text-emerald-300">
+                  <h4 className="font-display font-bold text-base text-emerald-800 dark:text-emerald-600 dark:text-emerald-300">
                     Bot de Entrenamiento por WhatsApp PNP
                   </h4>
                   <span className="bg-emerald-600 text-white px-2.5 py-0.5 rounded-md font-mono text-[10px] font-bold">
@@ -367,7 +367,7 @@ create table perfiles (
             <div className="space-y-4">
               <div className="bg-emerald-500/10 border border-emerald-500/30 p-4 rounded-xl space-y-2">
                 <div className="flex justify-between items-center">
-                  <h4 className="font-display font-bold text-base text-emerald-800 dark:text-emerald-300">Plan Premium Activo</h4>
+                  <h4 className="font-display font-bold text-base text-emerald-800 dark:text-emerald-600 dark:text-emerald-300">Plan Premium Activo</h4>
                   <span className="bg-emerald-600 text-white px-2.5 py-0.5 rounded-md font-mono text-[10px] font-bold">
                     ACCESO ILIMITADO
                   </span>

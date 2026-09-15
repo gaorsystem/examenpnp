@@ -352,7 +352,7 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
                 </span>
                 
                 {timeLeft > 0 ? (
-                  <span className="px-2.5 py-1 bg-emerald-200/80 dark:bg-emerald-800/60 text-emerald-900 dark:text-emerald-200 font-mono font-black text-xs rounded-full animate-pulse flex items-center gap-1">
+                  <span className="px-2.5 py-1 bg-emerald-200/80 dark:bg-emerald-800/60 text-emerald-900 dark:text-emerald-700 dark:text-emerald-200 font-mono font-black text-xs rounded-full animate-pulse flex items-center gap-1">
                     ⏱️ {timeLeft}s
                   </span>
                 ) : (
@@ -363,13 +363,13 @@ export const OtpLoginModal: React.FC<OtpLoginModalProps> = ({
               </div>
 
               {/* Big PIN Display */}
-              <div className="py-2 bg-white dark:bg-slate-900 rounded-xl border border-emerald-300 dark:border-emerald-700 shadow-sm">
-                <span className="text-4xl font-mono font-black text-emerald-900 dark:text-emerald-300 tracking-[0.3em] pl-2 select-all">
+              <div className="py-2 bg-white dark:bg-slate-900 rounded-xl border border-emerald-300 dark:border-slate-200 dark:border-emerald-700 shadow-sm">
+                <span className="text-4xl font-mono font-black text-emerald-900 dark:text-emerald-600 dark:text-emerald-300 tracking-[0.3em] pl-2 select-all">
                   {generatedPin}
                 </span>
               </div>
 
-              <div className="flex items-center justify-between text-[11px] text-emerald-800 dark:text-emerald-300 font-medium">
+              <div className="flex items-center justify-between text-[11px] text-emerald-800 dark:text-emerald-600 dark:text-emerald-300 font-medium">
                 <span>Hola <b>{foundProfile?.nombre}</b></span>
                 <button
                   type="button"

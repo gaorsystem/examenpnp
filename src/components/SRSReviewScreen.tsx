@@ -116,7 +116,7 @@ export const SRSReviewScreen: React.FC<SRSReviewScreenProps> = ({
             <span
               className={`font-mono text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase tracking-wider ${
                 currentPregunta.grupo === 'COMUNES'
-                  ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30'
+                  ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-600 dark:text-emerald-300 border border-emerald-500/30'
                   : 'bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30'
               }`}
             >
@@ -196,7 +196,7 @@ export const SRSReviewScreen: React.FC<SRSReviewScreenProps> = ({
         )}
 
         {/* ENUNCIADO */}
-        <p className="font-display font-bold text-lg sm:text-xl text-slate-900 dark:text-white leading-relaxed">
+        <p className="font-display font-bold text-base sm:text-lg text-slate-900 dark:text-white leading-snug">
           {currentPregunta.enunciado}
         </p>
 
@@ -231,7 +231,7 @@ export const SRSReviewScreen: React.FC<SRSReviewScreenProps> = ({
                 key={idx}
                 disabled={esRespondida || isEliminated}
                 onClick={() => handleResponder(opcion)}
-                className={`w-full text-left p-4 sm:p-5 rounded-2xl border transition-all flex items-start gap-3 text-sm sm:text-base font-sans active-scale ${style}`}
+                className={`w-full text-left p-3.5 sm:p-4 rounded-xl border transition-all flex items-start gap-3 text-[13px] sm:text-sm font-sans active-scale ${style}`}
               >
                 <span
                   className={`w-7 h-7 rounded-xl flex items-center justify-center font-mono font-bold text-xs shrink-0 mt-0.5 border ${
@@ -301,7 +301,7 @@ export const SRSReviewScreen: React.FC<SRSReviewScreenProps> = ({
 
                 <button
                   onClick={() => handleRatingSRS(4)}
-                  className="bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 p-2.5 rounded-xl font-bold active-scale shadow-sm"
+                  className="bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 p-2.5 rounded-xl font-bold active-scale shadow-sm"
                 >
                   Fácil
                   <span className="block text-[10px] opacity-75 font-normal">En 3 días</span>

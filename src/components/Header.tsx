@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, BookOpen, Clock, BarChart3, Search, Award, User, Sun, Moon, SlidersHorizontal, Home, LogIn, LogOut, Users, HelpCircle } from 'lucide-react';
+import { Shield, BookOpen, Clock, BarChart3, Search, Award, User, Sun, Moon, SlidersHorizontal, Home, LogIn, LogOut, Users, HelpCircle, Layers } from 'lucide-react';
 import { UserProfile } from '../types';
 
 interface HeaderProps {
@@ -31,10 +31,8 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const portalTabs = [
     { id: 'dashboard', label: 'Panel Principal', icon: BarChart3 },
-    { id: 'simulacro', label: 'Simulacro Real', icon: Clock },
-    { id: 'crear-simulacro', label: 'Armar Examen', icon: SlidersHorizontal },
-    { id: 'normas', label: 'Por Materia', icon: Shield },
-    { id: 'banco', label: 'Banco (1,500)', icon: Search },
+    { id: 'simulacro', label: 'Simulacros por Tema', icon: Layers },
+    { id: 'banco', label: 'Banco Oficial', icon: Search },
   ];
 
   if (isLoggedIn && userProfile.role === 'admin') {
@@ -44,136 +42,69 @@ export const Header: React.FC<HeaderProps> = ({
   const isLandingView = activeTab === 'landing';
 
   return (
-    <header className="bg-[#011e17] text-white border-b border-[#053d2f] shadow-md sticky top-0 z-40">
+    <header className="bg-white dark:bg-[#02281e] text-slate-900 dark:text-white border-b border-slate-100 dark:border-emerald-800/20 shadow-sm sticky top-0 z-40 backdrop-blur-md">
       {/* Top Banner Status Bar */}
-      <div className="bg-[#011611] px-4 py-1.5 border-b border-[#053d2f] flex justify-between items-center text-xs text-slate-300">
-        <div className="flex items-center gap-2 overflow-hidden whitespace-nowrap">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0"></span>
-          <span className="font-mono tracking-tight font-semibold text-emerald-300 truncate max-w-[120px] sm:max-w-none">
-            OFICIAL 2026
-          </span>
-          <span className="hidden sm:inline text-emerald-800">|</span>
-          <span className="hidden sm:inline text-emerald-200/80">
-            Simulador de Ascenso PNP
-          </span>
+      <div className="bg-slate-900 dark:bg-black/40 px-3 sm:px-4 py-1.5 border-b border-white/5 dark:border-emerald-800/10 flex justify-between items-center text-[9px] sm:text-[10px] font-mono tracking-widest font-black uppercase">
+        <div className="flex items-center gap-2 sm:gap-3 overflow-hidden whitespace-nowrap">
+          <div className="flex items-center gap-1.5 shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span className="text-emerald-500">SISTEMA ACTIVO</span>
+          </div>
+          <span className="text-slate-500 hidden xs:inline">|</span>
+          <span className="text-slate-400 hidden xs:inline">ASCENSO PNP 2026</span>
         </div>
-        <div className="flex items-center gap-2">
-          {isLoggedIn ? (
-            <div className="flex items-center gap-2">
-              {userProfile.role === 'admin' && (
-                <button
-                  onClick={() => setActiveTab('admin')}
-                  className={`flex items-center gap-1.5 border px-2 py-1 rounded transition-all font-mono text-[10px] font-bold ${
-                    activeTab === 'admin'
-                      ? 'bg-emerald-600 border-emerald-500 text-white shadow-lg shadow-emerald-500/20'
-                      : 'bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
-                  }`}
-                >
-                  <Shield className="w-3 h-3" />
-                  <span>ADMIN</span>
-                </button>
-              )}
-              <button 
-                onClick={onOpenProfile}
-                className="hidden sm:flex items-center gap-1.5 bg-emerald-900/40 hover:bg-emerald-800/60 text-emerald-200 border border-emerald-600/40 px-2 py-1 rounded transition-all font-mono text-[10px]"
-              >
-                <User className="w-3 h-3 text-emerald-300" />
-                <span className="font-bold">{userProfile.grado} {userProfile.nombre}</span>
-              </button>
-              <button
-                onClick={onLogout}
-                className="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 px-3 py-1.5 rounded-lg transition-all active-scale flex items-center gap-1.5 font-mono text-[10px] font-bold"
-                title="Cerrar Sesión"
-              >
-                <LogOut className="w-3.5 h-3.5" />
-                <span>SALIR</span>
-              </button>
-            </div>
-          ) : (
-            <div className="flex items-center gap-2">
-              {userProfile.role === 'admin' && (
-                <button
-                  onClick={() => setActiveTab('admin')}
-                  className={`flex items-center gap-1.5 border px-2 py-1 rounded transition-all font-mono text-[10px] font-bold ${
-                    activeTab === 'admin'
-                      ? 'bg-emerald-600 border-emerald-500 text-white'
-                      : 'text-emerald-400 hover:text-emerald-200 border-emerald-800'
-                  }`}
-                >
-                  <Shield className="w-3 h-3" />
-                  <span>ADMIN</span>
-                </button>
-              )}
-              <button
-                onClick={onOpenOtpModal}
-                className="bg-white hover:bg-emerald-50 text-[#01241a] font-mono font-black text-[11px] px-4 py-2 rounded-lg flex items-center gap-1.5 shadow-md transition-all active-scale"
-              >
-                <LogIn className="w-3.5 h-3.5" />
-                <span>INGRESAR</span>
-              </button>
-            </div>
-          )}
-          {onOpenGuideModal && (
-            <button
-              onClick={onOpenGuideModal}
-              className="bg-emerald-900/40 hover:bg-emerald-800/60 text-emerald-300 border border-emerald-600/40 px-2.5 py-1 rounded-lg transition-all active-scale flex items-center gap-1 font-mono text-[10px] font-extrabold"
-              title="Ver Guía de Uso del Sistema"
-            >
-              <HelpCircle className="w-3.5 h-3.5 text-emerald-300 animate-pulse" />
-              <span>GUÍA</span>
-            </button>
-          )}
-          <div className="h-3 w-[1px] bg-emerald-800 mx-1"></div>
+        
+        <div className="flex items-center gap-3 sm:gap-4 shrink-0">
           <button
             onClick={onToggleTheme}
-            className="text-emerald-300 hover:text-white transition-colors p-1"
+            className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 group"
           >
-            {theme === 'light' ? <Moon className="w-3.5 h-3.5" /> : <Sun className="w-3.5 h-3.5" />}
+            {theme === 'light' ? (
+              <>
+                <Moon className="w-3 h-3 group-hover:rotate-12 transition-transform" />
+                <span className="hidden xxs:inline">MODO OSCURO</span>
+              </>
+            ) : (
+              <>
+                <Sun className="w-3 h-3 group-hover:rotate-90 transition-transform" />
+                <span className="hidden xxs:inline">MODO CLARO</span>
+              </>
+            )}
           </button>
+          {isLoggedIn && (
+            <button
+              onClick={onLogout}
+              className="text-rose-500 hover:text-rose-400 transition-colors flex items-center gap-1.5"
+            >
+              <LogOut className="w-3 h-3" />
+              <span>SALIR</span>
+            </button>
+          )}
         </div>
       </div>
 
-      {/* Main Header Row - Compact */}
-      <div className="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
+      {/* Main Header Row */}
+      <div className="max-w-none mx-auto px-4 sm:px-6 lg:px-10 py-3 flex items-center justify-between gap-4">
         <div 
-          className="flex items-center gap-2.5 cursor-pointer shrink-0" 
+          className="flex items-center gap-3 cursor-pointer shrink-0 group" 
           onClick={() => setActiveTab('landing')}
         >
-          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#059669] flex items-center justify-center shrink-0 shadow-lg border border-emerald-400/40">
-            <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+          <div className="w-9 h-9 rounded-xl bg-slate-900 dark:bg-emerald-600 flex items-center justify-center shrink-0 shadow-lg group-active:scale-95 transition-all">
+            <Shield className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="font-display font-black text-lg sm:text-xl text-white tracking-tight leading-none">
-              PNP <span className="text-emerald-300">2026</span>
+            <h1 className="font-display font-black text-xl text-slate-900 dark:text-white tracking-tighter uppercase leading-none">
+              SIMULADOR <span className="text-emerald-600 dark:text-emerald-400">PNP</span>
             </h1>
-            <p className="hidden sm:block text-[10px] text-emerald-200/80 font-sans mt-0.5">
-              Simulador de Ascenso Oficial
+            <p className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] mt-0.5">
+              Promoción 2027
             </p>
           </div>
         </div>
 
         {/* Navigation Section */}
-        {isLandingView ? (
-          <div className="flex items-center gap-2">
-            <button
-              onClick={onOpenOtpModal}
-              className="bg-white hover:bg-emerald-50 text-[#01241a] font-display font-black text-xs px-4 py-2 rounded-xl shadow-lg transition-all active-scale"
-            >
-              INGRESAR AL PORTAL
-            </button>
-          </div>
-        ) : (
-          /* Private Portal Student Navigation Tabs */
-          <nav className="flex items-center gap-1 overflow-x-auto max-w-full pb-1 md:pb-0 scrollbar-none">
-            <button
-              onClick={() => setActiveTab('landing')}
-              className="flex items-center gap-1 px-2.5 py-2 rounded-xl text-xs font-mono text-emerald-200 hover:text-white hover:bg-[#004d38] transition-colors shrink-0"
-              title="Volver a la portada informativa"
-            >
-              <Home className="w-3.5 h-3.5 text-emerald-300" />
-              Inicio
-            </button>
-
+        {!isLandingView && (
+          <nav className="hidden md:flex items-center gap-1">
             {portalTabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
@@ -181,34 +112,53 @@ export const Header: React.FC<HeaderProps> = ({
                 <button
                   key={tab.id}
                   type="button"
-                  onClick={() => {
-                    if (!isLoggedIn) {
-                      onOpenOtpModal();
-                    } else {
-                      setActiveTab(tab.id);
-                    }
-                  }}
-                  className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-mono font-medium transition-all whitespace-nowrap active-scale ${
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest transition-all active-scale ${
                     isActive
-                      ? 'bg-white text-[#01241a] font-bold shadow-md'
-                      : 'text-emerald-200 hover:bg-[#004d38] hover:text-white'
+                      ? 'bg-slate-900 dark:bg-emerald-600 text-white shadow-lg'
+                      : 'text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-emerald-900/20'
                   }`}
                 >
-                  <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-[#01241a]' : 'text-emerald-300'}`} />
+                  <Icon className={`w-4 h-4 ${isActive ? 'stroke-[2.5]' : 'stroke-[1.5]'}`} />
                   {tab.label}
                 </button>
               );
             })}
-
-            <button
-              onClick={onQuickSimulacro}
-              className="ml-2 bg-[#059669] hover:bg-[#047857] text-white px-3.5 py-2 rounded-xl text-xs font-mono font-bold flex items-center gap-1.5 shadow-md border border-emerald-400/50 shrink-0 transition-transform active-scale"
-            >
-              <Award className="w-3.5 h-3.5 text-emerald-200" />
-              Examen Rápido
-            </button>
           </nav>
         )}
+
+        <div className="flex items-center gap-2">
+          {isLoggedIn ? (
+            <button 
+              onClick={onOpenProfile}
+              className="flex items-center gap-2 bg-slate-50 dark:bg-emerald-900/20 hover:bg-slate-100 dark:hover:bg-emerald-900/40 text-slate-900 dark:text-white border border-slate-200 dark:border-emerald-800/30 px-3 py-2 rounded-xl transition-all active-scale shadow-sm"
+            >
+              <div className="w-6 h-6 rounded-lg bg-slate-200 dark:bg-emerald-800 flex items-center justify-center">
+                <User className="w-3.5 h-3.5 text-slate-500 dark:text-emerald-300" />
+              </div>
+              <span className="text-[10px] font-black uppercase tracking-tight hidden sm:block">
+                {userProfile.grado} {userProfile.nombre.split(' ')[0]}
+              </span>
+            </button>
+          ) : (
+            <button
+              onClick={onOpenOtpModal}
+              className="bg-slate-900 dark:bg-emerald-600 hover:bg-slate-800 dark:hover:bg-emerald-500 text-white font-display font-black text-[11px] uppercase tracking-widest px-6 py-2.5 rounded-xl shadow-lg transition-all active-scale"
+            >
+              INGRESAR
+            </button>
+          )}
+          
+          {onOpenGuideModal && (
+            <button
+              onClick={onOpenGuideModal}
+              className="w-10 h-10 flex items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 transition-all active-scale border border-emerald-100 dark:border-emerald-800/30"
+              title="Guía de Usuario"
+            >
+              <HelpCircle className="w-5 h-5" />
+            </button>
+          )}
+        </div>
       </div>
     </header>
   );

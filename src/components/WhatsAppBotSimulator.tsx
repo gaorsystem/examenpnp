@@ -214,7 +214,7 @@ export const WhatsAppBotSimulator: React.FC<WhatsAppBotSimulatorProps> = ({ user
 
                         if (m.answered) {
                           if (isRight) {
-                            optBtnStyle = 'bg-emerald-500/20 text-emerald-200 border-emerald-500 font-bold';
+                            optBtnStyle = 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-200 border-emerald-500 font-bold';
                           } else if (isSelected) {
                             optBtnStyle = 'bg-red-500/20 text-red-200 border-red-500 font-bold';
                           }

@@ -17,6 +17,8 @@ export interface NormaInfo {
   grupo: GrupoMateria;
   slug: string;
   totalPreguntas: number;
+  imagen?: string;
+  color?: string;
 }
 
 export interface RespuestaUsuario {
@@ -31,6 +33,8 @@ export interface IntentoExamen {
   modo: 'simulacro' | 'repaso' | 'norma' | 'expres' | 'whatsapp';
   normaFiltro?: string;
   totalPreguntas: number;
+  imagen?: string;
+  color?: string;
   aciertos: number;
   duracionSeg: number;
   fecha: string;

@@ -1,0 +1,626 @@
+[
+  {
+    "codigo": "ASCENSO-P591",
+    "numero": 591,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN EL GRADO QUE DEBE TENER UN TENIENTE DE ARMAS PARA SER CANDIDATO AL ASCENSO?",
+    "opciones": [
+      "3 AÑOS",
+      "4 AÑOS",
+      "5 AÑOS",
+      "6 AÑOS",
+      "2 AÑOS"
+    ],
+    "respuesta": "4 AÑOS",
+    "ubicacion": "Artículo 7° de la Ley N° 31873 - Ley del Régimen de Ascensos de la PNP"
+  },
+  {
+    "codigo": "ASCENSO-P592",
+    "numero": 592,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN EL GRADO QUE DEBE TENER UN CORONEL DE ARMAS PARA SER CANDIDATO AL ASCENSO?",
+    "opciones": [
+      "4 AÑOS",
+      "5 AÑOS",
+      "15 AÑOS",
+      "20 AÑOS",
+      "25 AÑOS"
+    ],
+    "respuesta": "5 AÑOS",
+    "ubicacion": "Artículo 7° de la Ley N° 31873 - Ley del Régimen de Ascensos de la PNP"
+  },
+  {
+    "codigo": "ASCENSO-P594",
+    "numero": 594,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "CONSTITUYE UN PRINCIPIO RECTOR DE LOS PROCESOS DE ASCENSOS DEL PERSONAL DE LA POLICÍA NACIONAL DEL PERÚ:",
+    "opciones": [
+      "PRINCIPIO DE PRESUNCIÓN DE LICITUD",
+      "PRINCIPIO DE CAUSALIDAD",
+      "PRINCIPIO DE CELERIDAD",
+      "PRINCIPIO DE PRIMACÍA DE LA PERSONA HUMANA Y SUS DERECHOS FUNDAMENTALES",
+      "PRINCIPIO DE IGUALDAD"
+    ],
+    "respuesta": "PRINCIPIO DE IGUALDAD",
+    "ubicacion": "Artículo 3° inciso 1 de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P595",
+    "numero": 595,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "CONSTITUYE UN PRINCIPIO RECTOR DE LOS PROCESOS DE ASCENSOS DEL PERSONAL DE LA POLICÍA NACIONAL DEL PERÚ:",
+    "opciones": [
+      "PRINCIPIO DE DOBLE INSTANCIA",
+      "PRINCIPIO DE INMEDIATEZ",
+      "PRINCIPIO DE RESERVA",
+      "PRINCIPIO DE IMPARCIALIDAD",
+      "PRINCIPIO DE PROPORCIONALIDAD"
+    ],
+    "respuesta": "PRINCIPIO DE IMPARCIALIDAD",
+    "ubicacion": "Artículo 3° inciso 2 de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P596",
+    "numero": 596,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "CONSTITUYE UN PRINCIPIO RECTOR DE LOS PROCESOS DE ASCENSOS DEL PERSONAL DE LA POLICÍA NACIONAL DEL PERÚ:",
+    "opciones": [
+      "PRINCIPIO DE OBJETIVIDAD",
+      "PRINCIPIO DE EFICIENCIA Y EFICACIA",
+      "PRINCIPIO DE LA ARTICULACIÓN DE LAS INTERVENCIONES EN EL TERRITORIO NACIONAL",
+      "PRINCIPIO DE CELERIDAD",
+      "PRINCIPIO DE RAZONABILIDAD"
+    ],
+    "respuesta": "PRINCIPIO DE OBJETIVIDAD",
+    "ubicacion": "Artículo 3° inciso 4 de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P597",
+    "numero": 597,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "CONSTITUYE UN PRINCIPIO RECTOR DE LOS PROCESOS DE ASCENSOS DEL PERSONAL DE LA POLICÍA NACIONAL DEL PERÚ:",
+    "opciones": [
+      "PRINCIPIO DE PROPORCIONALIDAD",
+      "PRINCIPIO DE LA ARTICULACIÓN DE LAS INTERVENCIONES EN EL TERRITORIO NACIONAL",
+      "PRINCIPIO DE CELERIDAD",
+      "PERTENENCIA INSTITUCIONAL",
+      "PRINCIPIO DE TRANSPARENCIA."
+    ],
+    "respuesta": "PRINCIPIO DE TRANSPARENCIA.",
+    "ubicacion": "Artículo 3° inciso 5 de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P598",
+    "numero": 598,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "“LOS OFICIALES Y SUBOFICIALES TIENEN LOS MISMOS DERECHOS Y OPORTUNIDADES PARA LOS ASCENSOS EN SUS RESPECTIVOS GRADOS Y CATEGORÍAS, POR LO QUE QUEDA PROSCRITA TODA PRÁCTICA DE DISCRIMINACIÓN, PRIVILEGIO O PREFERENCIA”. EL ENUNCIADO CORRESPONDE A:",
+    "opciones": [
+      "PRINCIPIO DE IGUALDAD",
+      "PRINCIPIO DE NO DISCRIMINACIÓN",
+      "PRINCIPIO DE MERITOCRACIA",
+      "PRINCIPIO DE OBJETIVIDAD",
+      "PRINCIPIO DE PROPORCIONALIDAD"
+    ],
+    "respuesta": "PRINCIPIO DE IGUALDAD",
+    "ubicacion": "Artículo 3° inciso 1 de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P599",
+    "numero": 599,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "ESTABLECER LOS PRINCIPIOS, ETAPAS, REQUISITOS, APTITUDES Y PROCEDIMIENTOS PARA MATERIALIZAR LA ORGANIZACIÓN, EJECUCIÓN, CONTROL Y EVALUACIÓN DE LOS PROCESOS DE ASCENSOS DE LOS OFICIALES Y SUBOFICIALES QUE INTEGRAN LA POLICÍA NACIONAL DEL PERÚ (PNP), ASÍ COMO LAS COMPETENCIAS DE LAS JUNTAS CORRESPONDIENTES; CONSTITUYE:",
+    "opciones": [
+      "EL OBJETO DE LA LEY 31873",
+      "LA FINALIDAD DE LA LEY 31873",
+      "LA NATURALEZA DE LA LEY 31873",
+      "EL OBJETIVO DE LA LEY 31873",
+      "EL ALCANCE DE LA LEY 31873"
+    ],
+    "respuesta": "EL OBJETO DE LA LEY 31873",
+    "ubicacion": "Artículo 1° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P600",
+    "numero": 600,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "ES LA PROMOCIÓN DEL OFICIAL Y SUBOFICIAL EN SITUACIÓN DE ACTIVIDAD AL GRADO POLICIAL INMEDIATO SUPERIOR. NOS REFERIMOS A:",
+    "opciones": [
+      "ASCENSO",
+      "PROMOVER",
+      "ACCESO ORDINARIO",
+      "ACCESO EXTRAORDINARIO",
+      "EL GRADO"
+    ],
+    "respuesta": "ASCENSO",
+    "ubicacion": "Artículo 5° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P601",
+    "numero": 601,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LOS PROCESOS DE ASCENSO SON ANUALES. EL CRONOGRAMA DE SUS ETAPAS PARA OFICIALES Y SUBOFICIALES ES APROBADO Y PUBLICADO ANUALMENTE. ÚNICAMENTE SE AGREGA AL LEGAJO DE ASCENSO LA INFORMACIÓN QUE CORRESPONDA AL AÑO ANTERIOR A LA CONVOCATORIA AL PROCESO HASTA EL ÚLTIMO DÍA HÁBIL DEL MES DE....:",
+    "opciones": [
+      "ABRIL DEL AÑO DEL PROCESO.",
+      "JUNIO DEL AÑO DEL PROCESO.",
+      "MARZO DEL AÑO DEL PROCESO.",
+      "JULIO DEL AÑO DEL PROCESO.",
+      "MAYO DEL AÑO DEL PROCESO."
+    ],
+    "respuesta": "MAYO DEL AÑO DEL PROCESO.",
+    "ubicacion": "Artículo 5° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P602",
+    "numero": 602,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "CONSTITUYE UNA DE LAS ETAPAS DEL PROCESO DE ASCENSO:",
+    "opciones": [
+      "CONVOCATORIA.",
+      "DETERMINACIÓN DE CANDIDATOS.",
+      "NOMBRAMIENTO DE LAS RESPECTIVAS JUNTAS DE EVALUACION.",
+      "INICIO DE LA FICHA MEDICA ANUAL.",
+      "EJECUCIÓN DEL EXAMEN DE CONOCIMIENTOS."
+    ],
+    "respuesta": "DETERMINACIÓN DE CANDIDATOS.",
+    "ubicacion": "Artículo 6° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P603",
+    "numero": 603,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "CONSTITUYE UNA DE LAS ETAPAS DEL PROCESO DE ASCENSO:",
+    "opciones": [
+      "EJECUCIÓN DEL EXAMEN DE CONOCIMIENTOS.",
+      "REVISIÓN DE EXPEDIENTES.",
+      "DECLARACIÓN DE APTITUD.",
+      "EMISIÓN DE LAS RESPECTIVAS RESOLUCIONES.",
+      "DETERMINACIÓN Y APROBACIÓN DEL CUADRO DE ASIGNACIÓN DE CARGOS."
+    ],
+    "respuesta": "DECLARACIÓN DE APTITUD.",
+    "ubicacion": "Artículo 6° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P604",
+    "numero": 604,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "CONSTITUYE UNA DE LAS ETAPAS DEL PROCESO DE ASCENSO:",
+    "opciones": [
+      "FORMULACIÓN DEL CUADRO DE APTITUD Y NOTAS.",
+      "RECEPCIÓN Y ABSOLUCIÓN DE RECLAMOS.",
+      "EMISIÓN DE LAS RESPECTIVAS RESOLUCIONES.",
+      "DETERMINACIÓN Y APROBACIÓN DEL CUADRO DE ASIGNACIÓN DE CARGOS.",
+      "PUBLICACIÓN DE LAS NOTAS DEL EXAMEN DE TIRO"
+    ],
+    "respuesta": "FORMULACIÓN DEL CUADRO DE APTITUD Y NOTAS.",
+    "ubicacion": "Artículo 6° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P605",
+    "numero": 605,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "CONSTITUYE UNA DE LAS ETAPAS DEL PROCESO DE ASCENSO:",
+    "opciones": [
+      "PUBLICACIÓN DE LAS NOTAS DEL EXAMEN DE ESFUERZO FÍSICO",
+      "REVISIÓN DE EXPEDIENTES.",
+      "EMISIÓN DE LAS RESPECTIVAS RESOLUCIONES.",
+      "PUBLICACIÓN DE LAS NOTAS DEL EXAMEN DE CONOCIMIENTOS",
+      "PRESENTACIÓN Y FORMALIZACIÓN DEL ASCENSO."
+    ],
+    "respuesta": "PRESENTACIÓN Y FORMALIZACIÓN DEL ASCENSO.",
+    "ubicacion": "Artículo 6° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P606",
+    "numero": 606,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "ES EL PROCESO SELECTIVO PARA CUBRIR LAS VACANTES:",
+    "opciones": [
+      "EL ASCENSO",
+      "ASCENSO POR ACCIÓN DISTINGUIDA",
+      "ASCENSO EXTRAORDINARIO",
+      "ASCENSO POR CONCURSO",
+      "ASCENSO ORDINARIO"
+    ],
+    "respuesta": "ASCENSO POR CONCURSO",
+    "ubicacion": "Artículo 4° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P607",
+    "numero": 607,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "EL OFICIAL O SUBOFICIAL DE LA POLICÍA NACIONAL DEL PERÚ (PNP), PREVIA CALIFICACIÓN, ASCIENDE DE MANERA POSTUMA AL GRADO INMEDIATO SUPERIOR POR...:",
+    "opciones": [
+      "ACCIÓN DE ARMAS O COMO CONSECUENCIA DEL SERVICIO EN EL CUMPLIMIENTO DEL DEBER",
+      "ACCIÓN DE ARMAS O POR ACTO DEL SERVICIO EN EL CUMPLIMIENTO DEL DEBER",
+      "CUMPLIMIENTO DEL DEBER",
+      "ACCIÓN DE ARMAS O POR ACTOS AJENOS AL SERVICIO EN EL CUMPLIMIENTO DEL DEBER",
+      "ACCIÓN DE ARMAS O POR CUALQUIER OTRA CAUSAL EN EL CUMPLIMIENTO DEL DEBER"
+    ],
+    "respuesta": "ACCIÓN DE ARMAS O POR ACTO DEL SERVICIO EN EL CUMPLIMIENTO DEL DEBER",
+    "ubicacion": "Artículo 4° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P608",
+    "numero": 608,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN EL GRADO QUE DEBE TENER UN GENERAL DE ARMAS PARA SER CANDIDATO AL ASCENSO?",
+    "opciones": [
+      "4 AÑOS",
+      "5 AÑOS",
+      "20 AÑOS",
+      "25 AÑOS",
+      "29 AÑOS"
+    ],
+    "respuesta": "4 AÑOS",
+    "ubicacion": "Artículo 7° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P609",
+    "numero": 609,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN EL GRADO QUE DEBE TENER UN CAPITÁN DE SERVICIOS PARA SER CANDIDATO AL ASCENSO?",
+    "opciones": [
+      "4 AÑOS",
+      "5 AÑOS",
+      "6 AÑOS",
+      "10 AÑOS",
+      "15 AÑOS"
+    ],
+    "respuesta": "4 AÑOS",
+    "ubicacion": "Artículo 7° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P610",
+    "numero": 610,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN EL GRADO QUE DEBE TENER UN CORONEL DE SERVICIOS PARA SER CANDIDATO AL ASCENSO?",
+    "opciones": [
+      "4 AÑOS",
+      "5 AÑOS",
+      "6 AÑOS",
+      "25 AÑOS",
+      "29 AÑOS"
+    ],
+    "respuesta": "5 AÑOS",
+    "ubicacion": "Artículo 7° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P611",
+    "numero": 611,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN EL GRADO QUE DEBE TENER UN SUBOFICIAL DE TERCERA PARA SER CANDIDATO AL ASCENSO?",
+    "opciones": [
+      "4 AÑOS",
+      "5 AÑOS",
+      "6 AÑOS",
+      "3 AÑOS",
+      "10 AÑOS"
+    ],
+    "respuesta": "4 AÑOS",
+    "ubicacion": "Artículo 7° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P612",
+    "numero": 612,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN EL GRADO QUE DEBE TENER UN SUBOFICIAL DE PRIMERA PARA SER CANDIDATO AL ASCENSO?",
+    "opciones": [
+      "4 AÑOS",
+      "5 AÑOS",
+      "10 AÑOS",
+      "15 AÑOS",
+      "19 AÑOS"
+    ],
+    "respuesta": "5 AÑOS",
+    "ubicacion": "Artículo 7° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P613",
+    "numero": 613,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN EL GRADO QUE DEBE TENER UN SUBOFICIAL TÉCNICO DE TERCERA PARA SER CANDIDATO AL ASCENSO?",
+    "opciones": [
+      "4 AÑOS",
+      "5 AÑOS",
+      "10 AÑOS",
+      "15 AÑOS",
+      "19 AÑOS"
+    ],
+    "respuesta": "5 AÑOS",
+    "ubicacion": "Artículo 7° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P614",
+    "numero": 614,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN EL GRADO QUE DEBE TENER UN SUBOFICIAL TÉCNICO DE SEGUNDA PARA SER CANDIDATO AL ASCENSO?",
+    "opciones": [
+      "4 AÑOS",
+      "5 AÑOS",
+      "15 AÑOS",
+      "19 AÑOS",
+      "23 AÑOS"
+    ],
+    "respuesta": "4 AÑOS",
+    "ubicacion": "Artículo 7° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P615",
+    "numero": 615,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN EL GRADO QUE DEBE TENER UN SUBOFICIAL BRIGADIER PARA SER CANDIDATO AL ASCENSO?",
+    "opciones": [
+      "4 AÑOS",
+      "19 AÑOS",
+      "23 AÑOS",
+      "27 AÑOS",
+      "31 AÑOS"
+    ],
+    "respuesta": "4 AÑOS",
+    "ubicacion": "Artículo 7° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P616",
+    "numero": 616,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN EL GRADO QUE DEBE TENER UN SUBOFICIAL SUPERIOR PARA SER CANDIDATO AL ASCENSO?",
+    "opciones": [
+      "4 AÑOS",
+      "23 AÑOS",
+      "27 AÑOS",
+      "31 AÑOS",
+      "5 AÑOS"
+    ],
+    "respuesta": "4 AÑOS",
+    "ubicacion": "Artículo 7° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P617",
+    "numero": 617,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LOS OFICIALES DE SERVICIO DE LA PROFESIÓN DE MEDICINA HUMANA QUE TENGAN SEGUNDA ESPECIALIDAD DE LA PROFESIÓN, SE ASIMILAN CON EL GRADO DE...:",
+    "opciones": [
+      "CAPITÁN DE SERVICIOS.",
+      "TENIENTE DE SERVICIOS.",
+      "MAYOR DE SERVICIOS.",
+      "CAPITÁN DE ARMAS.",
+      "MAYOR DE ARMAS."
+    ],
+    "respuesta": "CAPITÁN DE SERVICIOS.",
+    "ubicacion": "Artículo 20° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P618",
+    "numero": 618,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN LA INSTITUCIÓN QUE DEBE TENER UN ALFÉREZ PARA POSTULAR AL GRADO INMEDIATO SUPERIOR?",
+    "opciones": [
+      "4 AÑOS",
+      "5 AÑOS",
+      "6 AÑOS",
+      "10 AÑOS",
+      "7 AÑOS"
+    ],
+    "respuesta": "4 AÑOS",
+    "ubicacion": "Artículo 8° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P619",
+    "numero": 619,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN LA INSTITUCIÓN QUE DEBE TENER UN TENIENTE DE ARMAS PARA POSTULAR AL GRADO INMEDIATO SUPERIOR?",
+    "opciones": [
+      "5 AÑOS",
+      "10 AÑOS",
+      "15 AÑOS",
+      "20 AÑOS",
+      "4 AÑOS"
+    ],
+    "respuesta": "5 AÑOS",
+    "ubicacion": "Artículo 8° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P620",
+    "numero": 620,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN LA INSTITUCIÓN QUE DEBE TENER UN CAPITÁN DE ARMAS PARA POSTULAR AL GRADO INMEDIATO SUPERIOR?",
+    "opciones": [
+      "5 AÑOS",
+      "10 AÑOS",
+      "15 AÑOS",
+      "20 AÑOS",
+      "4 AÑOS"
+    ],
+    "respuesta": "10 AÑOS",
+    "ubicacion": "Artículo 8° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P621",
+    "numero": 621,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN LA INSTITUCIÓN QUE DEBE TENER UN MAYOR DE ARMAS PARA POSTULAR AL GRADO INMEDIATO SUPERIOR?",
+    "opciones": [
+      "5 AÑOS",
+      "10 AÑOS",
+      "15 AÑOS",
+      "20 AÑOS",
+      "4 AÑOS"
+    ],
+    "respuesta": "15 AÑOS",
+    "ubicacion": "Artículo 8° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P622",
+    "numero": 622,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN LA INSTITUCIÓN QUE DEBE TENER UN COMANDANTE DE ARMAS PARA POSTULAR AL GRADO INMEDIATO SUPERIOR?",
+    "opciones": [
+      "5 AÑOS",
+      "15 AÑOS",
+      "20 AÑOS",
+      "25 AÑOS",
+      "4 AÑOS"
+    ],
+    "respuesta": "20 AÑOS",
+    "ubicacion": "Artículo 8° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P623",
+    "numero": 623,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN LA INSTITUCIÓN QUE DEBE TENER UN CORONEL DE ARMAS PARA POSTULAR AL GRADO INMEDIATO SUPERIOR?",
+    "opciones": [
+      "5 AÑOS",
+      "4 AÑOS",
+      "33 AÑOS",
+      "25 AÑOS",
+      "29 AÑOS"
+    ],
+    "respuesta": "25 AÑOS",
+    "ubicacion": "Artículo 8° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P624",
+    "numero": 624,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN LA INSTITUCIÓN QUE DEBE TENER UN CAPITÁN DE SERVICIOS PARA POSTULAR AL GRADO INMEDIATO SUPERIOR?",
+    "opciones": [
+      "5 AÑOS",
+      "4 AÑOS",
+      "6 AÑOS",
+      "10 AÑOS",
+      "12 AÑOS"
+    ],
+    "respuesta": "6 AÑOS",
+    "ubicacion": "Artículo 8° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P625",
+    "numero": 625,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN LA INSTITUCIÓN QUE DEBE TENER UN MAYOR DE SERVICIOS PARA POSTULAR AL GRADO INMEDIATO SUPERIOR?",
+    "opciones": [
+      "5 AÑOS",
+      "6 AÑOS",
+      "12 AÑOS",
+      "18 AÑOS",
+      "15 AÑOS"
+    ],
+    "respuesta": "12 AÑOS",
+    "ubicacion": "Artículo 8° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P626",
+    "numero": 626,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN LA INSTITUCIÓN QUE DEBE TENER UN COMANDANTE DE SERVICIOS PARA POSTULAR AL GRADO INMEDIATO SUPERIOR?",
+    "opciones": [
+      "6 AÑOS",
+      "12 AÑOS",
+      "18 AÑOS",
+      "24 AÑOS",
+      "25 AÑOS"
+    ],
+    "respuesta": "18 AÑOS",
+    "ubicacion": "Artículo 8° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P627",
+    "numero": 627,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN LA INSTITUCIÓN QUE DEBE TENER UN SUBOFICIAL DE TERCERA PARA POSTULAR AL GRADO INMEDIATO SUPERIOR?",
+    "opciones": [
+      "5 AÑOS",
+      "4 AÑOS",
+      "10 AÑOS",
+      "7 AÑOS",
+      "15 AÑOS"
+    ],
+    "respuesta": "4 AÑOS",
+    "ubicacion": "Artículo 8° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P628",
+    "numero": 628,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN LA INSTITUCIÓN QUE DEBE TENER UN SUBOFICIAL DE SEGUNDA PARA POSTULAR AL GRADO INMEDIATO SUPERIOR?",
+    "opciones": [
+      "5 AÑOS",
+      "4 AÑOS",
+      "10 AÑOS",
+      "15 AÑOS",
+      "20 AÑOS"
+    ],
+    "respuesta": "10 AÑOS",
+    "ubicacion": "Artículo 8° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P629",
+    "numero": 629,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN LA INSTITUCIÓN QUE DEBE TENER UN SUBOFICIAL DE PRIMERA PARA POSTULAR AL GRADO INMEDIATO SUPERIOR?",
+    "opciones": [
+      "4 AÑOS",
+      "5 AÑOS",
+      "10 AÑOS",
+      "15 AÑOS",
+      "20 AÑOS"
+    ],
+    "respuesta": "15 AÑOS",
+    "ubicacion": "Artículo 8° de la Ley N° 31873"
+  },
+  {
+    "codigo": "ASCENSO-P630",
+    "numero": 630,
+    "materia_grupo": "COMUNES",
+    "norma": "LEY DE PROCESOS DE ASCENSO DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿CUÁL ES EL TIEMPO MÍNIMO DE SERVICIO REALES Y EFECTIVOS EN LA INSTITUCIÓN QUE DEBE TENER UN SUBOFICIAL TÉCNICO DE TERCERA PARA POSTULAR AL GRADO INMEDIATO SUPERIOR?",
+    "opciones": [
+      "4 AÑOS",
+      "23 AÑOS",
+      "25 AÑOS",
+      "19 AÑOS",
+      "15 AÑOS"
+    ],
+    "respuesta": "19 AÑOS",
+    "ubicacion": "Artículo 8° de la Ley N° 31873"
+  }
+]

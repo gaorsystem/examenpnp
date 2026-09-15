@@ -97,7 +97,7 @@ export const NormPracticeScreen: React.FC<NormPracticeScreenProps> = ({ onStartE
       </div>
 
       {/* Grid of Norms */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
         {filteredNormas.map((n) => {
           const isSelected = selectedNorma?.id === n.id;
 
@@ -116,7 +116,7 @@ export const NormPracticeScreen: React.FC<NormPracticeScreenProps> = ({ onStartE
                   <span
                     className={`font-mono text-[10px] font-bold px-2.5 py-0.5 rounded-md uppercase tracking-wider ${
                       n.grupo === 'COMUNES'
-                        ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30'
+                        ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-600 dark:text-emerald-300 border border-emerald-500/30'
                         : 'bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30'
                     }`}
                   >
@@ -176,6 +176,8 @@ export const NormPracticeScreen: React.FC<NormPracticeScreenProps> = ({ onStartE
                 <option value={10}>10 Preguntas</option>
                 <option value={15}>15 Preguntas</option>
                 <option value={20}>20 Preguntas</option>
+                {selectedNorma.totalPreguntas >= 50 && <option value={50}>50 Preguntas</option>}
+                {selectedNorma.totalPreguntas >= 100 && <option value={100}>100 Preguntas (Oficial Completo)</option>}
                 <option value={selectedNorma.totalPreguntas}>Todas ({selectedNorma.totalPreguntas})</option>
               </select>
             </div>

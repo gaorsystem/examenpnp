@@ -120,7 +120,7 @@ export const AudioAndBotExplainerModal: React.FC<AudioAndBotExplainerModalProps>
                       key={idx}
                       className={`text-xs sm:text-sm p-3 rounded-xl border font-sans ${
                         idx === 1
-                          ? 'bg-emerald-500/10 border-emerald-500/60 text-emerald-700 dark:text-emerald-300 font-bold'
+                          ? 'bg-emerald-500/10 border-emerald-500/60 text-emerald-700 dark:text-emerald-600 dark:text-emerald-300 font-bold'
                           : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300'
                       }`}
                     >

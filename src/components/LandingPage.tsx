@@ -29,99 +29,101 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   };
 
   return (
-    <div className="min-h-[80vh] bg-[#01241a] text-slate-100 font-sans p-4 sm:p-6 pb-20 w-full overflow-x-hidden flex items-center justify-center">
-      <div className="max-w-xl w-full mx-auto space-y-6 text-center">
+    <div className="min-h-[80vh] bg-[#F8FAFC] dark:bg-[#011611] text-slate-900 dark:text-slate-100 font-sans p-4 sm:p-6 pb-20 w-full overflow-x-hidden flex items-center justify-center transition-colors duration-300">
+      <div className="max-w-7xl w-full mx-auto space-y-8 text-center">
 
         {/* LOGO Y TÍTULO DE LA PLATAFORMA */}
-        <div className="flex flex-col items-center space-y-3 pt-2">
-          <div className="w-20 h-20 rounded-3xl bg-[#004d38] border-2 border-emerald-500/40 shadow-2xl flex items-center justify-center text-white">
-            <Shield className="w-10 h-10 text-emerald-300" />
+        <div className="flex flex-col items-center space-y-4 pt-2">
+          <div className="w-24 h-24 rounded-[32px] bg-emerald-600 dark:bg-[#004d38] border-4 border-white dark:border-emerald-500/20 shadow-2xl flex items-center justify-center text-white transform -rotate-3 transition-transform hover:rotate-0">
+            <Shield className="w-12 h-12 text-white" />
           </div>
 
-          <div>
-            <h1 className="font-display font-black text-3xl sm:text-4xl text-white tracking-tight">
+          <div className="space-y-1">
+            <h1 className="font-display font-black text-3xl xs:text-4xl sm:text-5xl text-slate-900 dark:text-white tracking-tight uppercase">
               Simulador PNP 2026
             </h1>
-            <p className="text-xs sm:text-sm text-emerald-200/90 font-medium mt-1">
-              Plataforma Oficial de Evaluación de Ascenso
+            <p className="text-[10px] xs:text-xs sm:text-base text-slate-500 dark:text-emerald-400/90 font-bold uppercase tracking-widest">
+              Concurso de Ascenso Promoción 2027
             </p>
           </div>
 
-          <div className="inline-flex items-center gap-2 bg-[#004d38]/80 text-emerald-200 border border-emerald-600/50 px-3.5 py-1 rounded-full text-xs font-mono font-bold shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-emerald-300" />
-            <span>Balotario Oficial de 1,500 Preguntas</span>
+          <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-800/50 px-4 py-1.5 rounded-full text-xs font-mono font-black shadow-sm uppercase tracking-wider">
+            <Sparkles className="w-4 h-4" />
+            <span>Banco de 1,500 Preguntas Oficiales</span>
           </div>
         </div>
 
         {/* TARJETAS ÚNICAS DE ACCIÓN: INGRESAR O REGISTRARSE */}
-        <div className="space-y-4 pt-2">
+        <div className="grid grid-cols-1 gap-4 pt-2">
           {/* OPCIÓN 1: INGRESAR AL SIMULACRO */}
           <button
             type="button"
             onClick={() => onStartSimulacro('simulacro')}
-            className="w-full bg-[#004d38] hover:bg-[#005a42] text-white rounded-2xl p-5 sm:p-6 shadow-xl transition-all flex items-center gap-4 border-2 border-emerald-400/50 active:scale-[0.99] text-left group"
+            className="w-full bg-emerald-600 dark:bg-[#004d38] hover:bg-emerald-700 dark:hover:bg-[#005a42] text-white rounded-3xl p-6 shadow-xl shadow-emerald-600/20 transition-all flex items-center gap-5 border-2 border-emerald-500/30 active:scale-[0.98] text-left group relative overflow-hidden"
           >
-            <div className="w-14 h-14 rounded-2xl bg-white text-[#01241a] flex items-center justify-center shrink-0 shadow-md font-black">
-              <Play className="w-7 h-7 text-[#01241a] fill-current ml-0.5" />
+            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
+              <Shield className="w-24 h-24" />
             </div>
-            <div className="flex-1 min-w-0">
-              <div className="font-extrabold text-base sm:text-lg text-white flex items-center gap-2">
-                <span>Ingresar al Simulacro</span>
-                <span className="bg-emerald-950/80 text-emerald-300 text-[10px] font-mono px-2.5 py-0.5 rounded-full font-bold border border-emerald-500/40">
-                  100 Preguntas
+            
+            <div className="w-14 h-14 rounded-2xl bg-white text-emerald-600 flex items-center justify-center shrink-0 shadow-lg group-hover:rotate-6 transition-transform">
+              <Play className="w-7 h-7 fill-current ml-1" />
+            </div>
+            <div className="flex-1 min-w-0 z-10">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="font-display font-black text-xl sm:text-2xl uppercase">Ingresar al Simulacro</span>
+                <span className="bg-emerald-950/40 text-emerald-200 text-[10px] font-mono px-2 py-0.5 rounded-lg border border-emerald-400/30 font-black">
+                  100 PREG.
                 </span>
               </div>
-              <p className="text-xs text-emerald-200/90 truncate mt-1">
-                Evaluación real de 180 min con sustento legal
+              <p className="text-xs text-emerald-50/80 font-medium mt-1 leading-relaxed">
+                Evaluación táctica de 180 min con sustento legal actualizado.
               </p>
             </div>
-            <ChevronRight className="w-6 h-6 text-emerald-300 group-hover:text-white shrink-0 transition-transform group-hover:translate-x-1" />
           </button>
 
           {/* OPCIÓN 2: REGISTRARSE SI ES NUEVO */}
           <button
             type="button"
             onClick={handleRegisterWhatsApp}
-            className="w-full bg-white hover:bg-emerald-50 text-[#01241a] rounded-2xl p-5 sm:p-6 shadow-xl transition-all flex items-center gap-4 border-2 border-white active:scale-[0.99] text-left group"
+            className="w-full bg-white dark:bg-[#02281e] hover:bg-slate-50 dark:hover:bg-emerald-900/20 text-slate-900 dark:text-white rounded-3xl p-6 shadow-lg border-2 border-slate-100 dark:border-emerald-800/30 active:scale-[0.98] text-left group transition-all"
           >
-            <div className="w-14 h-14 rounded-2xl bg-[#059669] text-white flex items-center justify-center shrink-0 shadow-md">
-              <MessageCircle className="w-7 h-7 text-white" />
+            <div className="w-14 h-14 rounded-2xl bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-lg group-hover:-rotate-6 transition-transform">
+              <MessageCircle className="w-7 h-7" />
             </div>
             <div className="flex-1 min-w-0">
-              <div className="font-extrabold text-base sm:text-lg text-[#01241a] flex items-center gap-2">
-                <span>Registrarse si eres Nuevo</span>
-                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-mono px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1">
-                  WhatsApp
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="font-display font-black text-xl sm:text-2xl text-slate-900 dark:text-white uppercase">Inscripciones 2026</span>
+                <span className="bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 text-[10px] font-mono px-2 py-0.5 rounded-lg border border-emerald-200 dark:border-emerald-800/50 font-black">
+                  WHATSAPP
                 </span>
               </div>
-              <p className="text-xs text-slate-600 truncate mt-1">
-                Solicita tu inscripción al WhatsApp 929172559
+              <p className="text-xs text-slate-500 dark:text-emerald-400/70 font-medium mt-1">
+                Solicita tu acceso inmediato al WhatsApp <span className="text-emerald-600 font-bold">929 172 559</span>
               </p>
             </div>
-            <MessageCircle className="w-6 h-6 text-[#059669] group-hover:translate-x-1 shrink-0 transition-transform" />
           </button>
         </div>
 
         {/* BENEFICIOS RÁPIDOS */}
-        <div className="grid grid-cols-2 gap-2 text-left pt-2">
-          <div className="bg-[#003829] border border-emerald-700/50 rounded-xl p-3 flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-            <span className="text-xs text-emerald-200 font-medium">22 Normas Legales</span>
+        <div className="grid grid-cols-2 gap-3 text-left">
+          <div className="bg-white dark:bg-[#02281e] border border-slate-100 dark:border-emerald-800/20 rounded-2xl p-4 flex items-center gap-3 shadow-sm">
+            <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+            <span className="text-[11px] sm:text-xs text-slate-600 dark:text-emerald-400 font-bold uppercase tracking-tight">22 Normas Legales</span>
           </div>
-          <div className="bg-[#003829] border border-emerald-700/50 rounded-xl p-3 flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-            <span className="text-xs text-emerald-200 font-medium">Sustento Legal Oficial</span>
+          <div className="bg-white dark:bg-[#02281e] border border-slate-100 dark:border-emerald-800/20 rounded-2xl p-4 flex items-center gap-3 shadow-sm">
+            <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+            <span className="text-[11px] sm:text-xs text-slate-600 dark:text-emerald-400 font-bold uppercase tracking-tight">Sustento Oficial</span>
           </div>
         </div>
 
         {/* BANNER INFORMATIVO INFERIOR */}
-        <div className="bg-[#003829] border border-emerald-600/50 rounded-2xl p-4 text-center space-y-1.5 text-xs text-emerald-200">
-          <div className="inline-flex items-center gap-1.5 text-emerald-200 font-mono font-bold text-[11px]">
-            <Award className="w-4 h-4 text-emerald-300" />
+        <div className="bg-white/50 dark:bg-emerald-950/20 border border-slate-200 dark:border-emerald-800/30 rounded-3xl p-5 text-center space-y-2">
+          <div className="inline-flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-mono font-black text-xs uppercase tracking-widest">
+            <Award className="w-4 h-4" />
             <span>RD N° 006857-2026-DIRREHUM-PNP</span>
           </div>
-          <p className="text-[11px] text-emerald-300/80">
-            Preparación especializada para Suboficiales y Oficiales PNP.
+          <p className="text-[10px] sm:text-[11px] text-slate-400 dark:text-emerald-500/70 font-bold uppercase tracking-widest leading-relaxed">
+            Preparación de Élite para Suboficiales y Oficiales PNP.
           </p>
         </div>
 

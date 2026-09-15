@@ -202,9 +202,9 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
   if (!currentPregunta) {
     return (
       <div className="text-center py-12 text-emerald-100 space-y-4">
-        <AlertCircle className="w-12 h-12 text-emerald-300 mx-auto" />
+        <AlertCircle className="w-12 h-12 text-emerald-600 dark:text-emerald-300 mx-auto" />
         <h3 className="font-display text-xl font-bold">No hay preguntas disponibles</h3>
-        <p className="text-xs text-emerald-200">Selecciona otra materia o regresa al inicio.</p>
+        <p className="text-xs text-emerald-700 dark:text-emerald-200">Selecciona otra materia o regresa al inicio.</p>
         <button
           onClick={onCancelExamen}
           className="bg-white text-[#01241a] px-5 py-2.5 rounded-xl text-xs font-mono font-bold"
@@ -226,106 +226,71 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
   const timeFormatted = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
 
   return (
-    <div className="max-w-4xl mx-auto space-y-4 pb-16 bg-[#01241a] text-slate-100 p-2 sm:p-4 rounded-3xl min-h-screen">
-      {/* Top Control Header */}
-      <div className="bg-[#004d38] border border-emerald-700/60 rounded-2xl p-2.5 sm:p-3 text-white font-mono text-[10px] sm:text-xs flex items-center justify-between gap-2 shadow-md sticky top-0 z-30">
+    <div className="max-w-6xl mx-auto space-y-4 pb-16 bg-[#F8FAFC] dark:bg-[#011611] text-slate-900 dark:text-slate-100 p-3 sm:p-6 rounded-3xl min-h-screen transition-colors duration-300">
+      {/* Top Control Header - Styled from screenshots */}
+      <div className="flex items-center justify-between gap-2 mb-4">
+        <button
+          type="button"
+          onClick={onCancelExamen}
+          className="flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-emerald-600 transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span>Volver al Portal</span>
+        </button>
+
         <div className="flex items-center gap-2">
-          {/* BOTÓN VOLVER AL PORTAL */}
-          <button
-            type="button"
-            onClick={onCancelExamen}
-            className="px-3.5 py-2 rounded-xl bg-white hover:bg-emerald-50 text-[#01241a] font-display font-extrabold text-xs flex items-center gap-2 shadow-md transition-all active-scale shrink-0"
-            title="Volver al Portal de preparación"
-          >
-            <ArrowLeft className="w-4 h-4 text-[#01241a] shrink-0 stroke-[2.5]" />
-            <span className="font-sans">Volver al Portal</span>
-          </button>
-
-          <div className="flex items-center gap-1 bg-[#003829] px-2.5 py-2 rounded-xl border border-emerald-600/60 font-bold text-emerald-200">
-            <span className="text-emerald-300">{currentIndex + 1}</span>
-            <span className="opacity-40">/</span>
-            <span>{totalPreguntas}</span>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-1.5">
-          {modo === 'simulacro' || modo === 'expres' ? (
-            <div className="flex items-center gap-1 bg-[#003829] px-2.5 py-2 rounded-xl border border-emerald-600/60 text-emerald-300 font-black">
-              <Clock className="w-3.5 h-3.5" />
-              <span>{timeFormatted}</span>
+          {(modo === 'simulacro' || modo === 'expres') && (
+            <div className="bg-white dark:bg-[#02281e] border border-slate-200 dark:border-emerald-800/30 px-3 py-1.5 rounded-xl flex items-center gap-2 text-sm font-mono font-bold shadow-sm">
+              <Clock className="w-4 h-4 text-slate-400" />
+              <span className="text-slate-700 dark:text-emerald-300">{timeFormatted}</span>
             </div>
-          ) : (
-            <span className="hidden xs:inline bg-[#003829] text-emerald-300 border border-emerald-600/60 px-2.5 py-2 rounded-xl font-bold uppercase text-[10px]">
-              {modo.toUpperCase()}
-            </span>
           )}
-
+          
           <button
             onClick={() => setShowJumpDrawer(!showJumpDrawer)}
-            className="bg-[#003829] text-emerald-300 border border-emerald-600/60 p-2 rounded-xl active-scale"
-            title="Ver mapa de preguntas"
+            className="w-10 h-10 bg-white dark:bg-[#02281e] border border-slate-200 dark:border-emerald-800/30 rounded-xl flex items-center justify-center text-slate-400 hover:text-emerald-500 shadow-sm transition-all"
           >
-            <Grid className="w-4 h-4" />
+            <Grid className="w-5 h-5" />
           </button>
 
           <button
             onClick={() => setShowConfirmFinish(true)}
-            className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-xl font-black shadow-sm active-scale text-[10px]"
+            className="bg-[#EF4444] hover:bg-[#DC2626] text-white px-5 py-2 rounded-xl font-display font-black text-xs tracking-wider shadow-md transition-all active-scale"
           >
             FIN
           </button>
         </div>
       </div>
 
-      {/* Progress Bar */}
-      <div className="w-full bg-[#003829] h-2.5 rounded-full overflow-hidden border border-emerald-700/60 shadow-inner">
-        <div
-          className="bg-emerald-400 h-full transition-all duration-300 rounded-full"
-          style={{ width: `${((currentIndex + 1) / totalPreguntas) * 100}%` }}
-        ></div>
-      </div>
+      {/* QUESTION CARD - Tactical HUD Style */}
+      <div className="bg-white dark:bg-[#02281e] rounded-[32px] shadow-sm border border-slate-200 dark:border-emerald-800/20 p-5 sm:p-8 relative space-y-6">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-emerald-500 rounded-t-full"></div>
 
-      {/* QUESTION CARD */}
-      <div className="bg-[#004d38] text-white rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-6 relative border border-emerald-700/60 overflow-hidden space-y-4">
-        <div className="absolute top-0 left-0 right-0 h-1.5 bg-emerald-400"></div>
-
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-emerald-700/60 pb-3">
-          <div className="space-y-0.5">
-            <div className="flex items-center gap-2">
-              <span className="font-mono text-[9px] sm:text-[10px] font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider bg-emerald-950 text-emerald-300 border border-emerald-600/60">
-                {currentPregunta.grupo.toLowerCase()}
-              </span>
-              <span className="font-mono text-[11px] text-emerald-300 font-bold">
-                CÓDIGO: {currentPregunta.id}
-              </span>
-            </div>
-
-            <h2 className="font-display font-bold text-xs text-emerald-200 uppercase tracking-wide">
-              {currentPregunta.norma}
-            </h2>
-          </div>
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold px-3 py-1 rounded-lg uppercase tracking-widest font-mono">
+            {currentPregunta.grupo || 'COMUNES'}
+          </span>
+          <span className="bg-slate-100 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-[10px] font-bold px-3 py-1 rounded-lg uppercase tracking-widest font-mono border border-slate-200 dark:border-slate-700">
+            CÓDIGO: {currentPregunta.id}
+          </span>
         </div>
 
-        {/* ENUNCIADO DE LA PREGUNTA */}
-        <div className="space-y-2">
-          <p className="font-ubuntu font-bold text-lg sm:text-2xl md:text-3xl text-white leading-snug tracking-tight">
+        <div className="space-y-4">
+          <h2 className="font-display font-bold text-sm sm:text-base text-emerald-600 dark:text-emerald-400 uppercase tracking-wide leading-tight">
+            {currentPregunta.norma}
+          </h2>
+
+          <h1 className="font-display font-black text-lg sm:text-xl text-slate-900 dark:text-white leading-tight tracking-tight uppercase">
             {currentPregunta.enunciado}
+          </h1>
+
+          <p className="text-[10px] sm:text-xs font-mono font-black text-slate-400 uppercase tracking-[0.2em] pt-2">
+            Selecciona una alternativa
           </p>
-          <div className="flex items-center justify-between gap-2">
-            <span className="text-xs font-mono text-emerald-200/80 uppercase tracking-wider font-extrabold">
-              Selecciona una alternativa:
-            </span>
-            {modo !== 'simulacro' && (
-              <span className="text-[10px] font-mono font-black px-2.5 py-1 rounded-lg bg-emerald-950 text-emerald-300 border border-emerald-600/60 flex items-center gap-1">
-                <CheckCircle className="w-3 h-3 text-emerald-400" />
-                RESPUESTA AL INSTANTE ACTIVADA
-              </span>
-            )}
-          </div>
         </div>
 
-        {/* ALTERNATIVAS */}
-        <div className="grid grid-cols-1 gap-1 pt-1">
+        {/* ALTERNATIVAS - Styled as Buttons in Image */}
+        <div className="grid grid-cols-1 gap-3">
           {currentPregunta.opciones.map((opcionText, opIdx) => {
             const letra = String.fromCharCode(65 + opIdx);
             const isSelected = currentRespuesta?.opcion === opcionText;
@@ -336,27 +301,29 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
             );
             const isEliminated = currentEliminated.includes(opcionText);
 
-            let optionStyle =
-              'bg-[#003829] border-emerald-700/60 text-white hover:border-emerald-400';
+            let styleClass = "bg-slate-50 dark:bg-[#003829]/30 border-slate-200 dark:border-emerald-800/20 hover:border-emerald-400 dark:hover:border-emerald-500";
+            let badgeClass = "bg-emerald-50 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 border-emerald-100 dark:border-emerald-800/50";
+            let textClass = "text-slate-700 dark:text-slate-200";
 
             if (isSelected) {
-              optionStyle =
-                'bg-emerald-950 border-2 border-emerald-400 text-white font-extrabold ring-2 ring-emerald-400/40 shadow-sm';
+              styleClass = "bg-emerald-50/50 dark:bg-emerald-900/20 border-emerald-500 ring-1 ring-emerald-500/20";
+              badgeClass = "bg-emerald-500 text-white border-emerald-400";
+              textClass = "text-emerald-900 dark:text-white font-bold";
             }
 
             if (modoInstantaneo && isRespondida) {
               if (esCorrecta) {
-                optionStyle =
-                  'bg-emerald-900 border-2 border-emerald-400 text-white font-extrabold ring-2 ring-emerald-400/40 shadow-sm';
+                styleClass = "bg-emerald-50 dark:bg-emerald-900/40 border-emerald-500 ring-2 ring-emerald-500/20";
+                badgeClass = "bg-emerald-500 text-white border-emerald-500";
               } else if (isSelected) {
-                optionStyle =
-                  'bg-red-950 border-2 border-red-500 text-red-100 font-extrabold ring-2 ring-red-500/40 shadow-sm';
+                styleClass = "bg-red-50 dark:bg-red-900/20 border-red-500 ring-2 ring-red-500/20";
+                badgeClass = "bg-red-500 text-white border-red-500";
+                textClass = "text-red-900 dark:text-red-100 font-bold";
               }
             }
 
             if (isEliminated) {
-              optionStyle =
-                'bg-emerald-950/40 border-emerald-900 text-emerald-600 line-through opacity-30 cursor-not-allowed';
+              styleClass = "opacity-20 pointer-events-none grayscale";
             }
 
             return (
@@ -364,220 +331,85 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
                 key={opIdx}
                 disabled={isEliminated}
                 onClick={() => handleSelectOpcion(opcionText)}
-                className={`w-full text-left p-2 sm:p-2.5 rounded-xl border transition-all flex items-start gap-2 text-sm sm:text-base font-ubuntu active-scale ${optionStyle}`}
+                className={`w-full text-left p-4 rounded-2xl border-2 transition-all flex items-center gap-4 group active-scale ${styleClass}`}
               >
-                <span
-                  className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center font-mono font-black text-sm shrink-0 mt-0.5 border shadow-sm transition-all ${
-                    modoInstantaneo && isRespondida && esCorrecta
-                      ? 'bg-emerald-500 text-white border-emerald-400'
-                      : modoInstantaneo && isRespondida && isSelected && !esCorrecta
-                      ? 'bg-red-600 text-white border-red-500'
-                      : isSelected
-                      ? 'bg-white text-[#01241a] border-white font-black'
-                      : 'bg-[#004d38] text-emerald-300 border-emerald-600'
-                  }`}
-                >
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-display font-black text-base shrink-0 border transition-colors ${badgeClass}`}>
                   {letra}
+                </div>
+                <span className={`flex-1 text-[13px] sm:text-sm leading-snug font-medium transition-colors ${textClass}`}>
+                  {opcionText}
                 </span>
-
-                <span className="flex-1 leading-snug pt-0.5">{opcionText}</span>
-
                 {modoInstantaneo && isRespondida && esCorrecta && (
-                  <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 self-center" />
+                  <CheckCircle className="w-6 h-6 text-emerald-500 shrink-0" />
                 )}
                 {modoInstantaneo && isRespondida && isSelected && !esCorrecta && (
-                  <XCircle className="w-5 h-5 text-red-400 shrink-0 self-center" />
+                  <XCircle className="w-6 h-6 text-red-500 shrink-0" />
                 )}
               </button>
             );
           })}
         </div>
 
-        {/* FOOTER PREGUNTA */}
-        <div className="border-t border-emerald-700/60 pt-3.5 mt-4 space-y-3">
-          <div className="space-y-1.5 w-full">
-            <div className="flex items-center justify-between text-xs font-mono font-bold">
-              <span className="text-emerald-200 flex items-center gap-1.5">
-                <span className="text-emerald-300 font-extrabold">
-                  Pregunta {currentIndex + 1}
-                </span>{' '}
-                <span className="opacity-60">de {totalPreguntas}</span>
-              </span>
-              <span className="text-[11px] bg-emerald-950 text-emerald-300 px-2.5 py-0.5 rounded-lg font-extrabold border border-emerald-600/60">
-                {Math.round(((currentIndex + 1) / totalPreguntas) * 100)}% Avance
-              </span>
-            </div>
-
-            <div className="w-full bg-[#003829] h-2.5 rounded-full overflow-hidden border border-emerald-700/60 shadow-inner">
-              <div
-                className="bg-emerald-400 h-full transition-all duration-300 rounded-full"
-                style={{ width: `${((currentIndex + 1) / totalPreguntas) * 100}%` }}
-              ></div>
+        <div className="pt-6 border-t border-slate-100 dark:border-emerald-800/10 space-y-4">
+          <div className="flex items-center justify-between">
+            <span className="text-xs sm:text-sm font-bold text-emerald-700 dark:text-emerald-400 font-display">
+              Pregunta {currentIndex + 1} de {totalPreguntas}
+            </span>
+            <div className="bg-emerald-50 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest font-mono">
+              {Math.round(((currentIndex + 1) / totalPreguntas) * 100)}% Avance
             </div>
           </div>
-
-          <div className="w-full">
-            {isRespondida ? (
-              <div className={`p-3 sm:p-4 rounded-xl border flex flex-col gap-2 animate-fadeIn transition-all ${
-                currentRespuesta.esCorrecta
-                  ? 'bg-emerald-950 border-emerald-500/60 text-white'
-                  : 'bg-red-950 border-red-500/60 text-white'
-              }`}>
-                {modoInstantaneo ? (
-                  <div className="space-y-1.5">
-                    <div className="flex items-center justify-between gap-2 border-b border-emerald-700/60 pb-1.5">
-                      <div className="flex items-center gap-1.5 font-black text-xs sm:text-sm">
-                        {currentRespuesta.esCorrecta ? (
-                          <span className="text-emerald-300 flex items-center gap-1.5">
-                            <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
-                            ¡RESPUESTA CORRECTA!
-                          </span>
-                        ) : (
-                          <span className="text-red-300 flex items-center gap-1.5">
-                            <XCircle className="w-4 h-4 text-red-400 shrink-0" />
-                            RESPUESTA INCORRECTA
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="font-mono text-xs space-y-1">
-                      <div className="flex items-start gap-1.5">
-                        <span className="font-black text-emerald-300 shrink-0">
-                          Respuesta Oficial:
-                        </span>
-                        <span className="font-extrabold text-white">
-                          {currentPregunta.respuesta}
-                        </span>
-                      </div>
-
-                      {currentPregunta.ubicacion && (
-                        <div className="text-[11px] text-emerald-200 flex items-start gap-1">
-                          <span className="font-bold shrink-0 text-emerald-300/80">Base Legal:</span>
-                          <span className="font-semibold">{currentPregunta.ubicacion}</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ) : (
-                  <div className="flex items-center gap-1.5 font-bold text-xs text-emerald-300">
-                    <CheckCircle className="w-4 h-4 shrink-0" />
-                    <span>Respuesta seleccionada e ingresada para calificación.</span>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <span className="text-[11px] font-mono text-emerald-200/80 italic block text-center py-1">
-                Toca una alternativa para responder y ver la solución al instante
-              </span>
-            )}
+          
+          <div className="h-1.5 w-full bg-slate-100 dark:bg-[#003829] rounded-full overflow-hidden">
+            <div 
+              className="h-full bg-emerald-500 transition-all duration-500 ease-out rounded-full"
+              style={{ width: `${((currentIndex + 1) / totalPreguntas) * 100}%` }}
+            ></div>
           </div>
         </div>
 
-        {/* HINT DRAWER */}
-        {showHint && (
-          <div className="p-3 rounded-xl bg-[#003829] border border-emerald-600/60 text-emerald-200 space-y-1 text-xs font-mono animate-fadeIn mt-4">
-            <div className="flex items-center gap-1.5 text-emerald-300 font-bold">
-              <Lightbulb className="w-3.5 h-3.5 fill-current" />
-              <span>Referencia Legal:</span>
+        {/* FEEDBACK - Styled from screenshot feedback area */}
+        {isRespondida && modoInstantaneo && (
+          <div className={`mt-4 p-4 rounded-2xl animate-fadeIn border ${
+            currentRespuesta.esCorrecta 
+              ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-500/20 text-emerald-900 dark:text-emerald-100' 
+              : 'bg-red-50 dark:bg-red-900/20 border-red-500/20 text-red-900 dark:text-red-100'
+          }`}>
+            <div className="flex items-center gap-2 mb-2 font-black text-xs uppercase tracking-wider">
+              {currentRespuesta.esCorrecta ? <CheckCircle className="w-4 h-4" /> : <AlertCircle className="w-4 h-4" />}
+              <span>{currentRespuesta.esCorrecta ? '¡Respuesta Correcta!' : 'Respuesta Incorrecta'}</span>
             </div>
-            <p className="leading-relaxed">
-              {currentPregunta.ubicacion
-                ? `Esta pregunta corresponde a: ${currentPregunta.ubicacion}. Analiza la redacción del texto legal.`
-                : 'Pregunta del temario oficial PNP 2026. Distingue los plazos y causales taxativas.'}
+            <p className="text-xs font-medium leading-relaxed opacity-90">
+              <span className="font-bold">Respuesta Oficial:</span> {currentPregunta.respuesta}
+              {currentPregunta.ubicacion && (
+                <span className="block mt-1 italic opacity-80">Base Legal: {currentPregunta.ubicacion}</span>
+              )}
             </p>
           </div>
         )}
-
-        {/* COMODINES (MOVING TO BOTTOM) */}
-        <div className="flex flex-wrap items-center justify-between gap-1.5 bg-[#003829] p-2 rounded-xl border border-emerald-700/60 mt-4">
-          <span className="text-[10px] font-mono font-bold text-emerald-300 px-1 flex items-center gap-1">
-            <Zap className="w-3 h-3" />
-            Herramientas:
-          </span>
-
-          <div className="flex items-center gap-1.5">
-            <button
-              onClick={handleUse5050}
-              disabled={currentEliminated.length > 0 || isRespondida}
-              className={`px-2.5 py-1 rounded-lg font-mono text-[11px] font-bold transition-all flex items-center gap-1 border active-scale ${
-                currentEliminated.length > 0
-                  ? 'bg-emerald-950 text-emerald-400 border-emerald-700 opacity-80'
-                  : 'bg-[#004d38] hover:bg-emerald-900 text-emerald-200 border-emerald-600'
-              }`}
-            >
-              <Scissors className="w-3 h-3 text-emerald-300" />
-              <span>{currentEliminated.length > 0 ? '50:50 Usado' : '50:50'}</span>
-            </button>
-
-            <button
-              onClick={() => setShowHint(!showHint)}
-              className={`px-2.5 py-1 rounded-lg font-mono text-[11px] font-bold transition-all flex items-center gap-1 border active-scale ${
-                showHint
-                  ? 'bg-white text-[#01241a] border-white'
-                  : 'bg-[#004d38] hover:bg-emerald-900 text-emerald-200 border-emerald-600'
-              }`}
-            >
-              <Lightbulb className="w-3 h-3" />
-              <span>{showHint ? 'Ocultar Pista' : 'Pista'}</span>
-            </button>
-
-            <button
-              onClick={handleToggleFavorito}
-              className={`px-2.5 py-1 rounded-lg font-mono text-[11px] font-bold transition-all flex items-center gap-1 border active-scale ${
-                isFav
-                  ? 'bg-red-600 text-white border-red-500 shadow-sm'
-                  : 'bg-[#004d38] hover:bg-emerald-900 text-emerald-200 border-emerald-600'
-              }`}
-            >
-              <Bookmark className={`w-3 h-3 ${isFav ? 'fill-current' : ''}`} />
-              <span>{isFav ? 'Guardada' : 'Marcar'}</span>
-            </button>
-          </div>
-        </div>
       </div>
 
-      {/* JUMP DRAWER */}
+      {/* JUMP DRAWER - Tactical Grid */}
       {showJumpDrawer && (
-        <div className="bg-[#004d38] border border-emerald-700/60 rounded-2xl p-5 text-white space-y-4 shadow-2xl animate-fadeIn">
-          <div className="flex items-center justify-between border-b border-emerald-700/60 pb-3">
-            <h3 className="font-display font-bold text-base text-white flex items-center gap-2">
-              <Grid className="w-5 h-5 text-emerald-300" />
-              Mapa de Preguntas del Examen
+        <div className="bg-white dark:bg-[#02281e] border border-slate-200 dark:border-emerald-800/30 rounded-3xl p-5 shadow-2xl animate-fadeIn space-y-4">
+          <div className="flex items-center justify-between border-b border-slate-100 dark:border-emerald-800/10 pb-3">
+            <h3 className="font-display font-bold text-base text-slate-800 dark:text-white flex items-center gap-2">
+              <Grid className="w-5 h-5 text-emerald-500" />
+              Mapa de Preguntas
             </h3>
             <button
               onClick={() => setShowJumpDrawer(false)}
-              className="text-xs font-mono bg-[#003829] px-3 py-1 rounded-lg text-emerald-200 hover:text-white"
+              className="text-[10px] font-mono font-bold bg-slate-100 dark:bg-emerald-900/30 px-3 py-1.5 rounded-lg text-slate-500 hover:text-emerald-600 transition-colors"
             >
-              Cerrar
+              CERRAR
             </button>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 font-mono text-xs">
-            {(['todas', 'respondidas', 'pendientes', 'marcadas'] as const).map((f) => (
-              <button
-                key={f}
-                onClick={() => setGridFilter(f)}
-                className={`px-3 py-1 rounded-full border transition-all capitalize ${
-                  gridFilter === f
-                    ? 'bg-white text-[#01241a] border-white font-bold'
-                    : 'bg-[#003829] text-emerald-200 border-emerald-700/60'
-                }`}
-              >
-                {f}
-              </button>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-5 sm:grid-cols-10 gap-2 max-h-60 overflow-y-auto p-1">
+          <div className="grid grid-cols-5 sm:grid-cols-10 gap-2 max-h-60 overflow-y-auto p-1 scrollbar-none">
             {preguntas.map((q, idx) => {
               const resp = respuestasMap[q.id];
               const isCurrent = idx === currentIndex;
               const isBookmarked = favoritos.includes(q.id);
-
-              if (gridFilter === 'respondidas' && !resp) return null;
-              if (gridFilter === 'pendientes' && resp) return null;
-              if (gridFilter === 'marcadas' && !isBookmarked) return null;
 
               return (
                 <button
@@ -586,18 +418,16 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
                     setCurrentIndex(idx);
                     setShowJumpDrawer(false);
                   }}
-                  className={`p-2 rounded-xl font-mono text-xs font-bold transition-all flex flex-col items-center justify-center gap-1 active-scale ${
+                  className={`aspect-square rounded-xl font-mono text-xs font-bold transition-all flex flex-col items-center justify-center gap-1 active-scale border-2 ${
                     isCurrent
-                      ? 'bg-white text-[#01241a] ring-2 ring-emerald-300 scale-105'
+                      ? 'bg-emerald-500 text-white border-emerald-400 scale-105 shadow-md shadow-emerald-500/20'
                       : resp
-                      ? resp.esCorrecta
-                        ? 'bg-emerald-950 text-emerald-300 border border-emerald-500/60'
-                        : 'bg-red-950 text-red-300 border border-red-500/60'
-                      : 'bg-[#003829] text-emerald-200 border border-emerald-700/60 hover:border-emerald-400'
+                      ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/50'
+                      : 'bg-slate-50 dark:bg-slate-800/30 text-slate-400 border-slate-100 dark:border-slate-800/20 hover:border-emerald-400'
                   }`}
                 >
                   <span>{idx + 1}</span>
-                  {isBookmarked && <Bookmark className="w-2.5 h-2.5 fill-current text-emerald-300" />}
+                  {isBookmarked && <Bookmark className="w-2 h-2 fill-current" />}
                 </button>
               );
             })}
@@ -605,36 +435,32 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
         </div>
       )}
 
-      {/* BOTTOM ACTION BAR */}
-      <div className="flex items-center justify-between gap-3 pt-3">
+      {/* BOTTOM ACTIONS */}
+      <div className="flex items-center justify-between pt-4">
         <button
           onClick={() => setCurrentIndex((prev) => Math.max(0, prev - 1))}
           disabled={currentIndex === 0}
-          className="bg-[#004d38] hover:bg-[#005a42] disabled:opacity-40 text-white border-2 border-emerald-600 px-6 py-3.5 rounded-2xl font-display text-xs sm:text-sm font-extrabold flex items-center gap-2.5 transition-all shadow-md active-scale"
+          className="px-6 py-3 rounded-2xl bg-white dark:bg-[#02281e] border border-slate-200 dark:border-emerald-800/30 text-slate-500 hover:text-emerald-600 disabled:opacity-30 disabled:pointer-events-none transition-all shadow-sm font-bold text-sm active-scale flex items-center gap-2"
         >
-          <ArrowLeft className="w-5 h-5 text-emerald-300 stroke-[2.5]" />
-          <span>◄ Pregunta Anterior</span>
+          <ArrowLeft className="w-4 h-4" />
+          Anterior
         </button>
-
-        <span className="font-mono text-xs text-emerald-200/80 hidden md:inline">
-          Teclas ← → para navegar
-        </span>
 
         {currentIndex < totalPreguntas - 1 ? (
           <button
             onClick={() => setCurrentIndex((prev) => Math.min(totalPreguntas - 1, prev + 1))}
-            className="bg-white hover:bg-emerald-50 text-[#01241a] font-display text-xs sm:text-sm font-black px-8 py-3.5 rounded-2xl flex items-center gap-2.5 transition-all shadow-lg active-scale"
+            className="px-8 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg shadow-emerald-500/20 transition-all active-scale flex items-center gap-2"
           >
-            <span>Siguiente Pregunta ►</span>
-            <ArrowRight className="w-5 h-5 stroke-[2.5]" />
+            Siguiente
+            <ArrowRight className="w-4 h-4" />
           </button>
         ) : (
           <button
             onClick={handleFinalizarExamen}
-            className="bg-red-600 hover:bg-red-700 text-white font-display text-xs sm:text-sm font-black px-8 py-3.5 rounded-2xl flex items-center gap-2.5 transition-all shadow-lg active-scale border-2 border-red-500 animate-pulse"
+            className="px-8 py-3 rounded-2xl bg-red-600 hover:bg-red-700 text-white font-bold text-sm shadow-lg shadow-red-500/20 transition-all active-scale flex items-center gap-2"
           >
-            <span>Finalizar y Ver Nota</span>
-            <CheckCircle className="w-5 h-5" />
+            Finalizar
+            <CheckCircle className="w-4 h-4" />
           </button>
         )}
       </div>
@@ -642,8 +468,8 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
       {/* CONFIRM FINISH MODAL */}
       {showConfirmFinish && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-fadeIn">
-          <div className="bg-[#004d38] border-2 border-emerald-500/60 rounded-3xl p-6 sm:p-8 max-w-md w-full text-white space-y-5 shadow-2xl">
-            <div className="flex items-center gap-3 text-emerald-300">
+          <div className="bg-emerald-700 dark:bg-[#004d38] border-2 border-emerald-500/60 rounded-3xl p-6 sm:p-8 max-w-md w-full text-white space-y-5 shadow-2xl">
+            <div className="flex items-center gap-3 text-emerald-600 dark:text-emerald-300">
               <AlertCircle className="w-8 h-8 shrink-0" />
               <h3 className="font-display font-extrabold text-lg text-white">
                 ¿Finalizar examen de prueba?
@@ -661,7 +487,7 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
             <div className="flex items-center justify-end gap-3 pt-2">
               <button
                 onClick={() => setShowConfirmFinish(false)}
-                className="bg-[#003829] hover:bg-emerald-900 text-emerald-200 px-5 py-2.5 rounded-xl font-mono text-xs font-bold border border-emerald-600 active-scale"
+                className="bg-slate-100 dark:bg-[#003829] hover:bg-emerald-900 text-emerald-700 dark:text-emerald-200 px-5 py-2.5 rounded-xl font-mono text-xs font-bold border border-slate-300 dark:border-emerald-600 active-scale"
               >
                 Seguir respondiendo
               </button>

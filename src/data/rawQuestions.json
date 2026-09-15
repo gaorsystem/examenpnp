@@ -482,6 +482,1126 @@
   {
     "numero": "31",
     "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "ES NULO Y PUNIBLE TODO ACTO QUE PROHÍBA O LIMITE AL CIUDADANO EL EJERCICIO DE SUS:.",
+    "opciones": [
+      "DERECHOS.",
+      "DEBERES.",
+      "OBLIGACIONES.",
+      "ATRIBUCIONES.",
+      "FUNCIONES."
+    ],
+    "respuesta": "DERECHOS.",
+    "ubicacion": "(ART: 31)** [TITULO I] [CAPITULO III]",
+    "codigo": "180831"
+  },
+  {
+    "numero": "32",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "LOS MIEMBROS DE LAS FUERZAS ARMADAS Y DE LA POLICÍA NACIONAL TIENEN DERECHO:.",
+    "opciones": [
+      "A HUELGA.",
+      "A LA SINDICALIZACIÓN.",
+      "AL VOTO.",
+      "A LAS PROTESTAS.",
+      "A INTEGRAR SINDICATOS."
+    ],
+    "respuesta": "AL VOTO.",
+    "ubicacion": "(ART: 31)** [TITULO I] [CAPITULO III]",
+    "codigo": "180832"
+  },
+  {
+    "numero": "33",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "EL SECRETO BANCARIO Y LA RESERVA TRIBUTARIA PUEDEN LEVANTARSE:.",
+    "opciones": [
+      "A PEDIDO DEL FISCAL Y EL JUEZ.",
+      "A PEDIDO DE UNA COMISIÓN INVESTIGADORA DE LA CÁMARA DE DIPUTADOS",
+      "A PEDIDO DE LA CONTRALORÍA GENERAL DE LA REPÚBLICA.",
+      "A PEDIDO DEL PRESIDENTE DEL PODER JUDICIAL",
+      "A PEDIDO DEL BANCO CENTRAL DE RESERVA."
+    ],
+    "respuesta": "A PEDIDO DE UNA COMISIÓN INVESTIGADORA DE LA CÁMARA DE DIPUTADOS",
+    "ubicacion": "(ART: 2 inc 5)** [TITULO I] [CAPITULO I]",
+    "codigo": "180833"
+  },
+  {
+    "numero": "34",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "LOS CIUDADANOS TIENEN DERECHO A PARTICIPAR EN LOS ASUNTOS PÚBLICOS MEDIANTE:.",
+    "opciones": [
+      "REFERÉNDUM.",
+      "PROCESO ELECTORAL.",
+      "ESCRITOS.",
+      "ABSTENCIÓN.",
+      "PRIVACIÓN."
+    ],
+    "respuesta": "REFERÉNDUM.",
+    "ubicacion": "(ART: 31)** [TITULO I] [CAPITULO III]",
+    "codigo": "180834"
+  },
+  {
+    "numero": "35",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "ESTÁN FACULTADOS PARA INTERPONER ACCIÓN DE INCONSTITUCIONALIDAD:.",
+    "opciones": [
+      "LOS ALCALDES DISTRITALES CON ACUERDO DE SU CONCEJO, EN MATERIAS DE SU COMPETENCIA.",
+      "EL ABOGADO DEL PUEBLO.",
+      "EL FISCAL SUPERIOR.",
+      "LOS COLEGIOS PROFESIONALES, EN MATERIAS DE SU ESPECIALIDAD.",
+      "LOS COLEGIOS PARTICULARES, EN MATERIAS DE SU COMPETENCIA."
+    ],
+    "respuesta": "LOS COLEGIOS PROFESIONALES, EN MATERIAS DE SU ESPECIALIDAD.",
+    "ubicacion": "(ART: 203 inc 7)** [TITULO V]",
+    "codigo": "180835"
+  },
+  {
+    "numero": "36",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "LOS CIUDADANOS TIENEN, CONFORME A LEY, LOS DERECHOS DE:.",
+    "opciones": [
+      "ELECCIÓN, DE TRASLADO DE AUTORIDADES, DE INICIATIVA LEGISLATIVA Y DE REFERÉNDUM.",
+      "ELECCIÓN Y MOVIMIENTO DE CARGOS DE AUTORIDADES, DE FUNCIONES LEGISLATIVAS Y DE REFERÉNDUM.",
+      "ELECCIÓN, DE REMOCIÓN O REVOCACIÓN DE AUTORIDADES, DE INICIATIVA LEGISLATIVA Y DE REFERÉNDUM.",
+      "REMOCIÓN O REVOCACIÓN DE CARGOS DE CONFIANZA, DE INICIATIVA ADMINISTRATIVA Y OPERATIVA.",
+      "REVOCACIÓN DE AUTORIDADES PRIVADAS SUJETAS A REFERÉNDUM."
+    ],
+    "respuesta": "ELECCIÓN, DE REMOCIÓN O REVOCACIÓN DE AUTORIDADES, DE INICIATIVA LEGISLATIVA Y DE REFERÉNDUM.",
+    "ubicacion": "(ART: 31)** [TITULO I] [CAPITULO III]",
+    "codigo": "180836"
+  },
+  {
+    "numero": "37",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "SON SÍMBOLOS DE LA PATRIA LA BANDERA DE TRES FRANJAS VERTICALES CON LOS COLORES ROJO, BLANCO Y ROJO, Y EL ESCUDO Y:.",
+    "opciones": [
+      "EL ESTANDARTE NACIONAL.",
+      "EL HIMNO NACIONAL.",
+      "LA ESCARAPELA.",
+      "EL GALLARDETE.",
+      "EL PABELLON NACIONAL."
+    ],
+    "respuesta": "EL HIMNO NACIONAL.",
+    "ubicacion": "(ART: 49)** [TITULO II] [CAPITULO I]",
+    "codigo": "180837"
+  },
+  {
+    "numero": "38",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "TODA PERSONA TIENE DERECHO: AL SECRETO Y A LA INVIOLABILIDAD DE SUS COMUNICACIONES Y DOCUMENTOS PRIVADOS. LOS LIBROS, COMPROBANTES Y DOCUMENTOS CONTABLES Y ADMINISTRATIVOS ESTÁN SUJETOS A:.",
+    "opciones": [
+      "INSPECCIÓN O FISCALIZACIÓN DE LA AUTORIDAD COMPETENTE, DE CONFORMIDAD CON LA LEY.",
+      "INCAUTACIÓN O REGISTRO POR LA AUTORIDAD COMPETENTE, DE ACUERDO CON LA LEY.",
+      "INVENTARIADO O COMISO DE LA AUTORIDAD COMPETENTE, DE CONFORMIDAD CON LA LEY.",
+      "INSPECCIÓN O VERIFICACIÓN POR CUALQUIER AUTORIDAD, DE CONFORMIDAD CON LA LEY.",
+      "INCAUTACIÓN SÓLO POR LA AUTORIDAD JURISDICCIONAL, PREVIA RESOLUCIÓN FISCAL."
+    ],
+    "respuesta": "INSPECCIÓN O FISCALIZACIÓN DE LA AUTORIDAD COMPETENTE, DE CONFORMIDAD CON LA LEY.",
+    "ubicacion": "(ART: 2 inc 10)** [TITULO I] [CAPITULO I]",
+    "codigo": "180838"
+  },
+  {
+    "numero": "39",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "PARA EL EJERCICIO DEL DERECHO AL VOTO, SE REQUIERE ESTAR INSCRITO EN EL:.",
+    "opciones": [
+      "REGISTRO APROPIADO.",
+      "REGISTRO AUTORIZADO.",
+      "REGISTRO CORRESPONDIENTE.",
+      "REGISTRO IMPROCEDENTE.",
+      "REGISTRO INCONVENIENTE."
+    ],
+    "respuesta": "REGISTRO CORRESPONDIENTE.",
+    "ubicacion": "(ART: 31)** [TITULO I] [CAPITULO III]",
+    "codigo": "180839"
+  },
+  {
+    "numero": "40",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "TODA PERSONA TIENE DERECHO A LAS LIBERTADES DE:.",
+    "opciones": [
+      "OFENDER.",
+      "INFORMACION.",
+      "DIFUNDIR SUS PRETENSIONES.",
+      "ACCION.",
+      "DE ELEGIR SU IMAGEN."
+    ],
+    "respuesta": "INFORMACION.",
+    "ubicacion": "(ART: 2 inc 4)** [TITULO I] [CAPITULO I]",
+    "codigo": "180840"
+  },
+  {
+    "numero": "41",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "EL EJERCICIO DE LA CIUDADANIA SE SUSPENDE POR RESOLUCIÓN:.",
+    "opciones": [
+      "MOTIVADA DEL MINISTERIO PÚBLICO.",
+      "DEL REGISTRO NACIONAL DE IDENTIFICACIÓN CIVIL.",
+      "JUDICIAL DE INTERDICCIÓN.",
+      "ADMINISTRATIVA DEL PODER EJECUTIVO.",
+      "DEL CONGRESO DE LA REPÚBLICA."
+    ],
+    "respuesta": "JUDICIAL DE INTERDICCIÓN.",
+    "ubicacion": "(ART: 33 inc 1)** [TITULO I] [CAPITULO III]",
+    "codigo": "180841"
+  },
+  {
+    "numero": "42",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "LOS GRADOS Y HONORES, LAS REMUNERACIONES Y LAS PENSIONES INHERENTES A LA JERARQUÍA DE OFICIALES DE LAS FUERZAS ARMADAS Y DE LA POLICÍA NACIONAL SON:.",
+    "opciones": [
+      "DESIGUALES.",
+      "EQUIVALENTES.",
+      "PARECIDOS.",
+      "DIFERENTES.",
+      "PROPORCIONALES."
+    ],
+    "respuesta": "EQUIVALENTES.",
+    "ubicacion": "(ART: 174)** [TITULO IV] [CAPITULO XII]",
+    "codigo": "180842"
+  },
+  {
+    "numero": "43",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "¿QUIÉN OTORGA LOS ASCENSOS DE LOS GENERALES Y ALMIRANTES DE LAS FUERZAS ARMADAS Y DE LOS GENERALES DE LA POLICÍA NACIONAL, SEGÚN PROPUESTA DEL INSTITUTO CORRESPONDIENTE?.",
+    "opciones": [
+      "PRESIDENTE DEL CONGRESO.",
+      "PRESIDENTE DE LA REPÚBLICA.",
+      "COMANDO CONJUNTO DE LAS FFAA.",
+      "DIRECTOR GENERAL DE LA PNP.",
+      "CONSEJO DE MINISTROS."
+    ],
+    "respuesta": "PRESIDENTE DE LA REPÚBLICA.",
+    "ubicacion": "(ART: 172)** [TITULO IV] [CAPITULO XII]",
+    "codigo": "180843"
+  },
+  {
+    "numero": "44",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "ES UNA FINALIDAD FUNDAMENTAL DE LA POLICÍA NACIONAL:.",
+    "opciones": [
+      "PREVIENE, INVESTIGA Y COMBATE LOS CONFLICTOS ARMADOS.",
+      "GARANTIZA EL CUMPLIMIENTO DE LAS LEYES Y LA SEGURIDAD DEL PATRIMONIO PÚBLICO Y DEL PRIVADO.",
+      "GARANTIZA LA INDEPENDENCIA Y LA INTEGRIDAD TERRITORIAL DE LA REPÚBLICA.",
+      "GARANTIZAR, MANTENER Y RESTABLECER EL ORDEN ECONÓMICO.",
+      "PRESTA PROTECCIÓN Y AYUDA A LOS DELINCUENTES."
+    ],
+    "respuesta": "GARANTIZA EL CUMPLIMIENTO DE LAS LEYES Y LA SEGURIDAD DEL PATRIMONIO PÚBLICO Y DEL PRIVADO.",
+    "ubicacion": "(ART: 166)** [TITULO IV] [CAPITULO XII]",
+    "codigo": "180844"
+  },
+  {
+    "numero": "45",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "PARA EL EJERCICIO DE LA CIUDADANÍA SE REQUIERE LA INSCRIPCIÓN:.",
+    "opciones": [
+      "SOCIAL.",
+      "ELECTORAL.",
+      "JUDICIAL.",
+      "MINISTERIAL.",
+      "NOTARIAL."
+    ],
+    "respuesta": "ELECTORAL.",
+    "ubicacion": "(ART: 30)** [TITULO I] [CAPITULO III]",
+    "codigo": "180845"
+  },
+  {
+    "numero": "46",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "EL VOTO ES PERSONAL, IGUAL, LIBRE:.",
+    "opciones": [
+      "PÚBLICO Y FACULTATIVO.",
+      "SECRETO Y OBLIGATORIO.",
+      "EVIDENTE Y VOLUNTARIO.",
+      "POPULAR Y OPCIONAL.",
+      "PÚBLICO Y LIBRE."
+    ],
+    "respuesta": "SECRETO Y OBLIGATORIO.",
+    "ubicacion": "(ART: 31)** [TITULO I] [CAPITULO III]",
+    "codigo": "180846"
+  },
+  {
+    "numero": "47",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "TODA PERSONA TIENE DERECHO A QUE LOS SERVICIOS INFORMÁTICOS, COMPUTARIZADOS O NO, PÚBLICOS O PRIVADOS:.",
+    "opciones": [
+      "NO SUMINISTREN INFORMACIONES QUE AFECTEN LA INTIMIDAD PERSONAL Y FAMILIAR.",
+      "SUMINISTREN INFORMACIONES QUE AFECTEN LA INTIMIDAD PERSONAL Y FAMILIAR.",
+      "NO SUMINISTREN INFORMES DE INTELIGENCIA QUE AFECTEN LA INTIMIDAD DE LAS INSTITUCIONES.",
+      "INTERCAMBIEN DATOS QUE ATENTEN CONTRA LA UNIDAD FAMILIAR.",
+      "SUMINISTREN INFORMACIONES QUE AFECTEN AL CIUDADANO."
+    ],
+    "respuesta": "NO SUMINISTREN INFORMACIONES QUE AFECTEN LA INTIMIDAD PERSONAL Y FAMILIAR.",
+    "ubicacion": "(ART: 2 inc 6)** [TITULO I] [CAPITULO I]",
+    "codigo": "180847"
+  },
+  {
+    "numero": "48",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "RESPECTO A LA LIBERTAD Y A LA SEGURIDAD PERSONALES, NADIE PUEDE SER VÍCTIMA DE VIOLENCIA MORAL, PSÍQUICA O FÍSICA:.",
+    "opciones": [
+      "NI SOMETIDO A TORTURA O A TRATOS INHUMANOS O HUMILLANTES.",
+      "O SOMETIDO A HUMILLACIONES Y MALTRATOS.",
+      "NI SOMETIDO A VEJACIONES.",
+      "SOMETIDO A TORTURA O TRATOS HUMILLANTES E INHUMANOS.",
+      "Y SOMETIDO A TRATOS DEGRADANTES Y TORTURAS."
+    ],
+    "respuesta": "NI SOMETIDO A TORTURA O A TRATOS INHUMANOS O HUMILLANTES.",
+    "ubicacion": "(ART: 2 inc 24 h)** [TITULO I] [CAPITULO I]",
+    "codigo": "180848"
+  },
+  {
+    "numero": "49",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "RESPECTO A LA LIBERTAD Y A LA SEGURIDAD PERSONALES, CARECEN DE VALOR LAS DECLARACIONES OBTENIDAS POR:.",
+    "opciones": [
+      "LA VIOLENCIA.",
+      "LA PRESIÓN PSICOLÓGICA VOLUNTARIA.",
+      "MEDIOS EXTRAOFICIALES.",
+      "CONTRADICCIONES TESTIMONIALES.",
+      "FALTA DE DEFENSA."
+    ],
+    "respuesta": "LA VIOLENCIA.",
+    "ubicacion": "(ART: 2 inc 24 h)** [TITULO I] [CAPITULO I]",
+    "codigo": "180889"
+  },
+  {
+    "numero": "50",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "LAS FUERZAS ARMADAS ESTÁN CONSTITUIDAS POR EL EJÉRCITO, LA MARINA DE GUERRA Y LA FUERZA AÉREA. TIENEN COMO FINALIDAD PRIMORDIAL:.",
+    "opciones": [
+      "GARANTIZAR LA INDEPENDENCIA, LA SOBERANÍA Y LA INTEGRIDAD TERRITORIAL DE LA REPÚBLICA.",
+      "ORGANIZAR Y DISPONER SUS RESERVAS PARA LA DEFENSA REGIONAL.",
+      "GARANTIZAR, MANTENER Y RESTABLECER EL ORDEN INTERNO.",
+      "GARANTIZAR EL ESTADO DE DERECHO DE LA REPÚBLICA.",
+      "SUBORDINACIÓN AL PODER CONSTITUCIONAL, SIENDO DELIBERANTES."
+    ],
+    "respuesta": "GARANTIZAR LA INDEPENDENCIA, LA SOBERANÍA Y LA INTEGRIDAD TERRITORIAL DE LA REPÚBLICA.",
+    "ubicacion": "(ART: 165)** [TITULO IV] [CAPITULO XII]",
+    "codigo": "180850"
+  },
+  {
+    "numero": "51",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "LAS FUERZAS ARMADAS Y LA POLICÍA NACIONAL PARTICIPAN EN EL:.",
+    "opciones": [
+      "DESARROLLO ECONÓMICO Y SOCIAL DEL PAÍS.",
+      "DESARROLLO POLÍTICO Y SOCIAL DEL PAÍS.",
+      "DESARROLLO ECONÓMICO Y CULTURAL DEL PAÍS.",
+      "EN LA DEFENSA NACIONAL DE ACUERDO A LEY.",
+      "EN EL DESARROLLO SOCIAL Y POLITICO DEL PAÍS."
+    ],
+    "respuesta": "DESARROLLO ECONÓMICO Y SOCIAL DEL PAÍS.",
+    "ubicacion": "(ART: 171)** [TITULO IV] [CAPITULO XII]",
+    "codigo": "180851"
+  },
+  {
+    "numero": "52",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "CONFORME A LEY, LA DEFENSA DE LOS INTERESES DEL ESTADO ESTÁ A CARGO DE LOS:.",
+    "opciones": [
+      "ASISTENTES LEGALES.",
+      "PROFESIONALES ABOGADOS.",
+      "PROFESIONALES DE DERECHO.",
+      "PROCURADORES PÚBLICOS.",
+      "PROCURADORES PRIVADOS."
+    ],
+    "respuesta": "PROCURADORES PÚBLICOS.",
+    "ubicacion": "(ART: 47)** [TITULO II] [CAPITULO I]",
+    "codigo": "180852"
+  },
+  {
+    "numero": "53",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "TODA PERSONA TIENE DERECHO A LA VIDA, A SU IDENTIDAD, A SU INTEGRIDAD:.",
+    "opciones": [
+      "PURA, ÉTICA Y PSÍQUICA.",
+      "COMPLETA Y SUPREMA.",
+      "Y CORRECTA CONDICIÓN.",
+      "MORAL, PSÍQUICA Y FÍSICA.",
+      "CON BIENESTAR POLICIAL."
+    ],
+    "respuesta": "MORAL, PSÍQUICA Y FÍSICA.",
+    "ubicacion": "(ART: 2 inc 1)** [TITULO I] [CAPITULO I]",
+    "codigo": "180853"
+  },
+  {
+    "numero": "54",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "ES DERECHO Y DEBER DE LOS VECINOS PARTICIPAR EN EL GOBIERNO MUNICIPAL DE SU:.",
+    "opciones": [
+      "NACIÓN.",
+      "PAÍS.",
+      "JURISDICCIÓN.",
+      "VECINDAD.",
+      "SOCIEDAD."
+    ],
+    "respuesta": "JURISDICCIÓN.",
+    "ubicacion": "(ART: 31)** [TITULO I] [CAPITULO III]",
+    "codigo": "180854"
+  },
+  {
+    "numero": "55",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "TODA PERSONA TIENE DERECHO: A LA LIBERTAD DE CREACIÓN INTELECTUAL, ARTÍSTICA, TÉCNICA Y CIENTÍFICA, ASÍ COMO:.",
+    "opciones": [
+      "A LOS DERECHOS ECONÓMICOS DEL SERVICIO INDIVIDUALIZADO.",
+      "A LA PROPIEDAD SOLAMENTE POR OBRAS LITERARIAS Y A SU PRODUCTO.",
+      "A LOS DERECHOS DE AUTOR Y CONEXOS DEL INDECOPI.",
+      "A LOS DERECHOS ECONÓMICOS Y SOCIALES DEL PRODUCTO.",
+      "A LA PROPIEDAD SOBRE DICHAS CREACIONES Y A SU PRODUCTO."
+    ],
+    "respuesta": "A LA PROPIEDAD SOBRE DICHAS CREACIONES Y A SU PRODUCTO.",
+    "ubicacion": "(ART: 2 inc 8)** [TITULO I] [CAPITULO I]",
+    "codigo": "180855"
+  },
+  {
+    "numero": "56",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "PUEDE LEVANTARSE A PEDIDO DEL JUEZ:.",
+    "opciones": [
+      "SECRETO BANCARIO.",
+      "INVESTIGACIÓN.",
+      "VIDA PÚBLICA.",
+      "ADMINISTRACIÓN.",
+      "VIDA PRIVADA."
+    ],
+    "respuesta": "SECRETO BANCARIO.",
+    "ubicacion": "(ART: 2 inc 5)** [TITULO I] [CAPITULO I]",
+    "codigo": "180856"
+  },
+  {
+    "numero": "57",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "EN EL ESTADO DE EMERGENCIA PUEDEN RESTRINGIRSE O SUSPENDERSE EL EJERCICIO DE LOS DERECHOS CONSTITUCIONALES RELATIVOS:.",
+    "opciones": [
+      "A LA SEGURIDAD PÚBLICA.",
+      "A LA LIBERTAD Y SEGURIDAD PERSONALES.",
+      "AL PATRIMONIO.",
+      "A LA VIDA.",
+      "A LA FE PÚBLICA."
+    ],
+    "respuesta": "A LA LIBERTAD Y SEGURIDAD PERSONALES.",
+    "ubicacion": "(ART: 137 inc 1)** [TITULO IV] [CAPITULO VII]",
+    "codigo": "180857"
+  },
+  {
+    "numero": "58",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "DEL PAGO DE GASTOS JUDICIALES, EL ESTADO ESTÁ:.",
+    "opciones": [
+      "IMPUESTO.",
+      "HABILITADO.",
+      "GRAVADO.",
+      "EXONERADO.",
+      "OBLIGADO."
+    ],
+    "respuesta": "EXONERADO.",
+    "ubicacion": "(ART: 139 inc 16)** [TITULO IV] [CAPITULO VIII]",
+    "codigo": "180858"
+  },
+  {
+    "numero": "59",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "TODA PERSONA TIENE DERECHO:.",
+    "opciones": [
+      "A LA IGUALDAD ANTE LA NORMA.",
+      "A LA IGUALDAD ANTE LA CONSTITUCIÓN.",
+      "A LA IGUALDAD ANTE LOS CÓDIGOS.",
+      "A LA IGUALDAD ANTE LA SOCIEDAD.",
+      "A LA IGUALDAD ANTE LA LEY."
+    ],
+    "respuesta": "A LA IGUALDAD ANTE LA LEY.",
+    "ubicacion": "(ART: 2 inc 2)** [TITULO I] [CAPITULO I]",
+    "codigo": "180859"
+  },
+  {
+    "numero": "60",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "LAS FUERZAS ARMADAS Y LA POLICÍA NACIONAL NO SON DELIBERANTES. ESTÁN SUBORDINADAS:.",
+    "opciones": [
+      "AL PRESIDENTE DE LA REPÚBLICA.",
+      "AL PODER MUNICIPAL.",
+      "AL PODER LEGISLATIVO.",
+      "AL PODER CONSTITUCIONAL.",
+      "AL PODER EJECUTIVO."
+    ],
+    "respuesta": "AL PODER CONSTITUCIONAL.",
+    "ubicacion": "(ART: 169)** [TITULO IV] [CAPITULO XII]",
+    "codigo": "180860"
+  },
+  {
+    "numero": "61",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "DESPUÉS DE LOS SETENTA AÑOS EL VOTO ES:.",
+    "opciones": [
+      "FACULTATIVO.",
+      "OBLIGATORIO.",
+      "RESPONSABLE.",
+      "VOLUNTARIO.",
+      "IMPUESTO."
+    ],
+    "respuesta": "FACULTATIVO.",
+    "ubicacion": "(ART: 31)** [TITULO I] [CAPITULO III]",
+    "codigo": "180861"
+  },
+  {
+    "numero": "62",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "ES CONSIDERADA UNA FINALIDAD FUNDAMENTAL DE LA POLICÍA NACIONAL:.",
+    "opciones": [
+      "GARANTIZAR, MANTENER Y RESTABLECER LA DELINCUENCIA.",
+      "VIGILA Y CONTROLA A TODOS LOS COMITÉS DE SEGURIDAD CIUDADANA.",
+      "GARANTIZA EL CUMPLIMIENTO DE LAS ORDENES DEL PRESIDENTE.",
+      "PRESTA PROTECCIÓN Y AYUDA A LAS PERSONAS Y A LA COMUNIDAD.",
+      "PRESTA PROTECCIÓN A LAS FRONTERAS."
+    ],
+    "respuesta": "PRESTA PROTECCIÓN Y AYUDA A LAS PERSONAS Y A LA COMUNIDAD.",
+    "ubicacion": "(ART: 166)** [TITULO IV] [CAPITULO XII]",
+    "codigo": "180862"
+  },
+  {
+    "numero": "63",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "EN CASO DE FLAGRANTE DELITO, LA DETENCIÓN NO DURARÁ MAS DEL TIEMPO ESTRICTAMENTE NECESARIO PARA LA REALIZACIÓN DE LAS INVESTIGACIONES Y EN TODO CASO, EL DETENIDO DEBE SER PUESTO A DISPOSICIÓN DEL JUZGADO CORRESPONDIENTE:.",
+    "opciones": [
+      "DENTRO DE LAS VEINTICUATRO HORAS.",
+      "DENTRO DE LAS SETENTA Y DOS HORAS",
+      "DENTRO DEL PLAZO MÁXIMO DE CUARENTA Y OCHO HORAS O EN EL TÉRMINO DE LA DISTANCIA.",
+      "DENTRO DE LA SEMANA",
+      "AL TÉRMINO DE LA INVESTIGACIÓN PREPARATORIA."
+    ],
+    "respuesta": "DENTRO DEL PLAZO MÁXIMO DE CUARENTA Y OCHO HORAS O EN EL TÉRMINO DE LA DISTANCIA.",
+    "ubicacion": "(ART: 2 inc 24 f)** [TITULO I] [CAPITULO I]",
+    "codigo": "180863"
+  },
+  {
+    "numero": "64",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "PARA LA FUNCIÓN PÚBLICA, LA LEY ESTABLECE LA RESPONSABILIDAD DE LOS FUNCIONARIOS Y SERVIDORES PÚBLICOS, ASÍ COMO EL PLAZO DE SU:.",
+    "opciones": [
+      "PERMANENCIA.",
+      "INHABILITACIÓN.",
+      "CONTINUIDAD.",
+      "EXPULSIÓN.",
+      "DESPIDO."
+    ],
+    "respuesta": "INHABILITACIÓN.",
+    "ubicacion": "(ART: 41)** [TITULO I] [CAPITULO IV]",
+    "codigo": "180864"
+  },
+  {
+    "numero": "65",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "LOS EXTRANJEROS EN EL PERÚ, CUANDO SON CITADOS POR CUALQUIER AUTORIDAD, TIENEN DERECHO A:.",
+    "opciones": [
+      "USAR EL IDIOMA INGLÉS",
+      "USAR EL IDIOMA FRANCÉS",
+      "USAR EL IDIOMA QUE MÁS DOMINA EN COMPAÑÍA DE SUS CONOCIDOS.",
+      "USAR SU PROPIO IDIOMA ANTE CUALQUIER AUTORIDAD MEDIANTE UN INTÉRPRETE.",
+      "USAR SOLAMENTE EL IDIOMA CASTELLANO"
+    ],
+    "respuesta": "USAR SU PROPIO IDIOMA ANTE CUALQUIER AUTORIDAD MEDIANTE UN INTÉRPRETE.",
+    "ubicacion": "(ART: 2 inc 19)** [TITULO I] [CAPITULO I]",
+    "codigo": "180865"
+  },
+  {
+    "numero": "66",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "EN SU DOMINIO MARÍTIMO, EL ESTADO EJERCE:.",
+    "opciones": [
+      "LAS LEYES PERUANAS.",
+      "SOBERANÍA Y CONTROL.",
+      "CONTROL Y SOBERANÍA.",
+      "SOBERANÍA Y JURISDICCIÓN.",
+      "PREDOMINIO MARÍTIMO."
+    ],
+    "respuesta": "SOBERANÍA Y JURISDICCIÓN.",
+    "ubicacion": "(ART: 54)** [TITULO II] [CAPITULO II]",
+    "codigo": "180866"
+  },
+  {
+    "numero": "67",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "A LOS SERVIDORES PÚBLICOS, SE LE RECONOCEN LOS DERECHOS DE:.",
+    "opciones": [
+      "BLOQUEO DE VÍAS.",
+      "DISTURBIOS Y MANIFESTACIONES.",
+      "SINDICACIÓN Y HUELGA.",
+      "MOVILIZACIONES Y DAÑOS A LA PROPIEDAD.",
+      "ENFRENTAMIENTOS."
+    ],
+    "respuesta": "SINDICACIÓN Y HUELGA.",
+    "ubicacion": "(ART: 42)** [TITULO I] [CAPITULO IV]",
+    "codigo": "180867"
+  },
+  {
+    "numero": "68",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "EL ESTADO ESTÁ EXONERADO DEL PAGO DE:.",
+    "opciones": [
+      "GASTOS JUDICIALES.",
+      "GASTOS PENALES.",
+      "GASTOS PARTICULARES.",
+      "GASTOS DE COLABORACIÓN.",
+      "GASTOS DE EMBALAJE."
+    ],
+    "respuesta": "GASTOS JUDICIALES.",
+    "ubicacion": "(ART: 139 inc 16)** [TITULO IV] [CAPITULO VIII]",
+    "codigo": "180868"
+  },
+  {
+    "numero": "69",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "TODOS LOS PERUANOS TIENEN EL DEBER DE:.",
+    "opciones": [
+      "HONRAR AL PERÚ.",
+      "AFRENTAR AL PERÚ.",
+      "ADULAR AL PERÚ.",
+      "PENSAR EN EL PERÚ.",
+      "CONFIAR EN EL PERÚ."
+    ],
+    "respuesta": "HONRAR AL PERÚ.",
+    "ubicacion": "(ART: 38)** [TITULO I] [CAPITULO IV]",
+    "codigo": "180869"
+  },
+  {
+    "numero": "70",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "SON CIUDADANOS LOS PERUANOS MAYORES DE:.",
+    "opciones": [
+      "QUINCE AÑOS.",
+      "VEINTIÚN AÑOS.",
+      "DIECISÉIS AÑOS.",
+      "DIECIOCHO AÑOS.",
+      "DIECINUEVE AÑOS."
+    ],
+    "respuesta": "DIECIOCHO AÑOS.",
+    "ubicacion": "(ART: 30)** [TITULO I] [CAPITULO III]",
+    "codigo": "180870"
+  },
+  {
+    "numero": "71",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "ES DEBER DEL ESTADO ESTABLECER Y EJECUTAR LA POLÍTICA DE:.",
+    "opciones": [
+      "COMERCIO.",
+      "FRONTERAS.",
+      "AMPLIACIÓN.",
+      "INVERSIÓN.",
+      "CRECIMIENTO."
+    ],
+    "respuesta": "FRONTERAS.",
+    "ubicacion": "(ART: 44)** [TITULO II] [CAPITULO I]",
+    "codigo": "180871"
+  },
+  {
+    "numero": "72",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "REGULADOS POR LEY, LOS MIEMBROS DE LAS FUERZAS ARMADAS Y DE LA POLICÍA NACIONAL TIENEN DERECHO A LA:.",
+    "opciones": [
+      "SEGURIDAD DEMOCRÁTICA",
+      "PARTICIPACIÓN CIUDADANA.",
+      "CONVOCATORIA CIUDADANA.",
+      "SOLIDARIDAD CIUDADANA.",
+      "MÍTINES Y PROTESTAS."
+    ],
+    "respuesta": "PARTICIPACIÓN CIUDADANA.",
+    "ubicacion": "(ART: 34)** [TITULO I] [CAPITULO III]",
+    "codigo": "180872"
+  },
+  {
+    "numero": "73",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "ES UNA FINALIDAD FUNDAMENTAL DE LA POLICÍA NACIONAL:.",
+    "opciones": [
+      "VIGILA Y CONTROLA LAS FRONTERAS.",
+      "VIGILA Y CONTROLA EL DELITO",
+      "VIGILA Y CONTROLA LOS INMIGRANTES.",
+      "VIGILA Y COTROLA EL PATRIMONIO PÚBLICO Y PRIVADO.",
+      "VIGILA Y CONTROLA A LOS CIUDADANOS."
+    ],
+    "respuesta": "VIGILA Y CONTROLA LAS FRONTERAS.",
+    "ubicacion": "(ART: 166)** [TITULO IV] [CAPITULO XII]",
+    "codigo": "180873"
+  },
+  {
+    "numero": "74",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "NADIE DEBE OBEDIENCIA A UN GOBIERNO:.",
+    "opciones": [
+      "USURPADOR.",
+      "DEMOCRÁTICO.",
+      "SOCIALISTA.",
+      "COMUNISTA.",
+      "AUTORITARIO."
+    ],
+    "respuesta": "USURPADOR.",
+    "ubicacion": "(ART: 46)** [TITULO II] [CAPITULO I]",
+    "codigo": "180874"
+  },
+  {
+    "numero": "75",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "TIENEN DERECHO AL VOTO LOS CIUDADANOS EN GOCE DE SU CAPACIDAD CIVIL. PARA EL EJERCICIO DE ESTE DERECHO SE REQUIERE ESTAR:.",
+    "opciones": [
+      "LIMITADO EN EL REGISTRO CORRESPONDIENTE.",
+      "INSCRITO EN EL REGISTRO CORRESPONDIENTE.",
+      "ASOCIADO EN EL REGISTRO CORRESPONDIENTE.",
+      "SEPARARSE DEL REGISTRO CORRESPONDIENTE.",
+      "DIVIDIDO DEL REGISTRO CORRESPONDIENTE."
+    ],
+    "respuesta": "INSCRITO EN EL REGISTRO CORRESPONDIENTE.",
+    "ubicacion": "(ART: 31)** [TITULO I] [CAPITULO III]",
+    "codigo": "180875"
+  },
+  {
+    "numero": "76",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "TODA PERSONA TIENE DERECHO A LA LIBERTAD Y A LA SEGURIDAD PERSONALES, EN CONSECUENCIA:.",
+    "opciones": [
+      "NADIE PUEDE SER DETENIDO SINO POR MANDAMIENTO ESCRITO Y MOTIVADO DEL FISCAL O POR LAS AUTORIDADES POLICIALES EN CASO DE FLAGRANTE DELITO.",
+      "NADIE PUEDE SER DETENIDO SINO POR MANDAMIENTO ESCRITO Y MOTIVADO DEL MINISTERIO PÚBLICO O POR LAS AUTORIDADES POLICIALES EN CASO DE FLAGRANTE DELITO.",
+      "NADIE PUEDE SER DETENIDO SINO POR ORDEN DEL MINISTERIO PÚBLICO O AUTORIDADES POLICIALES EN CASO DE FLAGRANTE DELITO.",
+      "NADIE PUEDE SER DETENIDO POR MANDATO DEL CONTROLADOR GENERAL DE LA REPÚBLICA",
+      "NADIE PUEDE SER DETENIDO SINO POR MANDAMIENTO ESCRITO Y MOTIVADO DEL JUEZ O POR LAS AUTORIDADES POLICIALES EN CASO DE FLAGRANTE DELITO."
+    ],
+    "respuesta": "NADIE PUEDE SER DETENIDO SINO POR MANDAMIENTO ESCRITO Y MOTIVADO DEL JUEZ O POR LAS AUTORIDADES POLICIALES EN CASO DE FLAGRANTE DELITO.",
+    "ubicacion": "(ART: 2 inc 24 f)** [TITULO I] [CAPITULO I]",
+    "codigo": "180876"
+  },
+  {
+    "numero": "77",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "UNO DE LOS DEBERES PRIMORDIALES DEL ESTADO ES:",
+    "opciones": [
+      "PROMOVER EL DESARROLLO INTEGRAL DE LA FAMILIA",
+      "PARTICIPAR ACTIVAMENTE CON LA POBLACIÓN",
+      "GARANTIZAR LA PLENA VIGENCIA DE LOS DERECHOS HUMANOS",
+      "DIFUNDIR LA PRACTICA DEL DEPORTE",
+      "DEFENDER LOS DERECHOS CIUDADANOS"
+    ],
+    "respuesta": "GARANTIZAR LA PLENA VIGENCIA DE LOS DERECHOS HUMANOS",
+    "ubicacion": "(ART: 44)** [TITULO II] [CAPITULO I]",
+    "codigo": "180877"
+  },
+  {
+    "numero": "78",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "TODA PERSONA TIENE DERECHO AL SECRETO BANCARIO Y TRIBUTARIO. SU LEVANTAMIENTO PUEDE EFECTUARSE A PEDIDO:",
+    "opciones": [
+      "DE UNA COMISIÓN INVESTIGADORA DE LA CÁMARA DE DIPUTADOS CON ARREGLO A LEY.",
+      "DEL FISCAL SUPERIOR DE LIMA",
+      "DEL GOBERNADOR REGIONAL",
+      "DEL CONSEJERO REGIONAL",
+      "DEL ALCALDE DE LIMA"
+    ],
+    "respuesta": "DE UNA COMISIÓN INVESTIGADORA DE LA CÁMARA DE DIPUTADOS CON ARREGLO A LEY.",
+    "ubicacion": "(ART: 2 inc 5)** [TITULO I] [CAPITULO I]",
+    "codigo": "180878"
+  },
+  {
+    "numero": "79",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "LA COMUNIDAD Y EL ESTADO PROTEGEN ESPECIALMENTE AL:",
+    "opciones": [
+      "ACADÉMICO",
+      "ESTUDIANTE",
+      "UNIVERSITARIO",
+      "A LA MADRE",
+      "A LAS ASOCIACIONES PRIVADAS"
+    ],
+    "respuesta": "A LA MADRE",
+    "ubicacion": "(ART: 4)** [TITULO I] [CAPITULO II]",
+    "codigo": "180879"
+  },
+  {
+    "numero": "80",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "EL ESTADO RECONOCE EL DERECHO DE TODA PERSONA A ACCEDER DE FORMA PROGRESIVA Y UNIVERSAL A:",
+    "opciones": [
+      "ENERGIA ELECTRICA",
+      "ESTUDIOS UNIVERSITARIOS",
+      "BENEFICIOS FINANCIEROS",
+      "AGUA POTABLE",
+      "INTERESES ECONÓMICOS"
+    ],
+    "respuesta": "AGUA POTABLE",
+    "ubicacion": "(ART: 7-A)** [TITULO I] [CAPITULO II]",
+    "codigo": "180880"
+  },
+  {
+    "numero": "81",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "EDUCACIÓN PARA LA VIDA Y EL TRABAJO: ES DEBER DEL ESTADO EN EL PAÍS PROMOVER EL DESARROLLO CIENTÍFICO Y:",
+    "opciones": [
+      "MORAL",
+      "ÉTICO",
+      "SOCIAL",
+      "ECONÓMICO",
+      "TECNOLÓGICO"
+    ],
+    "respuesta": "TECNOLÓGICO",
+    "ubicacion": "(ART: 14)** [TITULO I] [CAPITULO II]",
+    "codigo": "180881"
+  },
+  {
+    "numero": "82",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "LA EDUCACIÓN PARA LA VIDA Y EL TRABAJO: LOS MEDIOS DE COMUNICACIÓN SOCIAL DEBEN COLABORAR CON EL ESTADO EN LA EDUCACIÓN Y EN LA FORMACIÓN:",
+    "opciones": [
+      "MORAL Y CULTURAL",
+      "CULTURAL Y RELIGIOSA",
+      "SOCIAL Y PEDAGÓGICA",
+      "ACADÉMICA Y MORAL",
+      "ÉTICA Y MORAL"
+    ],
+    "respuesta": "MORAL Y CULTURAL",
+    "ubicacion": "(ART: 14)** [TITULO I] [CAPITULO II]",
+    "codigo": "180882"
+  },
+  {
+    "numero": "83",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "EDUCACIÓN PARA LA VIDA Y EL TRABAJO. EL ESTADO GARANTIZA A TRAVÉS DE LA INVERSIÓN PÚBLICA O PRIVADA, EN TODO EL TERRITORIO NACIONAL EL ACCESO A:",
+    "opciones": [
+      "SALONES DE JUEGOS",
+      "TEATROS PÚBLICOS",
+      "INTERNET LIBRE",
+      "CLUBES PRIVADOS",
+      "ASOCIACIONES DEPORTIVAS"
+    ],
+    "respuesta": "INTERNET LIBRE",
+    "ubicacion": "(ART: 14)** [TITULO I] [CAPITULO II]",
+    "codigo": "180883"
+  },
+  {
+    "numero": "84",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "PROFESORADO, CARRERA PÚBLICA: TODA PERSONA NATURAL O JURÍDICA TIENE EL DERECHO DE PROMOVER Y CONDUCIR:",
+    "opciones": [
+      "INSTITUCIONES MILITARES",
+      "INSTITUCIONES POLÍTICAS",
+      "INSTITUCIONES EDUCATIVAS",
+      "INSTITUCIONES RECREATIVAS",
+      "INSTITUCIONES FINANCIERAS"
+    ],
+    "respuesta": "INSTITUCIONES EDUCATIVAS",
+    "ubicacion": "(ART: 15)** [TITULO I] [CAPITULO II]",
+    "codigo": "180884"
+  },
+  {
+    "numero": "85",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "DESCENTRALIZACIÓN DEL SISTEMA EDUCATIVA: TANTO EL SISTEMA COMO EL RÉGIMEN EDUCATIVO SON:",
+    "opciones": [
+      "SISTEMATIZADOS",
+      "DESCONCENTRADOS",
+      "DISTRIBUIDOS",
+      "DESCENTRALIZADOS",
+      "INSTITUIDOS"
+    ],
+    "respuesta": "DESCENTRALIZADOS",
+    "ubicacion": "(ART: 16)** [TITULO I] [CAPITULO II]",
+    "codigo": "180885"
+  },
+  {
+    "numero": "86",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "DESCENTRALIZACIÓN DEL SISTEMA EDUCATIVO: ES DEBER DEL ESTADO ASEGURAR QUE NADIE SE VEA IMPEDIDO DE RECIBIR EDUCACIÓN ADECUADA POR RAZÓN DE SU SITUACIÓN:",
+    "opciones": [
+      "ECONÓMICA",
+      "PSICOLÓGICA",
+      "POLÍTICA",
+      "ÉTICAS",
+      "ESTÉTICAS"
+    ],
+    "respuesta": "ECONÓMICA",
+    "ubicacion": "(ART: 16)** [TITULO I] [CAPITULO II]",
+    "codigo": "180886"
+  },
+  {
+    "numero": "87",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "OBLIGATORIEDAD DE LA EDUCACIÓN: EL ESTADO FOMENTA LA EDUCACIÓN:",
+    "opciones": [
+      "» MONOLINGÜE",
+      "» BICULTURAL",
+      "» BILATERAL",
+      "» BIMODAL",
+      "» BILINGÜE"
+    ],
+    "respuesta": "» BILINGÜE",
+    "ubicacion": "(ART: 17)** [TITULO I] [CAPITULO II]",
+    "codigo": "180887"
+  },
+  {
+    "numero": "88",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "OBLIGATORIEDAD DE LA EDUCACIÓN: EL ESTADO FOMENTA LA EDUCACIÓN:",
+    "opciones": [
+      "INTERDISCIPLINARIA",
+      "INTERNACIONAL",
+      "INTERPERSONAL",
+      "INTERDEPENDIENTE",
+      "INTERCULTURAL"
+    ],
+    "respuesta": "INTERCULTURAL",
+    "ubicacion": "(ART: 17)** [TITULO I] [CAPITULO II]",
+    "codigo": "180888"
+  },
+  {
+    "numero": "89",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "OBLIGATORIEDAD DE LA EDUCACIÓN: EL ESTADO PRESERVA LAS DIVERSAS MANIFESTACIONES CULTURALES Y LINGÜÍSTICAS DEL PAÍS. PROMUEVE LA INTEGRACIÓN:",
+    "opciones": [
+      "NATURAL",
+      "NAVAL",
+      "NACIONAL",
+      "INTERPERSONAL",
+      "INTERFAMILIAR"
+    ],
+    "respuesta": "NACIONAL",
+    "ubicacion": "(ART: 17)** [TITULO I] [CAPITULO II]",
+    "codigo": "180889"
+  },
+  {
+    "numero": "90",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "EDUCACIÓN UNIVERSITARIA: EL ESTADO GARANTIZA LA LIBERTAD DE:",
+    "opciones": [
+      "IGNORANCIA",
+      "IDENTIDAD",
+      "IMAGEN",
+      "MARKETING",
+      "CÁTEDRA"
+    ],
+    "respuesta": "CÁTEDRA",
+    "ubicacion": "(ART: 18)** [TITULO I] [CAPITULO II]",
+    "codigo": "180890"
+  },
+  {
+    "numero": "91",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "EDUCACIÓN UNIVERSITARIA: EL ESTADO RECHAZA LA:",
+    "opciones": [
+      "IMAGEN",
+      "CÁTEDRA",
+      "ENSEÑANZA",
+      "CULTURA",
+      "INTOLERANCIA"
+    ],
+    "respuesta": "INTOLERANCIA",
+    "ubicacion": "(ART: 18)** [TITULO I] [CAPITULO II]",
+    "codigo": "180891"
+  },
+  {
+    "numero": "92",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "EDUCACIÓN UNIVERSITARIA: QUIEN FIJA LAS CONDICIONES PARA AUTORIZAR SU FUNCIONAMIENTO",
+    "opciones": [
+      "EL PRESIDENTE DE LA REPÚBLICA",
+      "LA CÁMARA DE DIPUTADOS",
+      "LA CÁMARA DE SENADORES",
+      "LA LEY",
+      "LA SUNEDU"
+    ],
+    "respuesta": "LA LEY",
+    "ubicacion": "(ART: 18)** [TITULO I] [CAPITULO II]",
+    "codigo": "180892"
+  },
+  {
+    "numero": "93",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "EDUCACIÓN UNIVERSITARIA: LA UNIVERSIDAD ES LA COMUNIDAD DE:",
+    "opciones": [
+      "EX ALUMNOS",
+      "PROVEEDORES",
+      "AUTORIDADES",
+      "VISITANTES",
+      "PROFESORES"
+    ],
+    "respuesta": "PROFESORES",
+    "ubicacion": "(ART: 18)** [TITULO I] [CAPITULO II]",
+    "codigo": "180893"
+  },
+  {
+    "numero": "94",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "EDUCACIÓN UNIVERSITARIA: LA UNIVERSIDAD ES LA COMUNIDAD DE:",
+    "opciones": [
+      "EX PROFESORES",
+      "PROVEEDORES",
+      "VISITANTES",
+      "AUTORIDADES",
+      "ALUMNOS"
+    ],
+    "respuesta": "ALUMNOS",
+    "ubicacion": "(ART: 18)** [TITULO I] [CAPITULO II]",
+    "codigo": "180894"
+  },
+  {
+    "numero": "95",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "EDUCACIÓN UNIVERSITARIA: LA UNIVERSIDAD ES LA COMUNIDAD DE:",
+    "opciones": [
+      "EX ALUMNOS",
+      "VISITANTES",
+      "AUTORIDADES",
+      "PROVEEDORES",
+      "GRADUADOS"
+    ],
+    "respuesta": "GRADUADOS",
+    "ubicacion": "(ART: 18)** [TITULO I] [CAPITULO II]",
+    "codigo": "180895"
+  },
+  {
+    "numero": "96",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "EDUCACIÓN UNIVERSITARIA: CADA UNIVERSIDAD EN SU RÉGIMEN ACADÉMICO ES:",
+    "opciones": [
+      "DIPLOMÁTICA",
+      "DEPENDIENTE",
+      "CASTRENSE",
+      "AUTÓNOMA",
+      "VISIONARIA"
+    ],
+    "respuesta": "AUTÓNOMA",
+    "ubicacion": "(ART: 18)** [TITULO I] [CAPITULO II]",
+    "codigo": "180896"
+  },
+  {
+    "numero": "97",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "EDUCACIÓN UNIVERSITARIA: CADA UNIVERSIDAD EN EL MARCO DE LA CONSTITUCIÓN Y LAS LEYES SE RIGEN POR SUS:",
+    "opciones": [
+      "PROPIAS LIBERTADES",
+      "PROPIAS FLEXIBILIDADES",
+      "PROPIAS DISCRECIONES",
+      "PROPIAS FUNCIONES",
+      "PROPIOS ESTATUTOS"
+    ],
+    "respuesta": "PROPIOS ESTATUTOS",
+    "ubicacion": "(ART: 18)** [TITULO I] [CAPITULO II]",
+    "codigo": "180897"
+  },
+  {
+    "numero": "98",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "RÉGIMEN TRIBUTARIO DE CENTROS DE EDUCACIÓN: LAS UNIVERSIDADES, INSTITUTOS SUPERIORES Y DEMÁS CENTROS EDUCATIVOS CONFORME A LA LEGISLACIÓN EN LA MATERIA GOZAN DE INAFECTACIÓN DE TODO IMPUESTO DIRECTO E INDIRECTO QUE AFECTE LOS BIENES, ACTIVIDADES Y SERVICIOS PROPIOS DE SU FINALIDAD EDUCATIVA Y:",
+    "opciones": [
+      "MATERIAL",
+      "MORAL",
+      "ÉTICA",
+      "RELIGIOSA",
+      "CULTURAL"
+    ],
+    "respuesta": "CULTURAL",
+    "ubicacion": "(ART: 19)** [TITULO I] [CAPITULO II]",
+    "codigo": "180898"
+  },
+  {
+    "numero": "99",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "RÉGIMEN TRIBUTARIO DE CENTROS DE EDUCACIÓN: EN MATERIA DE ARANCELES DE IMPORTACIÓN PUEDE ESTABLECERSE UN RÉGIMEN ESPECIAL DE AFECTACIÓN PARA DETERMINADOS:",
+    "opciones": [
+      "INTERESES",
+      "OBJETOS",
+      "PRINCIPIOS",
+      "BIENES",
+      "LOGROS"
+    ],
+    "respuesta": "BIENES",
+    "ubicacion": "(ART: 19)** [TITULO I] [CAPITULO II]",
+    "codigo": "180899"
+  },
+  {
+    "numero": "100",
+    "materia_grupo": "COMUNES",
+    "norma": "CONSTITUCIÓN POLÍTICA DEL PERÚ",
+    "enunciado": "RÉGIMEN TRIBUTARIO DE CENTROS DE EDUCACIÓN: QUE ACTIVIDADES GOZARÁN DE EXONERACIONES TRIBUTARIOS EN LA FORMA Y DENTRO DE LOS LIMITES QUE FIJE LA LEY.",
+    "opciones": [
+      "LAS CONCESIONES",
+      "LOS CONTRATOS",
+      "LAS DIPLOMAS",
+      "LOS CERTIFICADOS",
+      "LAS DONACIONES"
+    ],
+    "respuesta": "LAS DONACIONES",
+    "ubicacion": "(ART: 19)** [TITULO I] [CAPITULO II]",
+    "codigo": "180900"
+  },
+  {
+    "numero": "31",
+    "materia_grupo": "COMUNES",
     "norma": "LEY Nº 30714 - REGIMEN DISCIPLINARIO PNP",
     "enunciado": "NO CONSTITUYEN DEMÉRITO NI SANCIÓN ADMINISTRATIVA:",
     "opciones": [
@@ -622,22 +1742,6 @@
     "respuesta": "CUANDO NUEVOS ELEMENTOS DE CONVICCIÓN DEMUESTREN QUE NO CONCURREN O NO SUBSISTEN LOS MOTIVOS QUE",
     "ubicacion": "(texto: (ART: UNICO)** Articulo 283. Cesacion de la prision preventiva o de la comparecencia)**",
     "codigo": "184910"
-  },
-  {
-    "numero": "40",
-    "materia_grupo": "COMUNES",
-    "norma": "LEY DE LA PNP - D.LEG. 1267",
-    "enunciado": "LA POLICÍA NACIONAL DEL PERÚ, CELEBRA SU ANIVERSARIO INSTITUCIONAL, CON LA FINALIDAD DE:.",
-    "opciones": [
-      "FORTALECER LA IMAGEN SOCIAL.",
-      "CELEBRAR LA EFEMÉRIDES INSTITUCIONAL.",
-      "FORTALECER LA VOCACIÓN PROFESIONAL,IDENTIDAD, DOCTRINA Y MÍSTICA INSTITUCIONAL.",
-      "DESCENTRALIZAR LAS CELEBRACIONES POLICIALES.",
-      "FORTALECER LA IMAGEN INSTITUCIONAL."
-    ],
-    "respuesta": "FORTALECER LA VOCACIÓN PROFESIONAL,IDENTIDAD, DOCTRINA Y MÍSTICA INSTITUCIONAL.",
-    "ubicacion": "(ART: X)** [TITULO PRELIMINAR]",
-    "codigo": "181157"
   },
   {
     "numero": "41",
@@ -798,5 +1902,1445 @@
     "respuesta": "PRONABI.",
     "ubicacion": "(texto: 13)** [CAPITULO III]",
     "codigo": "184992"
+  },
+  {
+    "codigo": "DL1267-116",
+    "numero": 116,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "INDIQUE QUIENES TIENEN DERECHO PREFERENTE A LA PRESTACIÓN DE LOS SERVICIOS OFRECIDOS POR EL RÉGIMEN DE BIENESTAR DE LA POLICÍA NACIONAL DEL PERÚ.",
+    "opciones": [
+      "LOS FAMILIARES Y HEREDEROS AFECTADOS GRAVEMENTE.",
+      "LOS POLICÍAS AFECTADOS EN CIRCUNSTANCIAS FUERA DE SERVICIO, SUS FAMILIARES Y HEREDEROS.",
+      "LOS HEREDEROS Y FAMILIARES AFECTADOS LEVEMENTE.",
+      "LOS POLICÍAS AFECTADOS EN CIRCUNSTANCIAS DE SERVICIO, SUS FAMILIARES Y HEREDEROS.",
+      "LOS SERENOS, SUS FAMILIARES Y HEREDEROS AFECTADOS GRAVEMENTE."
+    ],
+    "respuesta": "LOS POLICÍAS AFECTADOS EN CIRCUNSTANCIAS DE SERVICIO, SUS FAMILIARES Y HEREDEROS.",
+    "ubicacion": "Art. 25 y 34 del D.L. 1267 - Régimen de Bienestar"
+  },
+  {
+    "codigo": "DL1267-117",
+    "numero": 117,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "“ACATAR CONSCIENTE Y VOLUNTARIAMENTE LAS ÓRDENES IMPARTIDAS CON ARREGLO A LEY, ASÍ COMO LA NORMATIVIDAD INSTITUCIONAL”, A QUE VALOR INSTITUCIONAL CORRESPONDE.",
+    "opciones": [
+      "LEGALIDAD.",
+      "VOCACIÓN.",
+      "DISCIPLINA.",
+      "PERTENENCIA INSTITUCIONAL.",
+      "JUSTICIA."
+    ],
+    "respuesta": "DISCIPLINA.",
+    "ubicacion": "Título Preliminar, Art. VIII del D.L. 1267 - Disciplina"
+  },
+  {
+    "codigo": "DL1267-118",
+    "numero": 118,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "ES UNA ATRIBUCIÓN INTERVENIR, CITAR, CONDUCIR COMPULSIVAMENTE, RETENER Y DETENER A LAS PERSONAS DE CONFORMIDAD CON.",
+    "opciones": [
+      "EL CÓDIGO DE FUNCIONARIOS PARA HACER CUMPLIR LA LEY.",
+      "LA CONSTITUCIÓN Y LA LEY.",
+      "EL CÓDIGO PENAL.",
+      "EL CÓDIGO PROCESAL PENAL.",
+      "EL CÓDIGO CIVIL."
+    ],
+    "respuesta": "LA CONSTITUCIÓN Y LA LEY.",
+    "ubicacion": "Art. 3 inc. 4 del D.L. 1267 - Atribuciones"
+  },
+  {
+    "codigo": "DL1267-119",
+    "numero": 119,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "CONDUCTA RESPETUOSA, AMABLE, OPORTUNA, DEFERENTE Y PREDISPUESTA AL SERVICIO DEL CIUDADANO, A QUE VALOR INSTITUCIONAL CORRESPONDE.",
+    "opciones": [
+      "SERVICIO.",
+      "ORIENTACION AL CIUDADANO.",
+      "CORTESÍA.",
+      "VOCACIÓN.",
+      "ÍNTEGRIDAD."
+    ],
+    "respuesta": "CORTESÍA.",
+    "ubicacion": "Título Preliminar, Art. VIII del D.L. 1267 - Cortesía"
+  },
+  {
+    "codigo": "DL1267-120",
+    "numero": 120,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "CONSTITUYEN SÍMBOLOS DE LA POLICÍA NACIONAL DEL PERÚ.",
+    "opciones": [
+      "EL UNIFORME REGLAMENTARIO, EMBLEMA E HIMNO INSTITUCIONAL.",
+      "EL ESCUDO, ESTANDARTE E HIMNO INSTITUCIONAL.",
+      "EL ESTANDARTE, EMBLEMA E HIMNO NACIONAL.",
+      "EL UNIFORME REGLAMENTARIO, LA PLACA INSIGNIA Y EL CARNÉ DE IDENTIDAD.",
+      "EL ESTANDARTE, EMBLEMA E HIMNO INSTITUCIONAL."
+    ],
+    "respuesta": "EL ESTANDARTE, EMBLEMA E HIMNO INSTITUCIONAL.",
+    "ubicacion": "Título Preliminar, Art. VI y Art. 13 del D.L. 1267 - Símbolos"
+  },
+  {
+    "codigo": "DL1267-121",
+    "numero": 121,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "EL RÉGIMEN DE BIENESTAR TIENE COMO FINALIDAD ORGANIZAR, DESARROLLAR, DIRIGIR, EJECUTAR PROGRAMAS, PROYECTOS Y ACTIVIDADES DE BIENESTAR DEL PERSONAL DE LA PNP Y SU.",
+    "opciones": [
+      "ENTORNO.",
+      "COMUNIDAD.",
+      "FAMILIA.",
+      "PARENTELA.",
+      "VECINDAD."
+    ],
+    "respuesta": "FAMILIA.",
+    "ubicacion": "Art. 24 del D.L. 1267 - Régimen de Bienestar"
+  },
+  {
+    "codigo": "DL1267-122",
+    "numero": 122,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "VALORES INSTITUCIONALES.- “IDENTIFICACIÓN CON UN COLECTIVO HUMANO UNIDO POR LAZOS INSTITUCIONALES Y DE COMPAÑERISMO, BASADOS EN VALORES Y BUENAS PRÁCTICAS QUE DIGNIFICAN LA FUNCIÓN POLICIAL”, CORRESPONDE A.",
+    "opciones": [
+      "VOCACIÓN.",
+      "CAMARADERÍA.",
+      "PERTENENCIA INSTITUCIONAL.",
+      "INTEGRIDAD.",
+      "DIGNIDAD."
+    ],
+    "respuesta": "PERTENENCIA INSTITUCIONAL.",
+    "ubicacion": "Título Preliminar, Art. VIII del D.L. 1267 - Pertenencia Institucional"
+  },
+  {
+    "codigo": "DL1267-123",
+    "numero": 123,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LA FORMACIÓN PROFESIONAL POLICIAL, COMO PARTE DE LA ETAPA DE EDUCACIÓN SUPERIOR DEL SISTEMA EDUCATIVO, ES EL PROCESO QUE TIENE COMO FINALIDAD LA.",
+    "opciones": [
+      "ADIESTRAMIENTO.",
+      "ALINEACIÓN.",
+      "PREPARACIÓN.",
+      "CULTURA.",
+      "ERUDICIÓN."
+    ],
+    "respuesta": "PREPARACIÓN.",
+    "ubicacion": "Art. 22 del D.L. 1267 - Formación Profesional Policial"
+  },
+  {
+    "codigo": "DL1267-124",
+    "numero": 124,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "EL SERVICIO POLICIAL DEMANDA LA ACTUACIÓN ÉTICA, PROBA Y CORRECTA, A QUE VALOR INSTITUCIONAL CORRESPONDE.",
+    "opciones": [
+      "INTEGRIDAD.",
+      "ETICA.",
+      "SERVICIO.",
+      "TRANSPARENCIA.",
+      "HONOR."
+    ],
+    "respuesta": "INTEGRIDAD.",
+    "ubicacion": "Título Preliminar, Art. VIII del D.L. 1267 - Integridad"
+  },
+  {
+    "codigo": "DL1267-125",
+    "numero": 125,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "ES LA CONDICIÓN EN LA QUE SE ENCUENTRA EL PERSONAL DE LA POLICÍA NACIONAL DEL PERÚ, DENTRO O FUERA DEL SERVICIO. LAS SITUACIONES DEL PERSONAL SON.",
+    "opciones": [
+      "APTITUD, SOMETIDO A LEY Y SOSTENIBILIDAD.",
+      "DISPONIBLE, SOMETIDO A LEY Y SOSTENIBILIDAD.",
+      "SERVICIO, RETIRO Y DISPONIBLE.",
+      "FRANCO, LIBRE Y NO DISPONIBLE.",
+      "ACTIVIDAD, DISPONIBILIDAD Y RETIRO."
+    ],
+    "respuesta": "ACTIVIDAD, DISPONIBILIDAD Y RETIRO.",
+    "ubicacion": "Art. 18 del D.L. 1267 - Situación del Personal"
+  },
+  {
+    "codigo": "DL1267-126",
+    "numero": 126,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿QUÉ ÓRGANO FORMA PARTE DE LA ESTRUCTURA ORGÁNICA DE LA POLICÍA NACIONAL DEL PERÚ?.",
+    "opciones": [
+      "ÓRGANO DE CONTROL INSTITUCIONAL.",
+      "ÓRGANO DE CONTROL INTERNO.",
+      "ÓRGANO DE CONTROL ECONÓMICO.",
+      "ÓRGANO DE CONTROL PATRIMONIAL.",
+      "ÓRGANO INSTITUCIONAL."
+    ],
+    "respuesta": "ÓRGANO DE CONTROL INSTITUCIONAL.",
+    "ubicacion": "Art. 7 y Art. 11 del D.L. 1267 - Estructura Orgánica"
+  },
+  {
+    "codigo": "DL1267-127",
+    "numero": 127,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "SON SÍMBOLOS DE LA POLICÍA NACIONAL DEL PERÚ EL EMBLEMA, HIMNO INSTITUCIONAL Y.",
+    "opciones": [
+      "BANDERA DE LA PNP.",
+      "GALLARDETE.",
+      "BANDERA.",
+      "ESTANDARTE.",
+      "PABELLÓN INSTITUCIONAL."
+    ],
+    "respuesta": "ESTANDARTE.",
+    "ubicacion": "Título Preliminar, Art. VI y Art. 13 del D.L. 1267 - Símbolos"
+  },
+  {
+    "codigo": "DL1267-128",
+    "numero": 128,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "CONFORMAN EL ALTO MANDO DE LA POLICÍA NACIONAL DEL PERÚ.",
+    "opciones": [
+      "DIRECTOR GENERAL, SUB DIRECTOR E INSPECTOR GENERAL.",
+      "COMANDANTE GENERAL, JEFE DE ESTADO MAYOR E INSPECTOR GENERAL.",
+      "COMANDANTE GENERAL, JEFE DE ESTADO MAYOR CONJUNTO Y DIRECTOR NACIONAL DE OPERACIONES POLICIALES.",
+      "COMANDANTE GENERAL, JEFE DEL ESTADO MAYOR PERSONAL E INSPECTOR GENERAL.",
+      "COMANDANTE GENERAL, SUB DIRECTOR GENERAL Y DIRECTOR NACIONAL DE OPERACIONES POLICIALES."
+    ],
+    "respuesta": "COMANDANTE GENERAL, JEFE DE ESTADO MAYOR E INSPECTOR GENERAL.",
+    "ubicacion": "Art. 8 del D.L. 1267 - Alto Mando"
+  },
+  {
+    "codigo": "DL1267-129",
+    "numero": 129,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "DEPENDEN DE LA DIRECCIÓN NACIONAL DE ORDEN Y SEGURIDAD.",
+    "opciones": [
+      "LOS ÓRGANOS DE ASESORAMIENTO.",
+      "LOS ÓRGANOS DE INVESTIGACIÓN.",
+      "LAS REGIONES POLICIALES.",
+      "LOS ÓRGANOS DISCIPLINARIOS.",
+      "LAS SUB REGIONES POLICIALES."
+    ],
+    "respuesta": "LAS REGIONES POLICIALES.",
+    "ubicacion": "Art. 14 y 22 del D.L. 1267 - Órganos Desconcentrados"
+  },
+  {
+    "codigo": "DL1267-130",
+    "numero": 130,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "CUMPLIR SUS FUNCIONES CON IMPARCIALIDAD, RESPONSABILIDAD, DILIGENCIA Y PRONTITUD, ASÍ COMO EJERCERLAS CON PROFESIONALISMO, LEALTAD Y ÉTICA. CORRESPONDE A.",
+    "opciones": [
+      "OBLIGACIONES DEL PERSONAL POLICIAL.",
+      "DEBERES DEL PERSONAL POLICIAL.",
+      "DERECHOS DEL PERSONAL POLICIAL.",
+      "PRERROGATIVAS DEL PERSONAL POLICIAL.",
+      "BENEFICIOS DEL PERSONAL POLICIAL."
+    ],
+    "respuesta": "OBLIGACIONES DEL PERSONAL POLICIAL.",
+    "ubicacion": "Art. 4 num. 3 del D.L. 1267 - Obligaciones"
+  },
+  {
+    "codigo": "DL1267-131",
+    "numero": 131,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "CONSTITUYE UN DERECHO DEL PERSONAL POLICIAL.",
+    "opciones": [
+      "NO ACATAR DISPOSICIONES QUE CONSTITUYEN UNA MANIFIESTA VIOLACIÓN A LA CONSTITUCIÓN Y LAS LEYES.",
+      "IDENTIFICAR A LAS PERSONAS CON FINES POLICIALES.",
+      "TENER PASE LIBRE EN VEHÍCULOS DE TRANSPORTE DE SERVICIO PÚBLICO.",
+      "POSEER, PORTAR Y USAR ARMAS DE FUEGO, DE CONFORMIDAD CON LA CONSTITUCIÓN Y LA LEY.",
+      "EJERCER LA FUNCIÓN POLICIAL EN TODO MOMENTO, LUGAR, SITUACIÓN Y CIRCUNSTANCIA, POR CONSIDERARSE SIEMPRE DE SERVICIO."
+    ],
+    "respuesta": "NO ACATAR DISPOSICIONES QUE CONSTITUYEN UNA MANIFIESTA VIOLACIÓN A LA CONSTITUCIÓN Y LAS LEYES.",
+    "ubicacion": "Art. 5 num. 2 del D.L. 1267 - Derechos"
+  },
+  {
+    "codigo": "DL1267-132",
+    "numero": 132,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LAS SITUACIONES DEL PERSONAL DE LA POLICIA NACIONAL DEL PERU SON.",
+    "opciones": [
+      "ACTIVIDAD, CESE TEMPORAL Y CESE DEFINITIVO.",
+      "CESE TEMPORAL, RETIRO Y ACTIVIDAD.",
+      "ACTIVIDAD, SOMETIDO A LA LEY Y RETIRO.",
+      "SOMETIDO A LA LEY ACTIVIDAD Y DISPONIBILIDAD.",
+      "ACTIVIDAD, DISPONIBLIDAD Y RETIRO."
+    ],
+    "respuesta": "ACTIVIDAD, DISPONIBLIDAD Y RETIRO.",
+    "ubicacion": "Art. 18 del D.L. 1267 - Situación del Personal"
+  },
+  {
+    "codigo": "DL1267-133",
+    "numero": 133,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LA DIRECCION NACIONAL DE ORDEN Y SEGURIDAD SE ENCARGA DE SUPERVISAR LAS OPERACIONES POLICIALES EN MATERIA DE.",
+    "opciones": [
+      "COOPERACION POLICIAL INTERNACIONAL.",
+      "AVIACION POLICIAL.",
+      "PERITAJES CRIMINALISTICOS.",
+      "LOGISTICA.",
+      "SEGURIDAD DEL ESTADO Y SEGURIDAD INTEGRAL."
+    ],
+    "respuesta": "SEGURIDAD DEL ESTADO Y SEGURIDAD INTEGRAL.",
+    "ubicacion": "Art. 14 y 19 del D.L. 1267 - Dirección Nacional de Orden y Seguridad"
+  },
+  {
+    "codigo": "DL1267-134",
+    "numero": 134,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "SE PUEDE CREAR, MODIFICAR, SUPRIMIR O FUSIONAR LAS ESPECIALIDADES Y/O DIRECCIONES POLICIALES MEDIANTE: (MARQUE LA ALTERNATIVA CORRECTA).",
+    "opciones": [
+      "LEY.",
+      "DECRETO SUPREMO.",
+      "RESOLUCION MINISTERIAL.",
+      "RESOLUCION DIRECTORAL.",
+      "DECRETO LEGISLATIVO."
+    ],
+    "respuesta": "DECRETO SUPREMO.",
+    "ubicacion": "Art. 19 del D.L. 1267 - Creación de Direcciones"
+  },
+  {
+    "codigo": "DL1267-135",
+    "numero": 135,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "INTERVENIR CUANDO EL EJERCICIO DE LA FUNCIÓN POLICIAL ASÍ LO REQUIERA, POR CONSIDERAR QUE SUS EFECTIVOS SE ENCUENTRAN DE SERVICIO EN TODO MOMENTO Y CIRCUNSTANCIA; CONSTITUYE.",
+    "opciones": [
+      "UNA OBLIGACIÓN.",
+      "UNA FACULTAD.",
+      "UNA FUNCIÓN.",
+      "UNA ATRIBUCIÓN.",
+      "UNA COMPETENCIA."
+    ],
+    "respuesta": "UNA OBLIGACIÓN.",
+    "ubicacion": "Art. 4 num. 2 del D.L. 1267 - Obligaciones"
+  },
+  {
+    "codigo": "DL1267-136",
+    "numero": 136,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LA FUNCIÓN POLICIAL SE BRINDA A TRAVÉS DE LA POLICÍA NACIONAL DEL PERÚ, COMO FUERZA PÚBLICA UNITARIA Y COHESIONADA; CORRESPONDE AL PRINCIPIO DE.",
+    "opciones": [
+      "UNIDAD DE LA FUNCIÓN POLICIAL.",
+      "UNIDAD DE CRITERIO.",
+      "ACCESO A LOS SERVICIOS POLICIALES.",
+      "DERECHO AL SERVICIO POLICIAL.",
+      "CONTINUIDAD DEL SERVICIO POLICIAL."
+    ],
+    "respuesta": "UNIDAD DE LA FUNCIÓN POLICIAL.",
+    "ubicacion": "Título Preliminar, Art. VII num. 2 del D.L. 1267 - Principios"
+  },
+  {
+    "codigo": "DL1267-137",
+    "numero": 137,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "CON QUIEN MANTIENE DEPENDENCIA FUNCIONAL LA INSPECTORÍA GENERAL DE LA POLICÍA NACIONAL DEL PERÚ.",
+    "opciones": [
+      "EL MINISTERIO DEL INTERIOR.",
+      "LA DIRECCIÓN GENERAL DE LA POLICÍA NACIONAL DEL PERÚ.",
+      "LA SUB DIRECCIÓN GENERAL DE LA POLICÍA NACIONAL DEL PERÚ.",
+      "LA OFICINA GENERAL DE INTEGRIDAD INSTITUCIONAL DEL MINISTERIO DEL INTERIOR.",
+      "LA INSPECTORÍA GENERAL DEL MINISTERIO DEL INTERIOR."
+    ],
+    "respuesta": "LA OFICINA GENERAL DE INTEGRIDAD INSTITUCIONAL DEL MINISTERIO DEL INTERIOR.",
+    "ubicacion": "Art. 10 del D.L. 1267 - Inspectoría General"
+  },
+  {
+    "codigo": "DL1267-138",
+    "numero": 138,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "EL INGRESO, CARRERA Y TÉRMINO DE LA FUNCIÓN POLICIAL, ASÍ COMO LAS CATEGORÍAS, JERARQUÍAS Y GRADOS, SE REGULAN POR LA.",
+    "opciones": [
+      "LEY DE RÉGIMEN DISCIPLINARIO DE LA PNP.",
+      "LEY DE CARRERA Y SITUACIÓN DEL PERSONAL DE LA POLICÍA NACIONAL DEL PERÚ.",
+      "LEY DE LA PNP.",
+      "LEY DE EDUCACIÓN DE LA PNP.",
+      "LEY DE RÉGIMEN INTERNO DE LA PNP."
+    ],
+    "respuesta": "LEY DE CARRERA Y SITUACIÓN DEL PERSONAL DE LA POLICÍA NACIONAL DEL PERÚ.",
+    "ubicacion": "Art. 17 y 20 del D.L. 1267 - Carrera Policial"
+  },
+  {
+    "codigo": "DL1267-139",
+    "numero": 139,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LA SITUACION DEL PERSONAL ES LA CONDICION EN LA QUE SE ENCUENTRA EL PERSONAL DE LA POLICIA NACIONAL DEL PERU.",
+    "opciones": [
+      "EN SITUACION ESPECIAL.",
+      "SOMETIDO A LA LEY.",
+      "DENTRO O FUERA DEL SERVICIO.",
+      "FUERA DEL SERVICIO.",
+      "DENTRO DEL SERVICIO."
+    ],
+    "respuesta": "DENTRO O FUERA DEL SERVICIO.",
+    "ubicacion": "Art. 18 del D.L. 1267 - Situación del Personal"
+  },
+  {
+    "codigo": "DL1267-140",
+    "numero": 140,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LA FUNCIÓN: REALIZAR INSPECCIONES DE CONTROL INTERNO A LOS ÓRGANOS Y UNIDADES ORGÁNICAS QUE CONFORMAN LA POLICÍA NACIONAL DEL PERÚ PARA VERIFICAR LA CALIDAD, EFICIENCIA Y EFICACIA EN EL EJERCICIO DE LA FUNCIÓN POLICIAL, LE CORRESPONDE AL.",
+    "opciones": [
+      "INSPECTOR GENERAL DE LA POLICÍA NACIONAL DEL PERÚ.",
+      "SUB DIRECTOR DE LA POLICÍA NACIONAL DEL PERÚ.",
+      "SECRETARIO EJECUTIVO DE LA POLICÍA NACIONAL DEL PERÚ.",
+      "ÓRGANO DE CONTROL INSTITUCIONAL DE LA POLICÍA NACIONAL DEL PERÚ.",
+      "DIRECTOR GENERAL DE LA POLICÍA NACIONAL DEL PERÚ."
+    ],
+    "respuesta": "INSPECTOR GENERAL DE LA POLICÍA NACIONAL DEL PERÚ.",
+    "ubicacion": "Art. 10 del D.L. 1267 - Inspectoría General"
+  },
+  {
+    "codigo": "DL1267-141",
+    "numero": 141,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "APROBAR, EN EL MARCO DE SU COMPETENCIA, LAS RESOLUCIONES, MANUALES, REGLAMENTOS, DIRECTIVAS Y DEMÁS DOCUMENTOS DE CARACTER INTERNO QUE REGULEN EL FUNCIONAMIENTO OPERATIVO DE LA POLICÍA NACIONAL DEL PERÚ PARA EL EJERCICIO DE LA FUNCION POLICIAL; ESTA FUNCIÓN CORRESPONDE A.",
+    "opciones": [
+      "EL ESTADO MAYOR GENERAL.",
+      "LA INSPECTORÍA GENERAL.",
+      "LA COMANDANCIA GENERAL.",
+      "LA DIRECCIÓN NACIONAL DE GESTIÓN INSTITUCIONAL.",
+      "LA DIRECCIÓN NACIONAL DE OPERACIONES POLICIALES."
+    ],
+    "respuesta": "LA COMANDANCIA GENERAL.",
+    "ubicacion": "Art. 8 y 9 del D.L. 1267 - Comandancia General"
+  },
+  {
+    "codigo": "DL1267-142",
+    "numero": 142,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "SE CREAN DE MANERA EXCEPCIONAL Y TEMPORAL, EN EL MISMO NIVEL Y ORGANIZACIÓN FUNCIONAL DE UNA REGIÓN POLICIAL.",
+    "opciones": [
+      "DIRECCIONES.",
+      "FRENTES POLICIALES.",
+      "DIVISIONES POLICIALES.",
+      "UNIDADES OPERATIVAS.",
+      "UNIDADES ESPECIALIZADAS."
+    ],
+    "respuesta": "FRENTES POLICIALES.",
+    "ubicacion": "Art. 15 y 23 del D.L. 1267 - Frentes Policiales"
+  },
+  {
+    "codigo": "DL1267-143",
+    "numero": 143,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "SUS INTEGRANTES SE DEBEN AL CUMPLIMIENTO DE LA LEY, EL ORDEN Y LA SEGURIDAD EN TODA LA REPÚBLICA. EL ENUNCIADO CORRESPONDE A.",
+    "opciones": [
+      "EL EJÉRCITO PERUANO.",
+      "LA MARINA DE GUERRA DEL PERÚ.",
+      "LA POLICÍA NACIONAL DEL PERÚ.",
+      "LA FUERZA AÉREA DEL PERÚ.",
+      "LA DIRECCIÓN NACIONAL DE INTELIGENCIA."
+    ],
+    "respuesta": "LA POLICÍA NACIONAL DEL PERÚ.",
+    "ubicacion": "Título Preliminar, Art. II del D.L. 1267 - Naturaleza"
+  },
+  {
+    "codigo": "DL1267-144",
+    "numero": 144,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "PROPONER NORMAS QUE RESULTEN NECESARIAS PARA EL EFICAZ FUNCIONAMIENTO DEL REGIMEN DISCIPLINARIO POLICIAL; ESTA FUNCIÓN CORRESPONDE A.",
+    "opciones": [
+      "LA INSPECTORÍA GENERAL DEL MINISTERIO DEL INTERIOR.",
+      "LA INSPECTORÍA GENERAL.",
+      "LA DIRECCIÓN DE COMUNICACIÓN E IMAGEN INSTITUCIONAL.",
+      "LA DIRECCIÓN GENERAL.",
+      "LA OFICINA DE COMUNICACIÓN E IMAGEN DEL MINISTERIO DEL INTERIOR."
+    ],
+    "respuesta": "LA INSPECTORÍA GENERAL.",
+    "ubicacion": "Art. 10 del D.L. 1267 - Inspectoría General"
+  },
+  {
+    "codigo": "DL1267-145",
+    "numero": 145,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "DE LA ASISTENCIA SOCIAL.- LA POLICÍA NACIONAL DEL PERÚ CONTRIBUYE A LA MEJORA DE LA CALIDAD DE VIDA DE SU PERSONAL EN SITUACIÓN DE.",
+    "opciones": [
+      "RETIRO.",
+      "EXCEDENTE.",
+      "DE RESERVA.",
+      "UTILIZABLE.",
+      "DESOCUPADO."
+    ],
+    "respuesta": "RETIRO.",
+    "ubicacion": "Art. 24 y 25 del D.L. 1267 - Asistencia Social"
+  },
+  {
+    "codigo": "DL1267-146",
+    "numero": 146,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "CUANDO LAS CIRCUNSTANCIAS ASÍ LO REQUIERAN, EN EL CUMPLIMIENTO DE SUS FUNCIONES; ESTÁN OBLIGADAS A PRESTAR APOYO A LA POLICÍA NACIONAL DEL PERÚ.",
+    "opciones": [
+      "LOS CIUDADANOS NACIONALES Y EXTRANJEROS.",
+      "LAS PERSONAS NACIONALES Y JURÍDICAS.",
+      "LOS CIUDADANOS CON PERSONERÍA JURÍDICA.",
+      "LOS CIUDADANOS NATURALES Y EXTRANJEROS.",
+      "LAS PERSONAS NATURALES Y JURÍDICAS."
+    ],
+    "respuesta": "LAS PERSONAS NATURALES Y JURÍDICAS.",
+    "ubicacion": "Título Preliminar, Art. IV del D.L. 1267 - Obligación de Apoyo"
+  },
+  {
+    "codigo": "DL1267-147",
+    "numero": 147,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "DENTRO DE LOS VALORES QUE RIGEN AL PERSONAL DE LA POLICÍA NACIONAL DEL PERÚ. SEÑALE UN VALOR INSTITUCIONAL.",
+    "opciones": [
+      "FE.",
+      "VOCACIÓN.",
+      "HEROÍSMO.",
+      "VERACIDAD.",
+      "SINCERIDAD."
+    ],
+    "respuesta": "VOCACIÓN.",
+    "ubicacion": "Título Preliminar, Art. VIII del D.L. 1267 - Valores"
+  },
+  {
+    "codigo": "DL1267-148",
+    "numero": 148,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LA POLICÍA NACIONAL DEL PERÚ PARA EL CUMPLIMIENTO DE LA FUNCIÓN POLICIAL; REALIZA LO SIGUIENTE.",
+    "opciones": [
+      "PRESTA PROTECCIÓN Y AYUDA A ALGUNAS PERSONAS Y LA COMUNIDAD.",
+      "PRESTA PROTECCIÓN Y AYUDA A LAS INSTITUCIONES PÚBICAS Y PRIVADAS.",
+      "AYUDA A LA COMUNIDAD Y NO PRESTA PROTECCIÓN A LAS PERSONAS.",
+      "PRESTA PROTECCIÓN, Y AYUDA A LAS PERSONAS Y A LA COMUNIDAD.",
+      "GARANTIZA, MANTIENE Y ESTABLECE EL ORDEN INTERNO, ORDEN PÚBLICO Y LA SEGURIDAD CIUDADANA."
+    ],
+    "respuesta": "PRESTA PROTECCIÓN, Y AYUDA A LAS PERSONAS Y A LA COMUNIDAD.",
+    "ubicacion": "Título Preliminar, Art. III del D.L. 1267 - Función Policial"
+  },
+  {
+    "codigo": "DL1267-149",
+    "numero": 149,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "DE LOS AUXILIARES DE POLICÍA.- EL PERSONAL CIVIL EN LA FUNCIÓN DE AUXILIAR DE POLICÍA PODRÁ ASUMIR.",
+    "opciones": [
+      "FUNCIONES ADMINISTRATIVAS VINCULADAS A LAS FUNCIONES MILITARES.",
+      "FUNCIONES ADMINISTRATIVAS VINCULADAS A LAS FUNCIONES FISCALES.",
+      "FUNCIONES ADMINISTRATIVAS VINCULADAS A LAS FUNCIONES SOCIALES.",
+      "FUNCIONES ADMINISTRATIVAS VINCULADAS A LAS FUNCIONES POLICIALES.",
+      "FUNCIONES ADMINISTRATIVAS VINCULADAS A LAS FUNCIONES JUDICIALES."
+    ],
+    "respuesta": "FUNCIONES ADMINISTRATIVAS VINCULADAS A LAS FUNCIONES POLICIALES.",
+    "ubicacion": "Art. 21 y Disposiciones del D.L. 1267 - Auxiliares de Policía"
+  },
+  {
+    "codigo": "DL1267-150",
+    "numero": 150,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "ESTÁN OBLIGADAS A PRESTAR APOYO A LA POLICÍA NACIONAL DEL PERÚ, CUANDO LAS CIRCUNSTANCIAS ASÍ LO REQUIERAN, EN EL CUMPLIMIENTO DE SUS FUNCIONES; ESTÁN REFERIDAS A.",
+    "opciones": [
+      "GOBIERNOS REGIONALES.",
+      "LAS AUTORIDADES.",
+      "GOBIERNOS LOCALES.",
+      "ELSERENAZGO.",
+      "MINISTERIO PÚBLICO."
+    ],
+    "respuesta": "LAS AUTORIDADES.",
+    "ubicacion": "Título Preliminar, Art. IV del D.L. 1267 - Obligación de Apoyo"
+  },
+  {
+    "codigo": "DL1267-151",
+    "numero": 151,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "NO FORMA PARTE DE LA CARRERA DEL PERSONAL POLICIAL DE LA POLICÍA NACIONAL DEL PERÚ.",
+    "opciones": [
+      "EL PERSONAL CONTRATADO.",
+      "EL PERSONAL CIVIL.",
+      "LOS ESPECIALISTAS.",
+      "EL PERSONAL DE CONTRATACIÓN ADMINISTRATIVA DE SERVICIOS (CAS).",
+      "EL PERSONAL SERVIR."
+    ],
+    "respuesta": "EL PERSONAL CIVIL.",
+    "ubicacion": "Art. 20 y 26 del D.L. 1267 - Carrera Policial"
+  },
+  {
+    "codigo": "DL1267-152",
+    "numero": 152,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "SON SÍMBOLOS DE LA POLICÍA NACIONAL DEL PERÚ EL EMBLEMA, ESTANDARTE E HIMNO.",
+    "opciones": [
+      "NACIONAL.",
+      "POLICIAL.",
+      "CASTRENSE.",
+      "INSTITUCIONAL.",
+      "CARACTERÍSTICO."
+    ],
+    "respuesta": "INSTITUCIONAL.",
+    "ubicacion": "Título Preliminar, Art. VI y Art. 13 del D.L. 1267 - Símbolos"
+  },
+  {
+    "codigo": "DL1267-153",
+    "numero": 153,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "HACER USO DE LA FUERZA DE ACUERDO A LA NORMATIVIDAD VIGENTE, CÓDIGO DE CONDUCTA PARA FUNCIONARIOS ENCARGADOS DE HACER CUMPLIR LA LEY ES UNA.",
+    "opciones": [
+      "COMPETENCIA.",
+      "ATRIBUCIÓN.",
+      "FUNCIÓN.",
+      "OBLIGACIÓN.",
+      "PARTICIPACIÓN."
+    ],
+    "respuesta": "ATRIBUCIÓN.",
+    "ubicacion": "Art. 3 num. 6 del D.L. 1267 - Atribuciones"
+  },
+  {
+    "codigo": "DL1267-154",
+    "numero": 154,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LA FORMACIÓN PROFESIONAL POLICIAL, COMO PARTE DE LA ETAPA DE EDUCACIÓN SUPERIOR DEL SISTEMA EDUCATIVO, ES EL PROCESO QUE TIENE COMO FINALIDAD LA.",
+    "opciones": [
+      "ADIESTRAMIENTO.",
+      "DESARROLLO.",
+      "ALINEACIÓN.",
+      "ESPECIALIZACIÓN.",
+      "ERUDICIÓN."
+    ],
+    "respuesta": "ESPECIALIZACIÓN.",
+    "ubicacion": "Art. 22 del D.L. 1267 - Formación Profesional Policial"
+  },
+  {
+    "codigo": "DL1267-155",
+    "numero": 155,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "DEPENDEN DE LA DIRECCIÓN NACIONAL DE ORDEN Y SEGURIDAD.",
+    "opciones": [
+      "LOS FRENTES ADMINISTRATIVOS.",
+      "LOS ÓRGANOS DE INVESTIGACIÓN.",
+      "LOS FRENTES POLICIALES.",
+      "LOS ÓRGANOS DE ADMINISTRACIÓN.",
+      "LOS ÓRGANOS DE ASESORAMIENTO."
+    ],
+    "respuesta": "LOS FRENTES POLICIALES.",
+    "ubicacion": "Art. 14 y 15 del D.L. 1267 - Frentes Policiales"
+  },
+  {
+    "codigo": "DL1267-156",
+    "numero": 156,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "ES UNA FUNCIÓN DE LA COMANDANCIA GENERAL DE LA POLICÍA NACIONAL DEL PERÚ.",
+    "opciones": [
+      "ADMINISTRAR LA INSTITUCIÓN POLICIAL A TRAVÉS DE SUS ÓRGANOS COMPETENTES Y LOS RECURSOS QUE SE LE ASIGNE A LA POLICÍA NACIONAL.",
+      "PREVENIR, INVESTIGAR Y SANCIONAR LAS INFRACCIONES ESTABLECIDAS EN LA LEY DE RÉGIMEN DISCIPLINARIO DE LA POLICÍA NACIONAL DEL PERÚ.",
+      "DIRIGIR, COORDINAR Y SUPERVISAR LAS ACTIVIDADES DE LA DIRECCIÓN.",
+      "VELAR POR UNA ADECUADA INFRAESTRUCTURA, EQUIPAMIENTO Y EMPLEO DE TECNOLOGÍAS DE LA INFORMACIÓN Y COMUNICACIONES Y ESTADÍSTICA INSTITUCIONAL.",
+      "ADMINISTRAR Y MANTENER ACTUALIZADO EL OBSERVATORIO DEL DELITO Y LA CRIMINALIDAD."
+    ],
+    "respuesta": "ADMINISTRAR LA INSTITUCIÓN POLICIAL A TRAVÉS DE SUS ÓRGANOS COMPETENTES Y LOS RECURSOS QUE SE LE ASIGNE A LA POLICÍA NACIONAL.",
+    "ubicacion": "Art. 9 num. 2 del D.L. 1267 - Comandancia General"
+  },
+  {
+    "codigo": "DL1267-157",
+    "numero": 157,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "EL INGRESO, CARRERA, EVALUACIÓN DESEMPEÑO Y TÉRMINO DE LA FUNCIÓN POLICIAL, ASÍ COMO LAS CATEGORÍAS, JERARQUÍAS Y GRADOS SE REGULAN POR.",
+    "opciones": [
+      "DECRETO SUPREMO.",
+      "RESOLUCIÓN MINISTERIAL.",
+      "RESOLUCIÓN DIRECTORAL.",
+      "LA LEY DE CARRERA Y SITUACIÓN DEL PERSONAL DE LA POLICÍA NACIONAL DEL PERÚ.",
+      "LA DIRECCIÓN EJECUTIVA DE PERSONAL DE LA POLICÍA NACIONAL DEL PERÚ."
+    ],
+    "respuesta": "LA LEY DE CARRERA Y SITUACIÓN DEL PERSONAL DE LA POLICÍA NACIONAL DEL PERÚ.",
+    "ubicacion": "Art. 17 y 20 del D.L. 1267 - Carrera Policial"
+  },
+  {
+    "codigo": "DL1267-158",
+    "numero": 158,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "ES UNA ESPECIALIDAD FUNCIONAL DEL PERSONAL DE ARMAS.",
+    "opciones": [
+      "TERRORISMO.",
+      "ORDEN PÚBLICO.",
+      "INVESTIGACIÓN CRIMINAL",
+      "ORDEN INTERNO.",
+      "SEGURIDAD CIUDADANA."
+    ],
+    "respuesta": "INVESTIGACIÓN CRIMINAL",
+    "ubicacion": "Art. 19 del D.L. 1267 - Especialidades Funcionales"
+  },
+  {
+    "codigo": "DL1267-159",
+    "numero": 159,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "SON DESIGNADOS Y CONVOCADOS POR EL COMANDANTE GENERAL DE LA POLICÍA NACIONAL DEL PERÚ.",
+    "opciones": [
+      "LOS INTEGRANTES DE LOS ÓRGANOS CONSULTIVOS.",
+      "LOS INTEGRANTES DE LA COMISIÓN PERMANENTE.",
+      "LOS INTEGRANTES DEL ESTADO MAYOR.",
+      "LOS INTEGRANTES DE LAS COMISIONES TEMPORALES.",
+      "LOS INTEGRANTES DE LOS ÓRGANOS DISCIPLINARIOS."
+    ],
+    "respuesta": "LOS INTEGRANTES DE LOS ÓRGANOS CONSULTIVOS.",
+    "ubicacion": "Art. 12 y 15 del D.L. 1267 - Órganos Consultivos"
+  },
+  {
+    "codigo": "DL1267-160",
+    "numero": 160,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LA POLICÍA NACIONAL DEL PERÚ, CELEBRA SU ANIVERSARIO INSTITUCIONAL, CON LA FINALIDAD DE.",
+    "opciones": [
+      "FORTALECER LA IMAGEN SOCIAL.",
+      "CELEBRAR LA EFEMÉRIDES INSTITUCIONAL.",
+      "FORTALECER LA VOCACIÓN PROFESIONAL,IDENTIDAD, DOCTRINA Y MÍSTICA INSTITUCIONAL.",
+      "DESCENTRALIZAR LAS CELEBRACIONES POLICIALES.",
+      "FORTALECER LA IMAGEN INSTITUCIONAL."
+    ],
+    "respuesta": "FORTALECER LA VOCACIÓN PROFESIONAL,IDENTIDAD, DOCTRINA Y MÍSTICA INSTITUCIONAL.",
+    "ubicacion": "Título Preliminar, Art. IX y Disposiciones del D.L. 1267"
+  },
+  {
+    "codigo": "DL1267-161",
+    "numero": 161,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "ESTABLECE LAS NORMAS Y PROCEDIMIENTOS DISCIPLINARIOS DESTINADOS A REGULAR, PREVENIR, INVESTIGAR Y SANCIONAR LAS INFRACCIONES EN LAS QUE INCURRE EL PERSONAL DE LA POLICÍA NACIONAL DEL PERÚ.",
+    "opciones": [
+      "EL SISTEMA ADMINISTRATIVO DISCIPLINARIO.",
+      "EL SISTEMA DE RÉGIMEN DISCIPLINARIO.",
+      "EL SISTEMA DISCIPLINARIO POLICIAL.",
+      "LA INSPECTORÍA GENERAL.",
+      "EL SISTEMA EDUCATIVO POLICIAL."
+    ],
+    "respuesta": "EL SISTEMA DISCIPLINARIO POLICIAL.",
+    "ubicacion": "Art. 16 del D.L. 1267 - Sistema Disciplinario"
+  },
+  {
+    "codigo": "DL1267-162",
+    "numero": 162,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "ES UN DERECHO DEL PERSONAL POLICIAL.",
+    "opciones": [
+      "RESPETAR Y CUMPLIR LOS MANDATOS ESTABLECIDOS EN LA CONSTITUCIÓN, LAS LEYES, LOS REGLAMENTOS Y LAS ÓRDENES QUE EN EL MARCO LEGAL VIGENTE IMPARTEN SUS SUPERIORES.",
+      "POSEER, PORTAR Y USAR ARMAS DE FUEGO, DE CONFORMIDAD CON LA CONSTITUCIÓN Y LA LEY.",
+      "ACATAR DISPOSICIONES QUE CONSTITUYEN UNA MANIFIESTA VIOLACIÓN A LA CONSTITUCIÓN Y LAS LEYES.",
+      "PERMISOS, LICENCIAS Y GOCE DE VACACIONES ANUALES, CONFORME A LEY.",
+      "TENER PASE LIBRE EN VEHÍCULOS DE TRANSPORTE DE SERVICIO PÚBLICO."
+    ],
+    "respuesta": "PERMISOS, LICENCIAS Y GOCE DE VACACIONES ANUALES, CONFORME A LEY.",
+    "ubicacion": "Art. 5 del D.L. 1267 y Ley de Situación PNP"
+  },
+  {
+    "codigo": "DL1267-163",
+    "numero": 163,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LA POLICÍA NACIONAL DEL PERÚ PROPONE AL MINISTERIO DEL INTERIOR LA CELEBRACIÓN DE CONVENIOS Y/O.",
+    "opciones": [
+      "CONTRATOS INSTITUCIONALES.",
+      "ACUERDOS DE COOPERACIÓN INSTITUCIONAL.",
+      "ACUERDOS DE COOPERACIÓN EXTRA INSTITUCIONAL.",
+      "ACUERDOS DE AYUDA HUMANITARIA.",
+      "ACUERDOS."
+    ],
+    "respuesta": "ACUERDOS DE COOPERACIÓN INSTITUCIONAL.",
+    "ubicacion": "Art. 2 y 9 del D.L. 1267 - Funciones"
+  },
+  {
+    "codigo": "DL1267-164",
+    "numero": 164,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LOS INTEGRANTES DE LOS ÓRGANOS CONSULTIVOS SON DESIGNADOS Y CONVOCADOS POR EL.",
+    "opciones": [
+      "COMANDANTE DE ESTADO MAYOR GENERAL.",
+      "EL TENIENTE GENERAL DE ESTADO MAYOR.",
+      "COMANDANTE GENERAL DE LA POLICÍA NACIONAL DEL PERÚ.",
+      "MINISTRO DEL INTERIOR.",
+      "JEFE DEL ESTADO MAYOR DE LA POLICÍA NACIONAL DEL PERÚ."
+    ],
+    "respuesta": "COMANDANTE GENERAL DE LA POLICÍA NACIONAL DEL PERÚ.",
+    "ubicacion": "Art. 12 del D.L. 1267 - Órganos Consultivos"
+  },
+  {
+    "codigo": "DL1267-165",
+    "numero": 165,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "ARTICULA DE MODO SISTÉMICO LA INVESTIGACIÓN CRIMINAL CON .................ESPECIALIZADAS, DIVISIONES Y UNIDADES ORGÁNICAS DE LOS ÓRGANOS DESCONCENTRADOS QUE REALIZAN FUNCIONES DE INVESTIGACIÓN, A NIVEL NACIONAL.",
+    "opciones": [
+      "REGIONES.",
+      "LAS DIRECCIONES.",
+      "FRENTES POLICIALES.",
+      "DIVISIONES POLICIALES.",
+      "UNIDADES OPERATIVAS."
+    ],
+    "respuesta": "LAS DIRECCIONES.",
+    "ubicacion": "Art. 18 del D.L. 1267 - Dirección Nacional de Investigación Criminal"
+  },
+  {
+    "codigo": "DL1267-166",
+    "numero": 166,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "DIOS, PATRIA Y LEY ES.",
+    "opciones": [
+      "SÍMBOLO DE LA POLICÍA NACIONAL DEL PERÚ.",
+      "DISTINTIVO DE LA POLICÍA NACIONAL DEL PERÚ.",
+      "IDENTIFICACIÓN DE LA POLICÍA NACIONAL DEL PERÚ.",
+      "LEMA DE LA POLICÍA NACIONAL DEL PERÚ.",
+      "DESIGNACIÓN DE LA POLICÍA NACIONAL DEL PERÚ."
+    ],
+    "respuesta": "LEMA DE LA POLICÍA NACIONAL DEL PERÚ.",
+    "ubicacion": "Título Preliminar, Art. IX del D.L. 1267 - Lema Institucional"
+  },
+  {
+    "codigo": "DL1267-167",
+    "numero": 167,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "INVESTIGAR LA DESAPARICIÓN Y TRATA DE PERSONAS; CORRESPONDE A.",
+    "opciones": [
+      "FUNCIONES.",
+      "DEBERES.",
+      "ATRIBUCIONES.",
+      "OBLIGACIONES.",
+      "DERECHOS."
+    ],
+    "respuesta": "FUNCIONES.",
+    "ubicacion": "Art. 2 num. 22 del D.L. 1267 - Funciones"
+  },
+  {
+    "codigo": "DL1267-168",
+    "numero": 168,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "EL ESTADO MAYOR GENERAL, ESTÁ A CARGO DE UN OFICIAL GENERAL DE ARMAS DE LA POLICÍA NACIONAL DEL PERÚ EN SITUACIÓN DE ACTIVIDAD EN EL GRADO DE.",
+    "opciones": [
+      "GENERAL.",
+      "TENIENTE GENERAL.",
+      "GENERAL DE POLICÍA.",
+      "TENIENTE CORONEL.",
+      "GENERAL DE LA POLICÍA NACIONAL DEL PERÚ."
+    ],
+    "respuesta": "TENIENTE GENERAL.",
+    "ubicacion": "Art. 9 del D.L. 1267 - Estado Mayor General"
+  },
+  {
+    "codigo": "DL1267-169",
+    "numero": 169,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LOS UNIFORMES, DISTINTIVOS Y LAS DIVISAS DE LA POLICÍA NACIONAL DEL PERÚ SE ESPECIFICAN EN EL REGLAMENTO RESPECTIVO Y SON DE USO EXCLUSIVO DE.",
+    "opciones": [
+      "PERSONAL DE ARMAS.",
+      "PERSONAL EN SITUACIÓN DE ACTIVIDAD Y DISPONIBILIDAD.",
+      "SUS INTEGRANTES.",
+      "PERSONAL DE OFICIALES Y SUBOFICIALES.",
+      "PERSONAL EN SITUACIÓN DE ACTIVIDAD."
+    ],
+    "respuesta": "SUS INTEGRANTES.",
+    "ubicacion": "Título Preliminar, Art. VI del D.L. 1267 - Símbolos y Distintivos"
+  },
+  {
+    "codigo": "DL1267-170",
+    "numero": 170,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "PARTICIPA EN LA DEFENSA NACIONAL, MOVILIZACIÓN Y DEFENSA CIVIL.",
+    "opciones": [
+      "EL SERENAZGO.",
+      "LA POLICÍA NACIONAL DEL PERÚ.",
+      "LOS INSPECTORES MUNICIPALES.",
+      "LOS BOMBEROS.",
+      "LOS COLEGIOS PROFESIONALES."
+    ],
+    "respuesta": "LA POLICÍA NACIONAL DEL PERÚ.",
+    "ubicacion": "Art. 2 num. 19 del D.L. 1267 - Funciones"
+  },
+  {
+    "codigo": "DL1267-171",
+    "numero": 171,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LA POLICÍA NACIONAL DEL PERÚ SE ORIENTA POR EL SIGUIENTE PRINCIPIO INSTITUCIONAL.",
+    "opciones": [
+      "DISCIPLINA.",
+      "CONFIANZA.",
+      "EFICIENCIA Y EFICACIA.",
+      "CORTESÍA.",
+      "SACRIFICIO."
+    ],
+    "respuesta": "EFICIENCIA Y EFICACIA.",
+    "ubicacion": "Título Preliminar, Art. VII num. 5 del D.L. 1267 - Principios"
+  },
+  {
+    "codigo": "DL1267-172",
+    "numero": 172,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "EL PERSONAL POLICIAL ACCEDE A LA ESPECIALIDAD FUNCIONAL DE CONTROL ADMINISTRATIVO DISCIPLINARIO COMO SEGUNDA ESPECIALIDAD.",
+    "opciones": [
+      "EN LA JERARQUÍA DE TÉCNICOS.",
+      "EN LA JERARQUÍA DE OFICIAL.",
+      "EN LA JERARQUÍA DE OFICIALES GENERALES.",
+      "EN LA JERARQUÍA DE OFICIALES SUBALTERNOS.",
+      "EN LA JERARQUÍA DE OFICIAL SUPERIOR."
+    ],
+    "respuesta": "EN LA JERARQUÍA DE OFICIAL SUPERIOR.",
+    "ubicacion": "Art. 19 del D.L. 1267 - Especialidad de Control Administrativo"
+  },
+  {
+    "codigo": "DL1267-173",
+    "numero": 173,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "EMPLEO DE SISTEMAS TECNOLÓGICOS Y REGISTROS CON FINES POLICIALES.- INDIQUE CUAL DE LAS SIGUIENTES ALTERNATIVAS FORMA PARTE DEL REGISTRO NACIONAL DE SEGURIDAD PÚBLICA.",
+    "opciones": [
+      "REQUISITORIADOS.",
+      "VEHÍCULOS SINIESTRADOS.",
+      "ANTECEDENTES PENALES.",
+      "BANDAS CRIMINALES.",
+      "REFERENCIAS POLICIALES."
+    ],
+    "respuesta": "REQUISITORIADOS.",
+    "ubicacion": "Art. 30 del D.L. 1267 - Registro de Requisitorias"
+  },
+  {
+    "codigo": "DL1267-174",
+    "numero": 174,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "SERVICIO DE SALUD: LA POLICÍA NACIONAL DEL PERÚ CUENTA CON UN RÉGIMEN DE SALUD PARA.",
+    "opciones": [
+      "TODOS LOS FAMILIARES DEL PERSONAL POLICIAL.",
+      "TODO EL PERSONAL POLICIAL.",
+      "EL PERSONAL DE ARMAS Y FAMILIARES BENEFICIARIOS.",
+      "EL PERSONAL Y SU ESPOSA.",
+      "EL PERSONAL POLICIAL Y FAMILIARES BENEFICIARIOS."
+    ],
+    "respuesta": "EL PERSONAL POLICIAL Y FAMILIARES BENEFICIARIOS.",
+    "ubicacion": "Art. 24 y 25 del D.L. 1267 - Régimen de Salud"
+  },
+  {
+    "codigo": "DL1267-175",
+    "numero": 175,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "EL CONSEJO DE CALIFICACIÓN ES UN.",
+    "opciones": [
+      "ÓRGANO DE ASESORAMIENTO.",
+      "ÓRGANO CONSULTIVO.",
+      "ÓRGANO DE APOYO.",
+      "ÓRGANO DE APOYO POLICIAL.",
+      "ÓRGANO DE APOYO ADMINISTRATIVO."
+    ],
+    "respuesta": "ÓRGANO CONSULTIVO.",
+    "ubicacion": "Art. 12 del D.L. 1267 - Órganos Consultivos"
+  },
+  {
+    "codigo": "DL1267-176",
+    "numero": 176,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "A QUIÉN CORRESPONDE LA FUNCIÓN DE DETERMINAR LOS OBJETIVOS Y ESTRATEGIAS PARA MANTENER LA DISCIPLINA, LA IMAGEN INSTITUCIONAL, LA ÉTICA Y LA CALIDAD DEL SERVICIO POLICIAL, EN CONCORDANCIA CON LAS POLÍTICAS Y LINEAMIENTOS ESTABLECIDOS POR LA COMANDANCIA GENERAL DE LA POLICÍA NACIONAL DEL PERÚ Y EL MINISTERIO DEL INTERIOR.",
+    "opciones": [
+      "INSPECTOR GENERAL DE LA POLICÍA NACIONAL DEL PERÚ.",
+      "DIRECTOR CONTRA LA CORRUPCIÓN DE LA POLICÍA NACIONAL DEL PERÚ.",
+      "INSPECTOR GENERAL DEL MINISTERIO DEL INTERIOR.",
+      "EL ESTADO MAYOR GENERAL DE LA POLICÍA NACIONAL DEL PERÚ.",
+      "LA OFICINA GENERAL DE INTEGRIDAD DEL MINISTERIO DEL INTERIOR."
+    ],
+    "respuesta": "INSPECTOR GENERAL DE LA POLICÍA NACIONAL DEL PERÚ.",
+    "ubicacion": "Art. 10 num. 1 del D.L. 1267 - Inspectoría General"
+  },
+  {
+    "codigo": "DL1267-177",
+    "numero": 177,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "VALORES INSTITUCIONALES.- SERVIR A LA INSTITUCIÓN POLICIAL, CUYA DOCTRINA, ORGANIZACIÓN Y PRÁCTICA SON PROPIAS DE LA POLICÍA NACIONAL DEL PERÚ, DESTINADA A PROTEGER Y GARANTIZAR EL LIBRE EJERCICIO DE LOS DERECHOS Y LAS LIBERTADES DE LAS PERSONAS, PREVENIR Y CONTROLAR TODA CLASE DE DELITOS Y FALTAS, ASÍ COMO A MANTENER LA PAZ INTERNA, LA TRANQUILIDAD, EL ORDEN INTERNO, EL ORDEN PÚBLICO Y LA SEGURIDAD CIUDADANA, CORRESPONDE A.",
+    "opciones": [
+      "VOCACIÓN.",
+      "JUSTICIA.",
+      "SERVICIO.",
+      "INTEGRIDAD.",
+      "PERTENENCIA INSTITUCIONAL."
+    ],
+    "respuesta": "VOCACIÓN.",
+    "ubicacion": "Título Preliminar, Art. VIII del D.L. 1267 - Vocación"
+  },
+  {
+    "codigo": "DL1267-178",
+    "numero": 178,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "¿QUIENES PUEDEN PARTICIPAR EN TAREAS DE APOYO DE SEGURIDAD CIUDADANA?.",
+    "opciones": [
+      "LOS COMITÉS ADMINISTRATIVOS DE APOYO.",
+      "LOS COMITÉS SOCIALES DE APOYO.",
+      "LOS COMITÉS CÍVICOS DE APOYO.",
+      "LOS COMITÉS DE APOYO.",
+      "LOS COMITÉS CULTURALES DE APOYO."
+    ],
+    "respuesta": "LOS COMITÉS CÍVICOS DE APOYO.",
+    "ubicacion": "Art. 32 del D.L. 1267 - Participación Ciudadana"
+  },
+  {
+    "codigo": "DL1267-179",
+    "numero": 179,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LA DIRECCIÓN NACIONAL DE ORDEN Y SEGURIDAD ES.",
+    "opciones": [
+      "UN ÓRGANO DE CALIFICACIÓN.",
+      "UN ÓRGANO DE DECISIÓN.",
+      "UN ÓRGANO DE INVESTIGACIÓN.",
+      "UN ÓRGANO DE LÍNEA.",
+      "UN ÓRGANO DE ASESORAMIENTO."
+    ],
+    "respuesta": "UN ÓRGANO DE LÍNEA.",
+    "ubicacion": "Art. 7 y Art. 14 del D.L. 1267 - Órganos de Línea"
+  },
+  {
+    "codigo": "DL1267-180",
+    "numero": 180,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "EL ÓRGANO DE CONTROL INSTITUCIONAL PROMUEVE.",
+    "opciones": [
+      "LA INCORRECTA GESTIÓN DE LOS RECURSOS Y BIENES DEL ESTADO ASIGNADOS.",
+      "LA CORRECTA Y TRANSPARENTE GESTIÓN DE LOS RECURSOS Y BIENES DEL ESTADO ASIGNADOS.",
+      "LA INCORRECTA Y NO TRANSPARENTE GESTIÓN DE LOS RECURSOS Y BIENES DEL ESTADO ASIGNADOS.",
+      "LA CORRECTA Y DEFICIENTE GESTIÓN DE LOS RECURSOS Y BIENES DEL ESTADO ASIGNADOS.",
+      "LA CORRECTA Y TRANSPARENTE ADMINISTRACIÓN DE LOS RECURSOS Y BIENES DEL ESTADO NO ASIGNADOS."
+    ],
+    "respuesta": "LA CORRECTA Y TRANSPARENTE GESTIÓN DE LOS RECURSOS Y BIENES DEL ESTADO ASIGNADOS.",
+    "ubicacion": "Art. 11 del D.L. 1267 - Órgano de Control Institucional"
+  },
+  {
+    "codigo": "DL1267-181",
+    "numero": 181,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "PROPORCIONAR INFORMACIÓN OPORTUNA AL MINISTRO DEL INTERIOR SOBRE ASUNTOS DE CONFLICTIVIDAD SOCIAL Y GRAVES ALTERACIONES AL ORDEN INTERNO O SEGURIDAD PÚBLICA, CONSTITUYE UNA FUNCIÓN DEL.",
+    "opciones": [
+      "DIRECTOR NACIONAL DE INVESTIGACIÓN CRIMINAL.",
+      "COMANDANTE GENERAL DE LA POLICÍA NACIONAL DEL PERÚ.",
+      "DIRECTOR NACIONAL DE ORDEN Y SEGURIDAD.",
+      "DIRECTOR DE INTELIGENCIA DE LA POLICÍA NACIONAL DEL PERÚ.",
+      "SUB COMANDANTE GENERAL DE LA POLICÍA NACIONAL DEL PERÚ."
+    ],
+    "respuesta": "COMANDANTE GENERAL DE LA POLICÍA NACIONAL DEL PERÚ.",
+    "ubicacion": "Art. 8 y 9 del D.L. 1267 - Comandancia General"
+  },
+  {
+    "codigo": "DL1267-182",
+    "numero": 182,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LA FORMACIÓN PROFESIONAL POLICIAL SE OFRECE A TRAVÉS DE.",
+    "opciones": [
+      "ESCUELA DE EDUCACIÓN CONTINUA.",
+      "ESCUELA DE CAPACITACIÓN.",
+      "ESCUELA DE OFICIALES DE LA POLICÍA NACIONAL DEL PERÚ.",
+      "ESCUELAS DE LA POLICÍA NACIONAL DEL PERÚ.",
+      "ESCUELAS DE FORMACIÓN."
+    ],
+    "respuesta": "ESCUELAS DE LA POLICÍA NACIONAL DEL PERÚ.",
+    "ubicacion": "Art. 22 del D.L. 1267 - Formación Profesional"
+  },
+  {
+    "codigo": "DL1267-183",
+    "numero": 183,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LA ORIENTACIÓN AL CIUDADANO CONSTITUYE: (MARQUE LA ALTERNATIVA CORRECTA).",
+    "opciones": [
+      "UNA COMPETENCIA INSTITUCIONAL.",
+      "UNA FUNCIÓN POLICIAL.",
+      "UN PRINCIPIO INSTITUCIONAL.",
+      "UN VALOR INSTITUCIONAL.",
+      "UNA ATRIBUCIÓN POLICIAL."
+    ],
+    "respuesta": "UN VALOR INSTITUCIONAL.",
+    "ubicacion": "Título Preliminar, Art. VIII del D.L. 1267 - Valores"
+  },
+  {
+    "codigo": "DL1267-184",
+    "numero": 184,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "BRINDAR SEGURIDAD AL PRESIDENTE DE LA REPÚBLICA EN EJERCICIO O ELECTO, A LOS JEFES DE ESTADO EN VISITA OFICIAL; ES UNA.",
+    "opciones": [
+      "ESPECIALIDAD.",
+      "COMPETENCIA.",
+      "RETRIBUCIÓN.",
+      "FUNCIÓN.",
+      "ATRIBUCIÓN."
+    ],
+    "respuesta": "FUNCIÓN.",
+    "ubicacion": "Art. 2 num. 16 del D.L. 1267 - Funciones"
+  },
+  {
+    "codigo": "DL1267-185",
+    "numero": 185,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "SON DISTINTIVOS DE AUTORIDAD Y MANDO DEL PERSONAL DE ARMAS, EL UNIFORME REGLAMENTARIO, LA PLACA INSIGNIA Y.",
+    "opciones": [
+      "CHALECOS IDENTIFICATORIOS.",
+      "EMBLEMA DE IDENTIDAD.",
+      "CARNÉ DE IDENTIDAD.",
+      "BREVETE POLICIAL.",
+      "ESCUDO DE IDENTIDAD."
+    ],
+    "respuesta": "CARNÉ DE IDENTIDAD.",
+    "ubicacion": "Título Preliminar, Art. VI y Art. 26 del D.L. 1267 - Distintivos"
+  },
+  {
+    "codigo": "DL1267-186",
+    "numero": 186,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LA DENOMINACIÓN DE POLICÍA ES UN SIGNO DISTINTIVO DE USO EXCLUSIVO DE LA POLICÍA NACIONAL DEL PERÚ PARA EFECTOS DE.",
+    "opciones": [
+      "FUNCIÓN POLICIAL.",
+      "LABOR DESEMPEÑADA.",
+      "UBICACIÓN ANTE LA SOCIEDAD.",
+      "UBICACIÓN EN EL ESTADO PERUANO.",
+      "IDENTIFICACIÓN ANTE LA SOCIEDAD Y AUTORIDADES."
+    ],
+    "respuesta": "IDENTIFICACIÓN ANTE LA SOCIEDAD Y AUTORIDADES.",
+    "ubicacion": "Título Preliminar, Art. VI num. 3 del D.L. 1267 - Denominación Policía"
+  },
+  {
+    "codigo": "DL1267-187",
+    "numero": 187,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LA AFECTACIÓN DE ARMAMENTO, VESTUARIO Y EQUIPO QUE GARANTICEN EL EFICIENTE CUMPLIMIENTO DE SUS FUNCIONES, CORRESPONDE A.",
+    "opciones": [
+      "UNA OBLIGACIÓN.",
+      "UNA NECESIDAD.",
+      "UN REQUERIMIENTO.",
+      "UN DEBER.",
+      "UN DERECHO."
+    ],
+    "respuesta": "UN DERECHO.",
+    "ubicacion": "Art. 5 num. 5 del D.L. 1267 - Derechos"
+  },
+  {
+    "codigo": "DL1267-188",
+    "numero": 188,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "ES UNA ATRIBUCIÓN: REALIZAR CONSTATACIONES POLICIALES DE.",
+    "opciones": [
+      "ACUERDO A LEY.",
+      "ACUERDO A DISPOSICIONES VIGENTES.",
+      "OFICIO.",
+      "ACUERDO A LO INDICADO POR EL REPRESENTANTE DEL MINISTERIO PÚBLICO.",
+      "ACUERDO A LO DISPUESTO POR EL JUEZ PENAL."
+    ],
+    "respuesta": "ACUERDO A LEY.",
+    "ubicacion": "Art. 3 num. 14 del D.L. 1267 - Atribuciones"
+  },
+  {
+    "codigo": "DL1267-189",
+    "numero": 189,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LA FORMACIÓN PROFESIONAL POLICIAL, COMO PARTE DE LA ETAPA DE LA EDUCACIÓN SUPERIOR DEL SISTEMA EDUCATIVO, ES EL PROCESO QUE TIENE COMO FINALIDAD.",
+    "opciones": [
+      "LA PREPARACIÓN, ACTUALIZACIÓN, ESPECIALIZACIÓN Y CAPACITACIÓN POLICIAL.",
+      "LA PREPARACIÓN, ACTUALIZACIÓN, ESPECIALIZACIÓN Y ENTRENAMIENTO DEL CUERPO POLICIAL.",
+      "LA PREPARACIÓN, ACTUALIZACIÓN, ESPECIALIZACIÓN Y PERFECCIONAMIENTO DEL CUERPO POLICIAL.",
+      "EL ENTRENAMIENTO, ESPECIALIZACIÓN Y PERFECCIONAMIENTO DEL CUERPO POLICIAL.",
+      "LA ESPECIALIZACIÓN Y CAPACITACIÓN DEL CUERPO POLICIAL."
+    ],
+    "respuesta": "LA PREPARACIÓN, ACTUALIZACIÓN, ESPECIALIZACIÓN Y PERFECCIONAMIENTO DEL CUERPO POLICIAL.",
+    "ubicacion": "Art. 22 del D.L. 1267 - Formación Profesional"
+  },
+  {
+    "codigo": "DL1267-190",
+    "numero": 190,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "INTERVENIR EN LA EJECUCIÓN DE LOS PROCEDIMIENTOS DE EXTINCIÓN DE DOMINIO, DE CONFORMIDAD CON LAS NORMAS LEGALES VIGENTES; CONSTITUYE.",
+    "opciones": [
+      "UNA COMPETENCIA.",
+      "UNA FUNCIÓN.",
+      "UNA ATRIBUCIÓN.",
+      "UNA FACULTAD.",
+      "UNA OBLIGACIÓN."
+    ],
+    "respuesta": "UNA FUNCIÓN.",
+    "ubicacion": "Art. 2 num. 25 del D.L. 1267 - Funciones"
+  },
+  {
+    "codigo": "DL1267-191",
+    "numero": 191,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "COORDINAR, SUPERVISAR LAS ACTIVIDADES Y OPERACIONES DE INTELIGENCIA Y CONTRAINTELIGENCIA EN LA POLICÍA NACIONAL DEL PERÚ ; ESTA FUNCIÓN CORRESPONDE A.",
+    "opciones": [
+      "COMANDO DE OPERACIONES POLICIALES.",
+      "LA INSPECTORÍA GENERAL.",
+      "LA DIRECCIÓN NACIONAL DE GESTIÓN INSTITUCIONAL.",
+      "LA SUB COMANDANCIA GENERAL.",
+      "LA DIRECCIÓN DE INSPECCIONES DE LA IGPNP."
+    ],
+    "respuesta": "LA SUB COMANDANCIA GENERAL.",
+    "ubicacion": "Art. 9 del D.L. 1267 - Sub Comandancia General / Estado Mayor"
+  },
+  {
+    "codigo": "DL1267-192",
+    "numero": 192,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "ES EL ÓRGANO DE CARÁCTER TÉCNICO, NORMATIVO Y OPERATIVO, QUE TIENE COMPETENCIA A NIVEL NACIONAL.",
+    "opciones": [
+      "LA DIRECCIÓN DE ADMINISTRACIÓN.",
+      "LA DIRECCIÓN DE RECURSOS HUMANOS.",
+      "LA DIRECCIÓN DE COMUNICACIÓN.",
+      "LA DIRECCIÓN NACIONAL DE ORDEN INTERNO.",
+      "LA DIRECCIÓN NACIONAL DE ORDEN Y SEGURIDAD."
+    ],
+    "respuesta": "LA DIRECCIÓN NACIONAL DE ORDEN Y SEGURIDAD.",
+    "ubicacion": "Art. 14 y 19 del D.L. 1267 - Órganos de Línea"
+  },
+  {
+    "codigo": "DL1267-193",
+    "numero": 193,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "ES LA CÉLULA BÁSICA DE LA ORGANIZACIÓN DE LA POLICÍA NACIONAL DEL PERÚ, QUE MANTIENE UNA ESTRECHA RELACIÓN CON LA COMUNIDAD Y LOS GOBIERNOS LOCALES Y REGIONALES COADYUVANDO AL DESARROLLO ECONÓMICO Y SOCIAL DE LA JURISDICCIÓN.",
+    "opciones": [
+      "LA COMISARÍA.",
+      "LAS DEPENDENCIAS POLICIALES.",
+      "LAS DELEGACIONES POLICIALES.",
+      "LAS UNIDADES POLICIALES.",
+      "LAS ESTACIONES POLICIALES."
+    ],
+    "respuesta": "LA COMISARÍA.",
+    "ubicacion": "Art. 15 y 24 del D.L. 1267 - Comisaría"
+  },
+  {
+    "codigo": "DL1267-194",
+    "numero": 194,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LA POLICÍA NACIONAL DEL PERÚ PARA EL CUMPLIMIENTO DE LA FUNCIÓN POLICIAL; REALIZA LO SIGUIENTE.",
+    "opciones": [
+      "VIGILA, CONTROLA Y SUPERVISA EL ORDEN MIGRATORIO EN LAS FRONTERAS.",
+      "GARANTIZA, MANTIENE Y RESTABLECE EL ORDEN INTERNO Y EXTERNO Y LA SEGURIDAD PÚBLICA.",
+      "PRESTA PROTECCIÓN Y AYUDA A ALGUNAS PERSONAS Y LA COMUNIDAD.",
+      "GARANTIZA EL CUMPLIMIENTO DE LAS NORMAS Y LA SEGURIDAD DEL PATRIMONIO HISTÓRICO.",
+      "GARANTIZA EL CUMPLIMIENTO DE LAS LEYES Y LA SEGURIDAD DEL PATRIMONIO PÚBLICO Y PRIVADO."
+    ],
+    "respuesta": "GARANTIZA EL CUMPLIMIENTO DE LAS LEYES Y LA SEGURIDAD DEL PATRIMONIO PÚBLICO Y PRIVADO.",
+    "ubicacion": "Título Preliminar, Art. III num. 3 del D.L. 1267 - Función Policial"
+  },
+  {
+    "codigo": "DL1267-195",
+    "numero": 195,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "ASESORAR AL COMANDANTE GENERAL DE LA POLICÍA NACIONAL DEL PERÚ EN EL DISEÑO DE DIAGNÓSTICO Y PROSPECTIVA EN COORDINACIÓN CON LOS ÓRGANOS RESPONSABLES COMPETENTES ; ESTA FUNCIÓN CORRESPONDE A.",
+    "opciones": [
+      "ESTADO MAYOR GENERAL.",
+      "LA DIRECCIÓN GENERAL.",
+      "INSPECTOR GENERAL.",
+      "LA DIRECCIÓN DE PLANEAMIENTO ESTRATÉGICO.",
+      "LA DIRECCIÓN DE ADMINISTRACIÓN."
+    ],
+    "respuesta": "ESTADO MAYOR GENERAL.",
+    "ubicacion": "Art. 9 del D.L. 1267 - Estado Mayor General"
+  },
+  {
+    "codigo": "DL1267-196",
+    "numero": 196,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "DENTRO DE LOS VALORES QUE RIGEN AL PERSONAL DE LA POLICÍA NACIONAL DEL PERÚ. SEÑALE UN VALOR INSTITUCIONAL.",
+    "opciones": [
+      "HONESTIDAD.",
+      "FE.",
+      "HEROÍSMO.",
+      "SINCERIDAD.",
+      "LABORIOSIDAD."
+    ],
+    "respuesta": "HONESTIDAD.",
+    "ubicacion": "Título Preliminar, Art. VIII del D.L. 1267 - Valores"
+  },
+  {
+    "codigo": "DL1267-197",
+    "numero": 197,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "SON DISTINTIVOS DE AUTORIDAD Y MANDO DEL PERSONAL DE ARMAS, LA PLACA INSIGNIA, CARNÉ DE IDENTIDAD Y.",
+    "opciones": [
+      "UNIFORME POLICIAL.",
+      "UNIFORME CARACTERÍSTICO.",
+      "UNIFORME AFECTADO.",
+      "UNIFORME BÁSICO.",
+      "UNIFORME REGLAMENTARIO."
+    ],
+    "respuesta": "UNIFORME REGLAMENTARIO.",
+    "ubicacion": "Título Preliminar, Art. VI y Art. 26 del D.L. 1267 - Distintivos"
+  },
+  {
+    "codigo": "DL1267-198",
+    "numero": 198,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LOS ÓRGANOS DE LÍNEA ESTÁN CONFORMADOS POR: (MARQUE LA ALTERNATIVA CORRECTA).",
+    "opciones": [
+      "MACRO REGIONES, REGIONES Y FRENTES POLICIALES.",
+      "DIRECCIÓN NACIONAL DE INVESTIGACIÓN CRIMINAL, DIRECCIÓN NACIONAL DE ORDEN Y SEGURIDAD.",
+      "COMISARÍAS Y DEPARTAMENTOS DE INVESTIGACIÓN CRIMINAL.",
+      "ÓRGANOS DE ASESORAMIENTO, ÓRGANOS DE APOYO ADMINISTRATIVO, ÓRGANOS DE APOYO POLICIAL.",
+      "DIRECCIÓN NACIONAL DE ORDEN Y SEGURIDAD, REGIONES Y FRENTES POLICIALES."
+    ],
+    "respuesta": "DIRECCIÓN NACIONAL DE INVESTIGACIÓN CRIMINAL, DIRECCIÓN NACIONAL DE ORDEN Y SEGURIDAD.",
+    "ubicacion": "Art. 7 y 14 del D.L. 1267 - Órganos de Línea"
+  },
+  {
+    "codigo": "DL1267-199",
+    "numero": 199,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "DENTRO DE LOS VALORES QUE RIGEN AL PERSONAL DE LA POLICÍA NACIONAL DEL PERÚ. SEÑALE UN VALOR INSTITUCIONAL.",
+    "opciones": [
+      "SINCERIDAD.",
+      "SERVICIO.",
+      "FE.",
+      "HEROÍSMO.",
+      "LABORIOSIDAD."
+    ],
+    "respuesta": "SERVICIO.",
+    "ubicacion": "Título Preliminar, Art. VIII del D.L. 1267 - Valores"
+  },
+  {
+    "codigo": "DL1267-200",
+    "numero": 200,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "LA POLICÍA NACIONAL DEL PERÚ, A TRAVÉS DEL FONDO DE VIVIENDA POLICIAL, ADMINISTRA LOS FONDOS PROVENIENTES DEL ESTADO Y DE LOS APORTES DE SU PERSONAL, CON LA FINALIDAD DE CONTRIBUIR AL ACCESO A UNA.",
+    "opciones": [
+      "VIVIENDA DIGNA.",
+      "ALQUILER VIVIENDA.",
+      "VIVIENDA ALQUILADA.",
+      "VIVIENDA PRESTADA.",
+      "VIVIENDA AJENA."
+    ],
+    "respuesta": "VIVIENDA DIGNA.",
+    "ubicacion": "Art. 24 del D.L. 1267 - Fondo de Vivienda Policial"
+  },
+  {
+    "codigo": "DL1267-201",
+    "numero": 201,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "POSEER, PORTAR Y USAR ARMAS DE FUEGO, DE CONFORMIDAD CON LA CONSTITUCIÓN Y LA LEY; ES UNA.",
+    "opciones": [
+      "COMPETENCIA.",
+      "FUNCIÓN.",
+      "FACULTAD.",
+      "DERECHO.",
+      "ATRIBUCIÓN."
+    ],
+    "respuesta": "ATRIBUCIÓN.",
+    "ubicacion": "Art. 3 num. 8 del D.L. 1267 - Atribuciones"
+  },
+  {
+    "codigo": "DL1267-202",
+    "numero": 202,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "ES EL ÓRGANO ENCARGADO DE LA GESTIÓN ADMINISTRATIVA Y DOCUMENTARIA DE LA POLICÍA NACIONAL DEL PERÚ, ASÍ COMO DE ASISTIR Y ASESORAR AL COMANDANTE GENERAL EN DICHAS MATERIAS; Y TIENE A SU CARGO LOS ÓRGANOS DE ASESORAMIENTO Y DE APOYO ADMINISTRATIVO: SE REFIERE A.",
+    "opciones": [
+      "LA SECRETARÍA EJECUTIVA.",
+      "LA SUB DIRECCIÓN GENERAL.",
+      "LA DIRECCIÓN DE GESTIÓN INSTITUCIONAL.",
+      "LA INSPECTORÍA GENERAL.",
+      "LA OFICINA DE ASESORÍA JURÍDICA."
+    ],
+    "respuesta": "LA SECRETARÍA EJECUTIVA.",
+    "ubicacion": "Art. 13 del D.L. 1267 - Secretaría Ejecutiva"
+  },
+  {
+    "codigo": "DL1267-203",
+    "numero": 203,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "ES UN ÓRGANO CONSULTIVO.",
+    "opciones": [
+      "LOS ÓRGANOS DE INVESTIGACIÓN.",
+      "LOS ÓRGANOS DE APOYO.",
+      "LOS CONSEJOS DE INVESTIGACIÓN.",
+      "LOS ÓRGANOS DE ASESORAMIENTO.",
+      "LOS ÓRGANOS."
+    ],
+    "respuesta": "LOS CONSEJOS DE INVESTIGACIÓN.",
+    "ubicacion": "Art. 12 del D.L. 1267 - Órganos Consultivos"
+  },
+  {
+    "codigo": "DL1267-204",
+    "numero": 204,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "DENTRO DE LOS VALORES QUE RIGEN AL PERSONAL DE LA POLICÍA NACIONAL DEL PERÚ. SEÑALE UN VALOR INSTITUCIONAL.",
+    "opciones": [
+      "LABORIOSIDAD.",
+      "HEROÍSMO.",
+      "PERTENENCIA INSTITUCIONAL.",
+      "VERACIDAD.",
+      "FE."
+    ],
+    "respuesta": "PERTENENCIA INSTITUCIONAL.",
+    "ubicacion": "Título Preliminar, Art. VIII del D.L. 1267 - Valores"
+  },
+  {
+    "codigo": "DL1267-205",
+    "numero": 205,
+    "materia_grupo": "ESPECIALIDAD",
+    "norma": "D.L. 1267 - LEY DE LA POLICÍA NACIONAL DEL PERÚ",
+    "enunciado": "SON DISTINTIVOS DE AUTORIDAD Y MANDO DEL PERSONAL DE ARMAS DE LA POLICÍA NACIONAL DEL PERÚ.",
+    "opciones": [
+      "EL UNIFORME REGLAMENTARIO, LA PLACA INSIGNIA Y EL CARNÉ DE IDENTIDAD.",
+      "EL UNIFORME REGLAMENTARIO, EL EMBLEMA Y EL CARNÉ DE IDENTIDAD.",
+      "EL UNIFORME DE SERVICIO, EL EMBLEMA Y EL CARNÉ DE IDENTIDAD.",
+      "EL UNIFORME DE SERVICIO, LA PLACA INSIGNIA Y EL CARNÉ DE IDENTIDAD.",
+      "EL UNIFORME REGLAMENTARIO, EL ARMA DE REGLAMENTO Y EL CARNÉ DE IDENTIDAD."
+    ],
+    "respuesta": "EL UNIFORME REGLAMENTARIO, LA PLACA INSIGNIA Y EL CARNÉ DE IDENTIDAD.",
+    "ubicacion": "Título Preliminar, Art. VI y Art. 26 del D.L. 1267 - Distintivos"
   }
 ]
