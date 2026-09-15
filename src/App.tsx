@@ -17,6 +17,7 @@ import { AudioAndBotExplainerModal } from './components/AudioAndBotExplainerModa
 import { GuideHelpModal } from './components/GuideHelpModal';
 import { PwaInstallPrompt } from './components/PwaInstallPrompt';
 import { AuthFlow } from './components/auth/AuthFlow';
+import { HowItWorksModal } from './components/auth/HowItWorksModal';
 import { UserManagement } from './components/admin/UserManagement';
 import { Play, Zap, ArrowLeft, X, Home } from 'lucide-react';
 
@@ -608,6 +609,9 @@ export default function App() {
 
       {/* PWA Install Prompt (Smart Banner) */}
       <PwaInstallPrompt />
+      
+      {/* How it Works Modal for Auth Flow */}
+      <HowItWorksModal />
     </div>
   );
 }

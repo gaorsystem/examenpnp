@@ -246,21 +246,10 @@ export const AuthFlow: React.FC<AuthFlowProps> = ({ onAuthenticated }) => {
                     <AlertTriangle size={18} className="flex-shrink-0 mt-0.5 text-red-500" />
                     <span>{error}</span>
                   </div>
-                  {error.includes('no registrado') && (
-                    <a
-                      href={`https://wa.me/51929172559?text=${encodeURIComponent(`Hola, deseo inscribirme en el Simulador PNP 2026 con mi celular +51 ${phone}`)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 w-full py-3.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition-all hover:scale-[1.01] active:scale-95 uppercase tracking-wider"
-                    >
-                      <MessageCircle size={18} />
-                      <span>Inscribirme por WhatsApp (929172559)</span>
-                    </a>
-                  )}
                 </div>
               )}
 
-              <div>
+              <div className="flex flex-col space-y-5">
                 <button
                   type="submit"
                   disabled={loading}
@@ -270,10 +259,34 @@ export const AuthFlow: React.FC<AuthFlowProps> = ({ onAuthenticated }) => {
                     <Loader2 className="animate-spin h-5 w-5" />
                   ) : (
                     <>
-                      Continuar <ArrowRight className="ml-2 h-5 w-5" />
+                      Ingresar <ArrowRight className="ml-2 h-5 w-5" />
                     </>
                   )}
                 </button>
+                
+                <div className="pt-2 border-t border-gray-100 flex flex-col items-center gap-3">
+                  <div className="flex flex-col items-center gap-1.5">
+                    <span className="text-gray-500 text-[10px] font-black uppercase tracking-widest flex items-center gap-1">
+                      🚀 ¿Aún no tienes cuenta?
+                    </span>
+                    <a
+                      href={`https://wa.me/51929172559?text=${encodeURIComponent(`Hola, deseo inscribirme en el Simulador PNP 2026 con mi celular +51 ${phone || '999999999'}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-emerald-700 font-black text-sm hover:text-emerald-800 flex items-center gap-2 transition-all bg-emerald-100 hover:bg-emerald-200 px-5 py-2 rounded-full border border-emerald-200 shadow-sm active:scale-95"
+                    >
+                      <MessageCircle size={18} className="text-emerald-600" /> ¡Regístrate Ya!
+                    </a>
+                  </div>
+                  
+                  <button
+                    type="button"
+                    onClick={() => document.dispatchEvent(new CustomEvent('open-how-it-works'))}
+                    className="mt-2 text-xs font-bold text-slate-500 hover:text-slate-700 underline decoration-slate-300 underline-offset-4 flex items-center gap-1"
+                  >
+                    ¿Ver cómo funciona?
+                  </button>
+                </div>
               </div>
             </motion.form>
           ) : step === 'pin' ? (
