@@ -175,26 +175,38 @@ export async function actualizarProgresoSRS(preguntaId: string, esCorrecta: bool
   return actual;
 }
 
-// Obtener preguntas pendientes de revisión SRS hoy
+// Obtener preguntas pendientes de refuerzo (Banco de Errores)
 export function getPreguntasPendientesSRS(): Pregunta[] {
   const srsMap = getProgresoSRSMap();
   const hoyStr = new Date().toISOString().split('T')[0];
 
-  const idsFalladasOSRS = Object.values(srsMap)
-    .filter((srs) => srs.proximaRevision <= hoyStr || srs.rachaCorrectas === 0)
-    .map((srs) => srs.preguntaId);
+  // Identificar preguntas con fallos registrados no dominados (fallosTotales > 0 y rachaCorrectas < 2)
+  const idsPendientesSet = new Set<string>();
 
-  // Filtrar banco
-  const pendientes = BANCO_PREGUNTAS.filter((p) => idsFalladasOSRS.includes(p.id));
+  Object.values(srsMap).forEach((srs) => {
+    // Si tiene fallos y aún no ha alcanzado 2 aciertos seguidos, o si está programada para revisión
+    if (srs.fallosTotales > 0 && srs.rachaCorrectas < 2) {
+      idsPendientesSet.add(srs.preguntaId);
+    } else if (srs.proximaRevision <= hoyStr && srs.rachaCorrectas < 3) {
+      idsPendientesSet.add(srs.preguntaId);
+    }
+  });
 
-  // Si no hay suficientes pendientes por agenda, agregar preguntas con bajo acierto o aleatorias no respondidas
-  if (pendientes.length < 10) {
-    const respondidasIds = new Set(Object.keys(srsMap));
-    const noRespondidas = BANCO_PREGUNTAS.filter((p) => !respondidasIds.has(p.id));
-    return [...pendientes, ...noRespondidas.slice(0, 15 - pendientes.length)];
-  }
+  // Asegurar que cualquier pregunta respondida incorrectamente en el historial de exámenes esté incluida
+  const historial = getHistorialIntentos();
+  historial.forEach((intento) => {
+    intento.respuestas.forEach((resp) => {
+      if (!resp.esCorrecta) {
+        const srs = srsMap[resp.preguntaId];
+        // Si no está en SRS o aún no ha alcanzado 2 aciertos consecutivos de consolidación
+        if (!srs || srs.rachaCorrectas < 2) {
+          idsPendientesSet.add(resp.preguntaId);
+        }
+      }
+    });
+  });
 
-  return pendientes;
+  return BANCO_PREGUNTAS.filter((p) => idsPendientesSet.has(p.id));
 }
 
 // ----------------- FAVORITOS / MARCADOS -----------------

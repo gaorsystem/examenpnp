@@ -10,18 +10,26 @@ import {
   Sparkles,
   MessageCircle,
 } from 'lucide-react';
+import { ActiveExamSession } from '../lib/activeExamStorage';
+import { ActiveExamBanner } from './ActiveExamBanner';
 
 interface LandingPageProps {
   onStartSimulacro: (modo: 'simulacro' | 'expres' | 'repaso' | 'norma') => void;
   onNavigateTab: (tab: string) => void;
   onOpenOtpModal?: () => void;
   onOpenExplainer?: () => void;
+  activeExamSession?: ActiveExamSession | null;
+  onResumeExam?: () => void;
+  onDiscardExam?: () => void;
 }
 
 export const LandingPage: React.FC<LandingPageProps> = ({
   onStartSimulacro,
   onNavigateTab,
   onOpenOtpModal,
+  activeExamSession,
+  onResumeExam,
+  onDiscardExam,
 }) => {
   const handleRegisterWhatsApp = () => {
     const message = encodeURIComponent('Hola, deseo inscribirme en el Simulador PNP 2026');
@@ -50,6 +58,17 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             <span>Banco de 1,500 Preguntas Oficiales</span>
           </div>
         </div>
+
+        {/* ACTIVE EXAM RESUME BANNER */}
+        {activeExamSession && onResumeExam && onDiscardExam && (
+          <div className="text-left">
+            <ActiveExamBanner
+              session={activeExamSession}
+              onResume={onResumeExam}
+              onDiscard={onDiscardExam}
+            />
+          </div>
+        )}
 
         {/* TARJETAS ÚNICAS DE ACCIÓN: INGRESAR O REGISTRARSE */}
         <div className="grid grid-cols-1 gap-4 pt-2">

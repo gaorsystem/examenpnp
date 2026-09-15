@@ -148,7 +148,7 @@ export const GuideHelpModal: React.FC<GuideHelpModalProps> = ({
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
       <div className="bg-slate-900 border-2 border-amber-500/40 w-full max-w-4xl rounded-3xl shadow-2xl text-white overflow-hidden flex flex-col max-h-[90vh]">
         {/* Header Modal */}
         <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-4 sm:p-6 border-b border-slate-800 flex items-center justify-between gap-4 shrink-0">

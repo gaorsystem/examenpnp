@@ -258,23 +258,43 @@ export const SRSReviewScreen: React.FC<SRSReviewScreenProps> = ({
 
         {/* ANSWER FEEDBACK & SRS RATING */}
         {esRespondida && (
-          <div className="mt-6 p-5 rounded-2xl bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-mono text-xs space-y-4 animate-fadeIn border border-slate-200 dark:border-slate-700 shadow-md">
+          <div className="mt-6 p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-mono text-xs space-y-4 animate-fadeIn border-2 border-slate-200 dark:border-slate-700 shadow-md">
             <div className="flex items-center gap-2 font-bold text-sm">
               {esCorrecta ? (
-                <span className="text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-emerald-500" /> ¡Respuesta Correcta!
+                <span className="text-emerald-700 dark:text-emerald-400 flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-emerald-600 dark:text-emerald-400" /> ¡Respuesta Correcta!
                 </span>
               ) : (
-                <span className="text-red-600 dark:text-red-400 flex items-center gap-2">
-                  <XCircle className="w-5 h-5 text-red-500" /> Respuesta Incorrecta
+                <span className="text-rose-700 dark:text-rose-400 flex items-center gap-2">
+                  <XCircle className="w-5 h-5 text-rose-600 dark:text-rose-400" /> Respuesta Incorrecta — Refuerzo Activo
                 </span>
               )}
             </div>
 
-            <p className="text-slate-800 dark:text-slate-200 leading-relaxed pt-1 border-t border-slate-200 dark:border-slate-700">
-              <strong className="text-slate-900 dark:text-white font-bold">Clave Oficial PNP:</strong>{' '}
-              <span className="text-amber-600 dark:text-amber-400 font-bold">{currentPregunta.respuesta}</span>
-            </p>
+            <div className="space-y-2.5 pt-1 border-t border-slate-200 dark:border-slate-700">
+              <div className="bg-white dark:bg-slate-800 p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                <span className="font-mono font-bold text-[10px] text-slate-500 dark:text-slate-400 uppercase block mb-1">
+                  Respuesta Oficial del Balotario:
+                </span>
+                <p className="font-sans font-bold text-slate-900 dark:text-white leading-relaxed text-sm">
+                  {currentPregunta.respuesta}
+                </p>
+              </div>
+
+              {currentPregunta.ubicacion && (
+                <div className="bg-emerald-50 dark:bg-emerald-950/40 p-3 rounded-xl border border-emerald-300 dark:border-emerald-800 text-emerald-950 dark:text-emerald-200 flex items-start gap-2.5">
+                  <Shield className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-mono font-black text-[10px] uppercase tracking-wider block text-emerald-800 dark:text-emerald-400">
+                      Fundamento Legal:
+                    </span>
+                    <span className="font-medium text-xs text-slate-900 dark:text-emerald-100">
+                      {currentPregunta.ubicacion} ({currentPregunta.norma})
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
 
             {/* SRS Rating Buttons */}
             <div className="pt-2 border-t border-slate-200 dark:border-slate-700 space-y-2">

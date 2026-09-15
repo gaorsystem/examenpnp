@@ -33,6 +33,8 @@ import {
   getPreguntasPorNorma,
   barajar,
 } from '../data/questionsData';
+import { ActiveExamSession } from '../lib/activeExamStorage';
+import { ActiveExamBanner } from './ActiveExamBanner';
 
 interface SimulacroHubScreenProps {
   onStartCustomExamen: (
@@ -41,10 +43,16 @@ interface SimulacroHubScreenProps {
     tituloSimulacro: string
   ) => void;
   onNavigateTab: (tab: string) => void;
+  activeExamSession?: ActiveExamSession | null;
+  onResumeExam?: () => void;
+  onDiscardExam?: () => void;
 }
 
 export const SimulacroHubScreen: React.FC<SimulacroHubScreenProps> = ({
   onStartCustomExamen,
+  activeExamSession,
+  onResumeExam,
+  onDiscardExam,
 }) => {
   const todasLasNormas = useMemo(() => getNormasInfo(), []);
 
@@ -150,37 +158,46 @@ export const SimulacroHubScreen: React.FC<SimulacroHubScreenProps> = ({
 
   return (
     <div className="space-y-6 max-w-none mx-auto pb-16 px-2 sm:px-4">
+      {/* Active Exam Banner */}
+      {activeExamSession && onResumeExam && onDiscardExam && (
+        <ActiveExamBanner
+          session={activeExamSession}
+          onResume={onResumeExam}
+          onDiscard={onDiscardExam}
+        />
+      )}
+
       {/* Banner Principal - Estilo Elegante */}
-      <div className="bg-[#011a14] border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-sm relative overflow-hidden transition-all">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
+      <div className="bg-white dark:bg-[#011a14] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-8 shadow-sm relative overflow-hidden transition-all">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 dark:bg-emerald-500/5 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
 
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 bg-emerald-900/30 border border-emerald-800/50 px-3 py-1 rounded-lg text-[9px] font-bold text-emerald-400 uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5 text-emerald-500" />
+            <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800/50 px-3 py-1 rounded-lg text-[9px] font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-500" />
               <span>Configuración de Evaluación Táctica</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-none">
+            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight leading-none">
               Simulacro por Temas
             </h1>
-            <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Balotario Oficial PNP 2026</p>
+            <p className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Balotario Oficial PNP 2026</p>
           </div>
 
-          <div className="bg-[#01261d] px-6 py-4 rounded-xl border border-emerald-800/30 flex items-center gap-6 shrink-0 shadow-inner">
+          <div className="bg-slate-50 dark:bg-[#01261d] px-6 py-4 rounded-xl border border-slate-200 dark:border-emerald-800/30 flex items-center gap-6 shrink-0 shadow-inner">
             <div className="text-right">
-              <span className="block text-[9px] text-slate-400 uppercase font-bold tracking-tight">
+              <span className="block text-[9px] text-slate-500 dark:text-slate-400 uppercase font-bold tracking-tight">
                 TEMAS SELECCIONADOS
               </span>
-              <span className="text-xl font-bold text-emerald-500">
-                {selectedTemas.length} <span className="text-xs text-slate-600">/ {todasLasNormas.length}</span>
+              <span className="text-xl font-bold text-emerald-600 dark:text-emerald-500">
+                {selectedTemas.length} <span className="text-xs text-slate-400 dark:text-slate-600">/ {todasLasNormas.length}</span>
               </span>
             </div>
-            <div className="h-8 w-px bg-emerald-800/30"></div>
+            <div className="h-8 w-px bg-slate-200 dark:bg-emerald-800/30"></div>
             <div className="text-right">
-              <span className="block text-[9px] text-slate-400 uppercase font-bold tracking-tight">
+              <span className="block text-[9px] text-slate-500 dark:text-slate-400 uppercase font-bold tracking-tight">
                 TOTAL REACTIVOS
               </span>
-              <span className="text-xl font-bold text-white">
+              <span className="text-xl font-bold text-slate-900 dark:text-white">
                 {preguntasDisponibles.length}
               </span>
             </div>
@@ -189,13 +206,13 @@ export const SimulacroHubScreen: React.FC<SimulacroHubScreenProps> = ({
       </div>
 
       {/* SECCIÓN 1: SELECCIÓN DE TEMAS */}
-      <div className="bg-[#011a14] border border-slate-800 rounded-2xl p-6 shadow-sm space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800/50 pb-4">
+      <div className="bg-white dark:bg-[#011a14] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800/50 pb-4">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-emerald-900/30 flex items-center justify-center text-emerald-400">
+            <div className="w-9 h-9 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
               <Layers className="w-5 h-5" />
             </div>
-            <h2 className="font-bold text-lg text-white uppercase tracking-tight">
+            <h2 className="font-bold text-lg text-slate-900 dark:text-white uppercase tracking-tight">
               Selección de Materias
             </h2>
           </div>
@@ -382,10 +399,10 @@ export const SimulacroHubScreen: React.FC<SimulacroHubScreenProps> = ({
             return (
               <div
                 key={norma.id}
-                className={`group relative bg-[#011a14] dark:bg-[#011a14] rounded-2xl border transition-all duration-300 overflow-hidden shadow-sm hover:shadow-xl flex flex-col ${
+                className={`group relative bg-white dark:bg-[#011a14] rounded-2xl border transition-all duration-300 overflow-hidden shadow-sm hover:shadow-xl flex flex-col ${
                   isSelected
-                    ? `border-emerald-500 ring-1 ring-emerald-500/30`
-                    : 'border-slate-800/40'
+                    ? `border-emerald-500 ring-2 ring-emerald-500/30`
+                    : 'border-slate-200 dark:border-slate-800/60 hover:border-emerald-500/40'
                 }`}
               >
                 {/* PARTE SUPERIOR: IMAGEN + CONTENIDO */}
@@ -393,7 +410,7 @@ export const SimulacroHubScreen: React.FC<SimulacroHubScreenProps> = ({
                   {/* IMAGEN DEL TEMA (Cuadrada con bordes suaves) */}
                   <div
                     onClick={() => handleToggleTema(norma.nombre)}
-                    className="w-24 h-24 sm:w-28 sm:h-28 shrink-0 rounded-xl overflow-hidden relative bg-slate-900 cursor-pointer border border-slate-800"
+                    className="w-24 h-24 sm:w-28 sm:h-28 shrink-0 rounded-xl overflow-hidden relative bg-slate-100 dark:bg-slate-900 cursor-pointer border border-slate-200 dark:border-slate-800"
                   >
                     <img
                       src={norma.imagen || cardInfo.imagen}
@@ -401,8 +418,8 @@ export const SimulacroHubScreen: React.FC<SimulacroHubScreenProps> = ({
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     {isSelected && (
-                      <div className="absolute inset-0 bg-emerald-500/10 flex items-center justify-center backdrop-blur-[1px]">
-                        <CheckCircle2 className="w-6 h-6 text-emerald-400 drop-shadow-md" />
+                      <div className="absolute inset-0 bg-emerald-600/20 flex items-center justify-center backdrop-blur-[1px]">
+                        <CheckCircle2 className="w-6 h-6 text-white drop-shadow-md" />
                       </div>
                     )}
                   </div>
@@ -413,14 +430,14 @@ export const SimulacroHubScreen: React.FC<SimulacroHubScreenProps> = ({
                       <span className={`${p.badgeBg} ${p.badgeText} text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded`}>
                         {cardInfo.categoria}
                       </span>
-                      <span className="bg-slate-800/60 text-slate-400 text-[9px] font-bold px-2 py-1 rounded border border-slate-700/50">
+                      <span className="bg-slate-100 dark:bg-slate-800/60 text-slate-600 dark:text-slate-400 text-[9px] font-bold px-2 py-1 rounded border border-slate-200 dark:border-slate-700/50">
                         {cardInfo.destacado}
                       </span>
                     </div>
 
                     <h3
                       onClick={() => handleToggleTema(norma.nombre)}
-                      className="font-sans font-bold text-white text-base sm:text-lg leading-tight cursor-pointer transition-colors group-hover:text-emerald-400 line-clamp-3"
+                      className="font-sans font-bold text-slate-900 dark:text-white text-base sm:text-lg leading-tight cursor-pointer transition-colors group-hover:text-emerald-600 dark:group-hover:text-emerald-400 line-clamp-3"
                     >
                       {cardInfo.displayName}
                     </h3>
@@ -429,7 +446,7 @@ export const SimulacroHubScreen: React.FC<SimulacroHubScreenProps> = ({
 
                 {/* BARRA DE ACCIONES (Fiel a la imagen de referencia) */}
                 <div className="px-4 pb-4">
-                  <div className="flex items-center justify-between gap-2 pt-3 border-t border-slate-800/50">
+                  <div className="flex items-center justify-between gap-2 pt-3 border-t border-slate-100 dark:border-slate-800/50">
                     <div className="flex items-center gap-2">
                       {/* BOTÓN INFO */}
                       <button
@@ -446,7 +463,7 @@ export const SimulacroHubScreen: React.FC<SimulacroHubScreenProps> = ({
                           if (isUsoFuerza) setShowUsoFuerzaInfo(!showUsoFuerzaInfo);
                           if (isTid) setShowTidInfo(!showTidInfo);
                         }}
-                        className="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-800/40 text-slate-400 border border-slate-700/50 hover:text-emerald-400 transition-colors"
+                        className="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800/40 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700/50 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
                       >
                         <div className="flex items-center gap-0.5">
                           <Info className="w-4 h-4" />
@@ -460,11 +477,11 @@ export const SimulacroHubScreen: React.FC<SimulacroHubScreenProps> = ({
                         onClick={() => handleToggleTema(norma.nombre)}
                         className={`flex items-center gap-2 px-3 h-9 rounded-lg font-bold text-[10px] uppercase tracking-wide transition-all border ${
                           isSelected
-                            ? `bg-emerald-500/10 text-emerald-400 border-emerald-500/50`
-                            : 'bg-slate-800/20 text-slate-500 border-slate-700/50'
+                            ? `bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/50 font-black`
+                            : 'bg-slate-50 dark:bg-slate-800/20 text-slate-600 dark:text-slate-500 border-slate-200 dark:border-slate-700/50 hover:bg-slate-100'
                         }`}
                       >
-                        {isSelected ? <CheckSquare className="w-3.5 h-3.5" /> : <Square className="w-3.5 h-3.5" />}
+                        {isSelected ? <CheckSquare className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> : <Square className="w-3.5 h-3.5" />}
                         <span>Elegir</span>
                       </button>
                     </div>
@@ -476,7 +493,7 @@ export const SimulacroHubScreen: React.FC<SimulacroHubScreenProps> = ({
                         e.stopPropagation();
                         handleStartSingleTemaExamen(norma.nombre);
                       }}
-                      className={`flex items-center gap-2 px-4 h-9 rounded-lg text-white text-[10px] font-bold uppercase tracking-wider transition-all whitespace-nowrap ${p.iconBg} hover:brightness-110 shadow-lg shadow-black/20`}
+                      className={`flex items-center gap-2 px-4 h-9 rounded-lg text-white text-[10px] font-bold uppercase tracking-wider transition-all whitespace-nowrap ${p.iconBg} hover:brightness-110 shadow-md active-scale`}
                     >
                       <Play className="w-3 h-3 fill-current" />
                       <span>Dar Examen</span>
@@ -485,22 +502,22 @@ export const SimulacroHubScreen: React.FC<SimulacroHubScreenProps> = ({
 
                   {/* DESGLOSE */}
                   {isDesgloseOpen && (
-                    <div className="mt-3 pt-3 border-t border-slate-800/30 animate-fadeIn">
+                    <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800/30 animate-fadeIn">
                       <div className="space-y-2">
                         {isConstitucion && (
                           <div className="grid grid-cols-1 gap-1.5">
-                            <div className="p-2 rounded-lg bg-slate-900/50 border border-slate-800/50 text-[10px]">
-                              <span className="text-emerald-400 font-bold block">FORMULARIO 1 (PREG. 1-25)</span>
-                              <span className="text-slate-500">Derechos y Libertades Fundamentales</span>
+                            <div className="p-2 rounded-lg bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800/50 text-[10px]">
+                              <span className="text-emerald-700 dark:text-emerald-400 font-bold block">FORMULARIO 1 (PREG. 1-25)</span>
+                              <span className="text-slate-600 dark:text-slate-400">Derechos y Libertades Fundamentales</span>
                             </div>
-                            <div className="p-2 rounded-lg bg-slate-900/50 border border-slate-800/50 text-[10px]">
-                              <span className="text-emerald-400 font-bold block">FORMULARIO 2 (PREG. 26-50)</span>
-                              <span className="text-slate-500">Estado, Deberes, FF.AA. y PNP</span>
+                            <div className="p-2 rounded-lg bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800/50 text-[10px]">
+                              <span className="text-emerald-700 dark:text-emerald-400 font-bold block">FORMULARIO 2 (PREG. 26-50)</span>
+                              <span className="text-slate-600 dark:text-slate-400">Estado, Deberes, FF.AA. y PNP</span>
                             </div>
                           </div>
                         )}
                         {!isConstitucion && (
-                          <div className="p-2 text-[10px] text-slate-500 italic">
+                          <div className="p-2 text-[10px] text-slate-500 dark:text-slate-400 italic">
                             Contenido organizado según balotario oficial 2026.
                           </div>
                         )}
@@ -514,20 +531,20 @@ export const SimulacroHubScreen: React.FC<SimulacroHubScreenProps> = ({
           </div>
         </div>
         {/* BOTÓN PRINCIPAL Y RESUMEN */}
-        <div className="pt-8 border-t border-slate-800/50 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="pt-8 border-t border-slate-100 dark:border-slate-800/50 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-1 text-center md:text-left">
-            <div className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">
+            <div className="text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">
               Configuración de Evaluación:
             </div>
             <div className="flex items-center justify-center md:justify-start gap-4">
               <div className="flex items-center gap-1.5">
-                <Layers className="w-3.5 h-3.5 text-emerald-500" />
-                <span className="text-[10px] font-bold text-slate-300 uppercase">{selectedTemas.length} TEMAS</span>
+                <Layers className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-500" />
+                <span className="text-[10px] font-bold text-slate-700 dark:text-slate-300 uppercase">{selectedTemas.length} TEMAS</span>
               </div>
-              <div className="w-1 h-1 bg-slate-700 rounded-full"></div>
+              <div className="w-1 h-1 bg-slate-300 dark:bg-slate-700 rounded-full"></div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                <span className="text-[10px] font-bold text-emerald-500 uppercase">{totalPreguntasSimulacro} REACTIVOS</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-500" />
+                <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-500 uppercase">{totalPreguntasSimulacro} REACTIVOS</span>
               </div>
             </div>
           </div>
@@ -537,8 +554,8 @@ export const SimulacroHubScreen: React.FC<SimulacroHubScreenProps> = ({
             disabled={preguntasDisponibles.length === 0}
             className={`w-full md:w-auto font-bold text-xs px-8 py-4 rounded-xl flex items-center justify-center gap-3 shadow-lg transition-all uppercase tracking-widest ${
               preguntasDisponibles.length > 0
-                ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-900/20 active-scale cursor-pointer'
-                : 'bg-slate-800 text-slate-600 cursor-not-allowed border border-slate-700'
+                ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-600/20 active-scale cursor-pointer'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed border border-slate-200 dark:border-slate-700'
             }`}
           >
             <Play className="w-4 h-4 fill-current" />

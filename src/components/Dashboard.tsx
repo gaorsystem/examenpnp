@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Shield,
   Clock,
@@ -19,6 +19,8 @@ import {
 import { UserProfile, IntentoExamen, DominioMateria, GrupoMateria } from '../types';
 import { SimulacroInfoModal, ExamModalDetails } from './SimulacroInfoModal';
 import { BANCO_PREGUNTAS } from '../data/questionsData';
+import { ActiveExamSession } from '../lib/activeExamStorage';
+import { ActiveExamBanner } from './ActiveExamBanner';
 
 interface DashboardProps {
   userProfile: UserProfile;
@@ -36,6 +38,10 @@ interface DashboardProps {
   onStartExamen: (modo: 'simulacro' | 'repaso' | 'norma' | 'expres' | 'whatsapp', numPreguntas?: number, normaNombre?: string) => void;
   onNavigateTab: (tab: string) => void;
   onOpenExplainer?: () => void;
+  activeExamSession?: ActiveExamSession | null;
+  onResumeExam?: () => void;
+  onDiscardExam?: () => void;
+  onModalStateChange?: (isOpen: boolean) => void;
 }
 
 export const Dashboard: React.FC<DashboardProps> = ({
@@ -46,12 +52,20 @@ export const Dashboard: React.FC<DashboardProps> = ({
   historialIntentos,
   onStartExamen,
   onNavigateTab,
+  activeExamSession,
+  onResumeExam,
+  onDiscardExam,
+  onModalStateChange,
 }) => {
   const [filtroGrupo] = useState<'TODOS' | GrupoMateria>('TODOS');
   const [busquedaNorma, setBusquedaNorma] = useState('');
   const [subTab, setSubTab] = useState<'simulacros' | 'normas' | 'estadisticas'>('simulacros');
   const [showProfileStats, setShowProfileStats] = useState<boolean>(false);
   const [selectedExamDetails, setSelectedExamDetails] = useState<ExamModalDetails | null>(null);
+
+  useEffect(() => {
+    onModalStateChange?.(selectedExamDetails !== null);
+  }, [selectedExamDetails, onModalStateChange]);
 
   const materiasFiltradas = dominioMaterias.filter((m) => {
     const matchGrupo = filtroGrupo === 'TODOS' || m.grupo === filtroGrupo;
@@ -62,20 +76,20 @@ export const Dashboard: React.FC<DashboardProps> = ({
   const handleRequestRepasoExam = () => {
     setSelectedExamDetails({
       mode: 'repaso',
-      title: 'Repaso Inteligente de Fallos',
-      badge: '🎯 Refuerzo de Fallos (SRS)',
-      badgeColor: 'bg-emerald-600 text-white font-black',
-      finalidad: 'Garantizar el 100% de dominio convirtiendo tus errores pasados en aciertos consolidados mediante repetición espaciada.',
+      title: 'Refuerzo y Estudio de Fallos',
+      badge: '🎯 Banco de Errores (SRS)',
+      badgeColor: 'bg-amber-600 text-white font-black',
+      finalidad: 'Garantizar el 100% de dominio convirtiendo tus errores pasados en aciertos consolidados mediante repetición espaciada y estudio con base legal.',
       comoFunciona: [
         `Cargarás las ${pendientesSRSCount} preguntas en las que tuviste errores previamente.`,
-        'Cada pregunta muestra la explicación legal para corregir conceptos dudosos.',
-        'Al responder correctamente 2 veces consecutivas, la pregunta se registra como dominada.'
+        'Cada pregunta muestra la solución inmediata con su alternativa oficial y base legal (artículo de ley).',
+        'Al responder correctamente, se consolida tu aprendizaje y se actualiza tu progreso de dominio.'
       ],
       preguntasCount: pendientesSRSCount,
-      tiempoEstimado: 'Libre',
+      tiempoEstimado: 'Libre (Sin presión de tiempo)',
       permiteAyudas: true,
       retroalimentacion: 'instantanea',
-      onConfirm: () => onStartExamen('repaso'),
+      onConfirm: () => onStartExamen('repaso', pendientesSRSCount),
     });
   };
 
@@ -99,8 +113,37 @@ export const Dashboard: React.FC<DashboardProps> = ({
     });
   };
 
+  const handleRequestRapidinExam = () => {
+    setSelectedExamDetails({
+      mode: 'simulacro',
+      title: 'Simulacro Rapidín (100 Preguntas)',
+      badge: '⚡ Práctica Rápida',
+      badgeColor: 'bg-indigo-600 text-white font-black',
+      finalidad: 'Medir tu nivel general de conocimientos con un examen extenso de 100 preguntas extraídas aleatoriamente de todos los temas del balotario oficial.',
+      comoFunciona: [
+        'Se seleccionarán 100 preguntas al azar abarcando todo el temario.',
+        'Tendrás un límite de tiempo de 120 minutos para completarlo.',
+        'Al finalizar, recibirás un puntaje global y desglose por materias.'
+      ],
+      preguntasCount: 100,
+      tiempoEstimado: '120 Minutos',
+      permiteAyudas: false,
+      retroalimentacion: 'al_final',
+      onConfirm: () => onStartExamen('simulacro', 100),
+    });
+  };
+
   return (
     <div className="space-y-6 pb-16 bg-[#F8FAFC] dark:bg-[#011611] text-slate-900 dark:text-slate-100 min-h-screen p-3 sm:p-6 transition-colors duration-300">
+      {/* Active Exam Banner (if user has an in-progress or paused exam) */}
+      {activeExamSession && onResumeExam && onDiscardExam && (
+        <ActiveExamBanner
+          session={activeExamSession}
+          onResume={onResumeExam}
+          onDiscard={onDiscardExam}
+        />
+      )}
+
       {/* 1. CENTRO DE ENTRENAMIENTO (PRIORIDAD: SIMULACROS) */}
       <div className="flex flex-col gap-6">
         
@@ -146,9 +189,9 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
         {subTab === 'simulacros' && (
           <div className="animate-fadeIn space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-              {/* 1. SIMULACROS POR TEMA */}
+            <div className="grid grid-cols-1 gap-6">
+              
+              {/* 1. SIMULACRO POR TEMARIO */}
               <div className="bg-white dark:bg-[#02281e] border-2 border-slate-100 dark:border-emerald-800/30 rounded-3xl p-6 flex flex-col justify-between gap-6 shadow-md hover:shadow-xl hover:border-emerald-500/30 transition-all relative overflow-hidden group">
                 <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:scale-110 transition-transform">
                   <Layers className="w-32 h-32 text-emerald-600" />
@@ -178,7 +221,38 @@ export const Dashboard: React.FC<DashboardProps> = ({
                 </button>
               </div>
 
-              {/* 2. REPASAR ERRORES (SRS) */}
+              {/* 2. SIMULACRO RAPIDIN */}
+              <div className="bg-gradient-to-br from-indigo-600 to-blue-700 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl relative overflow-hidden group border-4 border-indigo-400/30">
+                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
+                   <Zap className="w-48 h-48 text-white" />
+                </div>
+                <div className="space-y-3 relative z-10 text-white max-w-xl">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-white/20 text-white text-[10px] font-mono font-black px-2.5 py-1 rounded-lg uppercase tracking-widest border border-white/30 backdrop-blur-sm">
+                      Práctica Rápida
+                    </span>
+                    <span className="bg-amber-400 text-amber-950 text-[10px] font-mono font-black px-2.5 py-1 rounded-lg uppercase tracking-widest border border-amber-300">
+                      100 Preguntas
+                    </span>
+                  </div>
+                  <h3 className="font-display font-black text-3xl md:text-4xl uppercase leading-tight drop-shadow-md">
+                    Simulacro Rapidín
+                  </h3>
+                  <p className="text-blue-100 leading-relaxed font-medium text-sm md:text-base">
+                    Ponte a prueba con 100 preguntas aleatorias de todos los temas del balotario oficial. Perfecto para medir tu nivel general en tiempo récord.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleRequestRapidinExam}
+                  className="w-full md:w-auto shrink-0 bg-white hover:bg-slate-50 text-indigo-700 font-display font-black py-4 px-8 rounded-2xl text-base flex items-center justify-center gap-3 transition-all shadow-xl active-scale uppercase tracking-wider relative z-10 group-hover:shadow-2xl"
+                >
+                  <Zap className="w-6 h-6 fill-current" />
+                  <span>INICIAR RAPIDÍN</span>
+                </button>
+              </div>
+
+              {/* 3. REPASAR ERRORES (SRS) */}
               <div className="bg-white dark:bg-[#02281e] border-2 border-slate-100 dark:border-emerald-800/30 rounded-3xl p-6 flex flex-col justify-between gap-6 shadow-md hover:shadow-xl hover:border-emerald-500/30 transition-all relative overflow-hidden group">
                 <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:scale-110 transition-transform">
                   <RotateCcw className="w-32 h-32 text-emerald-600" />
@@ -189,15 +263,21 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     <span className="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-[10px] font-mono font-black px-2.5 py-1 rounded-lg uppercase tracking-widest border border-emerald-200/50 dark:border-emerald-800/50">
                       Refuerzo Inteligente
                     </span>
-                    <span className="bg-slate-100 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-[10px] font-mono font-black px-2.5 py-1 rounded-lg uppercase border border-slate-200 dark:border-slate-700">
-                      {pendientesSRSCount} pendientes
+                    <span className={`text-[10px] font-mono font-black px-2.5 py-1 rounded-lg uppercase border ${
+                      pendientesSRSCount > 0
+                        ? 'bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-400 border-amber-300 dark:border-amber-700/60'
+                        : 'bg-slate-100 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-slate-700'
+                    }`}>
+                      {pendientesSRSCount > 0 ? `${pendientesSRSCount} errores pendientes` : '0 pendientes'}
                     </span>
                   </div>
                   <h3 className="font-display font-black text-2xl text-slate-900 dark:text-white uppercase leading-tight">
                     Repasar Errores
                   </h3>
                   <p className="text-sm text-slate-500 dark:text-emerald-300/80 leading-relaxed font-medium">
-                    Enfócate exclusivamente en las preguntas que fallaste para consolidar tu nota de ascenso.
+                    {pendientesSRSCount > 0
+                      ? `Tienes ${pendientesSRSCount} preguntas con fallas guardadas para estudiar con solución oficial y base legal.`
+                      : '¡Excelente! No tienes errores pendientes acumulados. Rinde simulacros para registrar nuevas preguntas de refuerzo.'}
                   </p>
                 </div>
 
@@ -207,12 +287,12 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   disabled={pendientesSRSCount === 0}
                   className={`w-full font-display font-black py-4 px-6 rounded-2xl text-sm flex items-center justify-center gap-3 transition-all relative z-10 uppercase tracking-wider ${
                     pendientesSRSCount > 0
-                      ? 'bg-slate-900 dark:bg-emerald-500 hover:bg-slate-800 dark:hover:bg-emerald-400 text-white shadow-lg active-scale'
+                      ? 'bg-amber-600 hover:bg-amber-500 text-white shadow-lg shadow-amber-600/20 active-scale'
                       : 'bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed border border-slate-200 dark:border-slate-700'
                   }`}
                 >
                   <RotateCcw className="w-5 h-5" />
-                  <span>Reparar Fallas</span>
+                  <span>{pendientesSRSCount > 0 ? `Reforzar ${pendientesSRSCount} Fallas` : 'Sin Fallas Pendientes'}</span>
                 </button>
               </div>
 

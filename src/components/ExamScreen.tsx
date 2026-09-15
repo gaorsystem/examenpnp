@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import {
   Clock,
   Shield,
@@ -12,10 +12,22 @@ import {
   Lightbulb,
   Grid,
   Zap,
+  Pause,
+  Play,
+  RotateCcw,
+  Trash2,
+  CheckCircle2,
+  HelpCircle,
 } from 'lucide-react';
 import { Pregunta, RespuestaUsuario, IntentoExamen } from '../types';
-import { getFavoritos, toggleFavorito } from '../lib/srsStorage';
+import { getFavoritos, toggleFavorito, actualizarProgresoSRS } from '../lib/srsStorage';
 import { esRespuestaCorrecta } from '../data/questionsData';
+import {
+  getActiveExamSession,
+  saveActiveExamSession,
+  clearActiveExamSession,
+  ActiveExamSession,
+} from '../lib/activeExamStorage';
 
 interface ExamScreenProps {
   modo: 'simulacro' | 'repaso' | 'norma' | 'expres' | 'whatsapp';
@@ -34,19 +46,48 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
   onFinishExamen,
   onCancelExamen,
 }) => {
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  // Detect if there is a matching saved session in localStorage to restore
+  const initialSession = useMemo(() => {
+    const saved = getActiveExamSession();
+    if (!saved || !saved.preguntas || saved.preguntas.length === 0) return null;
+    // Check if it corresponds to this exam
+    if (
+      saved.preguntas.length === preguntas.length &&
+      saved.preguntas[0]?.id === preguntas[0]?.id
+    ) {
+      return saved;
+    }
+    return null;
+  }, [preguntas]);
+
+  const [currentIndex, setCurrentIndex] = useState<number>(() => {
+    return initialSession ? Math.min(initialSession.currentIndex, preguntas.length - 1) : 0;
+  });
   const [respuestasMap, setRespuestasMap] = useState<
     Record<string, { opcion: string; tiempoSeg: number; esCorrecta?: boolean }>
-  >({});
+  >(() => {
+    return initialSession ? initialSession.respuestasMap || {} : {};
+  });
   const [favoritos, setFavoritos] = useState<string[]>(() => getFavoritos());
-  const [segundosRestantes, setSegundosRestantes] = useState<number>(() =>
-    modo === 'simulacro' || modo === 'expres' ? tiempoLimiteMinutos * 60 : 0
-  );
+  const [segundosRestantes, setSegundosRestantes] = useState<number>(() => {
+    if (initialSession && typeof initialSession.segundosRestantes === 'number') {
+      return initialSession.segundosRestantes;
+    }
+    return modo === 'simulacro' || modo === 'expres' ? tiempoLimiteMinutos * 60 : 0;
+  });
   const [showConfirmFinish, setShowConfirmFinish] = useState<boolean>(false);
-  const [modoInstantaneo] = useState<boolean>(modo !== 'simulacro');
+  const [showPauseModal, setShowPauseModal] = useState<boolean>(false);
+  const [showConfirmDiscard, setShowConfirmDiscard] = useState<boolean>(false);
+  // Feedback instantáneo: activado por defecto en repaso/normas y conmutable libremente por cualquier usuario
+  const [modoInstantaneo, setModoInstantaneo] = useState<boolean>(() => {
+    return modo !== 'simulacro';
+  });
+  const [showRestoredBadge, setShowRestoredBadge] = useState<boolean>(() => !!initialSession);
 
   // Lifelines & Interactive tools
-  const [eliminatedMap, setEliminatedMap] = useState<Record<string, string[]>>({});
+  const [eliminatedMap, setEliminatedMap] = useState<Record<string, string[]>>(() => {
+    return initialSession ? initialSession.eliminatedMap || {} : {};
+  });
   const [showHint, setShowHint] = useState<boolean>(false);
   const [showJumpDrawer, setShowJumpDrawer] = useState<boolean>(false);
   const [gridFilter, setGridFilter] = useState<'todas' | 'respondidas' | 'pendientes' | 'marcadas'>('todas');
@@ -54,12 +95,91 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
   const startTimeRef = useRef<number>(Date.now());
   const questionStartTimeRef = useRef<number>(Date.now());
 
+  // Refs for tracking up-to-date state in intervals and beforeunload
+  const currentIndexRef = useRef(currentIndex);
+  const respuestasMapRef = useRef(respuestasMap);
+  const segundosRestantesRef = useRef(segundosRestantes);
+  const eliminatedMapRef = useRef(eliminatedMap);
+
+  useEffect(() => {
+    currentIndexRef.current = currentIndex;
+  }, [currentIndex]);
+
+  useEffect(() => {
+    respuestasMapRef.current = respuestasMap;
+  }, [respuestasMap]);
+
+  useEffect(() => {
+    segundosRestantesRef.current = segundosRestantes;
+  }, [segundosRestantes]);
+
+  useEffect(() => {
+    eliminatedMapRef.current = eliminatedMap;
+  }, [eliminatedMap]);
+
+  // Helper to persist current state
+  const persistSession = (status: 'in_progress' | 'paused' = 'in_progress') => {
+    if (preguntas.length === 0) return;
+    const session: ActiveExamSession = {
+      id: initialSession?.id || `session_${Date.now()}`,
+      modo,
+      normaFiltro,
+      preguntas,
+      tiempoLimiteMinutos,
+      segundosRestantes: segundosRestantesRef.current,
+      currentIndex: currentIndexRef.current,
+      respuestasMap: respuestasMapRef.current,
+      eliminatedMap: eliminatedMapRef.current,
+      status,
+      savedAt: Date.now(),
+      tituloExamen: normaFiltro || `Simulacro (${preguntas.length} Preguntas)`,
+    };
+    saveActiveExamSession(session);
+  };
+
+  // Auto-save on reload (beforeunload)
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      persistSession('in_progress');
+      // Standard browser confirmation prompt if leaving
+      e.preventDefault();
+      e.returnValue = '';
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, [modo, normaFiltro, preguntas, tiempoLimiteMinutos]);
+
+  // Persist session whenever answers, index or lifelines change
+  useEffect(() => {
+    persistSession('in_progress');
+  }, [currentIndex, respuestasMap, eliminatedMap]);
+
+  // Periodic auto-save for the timer (every 5 seconds)
+  useEffect(() => {
+    const saveInterval = setInterval(() => {
+      if (!showPauseModal && !showConfirmFinish) {
+        persistSession('in_progress');
+      }
+    }, 5000);
+    return () => clearInterval(saveInterval);
+  }, [showPauseModal, showConfirmFinish]);
+
+  // Hide the "restored" banner after 4 seconds
+  useEffect(() => {
+    if (showRestoredBadge) {
+      const t = setTimeout(() => setShowRestoredBadge(false), 5000);
+      return () => clearTimeout(t);
+    }
+  }, [showRestoredBadge]);
+
   const currentPregunta = preguntas[currentIndex];
   const totalPreguntas = preguntas.length;
 
-  // Timer Countdown for exam modes
+  // Timer Countdown for exam modes (pauses if modal is open)
   useEffect(() => {
     if (modo !== 'simulacro' && modo !== 'expres') return;
+    if (showPauseModal || showConfirmFinish) return; // Pause countdown while modal is open
 
     const interval = setInterval(() => {
       setSegundosRestantes((prev) => {
@@ -73,7 +193,7 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [modo]);
+  }, [modo, showPauseModal, showConfirmFinish]);
 
   // Reset timer & hint on question change
   useEffect(() => {
@@ -87,7 +207,8 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
       if (
         e.target instanceof HTMLInputElement ||
         e.target instanceof HTMLTextAreaElement ||
-        showConfirmFinish
+        showConfirmFinish ||
+        showPauseModal
       ) {
         return;
       }
@@ -114,7 +235,7 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentIndex, currentPregunta, totalPreguntas, eliminatedMap, showConfirmFinish]);
+  }, [currentIndex, currentPregunta, totalPreguntas, eliminatedMap, showConfirmFinish, showPauseModal]);
 
   const handleSelectOpcion = (opcionElegida: string) => {
     if (!currentPregunta) return;
@@ -134,6 +255,11 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
         esCorrecta,
       },
     }));
+
+    // En modo repaso o refuerzo inteligente, actualizar SRS en tiempo real
+    if (modo === 'repaso') {
+      actualizarProgresoSRS(currentPregunta.id, esCorrecta);
+    }
   };
 
   const handleToggleFavorito = () => {
@@ -163,7 +289,21 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
     }));
   };
 
+  const handlePausarYSalir = () => {
+    persistSession('paused');
+    setShowPauseModal(false);
+    onCancelExamen();
+  };
+
+  const handleDescartarExamen = () => {
+    clearActiveExamSession();
+    setShowPauseModal(false);
+    setShowConfirmDiscard(false);
+    onCancelExamen();
+  };
+
   const handleFinalizarExamen = () => {
+    clearActiveExamSession(); // Clear active session upon final submission
     const duracionSeg = Math.max(1, Math.round((Date.now() - startTimeRef.current) / 1000));
 
     let aciertos = 0;
@@ -227,11 +367,30 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
 
   return (
     <div className="max-w-6xl mx-auto space-y-4 pb-16 bg-[#F8FAFC] dark:bg-[#011611] text-slate-900 dark:text-slate-100 p-3 sm:p-6 rounded-3xl min-h-screen transition-colors duration-300">
+      {/* Restored Session Notification */}
+      {showRestoredBadge && (
+        <div className="bg-emerald-950/90 border border-emerald-500/60 text-emerald-200 px-4 py-2.5 rounded-2xl text-xs flex items-center justify-between gap-3 shadow-lg animate-fadeIn">
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+            <span>
+              <strong>¡Examen Reanudado!</strong> Continúas en la pregunta {currentIndex + 1} de {totalPreguntas} con tus respuestas y tiempo restante intactos.
+            </span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setShowRestoredBadge(false)}
+            className="text-emerald-400 hover:text-white px-2 py-0.5 rounded text-xs font-mono font-bold"
+          >
+            ✕
+          </button>
+        </div>
+      )}
+
       {/* Top Control Header - Styled from screenshots */}
       <div className="flex items-center justify-between gap-2 mb-4">
         <button
           type="button"
-          onClick={onCancelExamen}
+          onClick={() => setShowPauseModal(true)}
           className="flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-emerald-600 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -245,6 +404,32 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
               <span className="text-slate-700 dark:text-emerald-300">{timeFormatted}</span>
             </div>
           )}
+
+          {/* Toggle Modo Estudio / Feedback Inmediato */}
+          <button
+            type="button"
+            onClick={() => setModoInstantaneo(!modoInstantaneo)}
+            className={`px-3 py-1.5 rounded-xl border flex items-center gap-1.5 text-xs font-bold shadow-sm transition-all active:scale-95 ${
+              modoInstantaneo
+                ? 'bg-emerald-500/10 dark:bg-emerald-950/40 border-emerald-500/40 text-emerald-700 dark:text-emerald-300'
+                : 'bg-white dark:bg-[#02281e] border-slate-200 dark:border-emerald-800/30 text-slate-500 dark:text-slate-400 hover:text-emerald-500'
+            }`}
+            title={modoInstantaneo ? "Feedback instantáneo activo: muestra respuesta correcta de inmediato" : "Activar feedback instantáneo con respuesta correcta"}
+          >
+            <HelpCircle className="w-3.5 h-3.5" />
+            <span className="hidden md:inline">{modoInstantaneo ? 'Repaso Activo' : 'Ver Respuestas'}</span>
+          </button>
+
+          {/* Pause Button */}
+          <button
+            type="button"
+            onClick={() => setShowPauseModal(true)}
+            className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-emerald-800/30 bg-white dark:bg-[#02281e] text-slate-600 dark:text-emerald-300 hover:text-emerald-500 flex items-center gap-1.5 text-xs font-bold shadow-sm transition-all active:scale-95"
+            title="Pausar simulacro y guardar progreso"
+          >
+            <Pause className="w-3.5 h-3.5 fill-current" />
+            <span className="hidden sm:inline">Pausar</span>
+          </button>
           
           <button
             onClick={() => setShowJumpDrawer(!showJumpDrawer)}
@@ -368,23 +553,68 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
           </div>
         </div>
 
-        {/* FEEDBACK - Styled from screenshot feedback area */}
+        {/* FEEDBACK - Modo Estudio y Refuerzo Táctico */}
         {isRespondida && modoInstantaneo && (
-          <div className={`mt-4 p-4 rounded-2xl animate-fadeIn border ${
+          <div className={`mt-5 p-5 rounded-2xl animate-fadeIn border-2 shadow-sm ${
             currentRespuesta.esCorrecta 
-              ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-500/20 text-emerald-900 dark:text-emerald-100' 
-              : 'bg-red-50 dark:bg-red-900/20 border-red-500/20 text-red-900 dark:text-red-100'
+              ? 'bg-emerald-50/90 dark:bg-emerald-950/30 border-emerald-500/40 text-emerald-950 dark:text-emerald-100' 
+              : 'bg-rose-50/90 dark:bg-rose-950/30 border-rose-500/40 text-rose-950 dark:text-rose-100'
           }`}>
-            <div className="flex items-center gap-2 mb-2 font-black text-xs uppercase tracking-wider">
-              {currentRespuesta.esCorrecta ? <CheckCircle className="w-4 h-4" /> : <AlertCircle className="w-4 h-4" />}
-              <span>{currentRespuesta.esCorrecta ? '¡Respuesta Correcta!' : 'Respuesta Incorrecta'}</span>
+            <div className="flex items-center justify-between gap-3 mb-3 pb-2.5 border-b border-current/10">
+              <div className="flex items-center gap-2 font-black text-xs sm:text-sm uppercase tracking-wider">
+                {currentRespuesta.esCorrecta ? (
+                  <>
+                    <CheckCircle className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                    <span className="text-emerald-800 dark:text-emerald-300">¡Respuesta Correcta!</span>
+                  </>
+                ) : (
+                  <>
+                    <XCircle className="w-5 h-5 text-rose-600 dark:text-rose-400" />
+                    <span className="text-rose-800 dark:text-rose-300">Respuesta Incorrecta — Refuerzo Activo</span>
+                  </>
+                )}
+              </div>
+              <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded uppercase ${
+                currentRespuesta.esCorrecta
+                  ? 'bg-emerald-200/70 dark:bg-emerald-900/60 text-emerald-900 dark:text-emerald-200'
+                  : 'bg-rose-200/70 dark:bg-rose-900/60 text-rose-900 dark:text-rose-200'
+              }`}>
+                {modo === 'repaso' ? 'Refuerzo SRS' : 'Modo Estudio'}
+              </span>
             </div>
-            <p className="text-xs font-medium leading-relaxed opacity-90">
-              <span className="font-bold">Respuesta Oficial:</span> {currentPregunta.respuesta}
+
+            <div className="space-y-2.5 text-xs sm:text-sm">
+              <div className="bg-white/80 dark:bg-[#01221a] p-3 rounded-xl border border-slate-200/80 dark:border-emerald-800/40">
+                <span className="font-mono font-bold text-[11px] text-slate-500 dark:text-emerald-300/80 uppercase block mb-1">
+                  Respuesta Oficial del Balotario:
+                </span>
+                <p className="font-sans font-bold text-slate-900 dark:text-white leading-relaxed">
+                  {currentPregunta.respuesta}
+                </p>
+              </div>
+
               {currentPregunta.ubicacion && (
-                <span className="block mt-1 italic opacity-80">Base Legal: {currentPregunta.ubicacion}</span>
+                <div className="bg-emerald-100/50 dark:bg-emerald-900/20 p-3 rounded-xl border border-emerald-300/60 dark:border-emerald-700/40 text-emerald-900 dark:text-emerald-200 flex items-start gap-2.5">
+                  <Shield className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-mono font-black text-[10px] uppercase tracking-wider block text-emerald-700 dark:text-emerald-400">
+                      Fundamento Legal:
+                    </span>
+                    <span className="font-medium text-xs text-slate-800 dark:text-emerald-100">
+                      {currentPregunta.ubicacion} ({currentPregunta.norma})
+                    </span>
+                  </div>
+                </div>
               )}
-            </p>
+
+              {modo === 'repaso' && (
+                <p className="text-[11px] text-slate-600 dark:text-emerald-300/80 italic pt-1">
+                  {currentRespuesta.esCorrecta
+                    ? '✓ Has respondido correctamente esta pregunta. Sigue acumulando aciertos para consolidarla como dominada al 100%.'
+                    : '⚠ Pregunta mantenida en tu Banco de Errores para garantizar que la domines en próximas revisiones.'}
+                </p>
+              )}
+            </div>
           </div>
         )}
       </div>
@@ -497,6 +727,117 @@ export const ExamScreen: React.FC<ExamScreenProps> = ({
               >
                 Sí, Finalizar
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* PAUSE & EXIT MODAL */}
+      {showPauseModal && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-fadeIn">
+          <div className="bg-[#011a14] border-2 border-emerald-500/50 rounded-3xl p-6 sm:p-8 max-w-md w-full text-white space-y-5 shadow-2xl relative overflow-hidden">
+            {/* Ambient blur */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -mr-16 -mt-16"></div>
+
+            <div className="relative z-10 space-y-4">
+              <div className="flex items-center gap-3 text-emerald-400">
+                <div className="w-10 h-10 rounded-xl bg-emerald-900/40 border border-emerald-500/30 flex items-center justify-center">
+                  <Pause className="w-5 h-5 fill-current text-emerald-400" />
+                </div>
+                <div>
+                  <h3 className="font-display font-bold text-lg text-white">
+                    Pausar o Salir del Examen
+                  </h3>
+                  <p className="text-[11px] font-mono text-emerald-400/80 uppercase">
+                    Autoguardado Seguro
+                  </p>
+                </div>
+              </div>
+
+              {/* Status card */}
+              <div className="bg-[#01251d] border border-emerald-800/40 rounded-2xl p-3.5 space-y-2 text-xs">
+                <div className="flex justify-between items-center text-slate-300">
+                  <span>Progreso:</span>
+                  <strong className="text-white font-mono">
+                    {Object.keys(respuestasMap).length} de {totalPreguntas} respondidas
+                  </strong>
+                </div>
+                {segundosRestantes > 0 && (
+                  <div className="flex justify-between items-center text-slate-300">
+                    <span>Tiempo restante:</span>
+                    <strong className="text-amber-400 font-mono flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5" />
+                      {timeFormatted}
+                    </strong>
+                  </div>
+                )}
+                <div className="flex justify-between items-center text-slate-300">
+                  <span>Pregunta actual:</span>
+                  <strong className="text-emerald-400 font-mono">
+                    Pregunta {currentIndex + 1}
+                  </strong>
+                </div>
+              </div>
+
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Si sales, tu simulacro se guardará y podrás <strong className="text-emerald-300">reanudarlo exactamente donde te quedaste</strong> desde el portal de inicio.
+              </p>
+
+              {/* Action Buttons */}
+              <div className="space-y-2 pt-2">
+                <button
+                  type="button"
+                  onClick={handlePausarYSalir}
+                  className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-950/50 flex items-center justify-center gap-2 transition-all active:scale-95"
+                >
+                  <Pause className="w-4 h-4 fill-current" />
+                  <span>Pausar y Salir al Portal</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setShowPauseModal(false)}
+                  className="w-full py-2.5 px-4 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 text-slate-200 border border-slate-700 font-bold text-xs transition-all active:scale-95"
+                >
+                  Continuar respondiendo ahora
+                </button>
+
+                {/* Discard section */}
+                <div className="pt-2 border-t border-emerald-950">
+                  {!showConfirmDiscard ? (
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmDiscard(true)}
+                      className="w-full text-center text-[11px] text-red-400/80 hover:text-red-300 hover:underline py-1 transition-colors flex items-center justify-center gap-1.5"
+                    >
+                      <Trash2 className="w-3 h-3" />
+                      <span>Descartar examen y borrar progreso</span>
+                    </button>
+                  ) : (
+                    <div className="p-3 bg-red-950/40 border border-red-500/30 rounded-xl space-y-2 text-center">
+                      <p className="text-[11px] text-red-200">
+                        ¿Estás seguro? Se borrarán todas las respuestas marcadas de este intento.
+                      </p>
+                      <div className="flex gap-2 justify-center">
+                        <button
+                          type="button"
+                          onClick={handleDescartarExamen}
+                          className="px-3 py-1 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-bold"
+                        >
+                          Sí, Descartar
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setShowConfirmDiscard(false)}
+                          className="px-3 py-1 bg-slate-800 text-slate-300 rounded-lg text-xs"
+                        >
+                          Cancelar
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>

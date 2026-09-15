@@ -36,9 +36,22 @@ import {
   calcularIndicadorPreparacionGlobal,
   getPreguntasPendientesSRS,
 } from './lib/srsStorage';
+import {
+  getActiveExamSession,
+  saveActiveExamSession,
+  clearActiveExamSession,
+  ActiveExamSession,
+} from './lib/activeExamStorage';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<string>('landing');
+  const [activeTab, setActiveTab] = useState<string>(() => {
+    const saved = getActiveExamSession();
+    // If the user refreshed or updated the app while in an active exam, restore directly to exam screen
+    if (saved && Array.isArray(saved.preguntas) && saved.preguntas.length > 0 && saved.status === 'in_progress') {
+      return 'examen';
+    }
+    return 'landing';
+  });
   const [userProfile, setUserProfile] = useState<UserProfile>(() => {
     const base = getProfile();
     return { ...base, role: 'student', dni: '' }; // Default role and empty dni
@@ -49,6 +62,7 @@ export default function App() {
   const [showOtpModal, setShowOtpModal] = useState<boolean>(false);
   const [showExplainerModal, setShowExplainerModal] = useState<boolean>(false);
   const [showGuideModal, setShowGuideModal] = useState<boolean>(false);
+  const [isDashboardModalOpen, setIsDashboardModalOpen] = useState<boolean>(false);
 
   // Theme State ('light' | 'dark')
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -258,11 +272,24 @@ export default function App() {
     setActiveTab('landing');
   };
 
-  // Active Exam State
-  const [activeExamPreguntas, setActiveExamPreguntas] = useState<Pregunta[]>([]);
-  const [activeExamModo, setActiveExamModo] = useState<'simulacro' | 'repaso' | 'norma' | 'expres' | 'whatsapp'>('simulacro');
-  const [activeExamNorma, setActiveExamNorma] = useState<string | undefined>(undefined);
-  const [activeExamTiempoMin, setActiveExamTiempoMin] = useState<number>(20);
+  // Active Exam Session & State
+  const [activeExamSession, setActiveExamSession] = useState<ActiveExamSession | null>(() => getActiveExamSession());
+  const [activeExamPreguntas, setActiveExamPreguntas] = useState<Pregunta[]>(() => {
+    const saved = getActiveExamSession();
+    return saved?.preguntas || [];
+  });
+  const [activeExamModo, setActiveExamModo] = useState<'simulacro' | 'repaso' | 'norma' | 'expres' | 'whatsapp'>(() => {
+    const saved = getActiveExamSession();
+    return saved?.modo || 'simulacro';
+  });
+  const [activeExamNorma, setActiveExamNorma] = useState<string | undefined>(() => {
+    const saved = getActiveExamSession();
+    return saved?.normaFiltro;
+  });
+  const [activeExamTiempoMin, setActiveExamTiempoMin] = useState<number>(() => {
+    const saved = getActiveExamSession();
+    return saved?.tiempoLimiteMinutos || 20;
+  });
 
   // Completed Exam State
   const [lastCompletedIntento, setLastCompletedIntento] = useState<IntentoExamen | null>(null);
@@ -273,34 +300,74 @@ export default function App() {
   const indicadorGlobal = calcularIndicadorPreparacionGlobal();
   const pendientesSRS = getPreguntasPendientesSRS();
 
+  const handleResumeExam = () => {
+    const saved = getActiveExamSession();
+    if (!saved || !saved.preguntas || saved.preguntas.length === 0) return;
+    setActiveExamPreguntas(saved.preguntas);
+    setActiveExamModo(saved.modo);
+    setActiveExamNorma(saved.normaFiltro);
+    setActiveExamTiempoMin(saved.tiempoLimiteMinutos);
+    setActiveExamSession(saved);
+    setActiveTab('examen');
+  };
+
+  const handleDiscardExam = () => {
+    clearActiveExamSession();
+    setActiveExamSession(null);
+  };
+
   const handleStartExamen = (
     modo: 'simulacro' | 'repaso' | 'norma' | 'expres' | 'whatsapp',
     numPreguntas: number = 20,
     normaNombre?: string
   ) => {
     let list: Pregunta[] = [];
+    let tiempo = 20;
 
     if (modo === 'simulacro') {
       list = generarExamenSimulacro(numPreguntas);
-      setActiveExamTiempoMin(numPreguntas === 100 ? 120 : numPreguntas);
+      tiempo = numPreguntas === 100 ? 120 : numPreguntas;
     } else if (modo === 'repaso') {
-      list = pendientesSRS.length > 0 ? barajar(pendientesSRS) : barajar(BANCO_PREGUNTAS).slice(0, 15);
-      setActiveExamTiempoMin(20);
+      const fallos = getPreguntasPendientesSRS();
+      if (fallos.length > 0) {
+        list = barajar(fallos);
+      } else {
+        list = barajar(BANCO_PREGUNTAS).slice(0, 15);
+      }
+      tiempo = Math.max(15, list.length * 2);
     } else if (modo === 'norma' && normaNombre) {
       const qNorma = getPreguntasPorNorma(normaNombre);
       list = barajar(qNorma).slice(0, numPreguntas);
-      setActiveExamTiempoMin(Math.max(10, numPreguntas));
+      tiempo = Math.max(10, numPreguntas);
     } else if (modo === 'expres') {
       list = barajar(BANCO_PREGUNTAS).slice(0, 10);
-      setActiveExamTiempoMin(10);
+      tiempo = 10;
     } else {
       list = barajar(BANCO_PREGUNTAS).slice(0, 15);
-      setActiveExamTiempoMin(15);
+      tiempo = 15;
     }
 
+    clearActiveExamSession();
+    const newSession: ActiveExamSession = {
+      id: `exam_${Date.now()}`,
+      modo,
+      normaFiltro: normaNombre,
+      preguntas: list,
+      tiempoLimiteMinutos: tiempo,
+      segundosRestantes: (modo === 'simulacro' || modo === 'expres') ? tiempo * 60 : 0,
+      currentIndex: 0,
+      respuestasMap: {},
+      eliminatedMap: {},
+      status: 'in_progress',
+      savedAt: Date.now(),
+      tituloExamen: normaNombre || (modo === 'simulacro' ? `Simulacro General (${numPreguntas} Preguntas)` : `Evaluación (${list.length} Preguntas)`),
+    };
+    saveActiveExamSession(newSession);
+    setActiveExamSession(newSession);
     setActiveExamPreguntas(list);
     setActiveExamModo(modo);
     setActiveExamNorma(normaNombre);
+    setActiveExamTiempoMin(tiempo);
     setActiveTab('examen');
   };
 
@@ -309,6 +376,23 @@ export default function App() {
     tiempoMinutos: number,
     tituloSimulacro: string
   ) => {
+    clearActiveExamSession();
+    const newSession: ActiveExamSession = {
+      id: `custom_exam_${Date.now()}`,
+      modo: 'simulacro',
+      normaFiltro: tituloSimulacro,
+      preguntas,
+      tiempoLimiteMinutos: tiempoMinutos,
+      segundosRestantes: tiempoMinutos * 60,
+      currentIndex: 0,
+      respuestasMap: {},
+      eliminatedMap: {},
+      status: 'in_progress',
+      savedAt: Date.now(),
+      tituloExamen: tituloSimulacro,
+    };
+    saveActiveExamSession(newSession);
+    setActiveExamSession(newSession);
     setActiveExamPreguntas(preguntas);
     setActiveExamModo('simulacro');
     setActiveExamNorma(tituloSimulacro);
@@ -317,6 +401,8 @@ export default function App() {
   };
 
   const handleFinishExamen = (intento: IntentoExamen) => {
+    clearActiveExamSession();
+    setActiveExamSession(null);
     guardarIntento(intento);
     setLastCompletedIntento(intento);
     setActiveTab('resultados');
@@ -391,6 +477,9 @@ export default function App() {
             }}
             onOpenOtpModal={() => setShowOtpModal(true)}
             onOpenExplainer={() => setShowExplainerModal(true)}
+            activeExamSession={activeExamSession}
+            onResumeExam={handleResumeExam}
+            onDiscardExam={handleDiscardExam}
           />
         )}
 
@@ -404,6 +493,10 @@ export default function App() {
             onStartExamen={handleStartExamen}
             onNavigateTab={setActiveTab}
             onOpenExplainer={() => setShowExplainerModal(true)}
+            activeExamSession={activeExamSession}
+            onResumeExam={handleResumeExam}
+            onDiscardExam={handleDiscardExam}
+            onModalStateChange={setIsDashboardModalOpen}
           />
         )}
 
@@ -411,6 +504,9 @@ export default function App() {
           <SimulacroHubScreen
             onStartCustomExamen={handleStartCustomExamen}
             onNavigateTab={setActiveTab}
+            activeExamSession={activeExamSession}
+            onResumeExam={handleResumeExam}
+            onDiscardExam={handleDiscardExam}
           />
         )}
 
@@ -438,7 +534,10 @@ export default function App() {
             preguntas={activeExamPreguntas}
             tiempoLimiteMinutos={activeExamTiempoMin}
             onFinishExamen={handleFinishExamen}
-            onCancelExamen={() => setActiveTab('dashboard')}
+            onCancelExamen={() => {
+              setActiveExamSession(getActiveExamSession());
+              setActiveTab('dashboard');
+            }}
           />
         )}
 
@@ -496,7 +595,7 @@ export default function App() {
       />
 
       {/* Native Mobile Bottom Navigation Bar (Hidden on Desktop) */}
-      {isLoggedIn && !['examen', 'repaso'].includes(activeTab) && (
+      {isLoggedIn && !['examen', 'repaso'].includes(activeTab) && !isDashboardModalOpen && (
         <MobileBottomNav
           activeTab={activeTab}
           setActiveTab={setActiveTab}
