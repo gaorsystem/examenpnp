@@ -38,12 +38,12 @@ import {
 } from './lib/srsStorage';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<string>('simulacro');
+  const [activeTab, setActiveTab] = useState<string>('landing');
   const [userProfile, setUserProfile] = useState<UserProfile>(() => {
     const base = getProfile();
     return { ...base, role: 'student', dni: '' }; // Default role and empty dni
   });
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [session, setSession] = useState<any>(null);
   const [showProfileModal, setShowProfileModal] = useState<boolean>(false);
   const [showOtpModal, setShowOtpModal] = useState<boolean>(false);
