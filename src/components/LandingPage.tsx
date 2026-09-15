@@ -42,9 +42,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             <h1 className="font-display font-black text-3xl xs:text-4xl sm:text-5xl text-slate-900 dark:text-white tracking-tight uppercase">
               Simulador PNP 2026
             </h1>
-            <p className="text-[10px] xs:text-xs sm:text-base text-slate-500 dark:text-emerald-400/90 font-bold uppercase tracking-widest">
-              Concurso de Ascenso Promoción 2027
-            </p>
+
           </div>
 
           <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-800/50 px-4 py-1.5 rounded-full text-xs font-mono font-black shadow-sm uppercase tracking-wider">
@@ -70,7 +68,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
             <div className="flex-1 min-w-0 z-10">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="font-display font-black text-xl sm:text-2xl uppercase">Ingresar al Simulacro</span>
+                <span className="font-display font-black text-xl sm:text-2xl uppercase">INGRESAR A SIMULACRO</span>
                 <span className="bg-emerald-950/40 text-emerald-200 text-[10px] font-mono px-2 py-0.5 rounded-lg border border-emerald-400/30 font-black">
                   100 PREG.
                 </span>
@@ -97,9 +95,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   WHATSAPP
                 </span>
               </div>
-              <p className="text-xs text-slate-500 dark:text-emerald-400/70 font-medium mt-1">
-                Solicita tu acceso inmediato al WhatsApp <span className="text-emerald-600 font-bold">929 172 559</span>
-              </p>
+
             </div>
           </button>
         </div>

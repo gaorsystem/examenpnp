@@ -179,7 +179,12 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
       console.warn('Error parsing local users:', e);
     }
 
-    setUsers(remoteUsers);
+    // Deduplicar por ID final para evitar errores de llaves en React
+    const uniqueUsers = Array.from(
+      new Map(remoteUsers.map(u => [u.id, u])).values()
+    );
+
+    setUsers(uniqueUsers);
     setLoading(false);
   };
 
@@ -443,26 +448,26 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-1 sm:px-0">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Gestión de Clientes</h2>
-          <p className="text-gray-500">Administra el acceso de tus alumnos y postulantes.</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Gestión de Clientes</h2>
+          <p className="text-sm text-gray-500">Administra el acceso de tus alumnos y postulantes.</p>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-col sm:flex-row gap-2">
           <button
             onClick={() => setShowGuide(!showGuide)}
-            className={`flex items-center justify-center space-x-2 px-4 py-2 rounded-xl font-semibold transition-all active:scale-95 ${
+            className={`flex items-center justify-center space-x-2 px-4 py-2.5 sm:py-2 rounded-xl font-semibold transition-all active:scale-95 text-sm sm:text-base ${
               showGuide ? 'bg-gray-200 text-gray-700' : 'bg-slate-800 text-white hover:bg-slate-900'
             }`}
           >
-            <Settings size={20} />
-            <span>{showGuide ? 'Ocultar Guía' : 'Guía de Conexión VPS'}</span>
+            <Settings size={18} />
+            <span>{showGuide ? 'Ocultar Guía' : 'Guía VPS'}</span>
           </button>
           <button
             onClick={() => setShowAddModal(true)}
-            className="flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl font-semibold transition-all active:scale-95"
+            className="flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 sm:py-2 rounded-xl font-semibold transition-all active:scale-95 text-sm sm:text-base shadow-lg shadow-blue-600/20"
           >
-            <UserPlus size={20} />
+            <UserPlus size={18} />
             <span>Nuevo Cliente</span>
           </button>
         </div>
@@ -481,146 +486,177 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
         )}
       </AnimatePresence>
 
-      <div className="relative">
+      <div className="relative mx-1 sm:mx-0">
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <Search className="h-5 w-5 text-gray-400" />
+          <Search className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
         </div>
         <input
           type="text"
           placeholder="Buscar por nombre o teléfono..."
-          className="block w-full pl-10 pr-3 py-2 border border-gray-200 rounded-xl leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm"
+          className="block w-full pl-10 pr-3 py-2.5 sm:py-2 border border-gray-200 rounded-xl leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mx-1 sm:mx-0">
         {loading ? (
           <div className="flex flex-col items-center justify-center py-12">
             <Loader2 className="h-8 w-8 text-blue-600 animate-spin mb-2" />
             <span className="text-gray-500">Cargando usuarios...</span>
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Documento</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contacto</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado Acceso</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dispositivo</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plan / Rol</th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {filteredUsers.length > 0 ? (
-                  filteredUsers.map((user) => (
-                    <tr key={user.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center">
-                          <div className="h-10 w-10 flex-shrink-0 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold">
-                            {user.nombre.charAt(0).toUpperCase()}
-                          </div>
-                          <div className="ml-4">
-                            <div className="text-sm font-medium text-gray-900">{user.nombre}</div>
-                            <div className="text-xs text-gray-500">{user.grado || 'Sin grado'}</div>
-                          </div>
+          <>
+            {/* MOBILE VIEW: Card Layout */}
+            <div className="block lg:hidden divide-y divide-gray-100">
+              {filteredUsers.length > 0 ? (
+                filteredUsers.map((user) => (
+                  <div key={user.id} className="p-4 space-y-4 hover:bg-gray-50 transition-colors">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center">
+                        <div className="h-10 w-10 flex-shrink-0 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold">
+                          {user.nombre.charAt(0).toUpperCase()}
                         </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900">DNI: {user.dni || '---'}</div>
-                        {user.cip && <div className="text-xs text-gray-500">CIP: {user.cip}</div>}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center text-sm text-gray-600 font-mono font-medium">
-                          <Smartphone size={16} className="mr-2 text-emerald-600" />
+                        <div className="ml-3">
+                          <div className="text-sm font-bold text-gray-900 leading-tight">{user.nombre}</div>
+                        </div>
+                      </div>
+                      <div className="flex flex-col items-end gap-1">
+                        <span className="text-[10px] text-emerald-600 font-bold flex items-center gap-1">
+                          🟢 Activo
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                      <div className="col-span-2">
+                        <span className="text-[9px] font-black text-slate-400 uppercase block mb-0.5">WhatsApp</span>
+                        <div className="text-xs font-mono font-bold text-emerald-700 flex items-center gap-1">
+                          <Smartphone size={12} />
                           {user.telefonoWhatsapp}
                         </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold text-xs px-2.5 py-1 rounded-lg">
-                          🟢 Habilitado
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        {user.activeDeviceId ? (
-                          <div className="flex items-center gap-1.5">
-                            <span className="px-2.5 py-1 text-[10px] font-mono font-bold bg-emerald-100 text-emerald-800 rounded-full flex items-center gap-1">
-                              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-                              📱 1 Dispositivo
-                            </span>
-                            <button
-                              onClick={() => handleUnlockDevice(user)}
-                              title="Liberar dispositivo para permitir nuevo ingreso"
-                              className="p-1 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors text-xs font-bold"
+                      </div>
+                      <div className="col-span-2 pt-2 border-t border-slate-200/50">
+                        <span className="text-[9px] font-black text-slate-400 uppercase block mb-0.5">Método de Pago</span>
+                        <div className="text-xs font-bold text-blue-700 uppercase tracking-tight">
+                          {user.metodoPago || 'No especificado'}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between gap-2 pt-1">
+                      <button 
+                        onClick={() => copyWhatsAppMessage(user)}
+                        className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white p-2 rounded-xl transition-all flex items-center justify-center gap-2 text-[11px] font-black uppercase tracking-tight"
+                      >
+                        <ClipboardCheck size={14} />
+                        WhatsApp
+                      </button>
+                      <div className="flex gap-2">
+                        <button 
+                          onClick={() => openEditModal(user)}
+                          className="p-2.5 text-slate-500 bg-slate-100 hover:bg-blue-100 hover:text-blue-600 rounded-xl transition-colors"
+                        >
+                          <Edit2 size={16} />
+                        </button>
+                        <button 
+                          onClick={() => handleDeleteUser(user)}
+                          className="p-2.5 text-slate-500 bg-slate-100 hover:bg-red-100 hover:text-red-600 rounded-xl transition-colors"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="p-8 text-center text-gray-500 italic text-sm">
+                  No se encontraron usuarios.
+                </div>
+              )}
+            </div>
+
+            {/* DESKTOP VIEW: Table Layout */}
+            <div className="hidden lg:block overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">WhatsApp</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Método de Pago</th>
+                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {filteredUsers.length > 0 ? (
+                    filteredUsers.map((user) => (
+                      <tr key={user.id} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex items-center">
+                            <div className="h-10 w-10 flex-shrink-0 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold">
+                              {user.nombre.charAt(0).toUpperCase()}
+                            </div>
+                            <div className="ml-4">
+                              <div className="text-sm font-bold text-gray-900">{user.nombre}</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex items-center text-sm text-gray-600 font-mono font-medium">
+                            <Smartphone size={16} className="mr-2 text-emerald-600" />
+                            {user.telefonoWhatsapp}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm font-bold text-blue-700 uppercase">
+                            {user.metodoPago || '---'}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                          <div className="flex justify-end space-x-2">
+                            <button 
+                              onClick={() => copyWhatsAppMessage(user)}
+                              title="Copiar mensaje de bienvenida para WhatsApp con teléfono y código"
+                              className="p-2 text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors flex items-center gap-1 text-xs font-bold"
                             >
-                              🔓 Liberar
+                              <ClipboardCheck size={16} />
+                              <span className="hidden sm:inline">WhatsApp</span>
+                            </button>
+                            <button 
+                              onClick={() => openEditModal(user)}
+                              title="Editar cliente"
+                              className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-colors"
+                            >
+                              <Edit2 size={16} />
+                            </button>
+                            <button 
+                              onClick={() => handleDeleteUser(user)}
+                              title="Eliminar cliente"
+                              className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors"
+                            >
+                              <Trash2 size={16} />
                             </button>
                           </div>
-                        ) : (
-                          <span className="px-2.5 py-1 text-[10px] font-mono text-slate-400 bg-slate-100 rounded-full">
-                            ⚪ Sin sesión activa
-                          </span>
-                        )}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex flex-col gap-1">
-                          <span className={`px-2 py-0.5 w-max inline-flex text-[10px] font-black rounded-full uppercase tracking-wider ${
-                            user.plan === 'premium' ? 'bg-amber-100 text-amber-800' : 'bg-gray-100 text-gray-800'
-                          }`}>
-                            {user.plan}
-                          </span>
-                          <span className="text-xs text-slate-500 font-medium">
-                            {user.role === 'admin' ? '🛡️ Admin' : '👤 Estudiante'}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <div className="flex justify-end space-x-2">
-                          <button 
-                            onClick={() => copyWhatsAppMessage(user)}
-                            title="Copiar mensaje de bienvenida para WhatsApp con teléfono y código"
-                            className="p-2 text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors flex items-center gap-1 text-xs font-bold"
-                          >
-                            <ClipboardCheck size={16} />
-                            <span className="hidden sm:inline">WhatsApp</span>
-                          </button>
-                          <button 
-                            onClick={() => openEditModal(user)}
-                            title="Editar cliente"
-                            className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-colors"
-                          >
-                            <Edit2 size={16} />
-                          </button>
-                          <button 
-                            onClick={() => handleDeleteUser(user)}
-                            title="Eliminar cliente"
-                            className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors"
-                          >
-                            <Trash2 size={16} />
-                          </button>
-                        </div>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={7} className="px-6 py-12 text-center text-gray-500 italic">
+                        No se encontraron usuarios.
                       </td>
                     </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan={7} className="px-6 py-12 text-center text-gray-500 italic">
-                      No se encontraron usuarios.
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </>
         )}
       </div>
 
       <AnimatePresence>
         {showAddModal && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -633,50 +669,50 @@ export const UserManagement: React.FC<UserManagementProps> = ({ userProfile }) =
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              className="relative bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl w-full max-w-xl overflow-hidden border border-slate-200 dark:border-slate-800"
+              className="relative bg-white dark:bg-slate-900 rounded-[1.5rem] sm:rounded-[2rem] shadow-2xl w-full max-w-xl overflow-hidden border border-slate-200 dark:border-slate-800"
             >
               <form onSubmit={handleAddUser} className="flex flex-col max-h-[90vh]">
-                <div className="p-8 pb-4 border-b border-slate-100 dark:border-slate-800">
+                <div className="p-5 sm:p-8 pb-3 sm:pb-4 border-b border-slate-100 dark:border-slate-800">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-2xl font-display font-black text-slate-900 dark:text-white flex items-center gap-3">
-                        <div className="p-2 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded-xl">
-                          <UserPlus size={24} />
+                      <h3 className="text-xl sm:text-2xl font-display font-black text-slate-900 dark:text-white flex items-center gap-2 sm:gap-3">
+                        <div className="p-1.5 sm:p-2 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded-lg sm:rounded-xl">
+                          <UserPlus size={20} className="sm:w-6 sm:h-6" />
                         </div>
                         Nuevo Cliente
                       </h3>
-                      <p className="text-slate-500 text-sm mt-1 font-medium">Registra un nuevo participante en el sistema.</p>
+                      <p className="text-slate-500 text-[11px] sm:text-sm mt-0.5 sm:mt-1 font-medium">Registra un nuevo participante en el sistema.</p>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1 sm:gap-2">
                       <button 
                         type="button" 
                         onClick={() => setShowGuide(!showGuide)} 
-                        className={`p-2 rounded-full transition-all ${showGuide ? 'bg-amber-100 text-amber-600' : 'text-slate-400 hover:text-blue-600 hover:bg-blue-50'}`}
+                        className={`p-1.5 sm:p-2 rounded-full transition-all ${showGuide ? 'bg-amber-100 text-amber-600' : 'text-slate-400 hover:text-blue-600 hover:bg-blue-50'}`}
                         title="Ver Guía de Resolución de Errores"
                       >
-                        <HelpCircle size={24} />
+                        <HelpCircle size={20} className="sm:w-6 sm:h-6" />
                       </button>
                       <button 
                         type="button" 
                         onClick={() => setShowAddModal(false)} 
-                        className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
+                        className="p-1.5 sm:p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
                       >
-                        <XCircle size={24} />
+                        <XCircle size={20} className="sm:w-6 sm:h-6" />
                       </button>
                     </div>
                   </div>
                 </div>
 
                 {showGuide && (
-                  <div className="mx-8 mt-4 p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl animate-in slide-in-from-top-2">
-                    <h4 className="text-amber-800 dark:text-amber-400 text-xs font-black uppercase tracking-widest mb-2 flex items-center gap-2">
-                      <AlertCircle size={14} /> Solución: Error de Recursión RLS
+                  <div className="mx-4 sm:mx-8 mt-3 sm:mt-4 p-3 sm:p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl sm:rounded-2xl animate-in slide-in-from-top-2">
+                    <h4 className="text-amber-800 dark:text-amber-400 text-[10px] sm:text-xs font-black uppercase tracking-widest mb-1.5 sm:mb-2 flex items-center gap-2">
+                      <AlertCircle size={12} className="sm:w-3.5 sm:h-3.5" /> Solución: Error de Recursión RLS
                     </h4>
-                    <p className="text-amber-700 dark:text-amber-500 text-[10px] leading-relaxed mb-3">
-                      Si recibes el error "infinite recursion detected", copia y ejecuta este comando en el <b>SQL Editor</b> de tu panel de Supabase para corregir los permisos:
+                    <p className="text-amber-700 dark:text-amber-500 text-[9px] sm:text-[10px] leading-relaxed mb-2 sm:mb-3">
+                      Si recibes el error "infinite recursion detected", copia y ejecuta este comando en el <b>SQL Editor</b> de tu panel de Supabase:
                     </p>
                     <div className="relative group">
-                      <pre className="text-[9px] bg-slate-900 text-amber-200 p-3 rounded-lg overflow-x-auto font-mono max-h-36">
+                      <pre className="text-[8px] sm:text-[9px] bg-slate-900 text-amber-200 p-2 sm:p-3 rounded-lg overflow-x-auto font-mono max-h-32 sm:max-h-36">
 {`ALTER TABLE profiles DISABLE ROW LEVEL SECURITY;
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 
@@ -697,24 +733,24 @@ WITH CHECK (true);`}
                           navigator.clipboard.writeText(`ALTER TABLE profiles DISABLE ROW LEVEL SECURITY;\nALTER TABLE profiles ENABLE ROW LEVEL SECURITY;\n\nDROP POLICY IF EXISTS "Admins manage all" ON profiles;\nDROP POLICY IF EXISTS "Users can view own profile" ON profiles;\nDROP POLICY IF EXISTS "Enable insert for authenticated users only" ON profiles;\nDROP POLICY IF EXISTS "Allow all access" ON profiles;\n\nCREATE POLICY "Allow public access to profiles"\nON public.profiles\nFOR ALL\nUSING (true)\nWITH CHECK (true);`);
                           alert('¡Código SQL copiado!');
                         }}
-                        className="absolute right-2 top-2 p-1.5 bg-white/10 hover:bg-white/20 rounded-md text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="absolute right-2 top-2 p-1 bg-white/10 hover:bg-white/20 rounded-md text-white opacity-0 group-hover:opacity-100 transition-opacity"
                       >
-                        <ClipboardCheck size={14} />
+                        <ClipboardCheck size={12} className="sm:w-3.5 sm:h-3.5" />
                       </button>
                     </div>
                   </div>
                 )}
 
-                <div className="p-8 pt-6 overflow-y-auto custom-scrollbar space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="md:col-span-2">
-                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">Nombre Completo</label>
+                <div className="p-5 sm:p-8 pt-4 sm:pt-6 overflow-y-auto custom-scrollbar space-y-4 sm:space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                    <div className="sm:col-span-2">
+                      <label className="block text-[10px] sm:text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5 sm:mb-2 ml-1">Nombre Completo</label>
                       <div className="relative">
-                        <UserIcon size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                        <UserIcon size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 sm:w-4.5 sm:h-4.5" />
                         <input
                           type="text"
                           required
-                          className="block w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
+                          className="block w-full pl-10 sm:pl-11 pr-4 py-2.5 sm:py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-sm sm:text-base text-slate-900 dark:text-white placeholder:text-slate-400"
                           placeholder="Ej. Juan Pérez García"
                           value={newUserName}
                           onChange={(e) => setNewUserName(e.target.value)}
@@ -723,13 +759,13 @@ WITH CHECK (true);`}
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">WhatsApp</label>
+                      <label className="block text-[10px] sm:text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5 sm:mb-2 ml-1">WhatsApp</label>
                       <div className="relative">
-                        <Smartphone size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                        <Smartphone size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 sm:w-4.5 sm:h-4.5" />
                         <input
                           type="tel"
                           required
-                          className="block w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
+                          className="block w-full pl-10 sm:pl-11 pr-4 py-2.5 sm:py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-sm sm:text-base text-slate-900 dark:text-white placeholder:text-slate-400"
                           placeholder="999 888 777"
                           value={newUserPhone}
                           onChange={(e) => setNewUserPhone(e.target.value)}
@@ -738,33 +774,11 @@ WITH CHECK (true);`}
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">Correo Electrónico (Opcional)</label>
-                      <input
-                        type="email"
-                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
-                        placeholder="ejemplo@correo.com (Auto si está vacío)"
-                        value={newUserEmail}
-                        onChange={(e) => setNewUserEmail(e.target.value)}
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">Contraseña Temporal (Opcional)</label>
-                      <input
-                        type="text"
-                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
-                        placeholder="Mínimo 6 caracteres (Auto si está vacío)"
-                        value={newUserPassword}
-                        onChange={(e) => setNewUserPassword(e.target.value)}
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">DNI (Documento)</label>
+                      <label className="block text-[10px] sm:text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5 sm:mb-2 ml-1">DNI (Documento)</label>
                       <input
                         type="text"
                         required
-                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
+                        className="block w-full px-4 py-2.5 sm:py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-sm sm:text-base text-slate-900 dark:text-white placeholder:text-slate-400"
                         placeholder="77665544"
                         value={newUserDni}
                         onChange={(e) => setNewUserDni(e.target.value)}
@@ -772,31 +786,31 @@ WITH CHECK (true);`}
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">CIP (Opcional)</label>
+                      <label className="block text-[10px] sm:text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5 sm:mb-2 ml-1">Grado</label>
                       <input
                         type="text"
-                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
-                        placeholder="123456"
-                        value={newUserCip}
-                        onChange={(e) => setNewUserCip(e.target.value)}
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">Grado</label>
-                      <input
-                        type="text"
-                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
+                        className="block w-full px-4 py-2.5 sm:py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-sm sm:text-base text-slate-900 dark:text-white placeholder:text-slate-400"
                         placeholder="Ej. SO3 / Alférez"
                         value={newUserGrado}
                         onChange={(e) => setNewUserGrado(e.target.value)}
                       />
                     </div>
 
-                    <div className="md:col-span-2">
-                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">Método de Pago</label>
+                    <div>
+                      <label className="block text-[10px] sm:text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5 sm:mb-2 ml-1">CIP (Opcional)</label>
+                      <input
+                        type="text"
+                        className="block w-full px-4 py-2.5 sm:py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-sm sm:text-base text-slate-900 dark:text-white placeholder:text-slate-400"
+                        placeholder="123456"
+                        value={newUserCip}
+                        onChange={(e) => setNewUserCip(e.target.value)}
+                      />
+                    </div>
+
+                    <div className="sm:col-span-2">
+                      <label className="block text-[10px] sm:text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5 sm:mb-2 ml-1">Método de Pago</label>
                       <select
-                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white cursor-pointer"
+                        className="block w-full px-4 py-2.5 sm:py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-sm sm:text-base text-slate-900 dark:text-white cursor-pointer"
                         value={newUserMetodoPago}
                         onChange={(e) => setNewUserMetodoPago(e.target.value)}
                       >
@@ -807,48 +821,48 @@ WITH CHECK (true);`}
                       </select>
                     </div>
 
-                    <div className="md:col-span-2 bg-slate-50 dark:bg-slate-800/50 p-5 rounded-2xl border border-slate-100 dark:border-slate-800">
-                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-4 ml-1">Permisos de Acceso</label>
-                      <div className="flex items-center gap-8">
-                        <label className="flex items-center gap-3 cursor-pointer group">
+                    <div className="sm:col-span-2 bg-slate-50 dark:bg-slate-800/50 p-4 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-100 dark:border-slate-800">
+                      <label className="block text-[10px] sm:text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-3 sm:mb-4 ml-1">Permisos de Acceso</label>
+                      <div className="flex items-center gap-6 sm:gap-8">
+                        <label className="flex items-center gap-2.5 sm:gap-3 cursor-pointer group">
                           <input
                             type="radio"
                             name="role"
                             checked={newUserRole === 'student'}
                             onChange={() => setNewUserRole('student')}
-                            className="w-5 h-5 text-blue-600 border-slate-300 dark:border-slate-700 focus:ring-blue-500 bg-white dark:bg-slate-900"
+                            className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 border-slate-300 dark:border-slate-700 focus:ring-blue-500 bg-white dark:bg-slate-900"
                           />
-                          <span className="text-sm font-bold text-slate-700 dark:text-slate-300 group-hover:text-blue-600 transition-colors">Estudiante</span>
+                          <span className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 group-hover:text-blue-600 transition-colors">Estudiante</span>
                         </label>
-                        <label className="flex items-center gap-3 cursor-pointer group">
+                        <label className="flex items-center gap-2.5 sm:gap-3 cursor-pointer group">
                           <input
                             type="radio"
                             name="role"
                             checked={newUserRole === 'admin'}
                             onChange={() => setNewUserRole('admin')}
-                            className="w-5 h-5 text-blue-600 border-slate-300 dark:border-slate-700 focus:ring-blue-500 bg-white dark:bg-slate-900"
+                            className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 border-slate-300 dark:border-slate-700 focus:ring-blue-500 bg-white dark:bg-slate-900"
                           />
-                          <span className="text-sm font-bold text-slate-700 dark:text-slate-300 group-hover:text-blue-600 transition-colors">Administrador</span>
+                          <span className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 group-hover:text-blue-600 transition-colors">Administrador</span>
                         </label>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-8 border-t border-slate-100 dark:border-slate-800 flex gap-4">
+                <div className="p-5 sm:p-8 border-t border-slate-100 dark:border-slate-800 flex gap-3 sm:gap-4">
                   <button
                     type="button"
                     onClick={() => setShowAddModal(false)}
-                    className="flex-1 px-6 py-4 border border-slate-200 dark:border-slate-800 text-sm font-bold rounded-2xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors uppercase tracking-widest"
+                    className="flex-1 px-4 sm:px-6 py-3 sm:py-4 border border-slate-200 dark:border-slate-800 text-[11px] sm:text-sm font-bold rounded-xl sm:rounded-2xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors uppercase tracking-widest"
                   >
-                    Cancelar
+                    CANCELAR
                   </button>
                   <button
                     type="submit"
                     disabled={saving}
-                    className="flex-[2] flex justify-center items-center px-6 py-4 bg-blue-600 hover:bg-blue-500 text-white text-sm font-black rounded-2xl shadow-xl shadow-blue-600/20 transition-all active:scale-[0.98] disabled:opacity-70 uppercase tracking-widest"
+                    className="flex-[2] flex justify-center items-center px-4 sm:px-6 py-3 sm:py-4 bg-blue-600 hover:bg-blue-500 text-white text-[11px] sm:text-sm font-black rounded-xl sm:rounded-2xl shadow-xl shadow-blue-600/20 transition-all active:scale-[0.98] disabled:opacity-70 uppercase tracking-widest"
                   >
-                    {saving ? <Loader2 className="animate-spin h-5 w-5 mr-2" /> : <CheckCircle size={18} className="mr-2" />}
+                    {saving ? <Loader2 className="animate-spin h-4 w-4 sm:h-5 sm:w-5 mr-2" /> : <CheckCircle size={16} className="mr-2 sm:w-5 sm:h-5" />}
                     {saving ? 'PROCESANDO...' : 'CONFIRMAR REGISTRO'}
                   </button>
                 </div>
@@ -859,7 +873,7 @@ WITH CHECK (true);`}
 
         {/* MODAL PARA EDITAR USUARIO */}
         {editingUser && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -872,83 +886,83 @@ WITH CHECK (true);`}
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              className="relative bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl w-full max-w-xl overflow-hidden border border-slate-200 dark:border-slate-800"
+              className="relative bg-white dark:bg-slate-900 rounded-[1.5rem] sm:rounded-[2rem] shadow-2xl w-full max-w-xl overflow-hidden border border-slate-200 dark:border-slate-800"
             >
               <form onSubmit={handleSaveEdit} className="flex flex-col max-h-[90vh]">
-                <div className="p-8 pb-4 border-b border-slate-100 dark:border-slate-800">
+                <div className="p-5 sm:p-8 pb-3 sm:pb-4 border-b border-slate-100 dark:border-slate-800">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Editar Cliente</h3>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Modifica la información o permisos de este usuario.</p>
+                      <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Editar Cliente</h3>
+                      <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 mt-0.5 sm:mt-1">Modifica la información o permisos de este usuario.</p>
                     </div>
                     <button
                       type="button"
                       onClick={() => setEditingUser(null)}
-                      className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                      className="p-1.5 sm:p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                     >
-                      <XCircle size={24} />
+                      <XCircle size={20} className="sm:w-6 sm:h-6" />
                     </button>
                   </div>
                 </div>
 
-                <div className="p-8 space-y-6 overflow-y-auto">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="md:col-span-2">
-                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">Nombre Completo</label>
+                <div className="p-5 sm:p-8 pt-4 sm:pt-6 space-y-4 sm:space-y-6 overflow-y-auto custom-scrollbar">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                    <div className="sm:col-span-2">
+                      <label className="block text-[10px] sm:text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5 sm:mb-2 ml-1">Nombre Completo</label>
                       <input
                         type="text"
                         required
-                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
+                        className="block w-full px-4 py-2.5 sm:py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-sm sm:text-base text-slate-900 dark:text-white placeholder:text-slate-400"
                         value={editName}
                         onChange={(e) => setEditName(e.target.value)}
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">WhatsApp / Teléfono</label>
+                      <label className="block text-[10px] sm:text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5 sm:mb-2 ml-1">WhatsApp / Teléfono</label>
                       <input
                         type="text"
                         required
-                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
+                        className="block w-full px-4 py-2.5 sm:py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-sm sm:text-base text-slate-900 dark:text-white placeholder:text-slate-400"
                         value={editPhone}
                         onChange={(e) => setEditPhone(e.target.value)}
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">DNI (Documento)</label>
+                      <label className="block text-[10px] sm:text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5 sm:mb-2 ml-1">DNI (Documento)</label>
                       <input
                         type="text"
-                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
+                        className="block w-full px-4 py-2.5 sm:py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-sm sm:text-base text-slate-900 dark:text-white placeholder:text-slate-400"
                         value={editDni}
                         onChange={(e) => setEditDni(e.target.value)}
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">CIP (Opcional)</label>
+                      <label className="block text-[10px] sm:text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5 sm:mb-2 ml-1">CIP (Opcional)</label>
                       <input
                         type="text"
-                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
+                        className="block w-full px-4 py-2.5 sm:py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-sm sm:text-base text-slate-900 dark:text-white placeholder:text-slate-400"
                         value={editCip}
                         onChange={(e) => setEditCip(e.target.value)}
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">Grado</label>
+                      <label className="block text-[10px] sm:text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5 sm:mb-2 ml-1">Grado</label>
                       <input
                         type="text"
-                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
+                        className="block w-full px-4 py-2.5 sm:py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-sm sm:text-base text-slate-900 dark:text-white placeholder:text-slate-400"
                         value={editGrado}
                         onChange={(e) => setEditGrado(e.target.value)}
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">Método de Pago</label>
+                      <label className="block text-[10px] sm:text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5 sm:mb-2 ml-1">Método de Pago</label>
                       <select
-                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white cursor-pointer"
+                        className="block w-full px-4 py-2.5 sm:py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-sm sm:text-base text-slate-900 dark:text-white cursor-pointer"
                         value={editMetodoPago}
                         onChange={(e) => setEditMetodoPago(e.target.value)}
                       >
@@ -960,9 +974,9 @@ WITH CHECK (true);`}
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 ml-1">Plan de Acceso</label>
+                      <label className="block text-[10px] sm:text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5 sm:mb-2 ml-1">Plan de Acceso</label>
                       <select
-                        className="block w-full px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white cursor-pointer"
+                        className="block w-full px-4 py-2.5 sm:py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-sm sm:text-base text-slate-900 dark:text-white cursor-pointer"
                         value={editPlan}
                         onChange={(e) => setEditPlan(e.target.value as 'free' | 'premium')}
                       >
@@ -972,62 +986,62 @@ WITH CHECK (true);`}
                     </div>
 
                     {editingUser?.activeDeviceId && (
-                      <div className="md:col-span-2 bg-amber-50/60 dark:bg-amber-950/20 p-5 rounded-2xl border border-amber-200 dark:border-amber-800 flex items-center justify-between">
-                        <span className="text-xs text-amber-900 dark:text-amber-300 font-medium">
+                      <div className="sm:col-span-2 bg-amber-50/60 dark:bg-amber-950/20 p-4 sm:p-5 rounded-xl sm:rounded-2xl border border-amber-200 dark:border-amber-800 flex items-center justify-between gap-2">
+                        <span className="text-[10px] sm:text-xs text-amber-900 dark:text-amber-300 font-medium">
                           📱 <b>Dispositivo vinculado activo</b>
                         </span>
                         <button
                           type="button"
                           onClick={() => handleUnlockDevice(editingUser)}
-                          className="px-3 py-1.5 bg-red-100 hover:bg-red-200 text-red-700 text-xs font-bold rounded-xl transition-colors flex items-center gap-1"
+                          className="px-3 py-2 sm:py-1.5 bg-red-100 hover:bg-red-200 text-red-700 text-[10px] sm:text-xs font-bold rounded-lg sm:rounded-xl transition-colors flex items-center gap-1"
                         >
                           🔓 Liberar Dispositivo
                         </button>
                       </div>
                     )}
 
-                    <div className="md:col-span-2 bg-slate-50 dark:bg-slate-800/50 p-5 rounded-2xl border border-slate-100 dark:border-slate-800">
-                      <label className="block text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-4 ml-1">Permisos de Acceso</label>
-                      <div className="flex items-center gap-8">
-                        <label className="flex items-center gap-3 cursor-pointer group">
+                    <div className="sm:col-span-2 bg-slate-50 dark:bg-slate-800/50 p-4 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-100 dark:border-slate-800">
+                      <label className="block text-[10px] sm:text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-3 sm:mb-4 ml-1">Permisos de Acceso</label>
+                      <div className="flex items-center gap-6 sm:gap-8">
+                        <label className="flex items-center gap-2.5 sm:gap-3 cursor-pointer group">
                           <input
                             type="radio"
                             name="editRole"
                             checked={editRole === 'student'}
                             onChange={() => setEditRole('student')}
-                            className="w-5 h-5 text-blue-600 border-slate-300 dark:border-slate-700 focus:ring-blue-500 bg-white dark:bg-slate-900"
+                            className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 border-slate-300 dark:border-slate-700 focus:ring-blue-500 bg-white dark:bg-slate-900"
                           />
-                          <span className="text-sm font-bold text-slate-700 dark:text-slate-300 group-hover:text-blue-600 transition-colors">Estudiante</span>
+                          <span className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 group-hover:text-blue-600 transition-colors">Estudiante</span>
                         </label>
-                        <label className="flex items-center gap-3 cursor-pointer group">
+                        <label className="flex items-center gap-2.5 sm:gap-3 cursor-pointer group">
                           <input
                             type="radio"
                             name="editRole"
                             checked={editRole === 'admin'}
                             onChange={() => setEditRole('admin')}
-                            className="w-5 h-5 text-blue-600 border-slate-300 dark:border-slate-700 focus:ring-blue-500 bg-white dark:bg-slate-900"
+                            className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 border-slate-300 dark:border-slate-700 focus:ring-blue-500 bg-white dark:bg-slate-900"
                           />
-                          <span className="text-sm font-bold text-slate-700 dark:text-slate-300 group-hover:text-blue-600 transition-colors">Administrador</span>
+                          <span className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 group-hover:text-blue-600 transition-colors">Administrador</span>
                         </label>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-8 border-t border-slate-100 dark:border-slate-800 flex gap-4">
+                <div className="p-5 sm:p-8 border-t border-slate-100 dark:border-slate-800 flex gap-3 sm:gap-4">
                   <button
                     type="button"
                     onClick={() => setEditingUser(null)}
-                    className="flex-1 px-6 py-4 border border-slate-200 dark:border-slate-800 text-sm font-bold rounded-2xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors uppercase tracking-widest"
+                    className="flex-1 px-4 sm:px-6 py-3 sm:py-4 border border-slate-200 dark:border-slate-800 text-[11px] sm:text-sm font-bold rounded-xl sm:rounded-2xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors uppercase tracking-widest"
                   >
-                    Cancelar
+                    CANCELAR
                   </button>
                   <button
                     type="submit"
                     disabled={savingEdit}
-                    className="flex-[2] flex justify-center items-center px-6 py-4 bg-blue-600 hover:bg-blue-500 text-white text-sm font-black rounded-2xl shadow-xl shadow-blue-600/20 transition-all active:scale-[0.98] disabled:opacity-70 uppercase tracking-widest"
+                    className="flex-[2] flex justify-center items-center px-4 sm:px-6 py-3 sm:py-4 bg-blue-600 hover:bg-blue-500 text-white text-[11px] sm:text-sm font-black rounded-xl sm:rounded-2xl shadow-xl shadow-blue-600/20 transition-all active:scale-[0.98] disabled:opacity-70 uppercase tracking-widest"
                   >
-                    {savingEdit ? <Loader2 className="animate-spin h-5 w-5 mr-2" /> : <CheckCircle size={18} className="mr-2" />}
+                    {savingEdit ? <Loader2 className="animate-spin h-4 w-4 sm:h-5 sm:w-5 mr-2" /> : <CheckCircle size={16} className="mr-2 sm:w-5 sm:h-5" />}
                     {savingEdit ? 'GUARDANDO...' : 'GUARDAR CAMBIOS'}
                   </button>
                 </div>

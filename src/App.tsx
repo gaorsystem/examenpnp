@@ -57,7 +57,7 @@ export default function App() {
   });
 
   React.useEffect(() => {
-    document.title = 'Simulacro PNP | Concurso de Ascenso Promoción 2027';
+    document.title = 'Simulacro PNP';
     const root = document.documentElement;
     if (theme === 'dark') {
       root.classList.add('dark');
@@ -384,7 +384,7 @@ export default function App() {
         {activeTab === 'landing' && (
           <LandingPage
             onStartSimulacro={(modo) => {
-              setActiveTab('simulacro');
+              setShowOtpModal(true);
             }}
             onNavigateTab={(tab) => {
               setActiveTab(tab);
@@ -496,7 +496,7 @@ export default function App() {
       />
 
       {/* Native Mobile Bottom Navigation Bar (Hidden on Desktop) */}
-      {!['examen', 'simulacro', 'repaso'].includes(activeTab) && (
+      {isLoggedIn && !['examen', 'repaso'].includes(activeTab) && (
         <MobileBottomNav
           activeTab={activeTab}
           setActiveTab={setActiveTab}

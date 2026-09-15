@@ -271,7 +271,7 @@ const codigoPenalMapped: Pregunta[] = (codigoPenalQuestions as any[]).map((q) =>
 }));
 
 // Mapeo unificado de los temas oficiales con 100% de preguntas cargadas
-export const BANCO_PREGUNTAS: Pregunta[] = [
+const PRE_BANCO_PREGUNTAS: Pregunta[] = [
   ...rawFiltered,
   ...dl1291Mapped,
   ...ley27806Mapped,
@@ -293,6 +293,11 @@ export const BANCO_PREGUNTAS: Pregunta[] = [
   ...dl1318Mapped,
   ...codigoPenalMapped
 ];
+
+// Deduplicar por ID para evitar errores de llaves duplicadas en React
+export const BANCO_PREGUNTAS: Pregunta[] = Array.from(
+  new Map(PRE_BANCO_PREGUNTAS.map(q => [q.id, q])).values()
+);
 
 // Generar lista única de normas/materias con su grupo y recuento
 

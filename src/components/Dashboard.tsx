@@ -174,7 +174,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-display font-black py-4 px-6 rounded-2xl text-sm flex items-center justify-center gap-3 transition-all shadow-lg shadow-emerald-600/20 active-scale uppercase tracking-wider relative z-10"
                 >
                   <Play className="w-5 h-5 fill-current" />
-                  <span>Configurar y Rendir</span>
+                  <span>INGRESAR A SIMULACRO</span>
                 </button>
               </div>
 
