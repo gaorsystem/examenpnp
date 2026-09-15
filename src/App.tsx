@@ -15,6 +15,7 @@ import { OtpLoginModal } from './components/OtpLoginModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { AudioAndBotExplainerModal } from './components/AudioAndBotExplainerModal';
 import { GuideHelpModal } from './components/GuideHelpModal';
+import { PwaInstallPrompt } from './components/PwaInstallPrompt';
 import { AuthFlow } from './components/auth/AuthFlow';
 import { UserManagement } from './components/admin/UserManagement';
 import { Play, Zap, ArrowLeft, X, Home } from 'lucide-react';
@@ -604,6 +605,9 @@ export default function App() {
           userProfile={userProfile}
         />
       )}
+
+      {/* PWA Install Prompt (Smart Banner) */}
+      <PwaInstallPrompt />
     </div>
   );
 }
