@@ -96,9 +96,6 @@ export const Header: React.FC<HeaderProps> = ({
             <h1 className="font-display font-black text-xl text-slate-900 dark:text-white tracking-tighter uppercase leading-none">
               SIMULADOR <span className="text-emerald-600 dark:text-emerald-400">PNP</span>
             </h1>
-            <p className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] mt-0.5">
-              Promoción 2027
-            </p>
           </div>
         </div>
 

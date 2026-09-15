@@ -459,7 +459,7 @@ export default function App() {
             Simulador PNP 2026
           </p>
           <p className="hidden sm:block">
-            RD N° 006857-2026-DIRREHUM-PNP/JE · Promoción 2027
+            RD N° 006857-2026-DIRREHUM-PNP/JE
           </p>
           <p>
             1,500 Preguntas Oficiales · PNP Ascenso

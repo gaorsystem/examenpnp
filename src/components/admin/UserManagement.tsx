@@ -774,10 +774,9 @@ WITH CHECK (true);`}
                     </div>
 
                     <div>
-                      <label className="block text-[10px] sm:text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5 sm:mb-2 ml-1">DNI (Documento)</label>
+                      <label className="block text-[10px] sm:text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5 sm:mb-2 ml-1">DNI (Opcional)</label>
                       <input
                         type="text"
-                        required
                         className="block w-full px-4 py-2.5 sm:py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-sm sm:text-base text-slate-900 dark:text-white placeholder:text-slate-400"
                         placeholder="77665544"
                         value={newUserDni}
@@ -930,7 +929,7 @@ WITH CHECK (true);`}
                     </div>
 
                     <div>
-                      <label className="block text-[10px] sm:text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5 sm:mb-2 ml-1">DNI (Documento)</label>
+                      <label className="block text-[10px] sm:text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5 sm:mb-2 ml-1">DNI (Opcional)</label>
                       <input
                         type="text"
                         className="block w-full px-4 py-2.5 sm:py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-sm sm:text-base text-slate-900 dark:text-white placeholder:text-slate-400"
