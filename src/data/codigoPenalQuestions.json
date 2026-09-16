@@ -12,7 +12,7 @@
       "VIOLACIÓN DE LA INTIMIDAD."
     ],
     "respuesta": "VIOLACIÓN DE DOMICILIO.",
-    "ubicacion": "Art. 159 CP",
+    "ubicacion": "(ART: 159)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO III]",
     "codigo": "CP-1"
   },
   {
@@ -28,7 +28,7 @@
       "ROBO."
     ],
     "respuesta": "ALLANAMIENTO ILEGAL DE DOMICILIO.",
-    "ubicacion": "Art. 160 CP",
+    "ubicacion": "(ART: 160)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO III]",
     "codigo": "CP-2"
   },
   {
@@ -44,7 +44,7 @@
       "ACOSO."
     ],
     "respuesta": "INTERFERENCIA TELEFÓNICA.",
-    "ubicacion": "Art. 162 CP",
+    "ubicacion": "(ART: 162)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO IV]",
     "codigo": "CP-3"
   },
   {
@@ -60,7 +60,7 @@
       "RECEPTACIÓN."
     ],
     "respuesta": "HURTO SIMPLE.",
-    "ubicacion": "Art. 185 CP",
+    "ubicacion": "(ART: 185)** [LIBRO SEGUNDO] [TITULO V] [CAPITULO I]",
     "codigo": "CP-4"
   },
   {
@@ -76,7 +76,7 @@
       "HURTO AGRAVADO."
     ],
     "respuesta": "HURTO AGRAVADO.",
-    "ubicacion": "Art. 186 CP",
+    "ubicacion": "(ART: 186)** [LIBRO SEGUNDO] [TITULO V] [CAPITULO I]",
     "codigo": "CP-5"
   },
   {
@@ -92,7 +92,7 @@
       "HURTO DE USO."
     ],
     "respuesta": "ROBO AGRAVADO.",
-    "ubicacion": "Art. 189 CP",
+    "ubicacion": "(ART: 189)** [LIBRO SEGUNDO] [TITULO V] [CAPITULO II]",
     "codigo": "CP-6"
   },
   {
@@ -108,7 +108,7 @@
       "RECEPTACIÓN."
     ],
     "respuesta": "APROPIACIÓN ILÍCITA.",
-    "ubicacion": "Art. 190 CP",
+    "ubicacion": "(ART: 190)** [LIBRO SEGUNDO] [TITULO V] [CAPITULO III]",
     "codigo": "CP-7"
   },
   {
@@ -124,7 +124,7 @@
       "RECEPTACIÓN."
     ],
     "respuesta": "RECEPTACIÓN.",
-    "ubicacion": "Art. 194 CP",
+    "ubicacion": "(ART: 194)** [LIBRO SEGUNDO] [TITULO V] [CAPITULO IV]",
     "codigo": "CP-8"
   },
   {
@@ -140,7 +140,7 @@
       "CONDUCCIÓN EN ESTADO DE EBRIEDAD O DROGADICCIÓN."
     ],
     "respuesta": "CONDUCCIÓN EN ESTADO DE EBRIEDAD O DROGADICCIÓN.",
-    "ubicacion": "Art. 274 CP",
+    "ubicacion": "(ART: 274)** [LIBRO SEGUNDO] [TITULO XII] [CAPITULO I]",
     "codigo": "CP-9"
   },
   {
@@ -156,7 +156,7 @@
       "EXTORSIÓN."
     ],
     "respuesta": "SUSTRACCIÓN O ARREBATO DE ARMAS DE FUEGO.",
-    "ubicacion": "Art. 279-B CP",
+    "ubicacion": "(ART: 279-B)** [LIBRO SEGUNDO] [TITULO XII] [CAPITULO I]",
     "codigo": "CP-10"
   },
   {
@@ -172,7 +172,7 @@
       "EJERCICIO ILEGAL DE PROFESIÓN."
     ],
     "respuesta": "RESISTENCIA O DESOBEDIENCIA A LA AUTORIDAD.",
-    "ubicacion": "Art. 368 CP",
+    "ubicacion": "(ART: 368)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO I] [SECCION II]",
     "codigo": "CP-11"
   },
   {
@@ -188,7 +188,7 @@
       "CORRUPCIÓN DE FUNCIONARIOS."
     ],
     "respuesta": "ABUSO DE AUTORIDAD.",
-    "ubicacion": "Art. 376 CP",
+    "ubicacion": "(ART: 376)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION I]",
     "codigo": "CP-12"
   },
   {
@@ -204,7 +204,7 @@
       "COBRO INDEBIDO."
     ],
     "respuesta": "CONCUSIÓN.",
-    "ubicacion": "Art. 382 CP",
+    "ubicacion": "(ART: 382)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION II]",
     "codigo": "CP-13"
   },
   {
@@ -220,7 +220,7 @@
       "COLUSIÓN."
     ],
     "respuesta": "PECULADO.",
-    "ubicacion": "Art. 387 CP",
+    "ubicacion": "(ART: 387)** [TITULO XVIII] [CAPITULO II] [SECCION III]",
     "codigo": "CP-14"
   },
   {
@@ -236,7 +236,7 @@
       "CONCUSIÓN."
     ],
     "respuesta": "MALVERSACIÓN.",
-    "ubicacion": "Art. 389 CP",
+    "ubicacion": "(ART: 389)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION III]",
     "codigo": "CP-15"
   },
   {
@@ -252,7 +252,7 @@
       "PECULADO."
     ],
     "respuesta": "COHECHO PASIVO PROPIO EN EL EJERCICIO DE LA FUNCIÓN POLICIAL.",
-    "ubicacion": "Art. 395-A CP",
+    "ubicacion": "(ART: 395-A)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION IV]",
     "codigo": "CP-16"
   },
   {
@@ -268,7 +268,7 @@
       "COHECHO PASIVO ESPECÍFICO."
     ],
     "respuesta": "COHECHO PASIVO IMPROPIO EN EL EJERCICIO DE LA FUNCIÓN POLICIAL.",
-    "ubicacion": "Art. 395-B CP",
+    "ubicacion": "(ART: 395-B)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION IV]",
     "codigo": "CP-17"
   },
   {
@@ -284,7 +284,7 @@
       "COBRO INDEBIDO."
     ],
     "respuesta": "TRÁFICO DE INFLUENCIAS.",
-    "ubicacion": "Art. 400 CP",
+    "ubicacion": "(ART: 400)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION IV]",
     "codigo": "CP-18"
   },
   {
@@ -300,7 +300,7 @@
       "ENCUBRIMIENTO REAL."
     ],
     "respuesta": "FALSEDAD IDEOLÓGICA.",
-    "ubicacion": "Art. 428 CP",
+    "ubicacion": "(ART: 428)** [LIBRO SEGUNDO] [TITULO XIX] [CAPITULO I]",
     "codigo": "CP-19"
   },
   {
@@ -316,7 +316,7 @@
       "EL DEFENSOR DEBE ESPERAR A SER ATACADO FÍSICAMENTE ANTES DE REPELER LA AGRESIÓN."
     ],
     "respuesta": "AGRESIÓN ACTUAL, ILEGÍTIMA Y REAL; NECESIDAD RACIONAL DEL MEDIO EMPLEADO Y FALTA DE PROVOCACIÓN SUFICIENTE DE QUIEN HACE LA DEFENSA.",
-    "ubicacion": "Art. 20 Num. 3 CP",
+    "ubicacion": "(ART: (ART: 20)** Articulo 20.-Inimputabilidad)**",
     "codigo": "CP-20"
   },
   {
@@ -332,7 +332,7 @@
       "EL CRITERIO DEL PELIGRO POTENCIAL DEL DEFENSOR."
     ],
     "respuesta": "EL CRITERIO DE PROPORCIONALIDAD DE MEDIOS.",
-    "ubicacion": "(Art. 20 Numeral 3 Literal b CP)",
+    "ubicacion": "(ART: (ART: 20)** Articulo 20.- Inimputabilidad)**",
     "codigo": "CP-21"
   },
   {
@@ -348,7 +348,7 @@
       "EXIME DE RESPONSABILIDAD SIEMPRE QUE EL AGENTE PUDO RESISTIR LA FUERZA PERO DECIDIÓ NO HACERLO."
     ],
     "respuesta": "EXIME DE RESPONSABILIDAD SIEMPRE QUE OBRA POR UNA FUERZA FÍSICA IRRESISTIBLE PROVENIENTE DE UN TERCERO O DE LA NATURALEZA.",
-    "ubicacion": "(Art. 20 Numeral 6 CP)",
+    "ubicacion": "(ART: (ART: 20)** Articulo 20.- Inimputabilidad)**",
     "codigo": "CP-22"
   },
   {
@@ -364,7 +364,7 @@
       "CUANDO EL DELITO COMETIDO ES TRÁFICO ILÍCITO DE DROGAS."
     ],
     "respuesta": "CUANDO EL AGENTE INTEGRA UNA ORGANIZACIÓN CRIMINAL AL MOMENTO DEL HECHO.",
-    "ubicacion": "(Art. 22 CP)",
+    "ubicacion": "(ART: (ART: 22)**",
     "codigo": "CP-23"
   },
   {
@@ -380,7 +380,7 @@
       "REALIZAR ACTIVIDADES ALTRUISTAS MEDIANTE EL USO DE VIOLENCIA."
     ],
     "respuesta": "OBTENER, DIRECTA O INDIRECTAMENTE, UN BENEFICIO ECONÓMICO U OTRO DE ORDEN MATERIAL.",
-    "ubicacion": "(Art. 317 CP)",
+    "ubicacion": "(ART: (ART: 317)**",
     "codigo": "CP-24"
   },
   {
@@ -396,7 +396,7 @@
       "LA PLURALIDAD DE AGENTES QUE INTERVIENEN EN LA EJECUCIÓN"
     ],
     "respuesta": "EL OBRAR POR MÓVILES NOBLES O ALTRUISTAS",
-    "ubicacion": "(Art. 46 Numeral 1 Literal b CP)",
+    "ubicacion": "(ART: (ART: 46)** Articulo 46.- Circunstancias de atenuacion y agravacion)**",
     "codigo": "CP-25"
   },
   {
@@ -412,7 +412,7 @@
       "EJECUTA EL DELITO COMO PARTE DE UN GRUPO CRIMINAL"
     ],
     "respuesta": "REPARA VOLUNTARIAMENTE EL DAÑO OCASIONADO O LAS CONSECUENCIAS DERIVADAS DEL PELIGRO GENERADO",
-    "ubicacion": "(Art. 46 Numeral 1 Literal e CP)",
+    "ubicacion": "(ART: (ART: 46)** Articulo 46.- Circunstancias de atenuacion y agravacion)**",
     "codigo": "CP-26"
   },
   {
@@ -428,7 +428,7 @@
       "QUE LA VÍCTIMA SEA FAMILIAR DEL IMPUTADO"
     ],
     "respuesta": "QUE LA VÍCTIMA SEA MENOR DE EDAD O ADULTO MAYOR EN SITUACIÓN DE ESPECIAL VULNERABILIDAD",
-    "ubicacion": "(Art. 46 Numeral 2 Literal i CP)",
+    "ubicacion": "(ART: (ART: 46)** Articulo 46.- Circunstancias de atenuacion y agravacion)**",
     "codigo": "CP-27"
   },
   {
@@ -444,7 +444,7 @@
       "CUANDO EL AGENTE ES REINCIDENTE EN DELITOS COMUNES DISTINTOS A LOS SEÑALADOS EN EL ARTÍCULO."
     ],
     "respuesta": "CUANDO EL AGENTE SE VALE DE SU POSICIÓN, CARGO O VÍNCULO FAMILIAR QUE LE OTORGA PARTICULAR AUTORIDAD SOBRE EL MENOR DE EDAD.",
-    "ubicacion": "(Art. 129-Q CP)",
+    "ubicacion": "(ART: (ART: 129-Q)** Artículo 129-Q.- Captacion de menores de edad para la comision de delitos)**",
     "codigo": "CP-28"
   },
   {
@@ -460,7 +460,7 @@
       "DESOBEDIENCIA A LA AUTORIDAD O USURPACIÓN."
     ],
     "respuesta": "ROBO AGRAVADO, SICARIATO, TRÁFICO ILÍCITO DE DROGAS O INTEGRAR A UNA ORGANIZACIÓN CRIMINAL.",
-    "ubicacion": "(Art. 129-Q CP)",
+    "ubicacion": "(ART: (ART: 129-Q)** Artículo 129-Q.- Captacion de menores de edad para la comision de delitos)**",
     "codigo": "CP-29"
   },
   {
@@ -476,7 +476,7 @@
       "UTILIZAR A UN MENOR DE EDAD ÚNICAMENTE COMO TESTIGO DE UN DELITO SIN SU PARTICIPACIÓN ACTIVA."
     ],
     "respuesta": "PERSUADIR A UN MENOR CUYA SITUACIÓN FAMILIAR LO COLOCA EN DESVENTAJA SOCIAL NOTABLE PARA QUE PARTICIPE EN LA COMISIÓN DE DELITOS.",
-    "ubicacion": "(Art. 129-Q CP)",
+    "ubicacion": "(ART: (ART: 129-Q)** Artículo 129-Q.- Captacion de menores de edad para la comision de delitos)**",
     "codigo": "CP-30"
   },
   {
@@ -491,8 +491,8 @@
       "ESTAFA.",
       "APROPIACIÓN ILÍCITA."
     ],
-    "respuesta": "HURTO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "APROPIACIÓN ILÍCITA.",
+    "ubicacion": "(ART: 190)** [LIBRO SEGUNDO] [TITULO V] [CAPITULO III]",
     "codigo": "CP-31"
   },
   {
@@ -507,8 +507,8 @@
       "RECEPTACIÓN.",
       "APROPIACIÓN ILÍCITA."
     ],
-    "respuesta": "ENCUBRIMIENTO REAL.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "RECEPTACIÓN.",
+    "ubicacion": "(ART: 194)** [LIBRO SEGUNDO] [TITULO V] [CAPITULO IV]",
     "codigo": "CP-32"
   },
   {
@@ -523,8 +523,8 @@
       "FALSIFICACIÓN DE DOCUMENTOS.",
       "MANIPULACIÓN PROVOCADA."
     ],
-    "respuesta": "CONCUSIÓN.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "PREVARICATO.",
+    "ubicacion": "(ART: 418)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO III] [SECCION II]",
     "codigo": "CP-33"
   },
   {
@@ -539,8 +539,8 @@
       "EL BIEN ES PROPIEDAD DE COMUNIDADES NATIVAS O CAMPESINAS.",
       "EL BIEN ES PROPIEDAD DE ANCIANOS EN INCAPACIDAD DE RESISTIR."
     ],
-    "respuesta": "EL BIEN ES PROPIEDAD DEL ESTADO DESTINADO AL USO PRIVADO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "EL BIEN ES PROPIEDAD DEL ESTADO DESTINADO A PROGRAMAS DE APOYO SOCIAL.",
+    "ubicacion": "(ART: 195)** [LIBRO SEGUNDO] [TITULO V] [CAPITULO IV]",
     "codigo": "CP-34"
   },
   {
@@ -555,8 +555,8 @@
       "SUSTRAÍDOS.",
       "DEVUELTOS."
     ],
-    "respuesta": "INCAUTADOS.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "DECOMISADOS.",
+    "ubicacion": "(ART: 401-A)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION IV]",
     "codigo": "CP-35"
   },
   {
@@ -571,8 +571,8 @@
       "EL AGENTE SE VALE DE MAYORES DE EDAD.",
       "EN AGRAVIO DE REPRESENTANTE DIPLOMÁTICO."
     ],
-    "respuesta": "UTILIZANDO DOCUMENTOS PRIVADOS AUTÉNTICOS.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "AFECTANDO LA LIBRE CIRCULACIÓN EN VÍAS DE COMUNICACIÓN.",
+    "ubicacion": "(ART: 204)** [LIBRO SEGUNDO] [TITULO V] [CAPITULO VIII]",
     "codigo": "CP-36"
   },
   {
@@ -587,8 +587,8 @@
       "DENUNCIA OMISIVA.",
       "DENUNCIA ENGAÑOSA."
     ],
-    "respuesta": "DENUNCIA PERNICIOSA.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "DENUNCIA CALUMNIOSA.",
+    "ubicacion": "(ART: 402)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO III] [SECCION I]",
     "codigo": "CP-37"
   },
   {
@@ -603,8 +603,8 @@
       "EVASIÓN VIOLENTA.",
       "EVASIÓN MEDIANTE VIOLENCIA O AMENAZA."
     ],
-    "respuesta": "EVASIÓN CAUSANDO LESIONES.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "EVASIÓN MEDIANTE VIOLENCIA O AMENAZA.",
+    "ubicacion": "(ART: 413)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO III] [SECCION I]",
     "codigo": "CP-38"
   },
   {
@@ -619,8 +619,8 @@
       "EL AGENTE SE VALE DE MAYORES DE EDAD.",
       "EN AGRAVIO DE REPRESENTANTE DIPLOMÁTICO."
     ],
-    "respuesta": "UTILIZANDO DOCUMENTOS PRIVADOS.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "SOBRE BIENES DEL ESTADO O COMUNIDADES CAMPESINAS O NATIVAS QUE INTEGRAN EL PATRIMONIO CULTURAL DE LA NACIÓN.",
+    "ubicacion": "(ART: 204)** [LIBRO SEGUNDO] [TITULO V] [CAPITULO VIII]",
     "codigo": "CP-39"
   },
   {
@@ -635,8 +635,8 @@
       "CONTRA EL PATRIMONIO - ABIGEATO.",
       "CONTRA LA VIDA, EL CUERPO Y LA SALUD."
     ],
-    "respuesta": "CONTRA LOS RECURSOS NATURALES.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "ABANDONO Y ACTOS DE CRUELDAD CONTRA ANIMALES DOMÉSTICOS Y SILVESTRES.",
+    "ubicacion": "(ART: 206-A)** [LIBRO SEGUNDO] [TITULO V] [CAPITULO IX]",
     "codigo": "CP-40"
   },
   {
@@ -651,8 +651,8 @@
       "CONTRA LA PAZ PÚBLICA - TERRORISMO.",
       "PERTURBACIÓN DEL ORDEN EN EL LUGAR DONDE LA AUTORIDAD EJERCE SU FUNCIÓN."
     ],
-    "respuesta": "CONTRA LOS PODERES DEL ESTADO - CONTRA LA VOLUNTAD POPULAR.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "PERTURBACIÓN DEL ORDEN EN EL LUGAR DONDE LA AUTORIDAD EJERCE SU FUNCIÓN.",
+    "ubicacion": "(ART: 375)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO I] [SECCION III]",
     "codigo": "CP-41"
   },
   {
@@ -667,8 +667,8 @@
       "SE ESCLAVIZA A LA VÍCTIMA.",
       "SE EJERCE LA ACCIÓN EN CONDICIONES DE FALTA DE HIGIENE."
     ],
-    "respuesta": "LA VÍCTIMA ES PARIENTE EN 5TO GRADO DE AFINIDAD.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "EL PROXENETISMO SEA UN MEDIO DE SUBSISTENCIA DEL AGENTE.",
+    "ubicacion": "(ART: 181)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO X]",
     "codigo": "CP-42"
   },
   {
@@ -684,7 +684,7 @@
       "NINGUNA DE LAS ANTERIORES."
     ],
     "respuesta": "LA MISMA PENA.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 152)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO I]",
     "codigo": "CP-43"
   },
   {
@@ -699,8 +699,8 @@
       "ROBO.",
       "LESIONES."
     ],
-    "respuesta": "SICARIATO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "HOMICIDIO SIMPLE.",
+    "ubicacion": "(ART: 106)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO I]",
     "codigo": "CP-44"
   },
   {
@@ -716,7 +716,7 @@
       "SUICIDIO."
     ],
     "respuesta": "HOMICIDIO CALIFICADO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 108)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO I]",
     "codigo": "CP-45"
   },
   {
@@ -731,8 +731,8 @@
       "FEMINICIDIO.",
       "LESIONES."
     ],
-    "respuesta": "PARRICIDIO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "FEMINICIDIO.",
+    "ubicacion": "(ART: 108-B)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO I]",
     "codigo": "CP-46"
   },
   {
@@ -747,8 +747,8 @@
       "LESIONES.",
       "PARRICIDIO."
     ],
-    "respuesta": "SUICIDIO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "SICARIATO.",
+    "ubicacion": "(ART: 108-C)** [TITULO I] [CAPITULO I]",
     "codigo": "CP-47"
   },
   {
@@ -764,7 +764,7 @@
       "HOMICIDIO SIMPLE."
     ],
     "respuesta": "HOMICIDIO POR EMOCIÓN VIOLENTA.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 109)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO I]",
     "codigo": "CP-48"
   },
   {
@@ -780,7 +780,7 @@
       "LESIONES."
     ],
     "respuesta": "INFANTICIDIO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 110)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO I]",
     "codigo": "CP-49"
   },
   {
@@ -795,8 +795,8 @@
       "SUICIDIO.",
       "ABORTO PRETERINTENCIONAL."
     ],
-    "respuesta": "ABORTO CONSENTIDO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "AUTOABORTO.",
+    "ubicacion": "(ART: 114)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO II]",
     "codigo": "CP-50"
   },
   {
@@ -812,7 +812,7 @@
       "HOMICIDIO SIMPLE."
     ],
     "respuesta": "ABORTO CONSENTIDO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 115)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO II]",
     "codigo": "CP-51"
   },
   {
@@ -827,8 +827,8 @@
       "PARRICIDIO.",
       "ABORTO SIN CONSENTIMIENTO."
     ],
-    "respuesta": "HOMICIDIO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "ABORTO SIN CONSENTIMIENTO.",
+    "ubicacion": "(ART: 116)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO II]",
     "codigo": "CP-52"
   },
   {
@@ -843,8 +843,8 @@
       "PARRICIDIO.",
       "INFANTICIDIO."
     ],
-    "respuesta": "AUTOABORTO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "ABORTO PRETERINTENCIONAL.",
+    "ubicacion": "(ART: 118)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO II]",
     "codigo": "CP-53"
   },
   {
@@ -859,8 +859,8 @@
       "DAÑOS.",
       "LESIONES LEVES."
     ],
-    "respuesta": "HOMICIDIO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "LESIONES GRAVES.",
+    "ubicacion": "(ART: 121)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO III]",
     "codigo": "CP-54"
   },
   {
@@ -876,7 +876,7 @@
       "ABORTO."
     ],
     "respuesta": "LESIONES LEVES.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 122)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO III]",
     "codigo": "CP-55"
   },
   {
@@ -892,7 +892,7 @@
       "DAÑOS."
     ],
     "respuesta": "LESIONES CULPOSAS.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 124)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO III]",
     "codigo": "CP-56"
   },
   {
@@ -907,8 +907,8 @@
       "TRATA DE PERSONAS.",
       "COACCIÓN."
     ],
-    "respuesta": "HURTO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "COACCIÓN.",
+    "ubicacion": "(ART: 151)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO I]",
     "codigo": "CP-57"
   },
   {
@@ -923,8 +923,8 @@
       "TRATA DE PERSONAS.",
       "VIOLACIÓN DE LA INTIMIDAD."
     ],
-    "respuesta": "ROBO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "SECUESTRO.",
+    "ubicacion": "(ART: 152)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO I]",
     "codigo": "CP-58"
   },
   {
@@ -939,8 +939,8 @@
       "ACOSO.",
       "SEDUCCIÓN."
     ],
-    "respuesta": "SECUESTRO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "EXPLOTACIÓN SEXUAL.",
+    "ubicacion": "(ART: 129-C)** [TITULO I-A] [CAPITULO II]",
     "codigo": "CP-59"
   },
   {
@@ -955,8 +955,8 @@
       "ESCLAVITUD Y OTRAS FORMAS DE EXPLOTACIÓN.",
       "ACOSO."
     ],
-    "respuesta": "COACCIÓN.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "ESCLAVITUD Y OTRAS FORMAS DE EXPLOTACIÓN.",
+    "ubicacion": "(ART: 129-Ñ)** [TITULO I-A] [CAPITULO II]",
     "codigo": "CP-60"
   },
   {
@@ -971,8 +971,8 @@
       "PECULADO DE USO.",
       "MALVERSACIÓN DE FONDOS."
     ],
-    "respuesta": "COLUSIÓN.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "PECULADO DE USO.",
+    "ubicacion": "(ART: 388)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION III]",
     "codigo": "CP-61"
   },
   {
@@ -987,8 +987,8 @@
       "ESTÁN SOMETIDOS A PROCESO JUDICIAL.",
       "PERTENECEN AL ESTADO O A CUALQUIER DEPENDENCIA PÚBLICA."
     ],
-    "respuesta": "PERTENECEN AL ESTADO O A CUALQUIER EMPRESA.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "PERTENECEN AL ESTADO O A CUALQUIER DEPENDENCIA PÚBLICA.",
+    "ubicacion": "(ART: 388)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION III]",
     "codigo": "CP-62"
   },
   {
@@ -1003,8 +1003,8 @@
       "COBRO INDEBIDO.",
       "MALVERSACIÓN."
     ],
-    "respuesta": "COLUSIÓN.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "MALVERSACIÓN.",
+    "ubicacion": "(ART: 389)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION III]",
     "codigo": "CP-63"
   },
   {
@@ -1019,8 +1019,8 @@
       "PECULADO DE USO.",
       "COLUSIÓN DOLOSA Y CULPOSA."
     ],
-    "respuesta": "COBRO INDEBIDO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "RETARDO INJUSTIFICADO DE PAGO.",
+    "ubicacion": "(ART: 390)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION III]",
     "codigo": "CP-64"
   },
   {
@@ -1035,8 +1035,8 @@
       "REHUSAMIENTO A ENTREGA DE BIENES PÚBLICOS O PUESTOS EN CUSTODIA.",
       "PECULADO DE USO SIN LA FORMALIDADES DE LEY."
     ],
-    "respuesta": "COLUSIÓN DOLOSA Y CULPOSA.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "REHUSAMIENTO A ENTREGA DE BIENES DEPOSITADOS O PUESTOS EN CUSTODIA.",
+    "ubicacion": "(ART: 391)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION III]",
     "codigo": "CP-65"
   },
   {
@@ -1051,8 +1051,8 @@
       "DESTRUCCIÓN.",
       "FABRICACIÓN O TRÁFICO."
     ],
-    "respuesta": "FABRICACIÓN LEGAL.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "FABRICACIÓN O TRÁFICO.",
+    "ubicacion": "(ART: 296)** [LIBRO SEGUNDO] [TITULO XII] [CAPITULO III] [SECCION II]",
     "codigo": "CP-66"
   },
   {
@@ -1068,7 +1068,7 @@
       "COHECHO PASIVO IMPROPIO EN EL EJERCICIO DE LA FUNCIÓN."
     ],
     "respuesta": "COHECHO PASIVO PROPIO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 393)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION IV]",
     "codigo": "CP-67"
   },
   {
@@ -1083,8 +1083,8 @@
       "COHECHO PASIVO IMPROPIO.",
       "PECULADO DE USO."
     ],
-    "respuesta": "COHECHO PASIVO PROPIO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "COHECHO PASIVO IMPROPIO.",
+    "ubicacion": "(ART: 394)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION IV]",
     "codigo": "CP-68"
   },
   {
@@ -1100,7 +1100,7 @@
       "MALVERSACIÓN."
     ],
     "respuesta": "COHECHO PASIVO ESPECÍFICO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 395)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION IV]",
     "codigo": "CP-69"
   },
   {
@@ -1115,8 +1115,8 @@
       "COHECHO PASIVO PROPIO EN EL EJERCICIO DE LA FUNCIÓN.",
       "COHECHO ACTIVO IMPROPIO EN EL EJERCICIO DE LA FUNCIÓN POLICIAL."
     ],
-    "respuesta": "COHECHO EN EL EJERCICIO DE LA FUNCIÓN POLICIAL.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "COHECHO PASIVO IMPROPIO EN EL EJERCICIO DE LA FUNCIÓN POLICIAL Y PENITENCIARIA.",
+    "ubicacion": "(ART: 395-B)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION IV]",
     "codigo": "CP-70"
   },
   {
@@ -1131,8 +1131,8 @@
       "COHECHO ACTIVO GENÉRICO.",
       "COHECHO ACTIVO IMPROPIO."
     ],
-    "respuesta": "COHECHO ACTIVO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "COHECHO ACTIVO GENÉRICO.",
+    "ubicacion": "(ART: 397)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION IV]",
     "codigo": "CP-71"
   },
   {
@@ -1148,7 +1148,7 @@
       "COHECHO PASIVO ESPECÍFICO."
     ],
     "respuesta": "COHECHO ACTIVO ESPECÍFICO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 398)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION IV]",
     "codigo": "CP-72"
   },
   {
@@ -1164,7 +1164,7 @@
       "OBSTACULIZA O IMPIDE LA CONTAMINACIÓN DEL MEDIO AMBIENTE."
     ],
     "respuesta": "ACTÚO CLANDESTINAMENTE EN EL EJERCICIO DE SU ACTIVIDAD.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 305)** [LIBRO SEGUNDO] [TITULO XIII] [CAPITULO I]",
     "codigo": "CP-73"
   },
   {
@@ -1179,8 +1179,8 @@
       "PECULADO DE USO.",
       "COLUSIÓN."
     ],
-    "respuesta": "COHECHO ACTIVO IMPROPIO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "NEGOCIACIÓN INCOMPATIBLE O APROVECHAMIENTO INDEBIDO DEL CARGO.",
+    "ubicacion": "(ART: 399)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION IV]",
     "codigo": "CP-74"
   },
   {
@@ -1195,8 +1195,8 @@
       "GUARDA INFORMACIÓN REFERIDA A FUNCIONARIOS A CARGO DE LA GESTIÓN DE RESIDUOS ORGÁNICOS.",
       "FALSEA U OCULTA INFORMACIÓN SOBRE EL HECHO CONSUMADO."
     ],
-    "respuesta": "OCULTA DATOS SOBRE EL HECHO AGRAVANTE.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "OBSTACULIZA O IMPIDE LA ACTIVIDAD FISCALIZADORA DE AUDITORÍA ORDENADA POR LA AUTORIDAD ADMINISTRATIVA COMPETENTE.",
+    "ubicacion": "(ART: 305)** [LIBRO SEGUNDO] [TITULO XIII] [CAPITULO I]",
     "codigo": "CP-75"
   },
   {
@@ -1211,8 +1211,8 @@
       "SI COMO EFECTO DE LA ACTIVIDAD CONTAMINANTE SE PRODUCEN LESIONES GRAVES O MUERTE.",
       "SI POR EFECTO DE LA ACTIVIDAD CONTAMINANTE SE PRODUCEN ACCIDENTES O MUERTE."
     ],
-    "respuesta": "SI POR EFECTO DE LA ACTIVIDAD ILEGAL SE PRODUCEN LESIONES GRAVES O MUERTE.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "SI COMO EFECTO DE LA ACTIVIDAD CONTAMINANTE SE PRODUCEN LESIONES GRAVES O MUERTE.",
+    "ubicacion": "(ART: 305)** [LIBRO SEGUNDO] [TITULO XIII] [CAPITULO I]",
     "codigo": "CP-76"
   },
   {
@@ -1227,8 +1227,8 @@
       "ENRIQUECIMIENTO ILÍCITO.",
       "PECULADO."
     ],
-    "respuesta": "APROVECHAMIENTO INDEBIDO DEL CARGO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "ENRIQUECIMIENTO ILÍCITO.",
+    "ubicacion": "(ART: 401)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION IV]",
     "codigo": "CP-77"
   },
   {
@@ -1243,8 +1243,8 @@
       "LA ALTERACIÓN QUE AFECTAN LOS RECURSOS NATURALES.",
       "EL PERJUICIO O ALTERACIÓN OCASIONADOS ADQUIEREN UN CARÁCTER CASTASTROFICO."
     ],
-    "respuesta": "CONTAMINAN VERTIENDO RESIDUOS SÓLIDOS, LÍQUIDOS Y GASEOSOS.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "EL PERJUICIO O ALTERACIÓN OCASIONADOS ADQUIEREN UN CARÁCTER CASTASTROFICO.",
+    "ubicacion": "(ART: 305)** [LIBRO SEGUNDO] [TITULO XIII] [CAPITULO I]",
     "codigo": "CP-78"
   },
   {
@@ -1259,8 +1259,8 @@
       "MINISTERIO DE DEFENSA.",
       "MINISTERIO PÚBLICO."
     ],
-    "respuesta": "FISCAL DE LA NACIÓN.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "MINISTERIO DE JUSTICIA.",
+    "ubicacion": "(ART: 401-B)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION IV]",
     "codigo": "CP-79"
   },
   {
@@ -1275,8 +1275,8 @@
       "EN ÁREAS NATURALES PROTEGIDAS.",
       "EN ÁREAS DE EMERGENCIA."
     ],
-    "respuesta": "EN ÁREAS DESTINADAS A LA CONCESIÓN MINERA.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "EN ÁREAS NATURALES PROTEGIDAS.",
+    "ubicacion": "(ART: 307-B)** [LIBRO SEGUNDO] [TITULO XIII] [CAPITULO I]",
     "codigo": "CP-80"
   },
   {
@@ -1291,8 +1291,8 @@
       "HURTO AGRAVADO.",
       "CHANTAJE."
     ],
-    "respuesta": "HURTO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "EXTORSIÓN.",
+    "ubicacion": "(ART: 200)** [LIBRO SEGUNDO] [TITULO V] [CAPITULO VII]",
     "codigo": "CP-81"
   },
   {
@@ -1308,7 +1308,7 @@
       "UTILIZANDO EMPRESAS MINERAS SANCIONADAS CON SUSPENSIÓN TEMPORAL."
     ],
     "respuesta": "UTILIZANDO DRAGAS, ARTEFACTOS U OTROS INSTRUMENTOS SIMILARES.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 307-B)** [LIBRO SEGUNDO] [TITULO XIII] [CAPITULO I]",
     "codigo": "CP-82"
   },
   {
@@ -1323,8 +1323,8 @@
       "DELITO CONTRA LA LIBERTAD.",
       "ESTELIONATO."
     ],
-    "respuesta": "EXTORSIÓN.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "CHANTAJE.",
+    "ubicacion": "(ART: 201)** [LIBRO SEGUNDO] [TITULO V] [CAPITULO VII]",
     "codigo": "CP-83"
   },
   {
@@ -1340,7 +1340,7 @@
       "FRAUDE."
     ],
     "respuesta": "ESTAFA.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 196)** [LIBRO SEGUNDO] [TITULO V] [CAPITULO V]",
     "codigo": "CP-84"
   },
   {
@@ -1355,8 +1355,8 @@
       "ROBO.",
       "USURPACIÓN."
     ],
-    "respuesta": "APROPIACIÓN ILÍCITA.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "USURPACIÓN.",
+    "ubicacion": "(ART: 202)** [LIBRO SEGUNDO] [TITULO V] [CAPITULO VIII]",
     "codigo": "CP-85"
   },
   {
@@ -1371,8 +1371,8 @@
       "CON CONOCIMIENTO DE LA AUTORIDAD JURISDICCIONAL.",
       "CON CONOCIMIENTO DE LA AUTORIDAD POLICIAL."
     ],
-    "respuesta": "SOBRE BIENES NO DESTINADOS A SERVICIOS BÁSICOS.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "SOBRE INMUEBLE RESERVADO PARA FINES HABITACIONALES.",
+    "ubicacion": "(ART: 204)** [LIBRO SEGUNDO] [TITULO V] [CAPITULO VIII]",
     "codigo": "CP-86"
   },
   {
@@ -1387,8 +1387,8 @@
       "LESIÓN DE ÓRGANO.",
       "LESIONES SEGUIDAS DE MUTILACIÓN."
     ],
-    "respuesta": "LESIONES MUTILADORAS.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "LESIONES GRAVES.",
+    "ubicacion": "(ART: 121)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO III]",
     "codigo": "CP-87"
   },
   {
@@ -1403,8 +1403,8 @@
       "TRÁFICO ILÍCITO DE INSUMOS QUÍMICOS Y MAQUINARIAS DESTINADOS A MINERÍA ILEGAL.",
       "TRÁFICO ILÍCITO DE INSUMOS QUÍMICOS FISCALIZADOS DESTINADOS A MINERÍA."
     ],
-    "respuesta": "CONTRABANDO ILEGAL DE INSUMOS QUÍMICOS FISCALIZADOS Y MAQUINARIAS DESTINADOS A MINERÍA.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "TRÁFICO ILÍCITO DE INSUMOS QUÍMICOS Y MAQUINARIAS DESTINADOS A MINERÍA ILEGAL.",
+    "ubicacion": "(ART: 307-E)** [LIBRO SEGUNDO] [TITULO XIII] [CAPITULO I]",
     "codigo": "CP-88"
   },
   {
@@ -1419,8 +1419,8 @@
       "ROBO.",
       "ROBO AGRAVADO."
     ],
-    "respuesta": "DIFAMACIÓN.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "EXTORSIÓN.",
+    "ubicacion": "(ART: 200)** [LIBRO SEGUNDO] [TITULO V] [CAPITULO VII]",
     "codigo": "CP-89"
   },
   {
@@ -1435,8 +1435,8 @@
       "ESCLAVITUD.",
       "CONDICIONES DE FALTA DE HIGIENE."
     ],
-    "respuesta": "PARIENTE EN 5TO GRADO DE AFINIDAD.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "LA VÍCTIMA ESTE EN SITUACIÓN DE ABANDONO.",
+    "ubicacion": "(ART: 181)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO X]",
     "codigo": "CP-90"
   },
   {
@@ -1451,8 +1451,8 @@
       "DISEÑO Y FABRICACIÓN PARA EL TRANSPORTE DE MERCADERÍAS SOBRE CHASIS DE CAMIÓN.",
       "AUTORIZACIÓN PARA EL ENSAMBLADO DE CHASIS DE CAMIÓN PARA TRANSPORTE PÚBLICO."
     ],
-    "respuesta": "COMERCIALIZACIÓN Y UTILIZACIÓN, EN EL SERVICIO PÚBLICO DE TRANSPORTE CON ESTRUCTURAS PROHIBIDAS.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "ENSAMBLADO, COMERCIALIZACIÓN Y UTILIZACIÓN, EN EL SERVICIO PÚBLICO, DE TRANSPORTE DE OMNIBUSES SOBRE CHASIS DE CAMIÓN.",
+    "ubicacion": "(ART: 279-E)** [LIBRO SEGUNDO] [TITULO XII] [CAPITULO I]",
     "codigo": "CP-91"
   },
   {
@@ -1468,7 +1468,7 @@
       "COMERCIALIZACIÓN Y TRÁFICO DE ARMAS DE FUEGO."
     ],
     "respuesta": "FABRICACIÓN, COMERCIALIZACIÓN, USO O PORTE DE ARMAS.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 279-G)** [LIBRO SEGUNDO] [TITULO XII] [CAPITULO I]",
     "codigo": "CP-92"
   },
   {
@@ -1483,8 +1483,8 @@
       "EXPLOTACIÓN.",
       "RUFIANISMO."
     ],
-    "respuesta": "VIOLACIÓN.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "RUFIANISMO.",
+    "ubicacion": "(ART: 180)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO X]",
     "codigo": "CP-93"
   },
   {
@@ -1499,8 +1499,8 @@
       "PROPOSICIONES SEXUALES A NIÑOS, NIÑAS Y JÓVENES.",
       "PROPOSICIONES A NIÑOS, NIÑAS Y ADOLESCENTES CON FINES SEXUALES."
     ],
-    "respuesta": "PROPOSICIONES SEXUALES A NIÑOS Y JÓVENES.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "PROPOSICIONES A NIÑOS, NIÑAS Y ADOLESCENTES CON FINES SEXUALES.",
+    "ubicacion": "(ART: 183-B)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO XI]",
     "codigo": "CP-94"
   },
   {
@@ -1515,8 +1515,8 @@
       "PROXENETISMO.",
       "FAVORECIMIENTO A LA PROSTITUCIÓN."
     ],
-    "respuesta": "RUFIANISMO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "PROXENETISMO.",
+    "ubicacion": "(ART: 181)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO X]",
     "codigo": "CP-95"
   },
   {
@@ -1531,8 +1531,8 @@
       "LOS CÓNYUGES, CONSUEGROS, ASCENDIENTES, DESCENDIENTES Y AFINES EN LÍNEA RECTA.",
       "LOS CÓNYUGES, CONCUBINOS, ASCENDIENTES, DESCENDIENTES Y AFINES EN LÍNEA RECTA."
     ],
-    "respuesta": "LOS CÓNYUGES, CONCUBINOS, ASCENDIENTES, DESCENDIENTES Y AFINES EN LÍNEA ASCENDENTE.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "LOS CÓNYUGES, CONCUBINOS, ASCENDIENTES, DESCENDIENTES Y AFINES EN LÍNEA RECTA.",
+    "ubicacion": "(ART: 208)** [LIBRO SEGUNDO] [TITULO V] [CAPITULO XI]",
     "codigo": "CP-96"
   },
   {
@@ -1547,8 +1547,8 @@
       "AGRAVACIÓN DE LA PENA POR LA CALIDAD DEL SUJETO.",
       "DISMINUCIÓN DE LA PENA POR LA CALIDAD DEL SUJETO."
     ],
-    "respuesta": "ATENUACIÓN DE LA PENA POR LA CALIDAD DEL SUJETO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "AGRAVACIÓN DE LA PENA POR LA CALIDAD DEL SUJETO.",
+    "ubicacion": "(ART: 117)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO II]",
     "codigo": "CP-97"
   },
   {
@@ -1563,8 +1563,8 @@
       "USURPACIÓN DE FUNCIÓN PÚBLICA.",
       "USURPACIÓN DE LA AUTORIDAD AGRAVADA."
     ],
-    "respuesta": "DESACATO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "USURPACIÓN DE FUNCIÓN PÚBLICA.",
+    "ubicacion": "(ART: 361)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO I] [SECCION I]",
     "codigo": "CP-98"
   },
   {
@@ -1579,8 +1579,8 @@
       "PROFESIÓN ILEGAL.",
       "EJERCICIO DE PROFESIÓN PUNIBLE."
     ],
-    "respuesta": "DESACATO A LA AUTORIDAD.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "EJERCICIO ILEGAL DE PROFESIÓN.",
+    "ubicacion": "(ART: 363)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO I] [SECCION I]",
     "codigo": "CP-99"
   },
   {
@@ -1595,8 +1595,8 @@
       "INTENTO DE HOMICIDIO.",
       "GENOCIDIO."
     ],
-    "respuesta": "TRATA DE PERSONAS.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "GENOCIDIO.",
+    "ubicacion": "(ART: 319)** [LIBRO SEGUNDO] [TITULO XIV-A] [CAPITULO I]",
     "codigo": "CP-100"
   },
   {
@@ -1611,8 +1611,8 @@
       "PARTICIPACIÓN DEL EJERCICIO LÍCITO PROFESIONAL.",
       "AMPARO EN EL EJERCICIO PROFESIONAL ILEGAL."
     ],
-    "respuesta": "EJERCICIO ILEGAL DE PROFESIÓN.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "PARTICIPACIÓN EN EJERCICIO ILEGAL DE LA PROFESIÓN.",
+    "ubicacion": "(ART: 364)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO I] [SECCIÓN I]",
     "codigo": "CP-101"
   },
   {
@@ -1627,8 +1627,8 @@
       "SE ENCUENTRA EN ESTADO DE GESTACIÓN.",
       "TIENE HIJOS MENORES DE EDAD A SU CUIDADO."
     ],
-    "respuesta": "SE ENCUENTRA DELICADA DE SALUD.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "SE ENCUENTRA EN ESTADO DE GESTACIÓN.",
+    "ubicacion": "(ART: 320)** [LIBRO SEGUNDO] [TITULO XIV-A] [CAPITULO II]",
     "codigo": "CP-102"
   },
   {
@@ -1644,7 +1644,7 @@
       "SE ENCUENTRA CON CUALQUIER TIPO DE INHABILITACIÓN."
     ],
     "respuesta": "PADECE DE CUALQUIER TIPO DE DISCAPACIDAD.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 320)** [LIBRO SEGUNDO] [TITULO XIV-A] [CAPITULO II]",
     "codigo": "CP-103"
   },
   {
@@ -1659,8 +1659,8 @@
       "LESIONES GRAVES.",
       "INTENTO DE HOMICIDIO AGRAVADO."
     ],
-    "respuesta": "GENOCIDIO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "TORTURA.",
+    "ubicacion": "(ART: 321)** [LIBRO SEGUNDO] [TITULO XIV-A] [CAPITULO III]",
     "codigo": "CP-104"
   },
   {
@@ -1675,8 +1675,8 @@
       "RESISTENCIA O DESOBEDIENCIA A LA AUTORIDAD.",
       "DESACATO AGRAVADO."
     ],
-    "respuesta": "VIOLENCIA CONTRA LA AUTORIDAD PARA IMPEDIR EL EJERCICIO DE SUS FUNCIONES.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "RESISTENCIA O DESOBEDIENCIA A LA AUTORIDAD.",
+    "ubicacion": "(ART: 368)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO I] [SECCION II]",
     "codigo": "CP-105"
   },
   {
@@ -1691,8 +1691,8 @@
       "LA MISMA PENA DE LOS AUTORES.",
       "LA MISMA PENA DE LOS COLABORADORES."
     ],
-    "respuesta": "UN TERCIO MÁS, DE LA PENA DE LOS AUTORES.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "LA MISMA PENA DE LOS AUTORES.",
+    "ubicacion": "(ART: 322)** [LIBRO SEGUNDO] [TITULO XIV-A] [CAPITULO III]",
     "codigo": "CP-106"
   },
   {
@@ -1707,8 +1707,8 @@
       "INGRESO INDEBIDO DE ARMAS, MUNICIONES O MATERIALES NOCIVOS, INFLAMABLES, ASFIXIANTES O TÓXICOS EN LOCALES PENITENCIARIOS.",
       "INGRESO DEBIDO DE ARMAS, MUNICIONES O MATERIALES EXPLOSIVOS, INFLAMABLES, TÓXICOS EN ESTABLECIMIENTOS PENITENCIARIOS NACIONALES."
     ],
-    "respuesta": "INGRESO DEBIDO DE ARMAS, MUNICIONES O MATERIALES EXPLOSIVOS, INFLAMABLES, LACRIMÓGENOS O TÓXICOS EN ESTABLECIMIENTOS PENITENCIARIOS ESTATALES.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "INGRESO INDEBIDO DE ARMAS, MUNICIONES O MATERIALES EXPLOSIVOS, INFLAMABLES, ASFIXIANTES O TÓXICOS EN ESTABLECIMIENTOS PENITENCIARIOS.",
+    "ubicacion": "(ART: 368-E)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO I] [SECCION II]",
     "codigo": "CP-107"
   },
   {
@@ -1723,8 +1723,8 @@
       "VIOLENCIA CONTRA AUTORIDADES NOMBRADAS.",
       "VIOLENCIA CONTRA AUTORIDADES O SERVIDORES."
     ],
-    "respuesta": "VIOLENCIA CONTRA AUTORIDADES PÚBLICAS.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "VIOLENCIA CONTRA AUTORIDADES ELEGIDAS.",
+    "ubicacion": "(ART: 369)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO I] [SECCION II]",
     "codigo": "CP-108"
   },
   {
@@ -1739,8 +1739,8 @@
       "ATENTADO CONTRA LA CONSERVACIÓN E IDENTIDAD.",
       "ATENTADO CONTRA LA CONSERVACIÓN E IDENTIDAD DE OBJETO."
     ],
-    "respuesta": "ATENTADO CONTRA LA CONSERVACIÓN.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "ATENTADO CONTRA LA CONSERVACIÓN E IDENTIDAD DE OBJETO.",
+    "ubicacion": "(ART: 370)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO I] [SECCION II]",
     "codigo": "CP-109"
   },
   {
@@ -1755,8 +1755,8 @@
       "DISCRIMINACIÓN E INCITACIÓN A LA DISCRIMINACIÓN.",
       "CONTRA LA IDENTIDAD DE GÉNERO."
     ],
-    "respuesta": "VIOLENCIA DE GÉNERO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "DISCRIMINACIÓN E INCITACIÓN A LA DISCRIMINACIÓN.",
+    "ubicacion": "(ART: 323)** [LIBRO SEGUNDO] [TITULO XIV-A] [CAPITULO IV]",
     "codigo": "CP-110"
   },
   {
@@ -1772,7 +1772,7 @@
       "A TRAVÉS E ORGANISMOS PRIVADAS."
     ],
     "respuesta": "A TRAVÉS DEL INTERNET U OTRO MEDIO ANALOGO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 323)** [LIBRO SEGUNDO] [TITULO XIV-A] [CAPITULO IV]",
     "codigo": "CP-111"
   },
   {
@@ -1787,8 +1787,8 @@
       "PERTURBACIÓN DEL ORDEN EN EL LUGAR DONDE LA AUTORIDAD EJERCE SU FUNCIÓN.",
       "PERTURBACIÓN DEL ORDEN EN EL LUGAR DONDE LA AUTORIDAD SANCIONA."
     ],
-    "respuesta": "PERTURBACIÓN DEL ORDEN EN EL LUGAR DONDE LA AUTORIDAD LEGISLA PARLAMENTARIAMENTE.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "PERTURBACIÓN DEL ORDEN EN EL LUGAR DONDE LA AUTORIDAD EJERCE SU FUNCIÓN.",
+    "ubicacion": "(ART: 375)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO I] [SECCION III]",
     "codigo": "CP-112"
   },
   {
@@ -1803,8 +1803,8 @@
       "PELIGRO POR MEDIO DE INCENDIO O EXPLOSIÓN.",
       "PELIGRO CONTRA LA PAZ SOCIAL."
     ],
-    "respuesta": "CONTRA LA SEGURIDAD NACIONAL.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "PELIGRO POR MEDIO DE INCENDIO O EXPLOSIÓN.",
+    "ubicacion": "(ART: 273)** [LIBRO SEGUNDO] [TITULO XII] [CAPITULO I]",
     "codigo": "CP-113"
   },
   {
@@ -1819,8 +1819,8 @@
       "SOLO CONTRA LAS PERSONAS.",
       "CONTRA LOS ELEMENTOS MATERIALES."
     ],
-    "respuesta": "EL ORDEN SOCIAL.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "LAS PERSONAS O LOS BIENES.",
+    "ubicacion": "(ART: 273)** [LIBRO SEGUNDO] [TITULO XII] [CAPITULO I]",
     "codigo": "CP-114"
   },
   {
@@ -1835,8 +1835,8 @@
       "SUPERIOR DE 0,25 GRAMOS-LITRO O BAJO EL EFECTO DE DROGAS TÓXICAS, ESTUPEFACIENTES, SUSTANCIAS PSICOTRÓPICAS O SINTÉTICAS.",
       "SUPERIOR A 0,05 GRAMOS-LITRO O BAJO EFECTO DE DROGAS TÓXICAS,ESTUPEFACIENTES, SUSTANCIAS PSICOTRÓPICAS O SINTÉTICAS."
     ],
-    "respuesta": "SUPERIOR A 0,50 GRAMOS-LITRO O BAJO EL EFECTO DE DROGAS TÓXICAS,ESTUPEFACIENTES, SUSTANCIAS PSICOTRÓPICAS O SINTÉTICAS.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "SUPERIOR DE 0,25 GRAMOS-LITRO O BAJO EL EFECTO DE DROGAS TÓXICAS, ESTUPEFACIENTES, SUSTANCIAS PSICOTRÓPICAS O SINTÉTICAS.",
+    "ubicacion": "(ART: 274)** [LIBRO SEGUNDO] [TITULO XII] [CAPITULO I]",
     "codigo": "CP-115"
   },
   {
@@ -1852,7 +1852,7 @@
       "MAYOR DE 0.25 GRAMOS-LITRO O BAJO EL EFECTO DE DROGAS TÓXICAS."
     ],
     "respuesta": "MAYOR DE 0.5 GRAMOS-LITRO O BAJO EL EFECTO DE DROGAS TÓXICAS.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 274)** [LIBRO SEGUNDO] [TITULO XII] [CAPITULO I]",
     "codigo": "CP-116"
   },
   {
@@ -1867,8 +1867,8 @@
       "MAYOR O IGUAL DE 0.1 GRAMOS-LITRO, O BAJO EL EFECTO DE ESTUPEFACIENTES.",
       "MAYOR DE 1.5 GRAMOS-LITRO, O BAJO EL EFECTO DE ESTUPEFACIENTES, DROGAS TÓXICAS."
     ],
-    "respuesta": "MAYOR O IGUAL DE 0.5 GRAMOS-LITRO, O BAJO EL EFECTO DE ESTUPEFACIENTES.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "MAYOR DE 0.5 GRAMOS-LITRO, O BAJO EL EFECTO DE DROGAS TÓXICAS.",
+    "ubicacion": "(ART: 274-A)** [LIBRO SEGUNDO] [TITULO XII] [CAPITULO I]",
     "codigo": "CP-117"
   },
   {
@@ -1883,8 +1883,8 @@
       "DELITO DE PELIGRO EMINENTE - MANIPULACIÓN EN ESTADO DE EBRIEDAD O INTERNACIÓN.",
       "DELITO DE PELIGRO INMINENTE - RIESGOS EN ESTADO DE EBRIEDAD O DROGADICCIÓN."
     ],
-    "respuesta": "DELITO DE PELIGRO COMÚN - MANIPULACIÓN DE INSTRUMENTOS EN ESTADO DE EBRIEDAD O DROGADICCIÓN.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "DELITO DE RIESGO COMÚN - MANIPULACIÓN EN ESTADO DE EBRIEDAD O DROGADICCIÓN.",
+    "ubicacion": "(ART: 274-A)** [LIBRO SEGUNDO] [TITULO XII] [CAPITULO I]",
     "codigo": "CP-118"
   },
   {
@@ -1899,8 +1899,8 @@
       "PELIGRO DE OBRAS DESTINADAS A LA DEFENSA PÚBLICA.",
       "PELIGRO DE DEFENSA COMÚN."
     ],
-    "respuesta": "PELIGRO DE OBRAS DESTINADAS A LA DEFENSA COMÚN.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "DAÑOS DE OBRAS PARA LA DEFENSA COMÚN.",
+    "ubicacion": "(ART: 277)** [LIBRO SEGUNDO] [TITULO XII] [CAPITULO I]",
     "codigo": "CP-119"
   },
   {
@@ -1915,8 +1915,8 @@
       "FABRICACIÓN O TENENCIA DE MATERIALES QUÍMICOS PELIGROSOS.",
       "FABRICACIÓN, SUMINISTRO O TENENCIA DE MATERIALES PELIGROSOS Y RESIDUOS PELIGROSOS."
     ],
-    "respuesta": "FABRICACIÓN, SUMINISTRO O TENENCIA Y ALMACENAMIENTO DE MATERIALES PELIGROSOS Y RESIDUOS.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "FABRICACIÓN, SUMINISTRO O TENENCIA DE MATERIALES PELIGROSOS Y RESIDUOS PELIGROSOS.",
+    "ubicacion": "(ART: 279)** [LIBRO SEGUNDO] [TITULO XII] [CAPITULO I]",
     "codigo": "CP-120"
   },
   {
@@ -1932,7 +1932,7 @@
       "USO DE ARMAS QUÍMICAS SIN AUTORIZACIÓN DE LA CONVENCIÓN."
     ],
     "respuesta": "PRODUCCIÓN, DESARROLLO Y COMERCIALIZACIÓN ILEGAL DE ARMAS QUÍMICAS.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 279-A)** [LIBRO SEGUNDO] [TITULO XII] [CAPITULO I]",
     "codigo": "CP-121"
   },
   {
@@ -1948,7 +1948,7 @@
       "IMPEDIMENTO DE FUNCIONES EN MEDIO DE TRANSPORTE."
     ],
     "respuesta": "SUSTITUCIÓN O IMPEDIMENTO DE FUNCIONES EN MEDIO DE TRANSPORTE.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 285)** [LIBRO SEGUNDO] [TITULO XII] [CAPITULO II]",
     "codigo": "CP-122"
   },
   {
@@ -1963,8 +1963,8 @@
       "OTORGAMIENTO ILEGÍTIMO DE DERECHOS SOBRE INMUEBLES.",
       "OMISIÓN, REHUSAMIENTO O DEMORA DE ACTOS FUNCIONALES."
     ],
-    "respuesta": "ABUSO DE AUTORIDAD CONDICIONANDO ILEGALMENTE LA ENTREGA DE BIENES Y SERVICIOS.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "OTORGAMIENTO ILEGÍTIMO DE DERECHOS SOBRE INMUEBLES.",
+    "ubicacion": "(ART: 376-B)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION I]",
     "codigo": "CP-123"
   },
   {
@@ -1979,8 +1979,8 @@
       "DENEGACIÓN O DEFICIENTE SERVICIO POLICIAL.",
       "OMISIÓN, REHUSAMIENTO O DEMORA DE ACTOS POLICIALES."
     ],
-    "respuesta": "REQUERIMIENTO INDEBIDO DE LA FUERZA PÚBLICA.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "DENEGACIÓN O DEFICIENTE APOYO POLICIAL.",
+    "ubicacion": "(ART: 378)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION I]",
     "codigo": "CP-124"
   },
   {
@@ -1996,7 +1996,7 @@
       "ABANDONO DE SERVICIO."
     ],
     "respuesta": "ABANDONO DE CARGO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 380)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION I]",
     "codigo": "CP-125"
   },
   {
@@ -2011,8 +2011,8 @@
       "CONCUSIÓN.",
       "COLUSIÓN."
     ],
-    "respuesta": "APROVECHAMIENTO INDEBIDO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "CONCUSIÓN.",
+    "ubicacion": "(ART: 382)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION II]",
     "codigo": "CP-126"
   },
   {
@@ -2027,8 +2027,8 @@
       "ABUSO DE AUTORIDAD.",
       "COBRO INDEBIDO."
     ],
-    "respuesta": "CONCUSIÓN.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "COBRO INDEBIDO.",
+    "ubicacion": "(ART: 383)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION II]",
     "codigo": "CP-127"
   },
   {
@@ -2044,7 +2044,7 @@
       "COLUSIÓN."
     ],
     "respuesta": "PATROCINIO ILEGAL.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 385)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO II] [SECCION II]",
     "codigo": "CP-128"
   },
   {
@@ -2060,7 +2060,7 @@
       "DELITO CONTRA LA SALUD MENTAL."
     ],
     "respuesta": "PROPAGACIÓN DE ENFERMEDAD PELIGROSA CONTAGIOSA.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 289)** [LIBRO SEGUNDO] [TITULO XII] [CAPITULO III] [SECCION I]",
     "codigo": "CP-129"
   },
   {
@@ -2075,8 +2075,8 @@
       "SUSTANCIAS ALUCINÓGENAS.",
       "NUEVAS SUSTANCIAS PSICOACTIVAS."
     ],
-    "respuesta": "NUEVAS SUSTANCIAS EXÓTICAS.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "NUEVAS SUSTANCIAS PSICOACTIVAS.",
+    "ubicacion": "(ART: 296)** [LIBRO SEGUNDO] [TITULO XII] [CAPITULO III] [SECCION II]",
     "codigo": "CP-130"
   },
   {
@@ -2092,7 +2092,7 @@
       "PREVARICATO ILEGAL."
     ],
     "respuesta": "PROHIBICION DE UN PROCESO QUE PATROCINÓ.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 420)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO III] [SECCION II]",
     "codigo": "CP-131"
   },
   {
@@ -2107,7 +2107,7 @@
       "PATROCINIO INCOMPATIBLE.",
       "PATROCINIO IMPROPIO."
     ],
-    "respuesta": "PREVARICATO.",
+    "respuesta": "PATROCINIO INDEBIDO DE ABOGADO O MANDATARIO JUDICIAL.",
     "ubicacion": "CÓDIGO PENAL",
     "codigo": "CP-132"
   },
@@ -2123,7 +2123,7 @@
       "REVELACIÓN DE INFORMACIÓN CLASIFICADA.",
       "REVELACIÓN DE INFORMACIÓN RESERVADA."
     ],
-    "respuesta": "OBSTRUCCIÓN A LA JUSTICIA.",
+    "respuesta": "REVELACIÓN INDEBIDA DE IDENTIDAD.",
     "ubicacion": "CÓDIGO PENAL",
     "codigo": "CP-133"
   },
@@ -2140,7 +2140,7 @@
       "FUGA MEDIANTE VIOLENCIA O AMENAZA."
     ],
     "respuesta": "FAVORECIMIENTO A LA FUGA.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 414)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO III] [SECCION I]",
     "codigo": "CP-134"
   },
   {
@@ -2155,8 +2155,8 @@
       "OMISIÓN DE DENUNCIA.",
       "OMISIÓN IMPROPIA."
     ],
-    "respuesta": "OMISIÓN DE INFORMAR.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "OMISIÓN DE DENUNCIA.",
+    "ubicacion": "(ART: 407)** [LIBRO SEGUNDO] [TITULO XVIII] [CAPITULO III] [SECCION I]",
     "codigo": "CP-135"
   },
   {
@@ -2171,8 +2171,8 @@
       "MANIPULACIÓN GENÉTICA.",
       "MANIPULACIÓN ILEGAL DE LA GENÉTICA."
     ],
-    "respuesta": "MANIPULACIÓN DE ADN ILEGAL.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "MANIPULACIÓN GENÉTICA.",
+    "ubicacion": "(ART: 324)** [LIBRO SEGUNDO] [TITULO XV] [CAPITULO V]",
     "codigo": "CP-136"
   },
   {
@@ -2187,7 +2187,7 @@
       "TRÁFICO ILÍCITO DE MIGRANTES.",
       "TRÁFICO ILÍCITO DE INMIGRANTES."
     ],
-    "respuesta": "TRÁFICO LÍCITO DE MIGRANTES.",
+    "respuesta": "TRÁFICO ILÍCITO DE MIGRANTES.",
     "ubicacion": "CÓDIGO PENAL",
     "codigo": "CP-137"
   },
@@ -2203,8 +2203,8 @@
       "DAÑO A LA PROPIEDAD PÚBLICA.",
       "DAÑO A LA PROPIEDAD AJENA."
     ],
-    "respuesta": "DAÑO AGRAVADO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "DAÑO SIMPLE.",
+    "ubicacion": "(ART: 205)** [LIBRO SEGUNDO] [TITULO V] [CAPITULO IX]",
     "codigo": "CP-138"
   },
   {
@@ -2219,8 +2219,8 @@
       "HOMICIDIO CALIFICADO.",
       "HOMICIDIO CON CRUELDAD."
     ],
-    "respuesta": "HOMICIDIO AGRAVADO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "HOMICIDIO SIMPLE.",
+    "ubicacion": "(ART: 106)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO I]",
     "codigo": "CP-139"
   },
   {
@@ -2235,8 +2235,8 @@
       "HOMICIDIO CRUEL.",
       "HOMICIDIO CALIFICADO."
     ],
-    "respuesta": "HOMICIDIO SIMPLE.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "HOMICIDIO CALIFICADO.",
+    "ubicacion": "(ART: 108)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO I]",
     "codigo": "CP-140"
   },
   {
@@ -2251,8 +2251,8 @@
       "HOMICIDIO AGRAVADO POR LA CONDICIÓN DEL AUTOR.",
       "HOMICIDIO CALIFICADO POR LA RELACIÓN DEL AUTOR CON LA VÍCTIMA."
     ],
-    "respuesta": "HOMICIDIO SIMPLE POR LA CONDICIÓN DE LA VÍCTIMA.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "HOMICIDIO CALIFICADO POR LA CONDICIÓN DE LA VÍCTIMA.",
+    "ubicacion": "(ART: 108-A)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO I]",
     "codigo": "CP-141"
   },
   {
@@ -2267,7 +2267,7 @@
       "GENOCIDIO.",
       "FEMINICIDIO."
     ],
-    "respuesta": "PARRICIDIO.",
+    "respuesta": "FEMINICIDIO.",
     "ubicacion": "CÓDIGO PENAL",
     "codigo": "CP-142"
   },
@@ -2283,8 +2283,8 @@
       "GENOCIDIO.",
       "PARRICIDIO."
     ],
-    "respuesta": "ASESINATO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "SICARIATO.",
+    "ubicacion": "(ART: 108-C)** LIBRO SEGUNDO:PARTE ESPECIAL [TITULO I] [CAPITULO I]",
     "codigo": "CP-143"
   },
   {
@@ -2299,8 +2299,8 @@
       "HOMICIDIO POR EMOCIÓN VIOLENTA.",
       "EXCUSA ABSOLUTORIA."
     ],
-    "respuesta": "HOMICIDIO POR REACCIÓN VIOLENTA.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "HOMICIDIO POR EMOCIÓN VIOLENTA.",
+    "ubicacion": "(ART: 109)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO I]",
     "codigo": "CP-144"
   },
   {
@@ -2315,8 +2315,8 @@
       "HOMICIDIO DOLOSO.",
       "HOMICIDIO PRETERINTENCIONAL."
     ],
-    "respuesta": "HOMICIDIO PIADOSO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "HOMICIDIO CULPOSO.",
+    "ubicacion": "(ART: 111)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO I]",
     "codigo": "CP-145"
   },
   {
@@ -2331,8 +2331,8 @@
       "HOMICIDIO SIMPLE.",
       "HOMICIDIO ATENUADO."
     ],
-    "respuesta": "HOMICIDIO CULPOSO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "HOMICIDIO PIADOSO.",
+    "ubicacion": "(ART: 112)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO I]",
     "codigo": "CP-146"
   },
   {
@@ -2347,8 +2347,8 @@
       "ABORTO PRETERINTENCIONAL.",
       "ABORTO TERAPEÚTICO."
     ],
-    "respuesta": "ABORTO CONSENTIDO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "AUTOABORTO.",
+    "ubicacion": "(ART: 114)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO II]",
     "codigo": "CP-147"
   },
   {
@@ -2364,7 +2364,7 @@
       "ABORTO TERAPÉUTICO."
     ],
     "respuesta": "ABORTO CONSENTIDO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 115)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO II]",
     "codigo": "CP-148"
   },
   {
@@ -2379,8 +2379,8 @@
       "ABORTO PRETERINTENCIONAL.",
       "ABORTO TERAPEÚTICO."
     ],
-    "respuesta": "ABORTO CONSENTIDO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "ABORTO PRETERINTENCIONAL.",
+    "ubicacion": "(ART: 118)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO II]",
     "codigo": "CP-149"
   },
   {
@@ -2395,8 +2395,8 @@
       "ABORTO PRETERINTENCIONAL.",
       "ABORTO TERAPEÚTICO."
     ],
-    "respuesta": "ABORTO SANITARIO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "ABORTO TERAPEÚTICO.",
+    "ubicacion": "(ART: 119)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO II]",
     "codigo": "CP-150"
   },
   {
@@ -2411,8 +2411,8 @@
       "ABORTO TERAPÉUTICO.",
       "ABORTO SENTIMENTAL Y EUGENÉSICO."
     ],
-    "respuesta": "ABORTO CONSENTIDO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "ABORTO SENTIMENTAL Y EUGENÉSICO.",
+    "ubicacion": "(ART: 120)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO II]",
     "codigo": "CP-151"
   },
   {
@@ -2427,8 +2427,8 @@
       "PARRICIDIO.",
       "DAÑOS AL CONCEBIDO."
     ],
-    "respuesta": "ABORTO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "DAÑOS AL CONCEBIDO.",
+    "ubicacion": "(ART: 124-A)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO III]",
     "codigo": "CP-152"
   },
   {
@@ -2443,8 +2443,8 @@
       "EXPOSICIÓN O ABANDONO ATENUADOS.",
       "EXPOSICIÓN O ABANDONO PELIGROSOS."
     ],
-    "respuesta": "ABANDONO DE PERSONAS BAJO SU TUTELA.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "EXPOSICIÓN O ABANDONO PELIGROSOS.",
+    "ubicacion": "(ART: 125)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO IV]",
     "codigo": "CP-153"
   },
   {
@@ -2459,8 +2459,8 @@
       "OMISIÓN DE APOYO Y EXPOSICIÓN A MUERTE.",
       "OMISIÓN DE APOYO Y EXPOSICIÓN A LESIONES."
     ],
-    "respuesta": "OMISIÓN DE AUXILIO Y EXPOSICIÓN A DAÑOS.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "OMISIÓN DE SOCORRO Y EXPOSICIÓN A PELIGRO.",
+    "ubicacion": "(ART: 126)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO IV]",
     "codigo": "CP-154"
   },
   {
@@ -2476,7 +2476,7 @@
       "OMISIÓN DE AVISO A LA AUTORIDAD U OMISION DE AUXILIO A PERSONA ILESA."
     ],
     "respuesta": "OMISIÓN DE AUXILIO A PERSONA EN PELIGRO O AVISO A LA AUTORIDAD.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 127)** [LIBRO SEGUNDO] [TITULO I] [CAPITULO IV]",
     "codigo": "CP-155"
   },
   {
@@ -2492,7 +2492,7 @@
       "SECUESTRO."
     ],
     "respuesta": "COACCIÓN.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 151)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO I]",
     "codigo": "CP-156"
   },
   {
@@ -2507,8 +2507,8 @@
       "SECUESTRO.",
       "EXTORSIÓN."
     ],
-    "respuesta": "COACCIÓN.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "SECUESTRO.",
+    "ubicacion": "(ART: 152)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO I]",
     "codigo": "CP-157"
   },
   {
@@ -2524,7 +2524,7 @@
       "TRANSPORTE ILEGAL DE PERSONAS."
     ],
     "respuesta": "TRATA DE PERSONAS.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 129-A)** [TITULO I-A] [CAPITULO I]",
     "codigo": "CP-158"
   },
   {
@@ -2539,8 +2539,8 @@
       "USO INDEBIDO DE ARCHIVOS COMPUTARIZADOS.",
       "USO INDEBIDO DE ARCHIVOS PASIVOS."
     ],
-    "respuesta": "USO DEBIDO DE ARCHIVOS REGISTRADOS.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "USO INDEBIDO DE ARCHIVOS COMPUTARIZADOS.",
+    "ubicacion": "(ART: 157)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO II]",
     "codigo": "CP-159"
   },
   {
@@ -2555,8 +2555,8 @@
       "VIOLACIÓN DE DOMICILIO.",
       "VIOLACIÓN DE VIVIENDA PROPIA."
     ],
-    "respuesta": "VIOLACIÓN DE PROPIEDAD.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "VIOLACIÓN DE DOMICILIO.",
+    "ubicacion": "(ART: 159)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO III]",
     "codigo": "CP-160"
   },
   {
@@ -2572,7 +2572,7 @@
       "VIOLACIÓN DE DOMICILIO."
     ],
     "respuesta": "ALLANAMIENTO ILEGAL DE DOMICILIO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 160)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO III]",
     "codigo": "CP-161"
   },
   {
@@ -2587,8 +2587,8 @@
       "VIOLACIÓN DE LA CARTA NOTARIAL.",
       "VIOLACIÓN DE LAS COMUNICACIONES."
     ],
-    "respuesta": "VIOLACIÓN DE LOS MENSAJES.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "VIOLACIÓN DE CORRESPONDENCIA.",
+    "ubicacion": "(ART: 161)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO IV]",
     "codigo": "CP-162"
   },
   {
@@ -2603,8 +2603,8 @@
       "INTERFERENCIA DE LAS COMUNICACIONES.",
       "INTERFERENCIA AUTORIZADA."
     ],
-    "respuesta": "INJERENCIA TELEFÓNICA.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "INTERFERENCIA TELEFÓNICA.",
+    "ubicacion": "(ART: 162)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO IV]",
     "codigo": "CP-163"
   },
   {
@@ -2619,8 +2619,8 @@
       "PUBLICACIÓN AUTORIZADA DE CORRESPONDENCIA PRIVADA.",
       "PUBLICACIÓN NO AUTORIZADA DE CORRESPONDENCIA PÚBLICA."
     ],
-    "respuesta": "PUBLICACIÓN ILEGAL DE CORRESPONDENCIA TELEGRÁFICA.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "PUBLICACIÓN INDEBIDA DE CORRESPONDENCIA.",
+    "ubicacion": "(ART: 164)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO IV]",
     "codigo": "CP-164"
   },
   {
@@ -2635,8 +2635,8 @@
       "VIOLACIÓN DEL SECRETO NO AUTORIZADO.",
       "VIOLACIÓN DEL SECRETO AUTORIZADO."
     ],
-    "respuesta": "VIOLACIÓN DEL SECRETO PERSONAL.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "VIOLACIÓN DEL SECRETO PROFESIONAL.",
+    "ubicacion": "(ART: 165)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO V]",
     "codigo": "CP-165"
   },
   {
@@ -2651,8 +2651,8 @@
       "PROHIBICIÓN DE REUNIÓN ESCANDALOSA U OBSCENA POR FUNCIONARIO PÚBLICO.",
       "PROHIBICIÓN DE REUNIÓN PÚBLICA LÍCITA POR FUNCIONARIO PÚBLICO."
     ],
-    "respuesta": "PROHIBICIÓN DE REUNIÓN PÚBLICA ILÍCITA POR FUNCIONARIO PARTICULAR.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "PROHIBICIÓN DE REUNIÓN PÚBLICA LÍCITA POR FUNCIONARIO PÚBLICO.",
+    "ubicacion": "(ART: 167)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO VI]",
     "codigo": "CP-166"
   },
   {
@@ -2667,8 +2667,8 @@
       "ATENTADO CONTRA LA LIBERTAD DE NO PERCIBIR HABERES POR TRABAJO.",
       "ATENTADO CONTRA LA LIBERTAD DE TRABAJO Y ASOCIACIÓN."
     ],
-    "respuesta": "ATENTADO CONTRA LA LIBERTAD DE ASOCIACIÓN.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "ATENTADO CONTRA LA LIBERTAD DE TRABAJO Y ASOCIACIÓN.",
+    "ubicacion": "(ART: 168)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO VII]",
     "codigo": "CP-167"
   },
   {
@@ -2684,7 +2684,7 @@
       "PROHIBICIÓN DE LA LIBERTAD DE CULTURA."
     ],
     "respuesta": "VIOLACIÓN DE LA LIBERTAD DE EXPRESIÓN.",
-    "ubicacion": "CÓDIGO PENAL",
+    "ubicacion": "(ART: 169)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO VIII]",
     "codigo": "CP-168"
   },
   {
@@ -2699,8 +2699,8 @@
       "VIOLACIÓN SEXUAL.",
       "VIOLACIÓN PERSONAL."
     ],
-    "respuesta": "VIOLACIÓN ÍNTIMA.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "VIOLACIÓN SEXUAL.",
+    "ubicacion": "(ART: 170)** [LIBRO SEGUNDO] [TITULO IV] [CAPITULO IX]",
     "codigo": "CP-169"
   },
   {
@@ -2715,8 +2715,8 @@
       "USO DE ARMA EN ESTADO DE EBRIEDAD O DROGADICCIÓN.",
       "EMPLEO Y TRANSFERENCIA DE EXPLOSIVOS ANTIPERSONALES."
     ],
-    "respuesta": "SUSTRACCIÓN O ARREBATO DE ARMAS DE FUEGO.",
-    "ubicacion": "CÓDIGO PENAL",
+    "respuesta": "EMPLEO, PRODUCCIÓN Y TRANSFERENCIA DE MINAS ANTIPERSONALES.",
+    "ubicacion": "(ART: 279-D)** [LIBRO SEGUNDO] [TITULO XII] [CAPITULO I]",
     "codigo": "CP-170"
   }
 ]
